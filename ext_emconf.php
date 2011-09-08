@@ -3,7 +3,7 @@
 ########################################################################
 # Extension Manager/Repository config file for ext "libconnect".
 #
-# Auto generated 08-09-2011 14:22
+# Auto generated 08-09-2011 14:37
 #
 # Manual updates:
 # Only the data in the array - everything else is removed by next
@@ -29,7 +29,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
 	'author_company' => '',
-	'version' => '2.2.0',
+	'version' => '2.1.0',
 	'constraints' => array(
 		'depends' => array(
 			'cms' => '',
