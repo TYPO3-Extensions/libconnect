@@ -1,3 +1,20 @@
+/**
+* Developer
+* - TW: Torsten Witt torsten.witt@sub.uni-hamburg.de
+*
+**/
+2.1.00
+	TW:
+		- Feature:
+			- Für DBIS kann nun in der Listenansicht im Backend die Sortierung festglegt werden (Datenbanktyp (standard), Alphabetisch, Zugangsart)
+		- Bugfix:
+			- DBIS-Suche: ksort ohne 2. Argument --> durch uasort ersetzt
+			- EZB-Liste
+				- Zugriff auf nicht existenten Arrayindex
+					- next_fifty
+						Core: Error handler (FE): PHP Warning: array_keys() expects parameter 1 ...
+					- first_fifty
+						Core: Error handler (FE): PHP Warning: Invalid argument supplied for foreach() ...
 2.0.5
 - Für DBIS und EZB wird nun eine eigen CSS-Datei mitgebracht zur Darstellung der Bilder in der Legende.
 2.0.4
