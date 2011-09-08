@@ -74,7 +74,7 @@ class DBIS{
 				'dbs' => array()
 			);
 		}
-		if($sort=="access"){
+		if($sort=='access'){
 			$list['groups']=&$list['access_infos'];
 		}else{
 
@@ -109,7 +109,7 @@ class DBIS{
 					if($sort=="alph"){
 						$list['groups']['Treffer']['dbs'][] = $db;
 						$sortlist['Treffer']=$db['Treffer'];
-					}elseif($sort=="access"){
+					}elseif($sort=='access'){
 						$list['access_infos'][$db['access_ref']]['dbs'][] = $db;
 						$sortlist[$db['access']]=$db['access_ref'];
 					}else{
@@ -124,7 +124,7 @@ class DBIS{
 
 		}
 
-		if(!empty($sortlist)&&($sort=="access")){
+		if(!empty($sortlist)&&($sort=='access')){
 			natsort($sortlist);
 			foreach($sortlist as $value =>$key){
 				$list['alphasort'][$value]=$key;
