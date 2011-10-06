@@ -294,13 +294,14 @@ class EZB {
 
 		$result['page_vars']['search_count'] = (int) $xml_request->ezb_alphabetical_list_searchresult->search_count;
 
-
-		foreach ($xml_request->ezb_alphabetical_list_searchresult->navlist->other_pages AS $key2 => $value2){
-			foreach ( $value2->attributes() AS $key3 => $value3){
-				$result['navlist']['pages'][(string)$value3] = array (
-				'id' => (string) $value3,
-				'title' => (string) $value2
-				);
+		if(isset($xml_request->ezb_alphabetical_list_searchresult->navlist->other_pages)){
+			foreach ($xml_request->ezb_alphabetical_list_searchresult->navlist->other_pages AS $key2 => $value2){
+				foreach ( $value2->attributes() AS $key3 => $value3){
+					$result['navlist']['pages'][(string)$value3] = array (
+					'id' => (string) $value3,
+					'title' => (string) $value2
+					);
+				}
 			}
 		}
 		$current_page = (string) $xml_request->ezb_alphabetical_list_searchresult->navlist->current_page;
@@ -315,16 +316,17 @@ class EZB {
 		if($xml_request->ezb_alphabetical_list_searchresult->current_title)
 			$result['alphabetical_order']['current_title'] = (string) $xml_request->ezb_alphabetical_list_searchresult->current_title;
 
-		foreach ( $xml_request->ezb_alphabetical_list_searchresult->alphabetical_order->journals->journal AS $key => $value){
-			$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['title'] = (string) $value->title;
-			$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['jourid'] = (int) $value->attributes()->jourid;
-			$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['color_code'] = (int) $value->journal_color->attributes()->color_code;
-			$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['color'] = (string) $value->journal_color->attributes()->color;
-			$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['detail_link'] = '';
-			$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['warpto_link'] = $this->journal_link_url . $value->attributes()->jourid;
+		if(isset($xml_request->ezb_alphabetical_list_searchresult->alphabetical_order->journals->journal)){
+			foreach ( $xml_request->ezb_alphabetical_list_searchresult->alphabetical_order->journals->journal AS $key => $value){
+				$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['title'] = (string) $value->title;
+				$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['jourid'] = (int) $value->attributes()->jourid;
+				$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['color_code'] = (int) $value->journal_color->attributes()->color_code;
+				$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['color'] = (string) $value->journal_color->attributes()->color;
+				$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['detail_link'] = '';
+				$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['warpto_link'] = $this->journal_link_url . $value->attributes()->jourid;
 
+			}
 		}
-
 		$i = 0;
 		foreach ($xml_request->ezb_alphabetical_list_searchresult->next_fifty AS $key => $value){
 			$result['alphabetical_order']['next_fifty'][$i]['sc'] = (string) $value->attributes()->sc;
