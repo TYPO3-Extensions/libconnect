@@ -154,8 +154,10 @@ class EZB {
 		}
 		$journal['pissns_join'] = join(', ', $journal['pissns']);
 		$journal['eissns'] = array();
-		foreach($xml_request->ezb_detail_about_journal->journal->detail->E_ISSNs->E_ISSN as $eissn) {
-			$journal['eissns'][] = (string) $eissn;
+		if(isset($xml_request->ezb_detail_about_journal->journal->detail->E_ISSNs->E_ISSN )){
+			foreach($xml_request->ezb_detail_about_journal->journal->detail->E_ISSNs->E_ISSN as $eissn) {
+				$journal['eissns'][] = (string) $eissn;
+			}
 		}
 		$journal['eissns_join'] = join(', ', $journal['eissns']);
 		$journal['keywords'] = array();
@@ -164,7 +166,9 @@ class EZB {
 		}
 		$journal['keywords_join'] = join(', ', $journal['keywords']);
 		$journal['fulltext'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->fulltext;
-		$journal['fulltext_link'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->fulltext->attributes()->url;
+		if(isset($xml_request->ezb_detail_about_journal->journal->detail->fulltext)){
+			$journal['fulltext_link'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->fulltext->attributes()->url;
+		}
 		$journal['homepages'] = array();
 		foreach($xml_request->ezb_detail_about_journal->journal->detail->homepages->homepage as $homepage) {
 			$journal['homepages'][] = (string) $homepage;
@@ -194,13 +198,15 @@ class EZB {
 			'yellow_red' => 6
 		);
 		$journal['periods'] = array();
-		foreach($xml_request->ezb_detail_about_journal->journal->periods->period as $period) {
-			$journal['periods'][] = array (
-				'label' => (string) $period->label,
-				'color' => (string) $period->journal_color->attributes()->color,
-				'color_code' => $color_map[(string) $period->journal_color->attributes()->color],
-				'link' => (string) $period->warpto_link->attributes()->url
-			);
+		if( isset( $xml_request->ezb_detail_about_journal->journal->periods->period) ){
+			foreach($xml_request->ezb_detail_about_journal->journal->periods->period as $period) {
+				$journal['periods'][] = array (
+					'label' => (string) $period->label,
+					'color' => (string) $period->journal_color->attributes()->color,
+					'color_code' => $color_map[(string) $period->journal_color->attributes()->color],
+					'link' => (string) $period->warpto_link->attributes()->url
+				);
+			}
 		}
 
 		return $journal;
