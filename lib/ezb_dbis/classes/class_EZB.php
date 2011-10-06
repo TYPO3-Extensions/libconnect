@@ -19,14 +19,14 @@ class EZB {
 	private $date; // YYYY-MM-DD YYYY-MM YYYY
 
 	// general config
-	private $overview_requst_url = "http://rzblx1.uni-regensburg.de/ezeit/fl.phtml?xmloutput=1&";
-	private $detailview_request_url = "http://rzblx1.uni-regensburg.de/ezeit/detail.phtml?xmloutput=1&";
-	private $search_url = "http://rzblx1.uni-regensburg.de/ezeit/search.phtml?xmloutput=1&";
+	private $overview_requst_url = 'http://rzblx1.uni-regensburg.de/ezeit/fl.phtml?xmloutput=1&';
+	private $detailview_request_url = 'http://rzblx1.uni-regensburg.de/ezeit/detail.phtml?xmloutput=1&';
+	private $search_url = 'http://rzblx1.uni-regensburg.de/ezeit/search.phtml?xmloutput=1&';
 //	private $journal_link_url = "http://rzblx1.uni-regensburg.de/ezeit/warpto.phtml?bibid=SUBHH&colors=7&lang=de&jour_id=";
 //	private $search_result_page = "http://rzblx1.uni-regensburg.de/ezeit/searchres.phtml?&xmloutput=1&bibid=SUBHH&colors=7&lang=de&";
 //	private $search_result_page = "http://ezb.uni-regensburg.de/searchres.phtml?xmloutput=1&bibid=SUBHH&colors=7&lang=de";
 
-	private $lang = "de";
+	private $lang = 'de';
 	private $colors = 7;
 
 	//Fachbereich Journals
@@ -40,7 +40,8 @@ class EZB {
 	 * @return array()
 	 */
 	public function getFachbereiche(){
-		$xml_request = simplexml_load_file( "{$this->overview_requst_url}bibid={$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid']}&colors={$this->colors}&lang={$this->lang}&" );
+		$bibid = $this->getBibid();
+		$xml_request = simplexml_load_file( "{$this->overview_requst_url}bibid={$bibid}&colors={$this->colors}&lang={$this->lang}&" );
 		$fachbereiche = array();
 		foreach ($xml_request->ezb_subject_list->subject AS $key => $value){
 			$fachbereiche[(string) $value['notation'][0]] = array('title' => (string) $value[0], 'journalcount' => (int) $value['journalcount'], 'id' => (string) $value['notation'][0], 'notation' => (string) $value['notation'][0] );
@@ -61,7 +62,8 @@ class EZB {
 	 * @return array()
 	 */
 	public function getFachbereichJournals($jounal, $sindex = 0, $sc = 'A', $lc = 'B', $lc = ''){
-		$xml_request = simplexml_load_file( "{$this->overview_requst_url}bibid={$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid']}&colors={$this->colors}&lang={$this->lang}&notation={$jounal}&sc={$sc}&lc={$lc}&sindex={$sindex}&");
+		$bibid = $this->getBibid();
+		$xml_request = simplexml_load_file( "{$this->overview_requst_url}bibid={$bibid}&colors={$this->colors}&lang={$this->lang}&notation={$jounal}&sc={$sc}&lc={$lc}&sindex={$sindex}&");
 		$journals = array();
 
 		if( $xml_request->page_vars ){
@@ -125,8 +127,8 @@ class EZB {
 	 * @param int Journal ID
 	 */
 	public function getJournalDetail($journalId){
-
-		$url = "{$this->detailview_request_url}bibid={$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid']}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}";
+		$bibid = $this->getBibid();
+		$url = "{$this->detailview_request_url}bibid={$bibid}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}";
 
 		$xml_request = simplexml_load_file( $url );
 		$journal = array();
@@ -237,8 +239,8 @@ class EZB {
 	}
 
 	private function createSearchUrl($term, $searchVars/*, $lett = 'k'*/) {
-
-		$searchUrl = "http://ezb.uni-regensburg.de/searchres.phtml?xmloutput=1&bibid=".$GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid']."&colors=7&lang=de";
+		$bibid = $this->getBibid();
+		$searchUrl = 'http://ezb.uni-regensburg.de/searchres.phtml?xmloutput=1&bibid='.$bibid.'&colors=7&lang=de';
 
 		// urlencode termi
 		$term = rawurlencode(utf8_decode($term));
@@ -253,14 +255,14 @@ class EZB {
 		foreach($searchVars as $var => $values) {
 
 			if (! is_array($values)) {
-				$searchUrl .= "&$var=".utf8_decode($values);
+				$searchUrl .= '&'.$var.'='.utf8_decode($values);
 			} else {
 				foreach($values as $value) {
 					$searchUrl .= '&'.$var.'[]='.utf8_decode($value);
 				}
 			}
 		}
-debug($searchUrl);
+
 		return $searchUrl;
 	}
 
@@ -336,6 +338,14 @@ debug($searchUrl);
 		return $result;
 	}
 
+	private function getBibid(){
+		$bibid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid '];
+		
+		if(empty($bibid)){
+			$bibid = 'SUBHH';
+		}
+		return $bibid;
+	}
 
 }
 
