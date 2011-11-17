@@ -4,7 +4,7 @@
 
 <form action="{$siteUrl}" method="get">
 <input type="hidden" name="id" value="{$listPid}" />
-	<label for="libconnect_ezb_minisuche" class="hiddenezb"/>Name der Zeitschrift</label>
+	<label for="libconnect_ezb_minisuche" class="hiddenezb">Name der Zeitschrift</label>
 	<input id="libconnect_ezb_minisuche" type="text" name="libconnect[search][sword]" size="20" value="{$vars.sword|urldecode}" />
 	<input type="submit" value="Suchen" /> <br/>
 	
