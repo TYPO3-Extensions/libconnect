@@ -347,7 +347,7 @@ class EZB {
 	}
 
 	private function getBibid(){
-		$bibid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid '];
+		$bibid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid'];
 		
 		if(empty($bibid)){
 			$bibid = 'SUBHH';

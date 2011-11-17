@@ -3,6 +3,12 @@
 * - TW: Torsten Witt torsten.witt@sub.uni-hamburg.de
 *
 **/
+2.2.4
+	- Fehler in Funktion getBibid der Klasse EZB entfernt
+2.2.3
+	- kleines Bugfix
+2.2.2
+	- Formulare enthalten nun Labels
 2.2.01
 	TW:
 		- Die konfigurierte ID der Bibliothek konnte bei der Suche nicht gelesen werden.
