@@ -3,6 +3,8 @@
 * - TW: Torsten Witt torsten.witt@sub.uni-hamburg.de
 *
 **/
+2.2.5
+	- kleine Bugfixes
 2.2.4
 	- Fehler in Funktion getBibid der Klasse EZB entfernt
 2.2.3

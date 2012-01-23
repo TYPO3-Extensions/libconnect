@@ -144,13 +144,17 @@ class EZB {
 		$journal['ZDB_number'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->ZDB_number;
 		$journal['ZDB_number_link'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->ZDB_number->attributes()->url;
 		$journal['subjects'] = array();
-		foreach($xml_request->ezb_detail_about_journal->journal->detail->subjects->subject as $subject) {
-			$journal['subjects'][] = (string) $subject;
+		if(isset($xml_request->ezb_detail_about_journal->journal->detail->subjects->subject)){
+			foreach($xml_request->ezb_detail_about_journal->journal->detail->subjects->subject as $subject) {
+				$journal['subjects'][] = (string) $subject;
+			}
 		}
 		$journal['subjects_join'] = join(', ', $journal['subjects']);
 		$journal['pissns'] = array();
-		foreach($xml_request->ezb_detail_about_journal->journal->detail->P_ISSNs->P_ISSN as $pissn) {
-			$journal['pissns'][] = (string) $pissn;
+		if(isset($xml_request->ezb_detail_about_journal->journal->detail->P_ISSNs->P_ISSN)){
+			foreach($xml_request->ezb_detail_about_journal->journal->detail->P_ISSNs->P_ISSN as $pissn) {
+				$journal['pissns'][] = (string) $pissn;
+			}
 		}
 		$journal['pissns_join'] = join(', ', $journal['pissns']);
 		$journal['eissns'] = array();
@@ -161,8 +165,10 @@ class EZB {
 		}
 		$journal['eissns_join'] = join(', ', $journal['eissns']);
 		$journal['keywords'] = array();
-		foreach($xml_request->ezb_detail_about_journal->journal->detail->keywords->keyword as $keyword) {
-			$journal['keywords'][] = (string) $keyword;
+		if(isset($xml_request->ezb_detail_about_journal->journal->detail->keywords->keyword)) {
+			foreach($xml_request->ezb_detail_about_journal->journal->detail->keywords->keyword as $keyword) {
+				$journal['keywords'][] = (string) $keyword;
+			}
 		}
 		$journal['keywords_join'] = join(', ', $journal['keywords']);
 		$journal['fulltext'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->fulltext;
@@ -170,8 +176,10 @@ class EZB {
 			$journal['fulltext_link'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->fulltext->attributes()->url;
 		}
 		$journal['homepages'] = array();
-		foreach($xml_request->ezb_detail_about_journal->journal->detail->homepages->homepage as $homepage) {
-			$journal['homepages'][] = (string) $homepage;
+		if(isset($xml_request->ezb_detail_about_journal->journal->detail->homepages->homepage)){
+			foreach($xml_request->ezb_detail_about_journal->journal->detail->homepages->homepage as $homepage) {
+				$journal['homepages'][] = (string) $homepage;
+			}
 		}
 		$journal['first_fulltext'] = array(
 			'volume' => (int) $xml_request->ezb_detail_about_journal->journal->detail->first_fulltext_issue->first_volume,
