@@ -114,5 +114,9 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 	public function displayMiniFormAction() {	
 		echo "miniForm";
 	}
+	
+	public function displayFormAction() {	
+		echo "Form";
+	}
 }
 ?>
