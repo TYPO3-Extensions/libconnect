@@ -7,7 +7,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'Dbis',
 	array(
-		//'Subject' => 'show, list, displayDetail, index,displayTop,displayList,displayMiniForm,displayForm, displayOverview',
+		//'Subject' => 'displayDetail, index,displayTop,displayList,displayMiniForm,displayForm, displayOverview',
 		'Dbis' => 'displayDetail, displayOverview, displayList'
 		
 	),
@@ -24,10 +24,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'Ezb',
 	array(
-		//'Subject' => 'show, list, index, displayTop, displayList, displayDetail, displayMiniForm, displayForm',
-		//'Dbis' => 'show, list',
 		'Ezb' => 'displayDetail, displayList, displayMiniForm, displayForm'
-		
 	),
 	// non-cacheable actions
 	array(

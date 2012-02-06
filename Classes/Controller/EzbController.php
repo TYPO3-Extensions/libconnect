@@ -44,15 +44,6 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		$this->view->assign('ezb', $ezb);
 	}
 
-	/**
-	 * action list
-	 *
-	 * @return void
-	 */
-	public function listAction() {
-		$ezbs = $this->ezbRepository->findAll();
-		$this->view->assign('ezbs', $ezbs);
-	}
 	
 	public function injectEzbRepository(Tx_Libconnect_Domain_Repository_EzbRepository $ezbRepository){
 		$this->ezbRepository = $ezbRepository;
@@ -66,7 +57,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 	* @todo $this->settings['flexform']['detailPid']; --> $this->settings['detailPid'];
 	**/
 	public function displayListAction() {	
-		
+		echo "listAction";
 		$params = t3lib_div::_GET('libconnect');
 		
 		if (!empty($params['subject'])) {//Gewaehltes Fach nach Einstiegspunkt
@@ -104,6 +95,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 	}
 	
 	public function displayDetailAction() {
+		echo "Detail";
 		//$this->set('bibid', $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid']);
 		/*
 		if (! $this->parameters->get('jourid')) {			
@@ -117,6 +109,10 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		$view->setTemplatePath($this->configurations->get('templatePath'));
 		return $view->render("ezb_detail.tpl");*/
 		
+	}
+	
+	public function displayMiniFormAction() {	
+		echo "miniForm";
 	}
 }
 ?>
