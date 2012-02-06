@@ -8,7 +8,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	'Dbis',
 	array(
 		//'Subject' => 'displayDetail, index,displayTop,displayList,displayMiniForm,displayForm, displayOverview',
-		'Dbis' => 'displayDetail, displayOverview, displayList'
+		'Dbis' => 'displayDetail, displayList, displayMiniForm, displayForm'
 		
 	),
 	// non-cacheable actions
