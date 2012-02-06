@@ -1,0 +1,40 @@
+plugin.tx_libconnect {
+	cssFile = typo3conf/ext/libconnect/Resources/Public/Styles/dbis.css
+	cssFile2 = typo3conf/ext/libconnect/Resources/Public/Styles/ezb.css
+	
+	persistence {
+		storagePid = {$plugin.tx_libconnect.persistence.storagePid}
+	}
+}
+
+plugin.tx_libconnect._CSS_DEFAULT_STYLE (
+	input.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	.tx-libconnect table {
+		border-collapse:separate;
+		border-spacing:10px;
+	}
+
+	.tx-libconnect table th {
+		font-weight:bold;
+	}
+
+	.tx-libconnect table td {
+		vertical-align:top;
+	}
+)
+
+#plugin.tx_libconnect {
+#	persistence {
+#		classes {
+#			Tx_Libconnect_Domain_Model_Subject {
+#				mapping {
+#					tableName = tx_libconnect_subject
+#				}
+#			}
+#		}
+#	}
+#}

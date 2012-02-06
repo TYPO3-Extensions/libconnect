@@ -1,7 +1,41 @@
 <?php
-if (!defined ('TYPO3_MODE')) {	die ('Access denied.'); }
+if (!defined('TYPO3_MODE')) {
+	die ('Access denied.');
+}
 
-require_once(t3lib_extMgm::extPath('div') . 'class.tx_div.php');
-if(TYPO3_MODE == 'FE') tx_div::autoLoadAll($_EXTKEY);
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
+	'Dbis',
+	array(
+		//'Subject' => 'show, list, displayDetail, index,displayTop,displayList,displayMiniForm,displayForm, displayOverview',
+		'Dbis' => 'displayDetail, displayOverview, displayList'
+		
+	),
+	// non-cacheable actions
+	array(
+		'Subject' => '',
+		'Dbis' => '',
+		'Ezb' => '',
+		
+	)
+);
+
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
+	'Ezb',
+	array(
+		//'Subject' => 'show, list, index, displayTop, displayList, displayDetail, displayMiniForm, displayForm',
+		//'Dbis' => 'show, list',
+		'Ezb' => 'displayDetail, displayList, displayMiniForm, displayForm'
+		
+	),
+	// non-cacheable actions
+	array(
+		'Subject' => '',
+		'Dbis' => '',
+		'Ezb' => '',
+		
+	)
+);
 
 ?>

@@ -1,0 +1,14 @@
+plugin.tx_libconnect {
+	view {
+		# cat=plugin.tx_libconnect/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:libconnect/Resources/Private/Templates/
+		# cat=plugin.tx_libconnect/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:libconnect/Resources/Private/Partials/
+		# cat=plugin.tx_libconnect/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:libconnect/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_libconnect//a; type=int+; label=Default storage PID
+		storagePid = 
+	}
+}
