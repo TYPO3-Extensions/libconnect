@@ -64,6 +64,7 @@ class EZB {
 	public function getFachbereichJournals($jounal, $sindex = 0, $sc = 'A', $lc = 'B', $lc = ''){
 		$bibid = $this->getBibid();
 		$xml_request = simplexml_load_file( "{$this->overview_requst_url}bibid={$bibid}&colors={$this->colors}&lang={$this->lang}&notation={$jounal}&sc={$sc}&lc={$lc}&sindex={$sindex}&");
+		
 		$journals = array();
 
 		if( $xml_request->page_vars ){
