@@ -24,8 +24,6 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
- require_once(t3lib_extMgm::extPath('libconnect') . 'Resources/Private/Lib/class_DBIS.php');
-
 /**
  *
  *
@@ -36,13 +34,11 @@
 class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_ActionController {
 	
 	public function displayListAction() {
-		 //print_r(t3lib_div::_GPmerged());
-		 
 		 $params = t3lib_div::_GET('libconnect');
 		 
 		if (!empty($params['subject'])) {//Gewaehltes Fach nach Einstiegspunkt
-			$config['sort'] = $this->settings['sortParameter'];
-			$config['detailPid'] = $this->settings['detailPid'];
+			$config['sort'] = $this->settings['flexform']['sortParameter'];
+			$config['detailPid'] = $this->settings['flexform']['detailPid'];
 			
 			$liste =  $this->dbisRepository->loadList($params['subject'], $config);
 			
@@ -81,9 +77,10 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 	
 	public function displayDetailAction() {
 		$params = t3lib_div::_GET('libconnect');
-		
+
 		if (!($params['titleid'])){
 			$this->view->assign('error', 'Error');
+			return;
 		}
 		$liste =  $this->dbisRepository->loadDetail($params['titleid']);
 		

@@ -24,7 +24,6 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-
 /**
  *
  *
@@ -34,31 +33,9 @@
  */
 class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_ActionController {
 
-	/**
-	 * action show
-	 *
-	 * @param $ezb
-	 * @return void
-	 */
-	public function showAction(Tx_Libconnect_Domain_Model_Ezb $ezb) {
-		$this->view->assign('ezb', $ezb);
-	}
-
-	
-	public function injectEzbRepository(Tx_Libconnect_Domain_Repository_EzbRepository $ezbRepository){
-		$this->ezbRepository = $ezbRepository;
-	}
-	
-	public function injectSubjectRepository(Tx_Libconnect_Domain_Repository_SubjectRepository $subjectRepository){
-		$this->subjectRepository = $subjectRepository;
-	}
-	
-	/**
-	* @todo $this->settings['flexform']['detailPid']; --> $this->settings['detailPid'];
-	**/
 	public function displayListAction() {	
-		echo "listAction";
 		$params = t3lib_div::_GET('libconnect');
+	
 		
 		if (!empty($params['subject'])) {//Gewaehltes Fach nach Einstiegspunkt
 			$config['detailPid'] = $this->settings['flexform']['detailPid'];
@@ -94,21 +71,26 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		}
 	}
 	
+	public function injectEzbRepository(Tx_Libconnect_Domain_Repository_EzbRepository $ezbRepository){
+		$this->ezbRepository = $ezbRepository;
+	}
+	
+	public function injectSubjectRepository(Tx_Libconnect_Domain_Repository_SubjectRepository $subjectRepository){
+		$this->subjectRepository = $subjectRepository;
+	}
+	
 	public function displayDetailAction() {
-		echo "Detail";
-		//$this->set('bibid', $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid']);
-		/*
-		if (! $this->parameters->get('jourid')) {			
-			return "<strong>Fehler: Es wurde keine Zeitschrift mit der angegeben URL gefunden.</strong>";
-		}
-			
-		$model = $this->makeInstance('tx_libconnect_models_ezb');	
-		$model->loadDetail(intval($this->parameters->get('jourid')));
-
-		$view = $this->makeInstance('tx_libconnect_views_smarty', $model);
-		$view->setTemplatePath($this->configurations->get('templatePath'));
-		return $view->render("ezb_detail.tpl");*/
+		$params = t3lib_div::_GET('libconnect');
 		
+		//$this->set('bibid', $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid']);
+		if (!($params['jourid'])){
+			$this->view->assign('error', 'Error');
+			//return "<strong>Fehler: Es wurde keine Zeitschrift mit der angegeben URL gefunden.</strong>";
+			return;
+		}
+
+		$journal =  $this->ezbRepository->loadDetail($params['jourid']);
+		$this->view->assign('journal', $journal);
 	}
 	
 	public function displayMiniFormAction() {	
