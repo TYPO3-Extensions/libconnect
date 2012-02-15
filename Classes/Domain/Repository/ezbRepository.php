@@ -49,7 +49,6 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		$lc = $options['lc'];
 		//$index=0, $sc='A', $lc =''
 		
-		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 		$this->loadSubjects();
 		$subject = $this->t3_to_ezb_subjects[$subject_id];

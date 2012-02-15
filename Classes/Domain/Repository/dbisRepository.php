@@ -51,11 +51,6 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		$result['list']['groups'] = $alph_sort_groups;
 		
 		return array('subject' => $subject['title'], 'list' => $result['list']);
-		
-		/*$this->set('subject', $subject['title']);
-		$this->set('list', $result['list']);*/
-		
-		 //$this->view->assign('hallo', 'Halli Hallo');
 	}
 	
 	public function loadOverview() {
