@@ -3,7 +3,9 @@
 	<meta>
 		<langDisable>1</langDisable>
 	</meta>
-
+<sheets>  
+  <sDEF>
+  
 		<ROOT>
 			<TCEforms>
 				<sheetTitle>LLL:EXT:lang/locallang_general.xml:LGL.startingpoint</sheetTitle>
@@ -11,7 +13,7 @@
 			<type>array</type>
 			<el>
 			
-				<defaultAction>
+				<switchableControllerActions>
 					<TCEforms>
 						<label>Ausgabe</label>
 						<onChange>reload</onChange>
@@ -45,12 +47,12 @@
 							</items>
 						</config>
 					</TCEforms>
-				</defaultAction>
+				</switchableControllerActions>
 				<settings.flexform.subject>
 					<TCEforms>
 						<exclude>1</exclude>
 						<label>Fachgebiet</label>
-						<displayCond><![CDATA[FIELD:defaultAction:=:Dbis->displayTop]]></displayCond>
+						<displayCond><![CDATA[FIELD:switchableControllerActions:=:Dbis->displayTop]]></displayCond>
 						<config>
 							<type>select</type>
 							<foreign_table>tx_libconnect_subject</foreign_table>
@@ -66,7 +68,7 @@
 					<TCEforms>
 						<exclude>1</exclude>
 						<label>Detailseite</label>
-						<displayCond><![CDATA[FIELD:defaultAction:IN:Dbis->displayList,Dbis->displayTop]]></displayCond>
+						<displayCond><![CDATA[FIELD:switchableControllerActions:IN:Dbis->displayList,Dbis->displayTop]]></displayCond>
 						<config>
 							<type>group</type>
 							<internal_type>db</internal_type>
@@ -83,7 +85,7 @@
 					<TCEforms>
 						<exclude>1</exclude>
 						<label>Listenausgabe</label>
-						<displayCond><![CDATA[FIELD:defaultAction:=:Dbis->displayForm]]></displayCond>
+						<displayCond><![CDATA[FIELD:switchableControllerActions:=:Dbis->displayForm]]></displayCond>
 						<config>
 							<type>group</type>
 							<internal_type>db</internal_type>
@@ -100,7 +102,7 @@
 					<TCEforms>
 						<exclude>1</exclude>
 						<label>Seite mit Detailsuche</label>
-						<displayCond><![CDATA[FIELD:defaultAction:=:Dbis->displayMiniForm]]></displayCond>
+						<displayCond><![CDATA[FIELD:switchableControllerActions:=:Dbis->displayMiniForm]]></displayCond>
 						<config>
 							<type>group</type>
 							<internal_type>db</internal_type>
@@ -117,7 +119,7 @@
 					<TCEforms>
 						<exclude>1</exclude>
 						<label>Sortierung</label>
-						<displayCond><![CDATA[FIELD:defaultAction:=:Dbis->displayList]]></displayCond>
+						<displayCond><![CDATA[FIELD:switchableControllerActions:=:Dbis->displayList]]></displayCond>
 						<config>
 							<type>select</type>
 							<items type="array">
@@ -142,7 +144,7 @@
 					<TCEforms>
 						<exclude>1</exclude>
 						<label>Overview</label>
-						<displayCond><![CDATA[FIELD:defaultAction:IN:Dbis->displayList]]></displayCond>
+						<displayCond><![CDATA[FIELD:switchableControllerActions:IN:Dbis->displayList]]></displayCond>
 						<config>
 							<type>group</type>
 							<internal_type>db</internal_type>
@@ -156,5 +158,6 @@
 				</settings.flexform.overviewPid>				
 			</el>
 		</ROOT>
-
+    </sDEF>
+  </sheets>
 </T3DataStructure>
