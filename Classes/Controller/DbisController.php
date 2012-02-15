@@ -34,37 +34,6 @@
  *
  */
 class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_ActionController {
-
-	/**
-	 * action show
-	 *
-	 * @param $dbis
-	 * @return void
-	 */
-	public function showAction(Tx_Libconnect_Domain_Model_Dbis $dbis) {
-		$this->view->assign('dbis', $dbis);
-	}
-
-	/**
-	 * action list
-	 *
-	 * @return void
-	 */
-	public function listAction() {
-		$dbis = $this->dbisRepository->findAll();
-		$this->view->assign('dbis', $dbis);
-	}
-	
-	public function indexAction() {
-		echo "indexDbis";
-    	 $this->view->assign('name', 'Stefan Frömken');
-		 
-		
-    }
-	
-	public function displayTopAction() {
-    	 $this->view->assign('name', 'Stefan Frömken');
-    }
 	
 	public function displayListAction() {
 		 //print_r(t3lib_div::_GPmerged());
