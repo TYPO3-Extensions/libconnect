@@ -8,6 +8,7 @@
 		- Doppeltes BR aus Views entfernt
 		- weniger style-Attribute
 		- Umlaute ersetzt
+		- Grafiken für Zugriffe nun per CSS
 2.2.5
 	- kleine Bugfixes
 2.2.4
