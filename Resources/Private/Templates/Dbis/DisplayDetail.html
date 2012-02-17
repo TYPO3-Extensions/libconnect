@@ -64,37 +64,7 @@
 			</th>
 
 			<td>
-
-			{namespace libconnect=Tx_Libconnect_ViewHelpers}
-			<f:if condition="{libconnect:compare(a: db.access_id, b: 'access_0')}">
-				<f:then><span class="dbis-list-accessinfo-access_1"></f:then>
-			</f:if>
-			<f:if condition="{libconnect:compare(a: db.access_id, b: 'access_1')}">
-				<f:then><span class="dbis-list-accessinfo-access_2"></f:then>
-			</f:if>
-			<f:if condition="{libconnect:compare(a: db.access_id, b: 'access_2')}">
-				<f:then><span class="dbis-list-accessinfo-access_3"></f:then>
-			</f:if>
-			<f:if condition="{libconnect:compare(a: db.access_id, b: 'access_7')}">
-				<f:then><span class="dbis-list-accessinfo-access_4"></f:then>
-			</f:if>
-			<f:if condition="{libconnect:compare(a: db.access_id, b: 'access_5')}">
-				<f:then><span class="dbis-list-accessinfo-access_5"></f:then>
-			</f:if>
-			<f:if condition="{libconnect:compare(a: db.access_id, b: 'access_4')}">
-				<f:then><span class="dbis-list-accessinfo-access_6"></f:then>
-			</f:if>
-			<f:if condition="{libconnect:compare(a: db.access_id, b: 'access_6')}">
-				<f:then><span class="dbis-list-accessinfo-access_7"></f:then>
-			</f:if>
-			<f:if condition="{libconnect:compare(a: db.access_id, b: 'access_500')}">
-				<f:then><img src="{f:uri.resource(path:'Img/dbis-list_germany.png')}" alt="" /></f:then>
-			</f:if>
-			<f:if condition="{libconnect:compare(a: db.access_id, b: 'access_300')}">
-				<f:then><img src="{f:uri.resource(path:'Img/euro.png')}" alt="" /></f:then>
-			</f:if>
-			
-			<f:escape value="{db.db_access_short_text}" type="raw" />
+			<span class="dbis-list-accessinfo-{db.access_id}"><f:escape value="{db.db_access_short_text}" type="raw" />
 			</span>
 			
 			
