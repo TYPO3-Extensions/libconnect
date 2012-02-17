@@ -138,24 +138,7 @@
 							</items>
 						</config>
 					</TCEforms>
-				</settings.flexform.sortParameter>
-
-				<settings.flexform.overviewPid>
-					<TCEforms>
-						<exclude>1</exclude>
-						<label>Overview</label>
-						<displayCond><![CDATA[FIELD:switchableControllerActions:IN:Dbis->displayList]]></displayCond>
-						<config>
-							<type>group</type>
-							<internal_type>db</internal_type>
-							<allowed>pages</allowed>
-							<size>1</size>
-							<maxitems>1</maxitems>
-							<minitems>0</minitems>
-							<show_thumbs>1</show_thumbs>
-						</config>
-					</TCEforms>
-				</settings.flexform.overviewPid>				
+				</settings.flexform.sortParameter>				
 			</el>
 		</ROOT>
     </sDEF>
