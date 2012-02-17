@@ -43,8 +43,8 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		}
 	}
 	
-	public function loadList($subject_id, $options =array('options' =>0, 'sc' => 'A', 'lc' => ''), $config) {
-		$index = $options['options'];
+	public function loadList($subject_id, $options =array('index' =>0, 'sc' => 'A', 'lc' => ''), $config) {
+		$index = $options['index'];
 		$sc = $options['sc'];
 		$lc = $options['lc'];
 		//$index=0, $sc='A', $lc =''
@@ -103,7 +103,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		$ezb = new EZB();
 		$journal = $ezb->getJournalDetail($journal_id);
 
-		if (! journal ){
+		if (! $journal ){
 			return false;
 		}
 	
