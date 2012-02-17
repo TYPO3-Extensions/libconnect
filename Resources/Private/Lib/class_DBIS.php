@@ -28,6 +28,7 @@ class DBIS{
 
 	/**
 	 * Alle Fachbereiche auslesen
+	 *
 	 * @return array()
 	 */
 	public function getFachliste(){
@@ -42,7 +43,9 @@ class DBIS{
 
 	/**
 	 * Return the list Fachgebiet
-	 * @param int $fachgebiet
+	 *
+	 * @param $fachgebiet int
+	 *
 	 * @return array
 	 */
 	public function getDbliste( $fachgebiet, $sort = "type" ){
@@ -138,8 +141,11 @@ class DBIS{
 	}
 
 	/**
-	 * get DB Detail Information
-	 * @param int db id
+	 * liefert Detailinformationen
+	 *
+	 * @param db_id int
+	 *
+	 * @return array
 	 */
 	public function getDbDetails( $db_id){
 		$bibid = $this->getBibid();
@@ -199,12 +205,7 @@ class DBIS{
 				}
 				$details['keywords_join'] = join(', ', $details['keywords']);
 			} else if( $key == 'db_type_infos' ){
-//				$i = 0;
 				foreach ($value->children() as $value2) {
-//					$details['db_type_infos'][$i]['db_type_id'] = (string) $value2->attributes()->db_type_id;
-//					$details['db_type_infos'][$i]['db_type'] = (string) $value2->db_type;
-//					$details['db_type_infos'][$i]['db_type_long_text'] = (string) $value2->db_type_long_text;
-//					$i++;
 					$details['db_type_infos'][] = (string) $value2->db_type;
 				}
 				$details['db_type_infos_join'] = join(', ', $details['db_type_infos']);
@@ -221,9 +222,12 @@ class DBIS{
 
 		return $details;
 	}
-
+	
+	
 	/**
 	 * Detailsuche Formular ausgeben
+	 *
+	 * @return array
 	 */
 	public function detailSucheFormFelder(){
 		$bibid = $this->getBibid();
@@ -254,7 +258,14 @@ class DBIS{
 		return $form;
 	}
 
-
+	/**
+	 * Suchurl erzeugen
+	 *
+	 * @param searchVars array
+	 * @param lett string
+	 *
+	 * @retun string
+	 */
 	private function createSearchUrl($searchVars, $lett = 'k') {
 		$bibid = $this->getBibid();
 	
@@ -276,8 +287,13 @@ class DBIS{
 
 
 	/**
-	 * Search
-	 * @param such String
+	 * Suche durchführen
+	 *
+	 * @param term string
+	 * @param searchVars string
+	 * @param lett string
+	 *
+	 * @return array
 	 */
 	public function search($term, $searchVars = false, $lett = 'fs'){
 		$bibid = $this->getBibid();
@@ -378,6 +394,7 @@ class DBIS{
 
 	/**
 	 * Set id Fachgebiet
+	 *
 	 * @param int $fachgebiet
 	 */
 	public function setGebiet($fachgebiet){
@@ -386,6 +403,7 @@ class DBIS{
 
 	/**
 	 * Set the letter string
+	 *
 	 * @param string $lett
 	 */
 	public function setLett($lett){
@@ -394,6 +412,7 @@ class DBIS{
 
 	/**
 	 * Set the int value colors
+	 *
 	 * @param int $colors
 	 */
 	public function setColors($colors){
@@ -402,6 +421,7 @@ class DBIS{
 
 	/**
 	 * Set the int value ocolors
+	 *
 	 * @param int $ocolors
 	 */
 	public function setOcolors($ocolors){
@@ -411,8 +431,9 @@ class DBIS{
 	/**
 	 *
 	 * helper function get fachliste
-	 * @param string
-	 * @return xml array
+	 *
+	 * @param request string
+	 * @return array
 	 */
 	public function getRequestFachliste( $request ){
 		$bibid = $this->getBibid();
@@ -422,10 +443,11 @@ class DBIS{
 	}
 
 	/**
-	 *
 	 * helper function get db liste
-	 * @param string
-	 * @return xml array
+	 *
+	 * @param request string
+	 *
+	 * @return array
 	 */
 	public function getRequestDbliste( $request ){
 		$bibid = $this->getBibid();
@@ -434,6 +456,11 @@ class DBIS{
 		return $xml_request;
 	}
 	
+	/**
+	 * helper function get BibId
+	 *
+	 * @return string
+	 */
 	private function getBibid(){
 		$bibid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['dbisbibid'];
 		

@@ -3,6 +3,7 @@
  * Doku: http://www.bibliothek.uni-regensburg.de/ezeit/vascoda/vifa/doku_xml_ezb.html
  * Doku: http://rzblx1.uni-regensburg.de/ezeit/vascoda/vifa/doku_xml_ezb.html
  * @author niklas guenther
+ * @author Torsten Witt
  *
  */
 
@@ -37,6 +38,7 @@ class EZB {
 
 	/**
 	 * Fachbereiche laden
+	 *
 	 * @return array()
 	 */
 	public function getFachbereiche(){
@@ -57,11 +59,11 @@ class EZB {
 	 * @param string $jounal
 	 * @param string $letter
 	 * @param string $lc
-	 * @param int $sindex
+	 * @param $sindex int
 	 *
 	 * @return array()
 	 */
-	public function getFachbereichJournals($jounal, $sindex = 0, $sc = 'A', $lc = 'B', $lc = ''){
+	public function getFachbereichJournals($jounal, $sindex = 0, $sc = 'A', $lc = ''){
 		$bibid = $this->getBibid();
 		$xml_request = simplexml_load_file( "{$this->overview_requst_url}bibid={$bibid}&colors={$this->colors}&lang={$this->lang}&notation={$jounal}&sc={$sc}&lc={$lc}&sindex={$sindex}&");
 		
@@ -125,7 +127,10 @@ class EZB {
 
 	/**
 	 * Details zu einem Journal laden
-	 * @param int Journal ID
+	 *
+	 * @param journalId int
+	 *
+	 * @return string
 	 */
 	public function getJournalDetail($journalId){
 		$bibid = $this->getBibid();
@@ -145,13 +150,17 @@ class EZB {
 		$journal['ZDB_number'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->ZDB_number;
 		$journal['ZDB_number_link'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->ZDB_number->attributes()->url;
 		$journal['subjects'] = array();
-		foreach($xml_request->ezb_detail_about_journal->journal->detail->subjects->subject as $subject) {
-			$journal['subjects'][] = (string) $subject;
+		if(isset($xml_request->ezb_detail_about_journal->journal->detail->subjects->subject)){
+			foreach($xml_request->ezb_detail_about_journal->journal->detail->subjects->subject as $subject) {
+				$journal['subjects'][] = (string) $subject;
+			}
 		}
 		$journal['subjects_join'] = join(', ', $journal['subjects']);
 		$journal['pissns'] = array();
-		foreach($xml_request->ezb_detail_about_journal->journal->detail->P_ISSNs->P_ISSN as $pissn) {
-			$journal['pissns'][] = (string) $pissn;
+		if(isset($xml_request->ezb_detail_about_journal->journal->detail->P_ISSNs->P_ISSN)){
+			foreach($xml_request->ezb_detail_about_journal->journal->detail->P_ISSNs->P_ISSN as $pissn) {
+				$journal['pissns'][] = (string) $pissn;
+			}
 		}
 		$journal['pissns_join'] = join(', ', $journal['pissns']);
 		$journal['eissns'] = array();
@@ -162,8 +171,10 @@ class EZB {
 		}
 		$journal['eissns_join'] = join(', ', $journal['eissns']);
 		$journal['keywords'] = array();
-		foreach($xml_request->ezb_detail_about_journal->journal->detail->keywords->keyword as $keyword) {
-			$journal['keywords'][] = (string) $keyword;
+		if(isset($xml_request->ezb_detail_about_journal->journal->detail->keywords->keyword)) {
+			foreach($xml_request->ezb_detail_about_journal->journal->detail->keywords->keyword as $keyword) {
+				$journal['keywords'][] = (string) $keyword;
+			}
 		}
 		$journal['keywords_join'] = join(', ', $journal['keywords']);
 		$journal['fulltext'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->fulltext;
@@ -171,8 +182,10 @@ class EZB {
 			$journal['fulltext_link'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->fulltext->attributes()->url;
 		}
 		$journal['homepages'] = array();
-		foreach($xml_request->ezb_detail_about_journal->journal->detail->homepages->homepage as $homepage) {
-			$journal['homepages'][] = (string) $homepage;
+		if(isset($xml_request->ezb_detail_about_journal->journal->detail->homepages->homepage)){
+			foreach($xml_request->ezb_detail_about_journal->journal->detail->homepages->homepage as $homepage) {
+				$journal['homepages'][] = (string) $homepage;
+			}
 		}
 		$journal['first_fulltext'] = array(
 			'volume' => (int) $xml_request->ezb_detail_about_journal->journal->detail->first_fulltext_issue->first_volume,
@@ -213,9 +226,11 @@ class EZB {
 		return $journal;
 
 	}
-
+ 
 	/**
-	 * Suchformular anzeigen
+	 * Detailsuche Formular ausgeben
+	 *
+	 * @return array
 	 */
 	public function detailSearchFormFields(){
 		$xml_such_form = simplexml_load_file( $this->search_url . "" );
@@ -244,7 +259,15 @@ class EZB {
 
 		return $form;
 	}
-
+	
+	/**
+	 * Suchurl erzeugen
+	 *
+	 * @param term string
+	 * @param searchVars array
+	 *
+	 * @return string
+	 */
 	private function createSearchUrl($term, $searchVars/*, $lett = 'k'*/) {
 		$bibid = $this->getBibid();
 		$searchUrl = 'http://ezb.uni-regensburg.de/searchres.phtml?xmloutput=1&bibid='.$bibid.'&colors=7&lang=de';
@@ -275,7 +298,10 @@ class EZB {
 
 	/**
 	 * Suche durchführen
+	 *
 	 * @param string Such string
+	 *
+	 * @return array
 	 */
 	public function search( $term, $searchVars = array() ){
 
@@ -346,7 +372,12 @@ class EZB {
 
 		return $result;
 	}
-
+	
+	/**
+	 * helper function get BibId
+	 *
+	 * @return string
+	 */
 	private function getBibid(){
 		$bibid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid'];
 		
