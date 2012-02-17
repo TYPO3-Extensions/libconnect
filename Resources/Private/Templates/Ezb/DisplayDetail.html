@@ -18,19 +18,36 @@
 
 		<table class="ezb-result-details">
 		<tbody>
-
 		<tr>
 			<td width="130">
-			<strong>Verf&uuml;gbarkeit:</strong>
+				<strong>Verf&uuml;gbarkeit:</strong>
 			</td>
 
 			<td>
-			<img src="typo3conf/ext/libconnect/templates/img/ezb-list_{$journal.color_code}.png" alt="" />
-			{if $journal.color_code == "1"}Frei zug&auml;nglich
-				{elseif $journal.color_code == "2"}Im Campus-Netz sowie f&uuml;r Angeh&ouml;rige der Universit&auml;t auch extern zug&auml;nglich
-				{elseif $journal.color_code == "6"}Nur f&uuml;r einen Teil der erschienenen Jahrg&auml;nge zug&auml;nglich
-				{elseif $journal.color_code == "4"}F&uuml;r Ihren Standort nicht freigeschaltet. Zum Teil bekommen Sie Zugriff auf Abstracts oder Inhaltsverzeichnisse
-			{/if}
+				<span class="ezb-list-accessinfo-access_{journal.color_code}">
+				<f:if condition="{journal.color_code} == 1">
+				<f:then>
+					Frei zug&auml;nglich
+				</f:then>
+				<f:else>
+					<f:if condition="{journal.color_code} == 2">
+					<f:then>
+						Im Campus-Netz sowie f&uuml;r Angeh&ouml;rige der Universit&auml;t auch extern zug&auml;nglich
+					</f:then>
+					<f:else>
+						<f:if condition="{journal.color_code} == 6">
+						<f:then>
+							Nur f&uuml;r einen Teil der erschienenen Jahrg&auml;nge zug&auml;nglich
+						</f:then>
+						<f:else>
+							F&uuml;r Ihren Standort nicht freigeschaltet. Zum Teil bekommen Sie Zugriff auf Abstracts oder Inhaltsverzeichnisse
+						</f:else>
+						</f:if>
+					</f:else>
+					</f:if>
+				</f:else>
+				</f:if>
+				</span>
 			</td>
 		</tr>
 
@@ -61,8 +78,7 @@
 					<strong>Restliche Zeitr&auml;ume:</strong>
 				</td>
 				<td>
-					<img src="{f:uri.resource(path:'Img/ezb-list_{period.color_code}.png')}" alt="" />
-					<a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">Homepage der Zeitschrift</a>
+					<span class="ezb-list-accessinfo-access_{period.color_code}"><a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">Homepage der Zeitschrift</a></span>
 				</td>
 				</f:else>
 				</f:if>
