@@ -39,11 +39,7 @@
 								<numIndex index="4">
 									<numIndex index="0">Suchformular</numIndex>
 									<numIndex index="1">Dbis->displayForm</numIndex>
-								</numIndex>
-								<numIndex index="4">
-									<numIndex index="0">Overview</numIndex>
-									<numIndex index="1">Dbis->displayOverview</numIndex>
-								</numIndex>										
+								</numIndex>									
 							</items>
 						</config>
 					</TCEforms>
