@@ -42,17 +42,20 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 			
 			$liste =  $this->dbisRepository->loadList($params['subject'], $config);
 			
-			
-			//var_dump($liste['list']['access_infos']);
+
 			$this->view->assign('subject', $liste['subject']);
 			$this->view->assign('list', $liste['list']);
-			//$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('extkey') . 'Resources/Public/Styles/dbis.css" />');
 
 		} else if (!empty($params['search'])) {//Suchergebnisse
-			/*$model->loadSearch();
-			$view = $this->makeInstance('tx_libconnect_views_smarty', $model);
-			$view->setTemplatePath($this->configurations->get('templatePath'));
-			$output = $view->render("dbis_search.tpl");*/
+			$config['detailPid'] = $this->settings['flexform']['detailPid'];
+			
+			$liste =  $this->dbisRepository->loadSearch($params['search'], $config);
+			//andere View verwenden
+			$controllerContext = $this->buildControllerContext();
+			$controllerContext->getRequest()->setControllerActionName('displaySearch');
+			$this->view->setControllerContext($controllerContext);
+			
+			$this->view->assign('list', $liste);
 
 		} else {//Einstiegspunkt
 			$liste =  $this->dbisRepository->loadOverview();
@@ -94,28 +97,41 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 			}
 		
 			$this->view->assign('db', $liste);
-		}
-		
-		//if (! $this->parameters->get('titleid')) {
-//			$this->flashMessageContainer->add();
-	//		$this->pushFlashMessage("<strong>Error in DBIS displayDetailAction: No title id</strong>");
-			 
-		//}
-
-		/*$model = $this->makeInstance('tx_libconnect_models_dbis');
-		$model->loadDetail(intval($this->parameters->get('titleid')));*/
-
-		
-		
-		
+		}		
     }
 	
+	
+	
 	public function displayMiniFormAction() {
-    	 $this->view->assign('name', 'Stefan Frömken');
+		$params = t3lib_div::_GET('libconnect');
+		
+		$cObject = t3lib_div::makeInstance('tslib_cObj');
+		
+    	$form = $this->dbisRepository->loadMiniForm($params['search']);
+		
+		$this->view->assign('vars', $params['search']);
+		$this->view->assign('form', $form);
+		$this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
+		$this->view->assign('searchUrl', $cObject->getTypolink_URL($this->settings['flexform']['searchPid']));//Link zur Suchseite
+		$this->view->assign('listPid', $this->settings['flexform']['listPid']);//Link zur Listendarstellung
     }
 	
 	public function displayFormAction() {
-    	 $this->view->assign('name', 'Stefan Frömken');
+		$params = t3lib_div::_GET('libconnect');
+		
+		$cObject = t3lib_div::makeInstance('tslib_cObj');
+	
+    	$form = $this->dbisRepository->loadForm($params['search']);
+		
+		$this->view->assign('vars', $params['search']);
+		$this->view->assign('form', $form);
+		$this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
+		$this->view->assign('listUrl', $cObject->getTypolink_URL($this->settings['flexform']['listPid']));//Link zur Suchseite
+		$this->view->assign('listPid', $this->settings['flexform']['listPid']);//Link zur Listendarstellung
+		
+		
+		
+		
     }
 
 }

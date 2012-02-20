@@ -41,7 +41,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 				);
 			}
 		}
-//var_dump($result['list']);
+
 		// sort groups by name
 		$alph_sort_groups = array();
 		foreach ($result['list']['groups'] as $group) {
@@ -96,6 +96,50 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		}
 		
 		return $db;
+	}
+	
+	public function loadSearch($searchVars, $config) {
+		$cObject = t3lib_div::makeInstance('tslib_cObj');
+		$this->loadSubjects();
+
+		$term = $searchVars['sword'];//wird bei MiniForm verwendet
+		unset($searchVars['sword']);
+
+		$dbis = new DBIS();
+		$result = $dbis->search($term, $searchVars);
+
+		foreach(array_keys($result['list']['top']) as $db) {
+			$result['list']['top'][$db]['detail_link'] = $cObject->getTypolink_URL(
+				intval($config['detailPid']),
+				array(
+					'libconnect[titleid]' => $result['list']['top'][$db]['id'],
+				)
+			);
+		}
+		foreach(array_keys($result['list']['values']) as $value) {
+				$result['list']['values'][$value]['detail_link'] = $cObject->getTypolink_URL(
+					intval($config['detailPid']),
+					array(
+						'libconnect[titleid]' => $result['list']['values'][$value]['id'],
+					)
+				);
+		}
+		
+		return $result['list'];
+	}
+	
+	public function loadMiniForm() {
+		$dbis = new DBIS();
+		$form = $dbis->detailSucheFormFelder();
+
+		return $form;
+	}
+	
+	public function loadForm() {
+		$dbis = new DBIS();
+		$form = $dbis->detailSucheFormFelder();
+		
+		return $form;
 	}
 	
 	public function injectSubjectRepository(Tx_Libconnect_Domain_Repository_SubjectRepository $subjectRepository){
