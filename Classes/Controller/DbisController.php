@@ -100,8 +100,6 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		}		
     }
 	
-	
-	
 	public function displayMiniFormAction() {
 		$params = t3lib_div::_GET('libconnect');
 		
@@ -128,11 +126,6 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		$this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
 		$this->view->assign('listUrl', $cObject->getTypolink_URL($this->settings['flexform']['listPid']));//Link zur Suchseite
 		$this->view->assign('listPid', $this->settings['flexform']['listPid']);//Link zur Listendarstellung
-		
-		
-		
-		
     }
-
 }
 ?>
