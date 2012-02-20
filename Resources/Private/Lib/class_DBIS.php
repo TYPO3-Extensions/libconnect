@@ -382,12 +382,7 @@ class DBIS{
 		if (isset($request->error)) {
 			$list['error'] = (string) $request->error;
 		}
-
-		//setlocale(LC_COLLATE, "de_DE.UTF-8");
 		
-		//asort($sort, SORT_LOCALE_STRING);
-		$list['alphasort']=$sort;
-
 		return array( 'page_vars' => $page_vars, /*'groups' => $access_infos,*/ 'list' => $list);
 	}
 
