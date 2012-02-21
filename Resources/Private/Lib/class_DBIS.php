@@ -2,6 +2,7 @@
 /**
  * Doku:
  * @author niklas guenther
+ * @author Torsten Witt
  *
  */
 class DBIS{
