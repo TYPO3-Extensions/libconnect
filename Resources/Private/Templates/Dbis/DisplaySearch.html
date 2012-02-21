@@ -4,13 +4,13 @@
 Sie suchten nach folgenden Kriterien:<br/>
 <ul>
 	<f:for each="{list.searchDescription}" as="description">
-		<li>{description}</li>
+		<li><f:escape value="{description}" type="raw" /></li>
 	</f:for>
 </ul>
 
 <br/><br/>
 
-<f:if condition="{listerror}">
+<f:if condition="{list.error}">
 	<f:then>
 	
 	</f:then>
@@ -46,7 +46,7 @@ Sie suchten nach folgenden Kriterien:<br/>
 				<ul class="dbis-dblist">
 					<f:for each="{list.values}" as="db" key="titleid">
 						<li>
-							<li class="dbis-list-accessinfo-{db.access_ref}"><a href="{db.detail_link}"><f:escape value="{db.title}" type="raw" /></a></li>							
+							<li class="dbis-list-accessinfo-{db.access_ref}"><a href="{db.detail_link}"><f:escape value="{db.title}" type="raw" /></a></li>
 						</li>
 					</f:for>
 				</ul>
