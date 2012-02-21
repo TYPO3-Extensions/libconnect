@@ -109,5 +109,92 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 	
 		return $journal; 
 	}
+	
+	public function loadSearch($searchVars, $config) {
+		$cObject = t3lib_div::makeInstance('tslib_cObj');
+		$this->loadSubjects();
+
+		$linkParams = array();
+		foreach ($searchVars as $key => $value) {
+			$linkParams["libconnect[search][$key]"] = $value;
+		}
+
+		$term = $searchVars['sword'];
+		unset($searchVars['sword']);
+
+		$ezb = new EZB();
+		$journals = $ezb->search($term, $searchVars);
+
+		if (! $journals)
+			return false;
+
+		if (is_array($journals['navlist']['pages'])) {
+
+			foreach(array_keys($journals['navlist']['pages']) as $page) {
+				if (is_array($journals['navlist']['pages'][$page])) {
+					$journals['navlist']['pages'][$page]['link'] = $cObject->getTypolink_URL($GLOBALS['TSFE']->id,
+						array_merge($linkParams, array(
+							'libconnect[search][sc]' => $journals['navlist']['pages'][$page]['id']
+						)));
+				}
+			}
+		}
+
+		if (is_array($journals['alphabetical_order']['first_fifty'])) {
+
+			foreach(array_keys($journals['alphabetical_order']['first_fifty']) as $section) {
+				$journals['alphabetical_order']['first_fifty'][$section]['link'] = $cObject->getTypolink_URL($GLOBALS['TSFE']->id,
+					array_merge($linkParams, array(
+						'libconnect[search][sindex]' => $journals['alphabetical_order']['first_fifty'][$section]['sindex'],
+					    'libconnect[search][sc]' => $journals['alphabetical_order']['first_fifty'][$section]['sc'],
+					)));
+			}
+		}
+
+		if (is_array($journals['alphabetical_order']['journals'])) {
+
+			foreach(array_keys($journals['alphabetical_order']['journals']) as $journal) {
+				$journals['alphabetical_order']['journals'][$journal]['detail_link'] = $cObject->getTypolink_URL(
+						intval($config['detailPid']),
+						array(
+							'libconnect[jourid]' => $journals['alphabetical_order']['journals'][$journal]['jourid'],
+						)
+				);
+			}
+		}
+
+		if (is_array($journals['alphabetical_order']['next_fifty'])) {
+
+			foreach(array_keys($journals['alphabetical_order']['next_fifty']) as $section) {
+				$journals['alphabetical_order']['next_fifty'][$section]['link'] = $cObject->getTypolink_URL($GLOBALS['TSFE']->id,
+					array_merge($linkParams, array(
+						'libconnect[search][sindex]' => $journals['alphabetical_order']['next_fifty'][$section]['sindex'],
+					    'libconnect[search][sc]' => $journals['alphabetical_order']['next_fifty'][$section]['sc'],
+					)));
+			}
+		}
+
+		return $journals;
+	}
+
+	public function loadMiniForm() {/*
+		$cObject = $this->findCObject();
+
+		$ezb = new EZB();
+		$form = $ezb->detailSearchFormFields();
+		$searchVars = $this->controller->parameters->get('search');
+		$this->set('vars', $searchVars);
+		$this->set('form', $form);
+		$this->set('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));
+		$this->set('searchUrl', $cObject->getTypolink_URL($this->controller->configurations->get('searchPid')));
+		$this->set('listPid', $this->controller->configurations->get('searchPid'));*/
+	}
+
+	public function loadForm() {
+		$ezb = new EZB();
+		$form = $ezb->detailSearchFormFields();
+	
+		return $form;
+	}
 }
 ?>

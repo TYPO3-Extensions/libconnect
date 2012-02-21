@@ -49,16 +49,20 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 				$options,
 				$config
 			);
-			
+
 			$this->view->assign('journals', $liste);
 				
 		} else if (!empty($params['search'])) {//Suchergebnisse
-			/*$liste =  $this->ezbRepository->loadSearch();
+			$config['detailPid'] = $this->settings['flexform']['detailPid'];
 			
-			$view = $this->makeInstance('tx_libconnect_views_smarty', $model);
-			$view->setTemplatePath($this->configurations->get('templatePath'));
-			$output = $view->render("ezb_search.tpl");*/
-
+			$journals =  $this->ezbRepository->loadSearch($params['search'], $config);
+			
+			//andere View verwenden
+			$controllerContext = $this->buildControllerContext();
+			$controllerContext->getRequest()->setControllerActionName('displaySearch');
+			$this->view->setControllerContext($controllerContext);
+			
+			$this->view->assign('journals', $journals);
 		} else {
 			$liste =  $this->ezbRepository->loadOverview();
 			
@@ -94,12 +98,31 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		$this->view->assign('bibid', 'bibid');
 	}
 	
-	public function displayMiniFormAction() {	
-		echo "miniForm";
+	public function displayMiniFormAction() {
+		$params = t3lib_div::_GET('libconnect');
+		
+		$cObject = t3lib_div::makeInstance('tslib_cObj');
+		
+    	$form = $this->ezbRepository->loadMiniForm($params['search']);
+		
+		//$this->view->assign('vars', $params['search']);
+		$this->view->assign('form', $form);
+		$this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
+		$this->view->assign('searchUrl', $cObject->getTypolink_URL($this->settings['flexform']['searchPid']));//Link zur Suchseite
+		$this->view->assign('listPid', $this->settings['flexform']['searchPid']);//Link zur Listendarstellung
 	}
 	
 	public function displayFormAction() {	
-		echo "Form";
+		$form =  $this->ezbRepository->loadForm();
+		$params = t3lib_div::_GET('libconnect');
+		
+		$cObject = t3lib_div::makeInstance('tslib_cObj');
+		
+		$this->view->assign('vars', $params['search']);
+		$this->view->assign('form', $form);
+		$this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
+		$this->view->assign('listUrl', $cObject->getTypolink_URL($this->settings['flexform']['listPid']));//Link zur Suchseite
+		$this->view->assign('listPid', $this->settings['flexform']['listPid']);//Link zur Listendarstellung
 	}
 }
 ?>

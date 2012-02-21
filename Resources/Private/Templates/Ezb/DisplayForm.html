@@ -1,43 +1,46 @@
-<form id="e-search" name="extSearchForm" action="{$listUrl}" method="get" class="e-search">
+<link rel="stylesheet" href="{f:uri.resource(path:'Styles/ezb.css')}" />
+<div id="extSearchForm-wrapper" class="clearfix">
 
-<input type="hidden" name="id" value="{$listPid}" />
+<form id="e-search" name="extSearchForm" action="{listUrl}" method="GET" class="e-search">
+
+<input type="hidden" name="id" value="{listPid}" />
   <fieldset>
     <legend>Erweiterte Suche nach Zeitschriften</legend> 
-
-	{section name=jq_type loop=4}
-		<label for="jq_type{$smarty.section.jq_type.iteration}" class="hiddenezb">Feldangabe</label>
-    	<select name="libconnect[search][jq_type{$smarty.section.jq_type.iteration}]" id="jq_type{$smarty.section.jq_type.iteration}">
+	
+	<f:for each="{1:1, 2:2, 3:3, 4:4}" as="jq_type">
+		<label for="jq_type{jq_type}" class="hiddenezb">Feldangabe</label>
+    	<select name="libconnect[search][jq_type{jq_type}]" id="jq_type{jq_type}">
     	
-    		{foreach name=jq_type_foreach from=$form.jq_type key=key item=value}
-    			<option value="{$key}" {if (intval($smarty.section.jq_type.iteration) == intval($smarty.foreach.jq_type_foreach.iteration))}selected="selected"{/if}>{$value}</option>
-    		{/foreach}
+			<f:for each="{form.jq_type}" as="value" key="key" iteration="foriteration">
+				<option value="{key}" <f:if condition="{jq_type} == {foriteration.cycle}">selected="selected"</f:if>><f:escape value="{value}" type="raw" /></option>
+    		</f:for>
     	
 		</select>
 		
-		<label for="jq_term{$smarty.section.jq_type.iteration}" class="hiddenezb">Suchbegriff</label> 
-		<input type="text" size="30" class="dbis-input" name="libconnect[search][jq_term{$smarty.section.jq_type.iteration}]" id="jq_term{$smarty.section.jq_type.iteration}" value="" />
+		<label for="jq_term{jq_type}" class="hiddenezb">Suchbegriff</label> 
+		<input type="text" size="30" class="dbis-input" name="libconnect[search][jq_term{jq_type}]" id="jq_term{jq_type}" value="" />
 		
-		<label for="jq_bool{$smarty.section.jq_type.iteration}" class="hiddenezb">Verkn&uuml;pfung</label> 
-	    <select name="libconnect[search][jq_bool{$smarty.section.jq_type.iteration}]" id="jq_bool{$smarty.section.jq_type.iteration}">
-	      	{foreach name=jq_bool_foreach from=$form.jq_bool key=key item=value}
-	      		<option value="{$key}">{$value}</option>
-			{/foreach}
+		<label for="jq_bool{jq_type}" class="hiddenezb">Verkn&uuml;pfung</label> 
+	    <select name="libconnect[search][jq_bool{jq_type}]" id="jq_bool{jq_type}">
+			<f:for each="{form.jq_bool}" as="value" key="key">
+	      		<option value="{key}">{value}</option>
+			</f:for>
 	    </select>
 	
-		<label for="jq_not{$smarty.section.jq_type.iteration}" class="hiddenezb">Negator</label> 
-	    <select name="libconnect[search][jq_not{$smarty.section.jq_type.iteration}]" id="jq_not{$smarty.section.jq_type.iteration}">
-	      	{foreach name=jq_not_foreach from=$form.jq_not key=key item=value}
-	      		<option value="{$key}">{$value}</option>
-			{/foreach}
+		<label for="jq_not{jq_type}" class="hiddenezb">Negator</label> 
+	    <select name="libconnect[search][jq_not{jq_type}]" id="jq_not{jq_type}">
+	      	<f:for each="{form.jq_not}" as="value" key="key">
+	      		<option value="{key}">{value}</option>
+			</f:for>
 	    </select>
 	
 	    <br />		 
-	{/section}
+	</f:for>
 
 	<br/>
 	
     <label for="hits_per_page">Treffer pro Seite:</label>
-    <select size="1" name="libconnect[search][hits_per_page]">
+    <select size="1" name="libconnect[search][hits_per_page]" id="hits_per_page">
 		<option value="10">10</option>
 		<option value="25">25</option>
 		<option selected="" value="50">50</option>
@@ -51,18 +54,18 @@
 	
     <label for="fachgebiete">Fachgebiete:</label> 
     <select multiple="multiple" size="5" name="libconnect[search][Notations][]" id="fachgebiete" style="width:34em;margin-left:6.5em;">
-   		{foreach from=$form.Notations key=key item=value}
-   			<option value="{$key}">{$value}</option>
-   		{/foreach}
+		<f:for each="{form.Notations}" as="value" key="key">
+   			<option value="{key}">{value}</option>
+   		</f:for>
     </select>
 
     <br/><br/>
 
     <label for="zugaenge">Volltextartikel sind:</label> 
    	<p>
-   	{foreach from=$form.selected_colors key=key item=value}
-  		<input type="checkbox" name="libconnect[search][selected_colors][]" value="{$key}" checked="checked" /> {$value} <br/>
-  	{/foreach}
+	<f:for each="{form.selected_colors}" as="value" key="key">
+  		<input type="checkbox" name="libconnect[search][selected_colors][]" id="zugaenge" value="{key}" checked="checked" /> {value} <br/>
+  	</f:for>
 	</p>
 
     <br />
@@ -70,3 +73,4 @@
   </fieldset>
 
 </form>
+</div>
