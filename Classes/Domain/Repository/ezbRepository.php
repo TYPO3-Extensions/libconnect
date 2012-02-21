@@ -177,17 +177,12 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		return $journals;
 	}
 
-	public function loadMiniForm() {/*
-		$cObject = $this->findCObject();
+	public function loadMiniForm() {
 
 		$ezb = new EZB();
 		$form = $ezb->detailSearchFormFields();
-		$searchVars = $this->controller->parameters->get('search');
-		$this->set('vars', $searchVars);
-		$this->set('form', $form);
-		$this->set('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));
-		$this->set('searchUrl', $cObject->getTypolink_URL($this->controller->configurations->get('searchPid')));
-		$this->set('listPid', $this->controller->configurations->get('searchPid'));*/
+		
+		return $form;
 	}
 
 	public function loadForm() {
