@@ -50,6 +50,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 			$config['detailPid'] = $this->settings['flexform']['detailPid'];
 			
 			$liste =  $this->dbisRepository->loadSearch($params['search'], $config);
+			
 			//andere View verwenden
 			$controllerContext = $this->buildControllerContext();
 			$controllerContext->getRequest()->setControllerActionName('displaySearch');
