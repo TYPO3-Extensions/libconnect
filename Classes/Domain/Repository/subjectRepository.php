@@ -12,6 +12,7 @@ Class Tx_Libconnect_Domain_Repository_SubjectRepository extends Tx_Extbase_Persi
 		//$pidList = implode(', ', t3lib_div::intExplode(',', $extbaseFrameworkConfiguration['persistence']['storagePid']));
 		$query = $this->createQuery();
 		$query->statement('SELECT * from tx_libconnect_subject');
+		
 		return $query->execute();
  	}
 }
