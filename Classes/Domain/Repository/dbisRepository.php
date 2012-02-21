@@ -9,15 +9,14 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 	public function loadList($subject_id, $config) {
 		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
-		
+
 		$this->loadSubjects();
 
 		$dbis = new DBIS();
+		
 		$subject = $this->t3_to_dbis_subjects[$subject_id];
 
 		$dbis_id = $subject['dbisid'];
-		//$sort = $this->controller->configurations->get('sortParameter');
-		
 	
 		$result = $dbis->getDbliste($dbis_id, $config['sort']);
 		
@@ -59,6 +58,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		
 		
 		$dbis = new DBIS();
+		
 		$list = $dbis->getFachliste();
 
 		foreach($list as $el) {
@@ -75,7 +75,8 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 	
 	private function loadSubjects() {
 		$res = $this->subjectRepository->findAll();
-		foreach($res as $row){			
+		foreach($res as $row){		
+
 			$this->dbis_to_t3_subjects[$row->getDbisId()]['dbisid'] = $row->getDbisId();
 			$this->dbis_to_t3_subjects[$row->getDbisId()]['title'] = $row->getTitle();
 			$this->dbis_to_t3_subjects[$row->getDbisId()]['uid'] = $row->getUid();
