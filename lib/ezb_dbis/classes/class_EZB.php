@@ -283,6 +283,8 @@ class EZB {
 	/**
 	 * Suche durchführen
 	 * @param string Such string
+	 *
+	 * @return array
 	 */
 	public function search( $term, $searchVars = array() ){
 

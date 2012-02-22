@@ -118,7 +118,7 @@ class tx_libconnect_models_dbis extends tx_lib_object {
 		$this->loadSubjects();
 
 		$searchVars = $this->controller->parameters->get('search');
-		$term = $searchVars['sword'];
+		$term = $searchVars['sword'];//wird bei MiniForm verwendet
 		unset($searchVars['sword']);
 
 		$dbis = new DBIS();
