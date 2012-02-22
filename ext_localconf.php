@@ -11,9 +11,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	),
 	// non-cacheable actions
 	array(
-		'Subject' => '',
-		'Dbis' => 'displayDetail, displayList, displayMiniForm, displayForm',
-		'Ezb' => ''
+		'Dbis' => 'displayDetail, displayList, displayMiniForm, displayForm'
 	)
 );
 
@@ -21,15 +19,11 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'Ezb',
 	array(
-		'Ezb' => 'displayList, displayDetail, displayMiniForm, displayForm'
+		'Ezb' => 'displayDetail, displayList, displayMiniForm, displayForm'
 	),
 	// non-cacheable actions
 	array(
-		'Subject' => '',
-		'Dbis' => '',
 		'Ezb' => 'displayDetail, displayList, displayMiniForm, displayForm'
-		
 	)
 );
-
 ?>
