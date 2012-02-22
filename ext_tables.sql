@@ -6,9 +6,9 @@ CREATE TABLE tx_libconnect_subject (
 	cruser_id INT(11) DEFAULT '0' NOT NULL,
 	deleted TINYINT(4) DEFAULT '0' NOT NULL,
 	hidden TINYINT(4) DEFAULT '0' NOT NULL,
-	title TINYINT NOT NULL,
-	dbisid TINYINT NOT NULL,
-	ezbnotation TINYINT NOT NULL,
+	title TINYTEXT NOT NULL,
+	dbisid TINYTEXT NOT NULL,
+	ezbnotation TINYTEXT NOT NULL,
 	
 	PRIMARY KEY (uid),
 	KEY parent (pid)
