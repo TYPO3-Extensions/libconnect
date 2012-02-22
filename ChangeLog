@@ -4,11 +4,14 @@
 *
 **/
 3.0.0
+	- Umstellung auf Extbase und Fluid
+	- kleine Bugfixes
 	- Views
 		- Doppeltes BR aus Views entfernt
 		- weniger style-Attribute
 		- Umlaute ersetzt
 		- Grafiken für Zugriffe nun per CSS
+		
 2.2.5
 	- kleine Bugfixes
 2.2.4
