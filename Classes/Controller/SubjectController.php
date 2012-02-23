@@ -34,34 +34,5 @@
  */
 class Tx_Libconnect_Controller_SubjectController extends Tx_Extbase_MVC_Controller_ActionController {
 
-	/**
-	 * action show
-	 *
-	 * @param $subject
-	 * @return void
-	 */
-	public function showAction(Tx_Libconnect_Domain_Model_Subject $subject) {
-//	public function showAction() {
-		$this->view->assign('subject', $subject);
-	}
-
-	/**
-	 * action list
-	 *
-	 * @return void
-	 */
-	public function listAction() {
-		$subjects = $this->subjectRepository->findAll();
-		$this->view->assign('subjects', $subjects);
-	}
-	/*
-	public function detailAction() {
-		$this->view->assign('subject', $subject);
-	}
-	
-	public function displayDetailAction() {
-		$this->view->assign('subject', $subject);
-	}*/
-
 }
 ?>
