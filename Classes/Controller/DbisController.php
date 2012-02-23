@@ -33,6 +33,15 @@
  */
 class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_ActionController {
 	
+	public function displayTopAction() {
+		$config['subject'] = $this->settings['flexform']['subject'];
+		$config['detailPid'] = $this->settings['flexform']['detailPid'];
+
+		$top =  $this->dbisRepository->loadTop($config);
+
+		$this->view->assign('top', $top);
+	}
+	
 	public function displayListAction() {
 		 $params = t3lib_div::_GET('libconnect');
 		 
