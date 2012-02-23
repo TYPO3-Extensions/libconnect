@@ -1,4 +1,4 @@
-CREATE TABLE tx_libconnect_subject (
+CREATE TABLE tx_libconnect_domain_model_subject (
 	uid INT(11) NOT NULL AUTO_INCREMENT,
 	pid INT(11) DEFAULT '0' NOT NULL,
 	tstamp INT(11) DEFAULT '0' NOT NULL,

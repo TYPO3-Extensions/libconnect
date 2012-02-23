@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS tx_libconnect_subject;
-CREATE TABLE tx_libconnect_subject (
+DROP TABLE IF EXISTS tx_libconnect_domain_model_subject;
+CREATE TABLE tx_libconnect_domain_model_subject (
 	uid INT(11) NOT NULL AUTO_INCREMENT,
 	pid INT(11) DEFAULT '0' NOT NULL,
 	tstamp INT(11) DEFAULT '0' NOT NULL,
@@ -17,10 +17,10 @@ CREATE TABLE tx_libconnect_subject (
 
 
 --
--- Daten für Tabelle `tx_libconnect_subject`
+-- Daten für Tabelle `tx_libconnect_domain_model_subject`
 --
 
-INSERT INTO `tx_libconnect_subject` (`uid`, `pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `dbisid`, `ezbnotation`) VALUES
+INSERT INTO `tx_libconnect_domain_model_subject` (`uid`, `pid`, `tstamp`, `crdate`, `cruser_id`, `deleted`, `hidden`, `title`, `dbisid`, `ezbnotation`) VALUES
 (1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 0, 0, 'Biologie', '5', 'W'),
 (2, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 0, 0, 'Allgemein / Fachübergreifend', '28', 'AZ'),
 (3, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 0, 0, 'Allgemeine und vergleichende Sprach- und Literaturwissenschaft', '13', 'E'),
