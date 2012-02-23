@@ -11,7 +11,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 
 		$this->loadSubjects();
 		$subject = $this->t3_to_dbis_subjects[$config['subject']];
-		$dbis_id = $subject['dbis_id'];
+		$dbis_id = $subject['dbisid'];
 
 		$dbis = new DBIS();
 		$result = $dbis->getDbliste($dbis_id);
@@ -24,12 +24,12 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 				)
 			);
 		}
+	
 
 		return $result['list']['top'];
 	}
 	
 	public function loadList($subject_id, $config) {
-		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 
 		$this->loadSubjects();
@@ -42,8 +42,6 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 	
 		$result = $dbis->getDbliste($dbis_id, $config['sort']);
 		
-		
-
 		foreach(array_keys($result['list']['top']) as $db) {
 			$result['list']['top'][$db]['detail_link'] = $cObject->getTypolink_URL(
 				intval($config['detailPid']),
