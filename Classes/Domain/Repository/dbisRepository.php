@@ -6,6 +6,28 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 	private $dbis_to_t3_subjects = array();
 	private $t3_to_dbis_subjects = array();
 	
+	public function loadTop($config) {
+		$cObject = t3lib_div::makeInstance('tslib_cObj');
+
+		$this->loadSubjects();
+		$subject = $this->t3_to_dbis_subjects[$config['subject']];
+		$dbis_id = $subject['dbis_id'];
+
+		$dbis = new DBIS();
+		$result = $dbis->getDbliste($dbis_id);
+
+		foreach(array_keys($result['list']['top']) as $db) {
+			$result['list']['top'][$db]['detail_link'] = $cObject->getTypolink_URL(
+				intval($config['detailPid']),
+				array(
+					'libconnect[titleid]' => $result['list']['top'][$db]['id'],
+				)
+			);
+		}
+
+		return $result['list']['top'];
+	}
+	
 	public function loadList($subject_id, $config) {
 		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
@@ -147,5 +169,13 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		$this->subjectRepository = $subjectRepository;
 	}
 
+	public function findAll() {
+ 		//$extbaseFrameworkConfiguration = Tx_Extbase_Dispatcher::getExtbaseFrameworkConfiguration();
+		//$pidList = implode(', ', t3lib_div::intExplode(',', $extbaseFrameworkConfiguration['persistence']['storagePid']));
+		$query = $this->createQuery();
+		$query->statement('SELECT * from tx_libconnect_domain_model_subject');
+		
+		return $query->execute();
+ 	}
 }
 ?>
