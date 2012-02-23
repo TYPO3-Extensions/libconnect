@@ -51,8 +51,8 @@
 						<displayCond><![CDATA[FIELD:switchableControllerActions:=:Dbis->displayTop]]></displayCond>
 						<config>
 							<type>select</type>
-							<foreign_table>tx_libconnect_subject</foreign_table>
-							<foreign_table_where>AND tx_libconnect_subject.deleted=0 AND tx_libconnect_subject.hidden=0 ORDER BY tx_libconnect_subject.title</foreign_table_where>
+							<foreign_table>tx_libconnect_domain_model_subject</foreign_table>
+							<foreign_table_where>AND tx_libconnect_domain_model_subject.deleted=0 AND tx_libconnect_domain_model_subject.hidden=0 ORDER BY tx_libconnect_domain_model_subject.title</foreign_table_where>
 							<size>1</size>							
 							<minitems>1</minitems>							
 							<maxitems>1</maxitems>							
