@@ -459,11 +459,12 @@ class DBIS{
 	 */
 	private function getBibid(){
 		$bibid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['dbisbibid'];
-
-		/*if(empty($bibid)){	
+		
+		/*
+		if(is_null($bibid) or !$bibid or empty($bibid)){	
 			//todo: Fehlermeldung ausgeben
 		}*/
-		
+
 		return $bibid;
 	}
 }

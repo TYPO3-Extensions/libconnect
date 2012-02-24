@@ -44,7 +44,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 	
 	public function displayListAction() {
 		 $params = t3lib_div::_GET('libconnect');
-		 
+
 		if (!empty($params['subject'])) {//Gewaehltes Fach nach Einstiegspunkt
 			$config['sort'] = $this->settings['flexform']['sortParameter'];
 			$config['detailPid'] = $this->settings['flexform']['detailPid'];

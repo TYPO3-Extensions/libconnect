@@ -380,7 +380,8 @@ class EZB {
 	private function getBibid(){
 		$bibid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid'];
 		
-		/*if(empty($bibid)){	
+		/*
+		if(is_null($bibid) or !$bibid or empty($bibid)){	
 			//todo: Fehlermeldung ausgeben
 		}*/
 		
