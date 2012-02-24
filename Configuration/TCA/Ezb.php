@@ -2,7 +2,7 @@
 if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
-
+/*
 $TCA['tx_libconnect_domain_model_ezb'] = array(
 	'ctrl' => $TCA['tx_libconnect_domain_model_ezb']['ctrl'],
 	'interface' => array(
@@ -94,5 +94,5 @@ $TCA['tx_libconnect_domain_model_ezb'] = array(
 			),
 		),
 	),
-);
+);*/
 ?>

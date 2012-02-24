@@ -6,16 +6,19 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_libconnect_domain_model_subject'] = array(
 	'ctrl' => $TCA['tx_libconnect_domain_model_subject']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, dbisid, ezbnotation',
+		//'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, dbisid, ezbnotation',
+		'showRecordFieldList' => 'hidden,title,dbisid,ezbnotation',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, dbisid, ezbnotation,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
+		//'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, dbisid, ezbnotation,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
+		//'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, dbisid, ezbnotation,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
+		"0" => array("showitem" => "hidden;;1;;1-1-1, title, dbisid, ezbnotation")
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
 	),
 	'columns' => array(
-		'sys_language_uid' => array(
+		/*'sys_language_uid' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
 			'config' => array(
@@ -27,8 +30,8 @@ $TCA['tx_libconnect_domain_model_subject'] = array(
 					array('LLL:EXT:lang/locallang_general.xml:LGL.default_value', 0)
 				),
 			),
-		),
-		'l10n_parent' => array(
+		),*/
+		/*'l10n_parent' => array(
 			'displayCond' => 'FIELD:sys_language_uid:>:0',
 			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
@@ -53,7 +56,7 @@ $TCA['tx_libconnect_domain_model_subject'] = array(
 				'size' => 30,
 				'max' => 255,
 			)
-		),
+		),*/
 		'hidden' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
