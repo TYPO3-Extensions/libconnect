@@ -1,3 +1,7 @@
+#
+# content here will be included after plugin activation automatically. No template inclusion necessary.
+#
+
 plugin.tx_libconnect {
 	view {
 		# cat=plugin.tx_libconnect/file; type=string; label=Path to template root (FE)
@@ -11,4 +15,6 @@ plugin.tx_libconnect {
 		# cat=plugin.tx_libconnect//a; type=int+; label=Default storage PID
 		storagePid = 
 	}
+	ezbbibid = SUBHH
+	dbisbibid = sub_hh
 }

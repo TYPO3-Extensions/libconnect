@@ -1,3 +1,7 @@
+#
+# content here will be included after plugin activation automatically. No template inclusion necessary.
+#
+
 plugin.tx_libconnect {
 	cssFile = typo3conf/ext/libconnect/Resources/Public/Styles/dbis.css
 	cssFile2 = typo3conf/ext/libconnect/Resources/Public/Styles/ezb.css
@@ -5,6 +9,9 @@ plugin.tx_libconnect {
 	persistence {
 		storagePid = {$plugin.tx_libconnect.persistence.storagePid}
 	}
+	
+	ezbbibid = SUBHH
+	dbisbibid = sub_hh
 }
 
 plugin.tx_libconnect._CSS_DEFAULT_STYLE (
@@ -26,15 +33,3 @@ plugin.tx_libconnect._CSS_DEFAULT_STYLE (
 		vertical-align:top;
 	}
 )
-
-#plugin.tx_libconnect {
-#	persistence {
-#		classes {
-#			Tx_Libconnect_Domain_Model_Subject {
-#				mapping {
-#					tableName = tx_libconnect_subject
-#				}
-#			}
-#		}
-#	}
-#}

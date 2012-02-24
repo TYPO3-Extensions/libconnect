@@ -241,7 +241,6 @@ class EZB {
 			}
 		}
 
-
 		// fehlenden Eintrag ergaenzen
 		$form['selected_colors'][2] = 'im Campus-Netz';
 
@@ -381,9 +380,10 @@ class EZB {
 	private function getBibid(){
 		$bibid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid'];
 		
-		if(empty($bibid)){
-			$bibid = 'SUBHH';
-		}
+		/*if(empty($bibid)){	
+			//todo: Fehlermeldung ausgeben
+		}*/
+		
 		return $bibid;
 	}
 
