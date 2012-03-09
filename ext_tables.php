@@ -109,10 +109,10 @@ $TCA['tx_libconnect_domain_model_ezb'] = array(
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_libconnect_domain_model_ezb.gif'
 	),
 );*/
-/*
+
 if (TYPO3_MODE == "BE") {
-    $TBE_MODULES_EXT["xMOD_db_new_content_el"]["addElClasses"]["tx_libconnect_dbis_wizicon"] = t3lib_extMgm::extPath($_EXTKEY) . 'configurations/dbis/class.tx_libconnect_dbis_wizicon.php';
-    $TBE_MODULES_EXT["xMOD_db_new_content_el"]["addElClasses"]["tx_libconnect_ezb_wizicon"] = t3lib_extMgm::extPath($_EXTKEY) . 'configurations/ezb/class.tx_libconnect_ezb_wizicon.php';
-}*/
+    $TBE_MODULES_EXT["xMOD_db_new_content_el"]["addElClasses"]["tx_libconnect_dbis_wizicon"] = t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/Wizicon/class.tx_libconnect_dbis_wizicon.php';
+    $TBE_MODULES_EXT["xMOD_db_new_content_el"]["addElClasses"]["tx_libconnect_ezb_wizicon"] = t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/Wizicon/class.tx_libconnect_ezb_wizicon.php';
+}
 
 ?>
