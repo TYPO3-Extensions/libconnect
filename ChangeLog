@@ -5,12 +5,14 @@
 **/
 3.0.0
 	- Umstellung auf Extbase und Fluid
+		- smarty un div sind nicht mehr notwendig
 	- kleine Bugfixes
 	- Views
 		- Doppeltes BR aus Views entfernt
 		- weniger style-Attribute
 		- Umlaute ersetzt
 		- Grafiken für Zugriffe nun per CSS
+		- Aufzählungen werden in Listen dargestellt
 		
 2.2.5
 	- kleine Bugfixes
