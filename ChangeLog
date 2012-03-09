@@ -9,7 +9,7 @@
 	- kleine Bugfixes
 	- Views
 		- Doppeltes BR aus Views entfernt
-		- weniger style-Attribute
+		- weniger inlinestyle-Attribute
 		- Umlaute ersetzt
 		- Grafiken für Zugriffe nun per CSS
 		- Aufzählungen werden in Listen dargestellt
