@@ -17,9 +17,11 @@
 		<h1><f:escape value="{db.title}" type="raw" /></h1>
 
 		<f:if condition="{db.access_workaround}">
-		<p>
-		<a class="dbis-research" href="http://rzblx10.uni-regensburg.de/dbinfo/{db.access.href}" target="_blank">Recherche starten</a>
-		</p>
+			<f:if condition="{db.access.href}">
+			<p>
+				<a class="dbis-research" href="http://rzblx10.uni-regensburg.de/dbinfo/{db.access.href}" target="_blank">Recherche starten</a>
+			</p>
+			</f:if>
 		</f:if>
 
 		<table class="dbis-result-details">

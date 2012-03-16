@@ -6,6 +6,7 @@
 3.0.2
 	- EZB: Fehler in der Statistik in Regensburg beeinflusst behoben. In den Links für "Volltext" und "lizensierter Zeitraum" fehlte der "http://rzblx1.uni-regensburg.de/ezeit/warpto.phtml.." -Aufruf
 	- EZB: Links zur Homepage war fehlerhaft. In Detail wurde die Variable "bibid" falsch gesetzt. Das war noch ein Überbleibsel aus der Entwicklungsphase von Version 3.0.0
+	- DBIS: "Recherche starten"-Link nur dann anzeigen, wenn Link vorhanden
 3.0.1
 	- Subject: start- und endtime wird aus TCA nicht verwendet
 
