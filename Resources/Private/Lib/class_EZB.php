@@ -178,9 +178,13 @@ class EZB {
 		}
 		$journal['keywords_join'] = join(', ', $journal['keywords']);
 		$journal['fulltext'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->fulltext;
+		
 		if(isset($xml_request->ezb_detail_about_journal->journal->detail->fulltext)){
-			$journal['fulltext_link'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->fulltext->attributes()->url;
+			$i = 1;
+			$warpto = (string) $xml_request->ezb_detail_about_journal->journal->detail->fulltext->attributes()->url;
+			$journal['fulltext_link'] = str_replace('http%3A%2F%2F', 'http%3A%2F%2Frzblx1.uni-regensburg.de%2Fezeit%2Fwarpto.phtml?bibid='.$bibid.'&colors='.$this->colors.'&lang='.$this->lang.'&jour_id='.$journalId.'&url=http%3A%2F%2F', $warpto, $i);
 		}
+		
 		$journal['homepages'] = array();
 		if(isset($xml_request->ezb_detail_about_journal->journal->detail->homepages->homepage)){
 			foreach($xml_request->ezb_detail_about_journal->journal->detail->homepages->homepage as $homepage) {
@@ -211,14 +215,17 @@ class EZB {
 			'red' => 4,
 			'yellow_red' => 6
 		);
-		$journal['periods'] = array();
+		$journal['periods'] = array();	
 		if( isset( $xml_request->ezb_detail_about_journal->journal->periods->period) ){
 			foreach($xml_request->ezb_detail_about_journal->journal->periods->period as $period) {
+				$i = 1;
+				$warpto = (string) $period->warpto_link->attributes()->url;
 				$journal['periods'][] = array (
 					'label' => (string) $period->label,
 					'color' => (string) $period->journal_color->attributes()->color,
 					'color_code' => $color_map[(string) $period->journal_color->attributes()->color],
-					'link' => (string) $period->warpto_link->attributes()->url
+					//'link' => (string) $period->warpto_link->attributes()->url //alt und fehlerhaft
+					'link' => str_replace('http%3A%2F%2F', 'http%3A%2F%2Frzblx1.uni-regensburg.de%2Fezeit%2Fwarpto.phtml?bibid='.$bibid.'&colors='.$this->colors.'&lang='.$this->lang.'&jour_id='.$journalId.'&url=http%3A%2F%2F', $warpto, $i)
 				);
 			}
 		}
