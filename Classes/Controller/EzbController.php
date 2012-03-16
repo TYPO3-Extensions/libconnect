@@ -95,7 +95,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 
 		$journal =  $this->ezbRepository->loadDetail($params['jourid']);
 		$this->view->assign('journal', $journal);
-		$this->view->assign('bibid', 'bibid');
+		$this->view->assign('bibid', $this->ezbRepository->getBibid());
 	}
 	
 	public function displayMiniFormAction() {
