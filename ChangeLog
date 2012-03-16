@@ -3,6 +3,12 @@
 * - TW: Torsten Witt torsten.witt@sub.uni-hamburg.de
 *
 **/
+3.0.2
+	- EZB: Fehler in der Statistik in Regensburg beeinflusst behoben. In den Links für "Volltext" und "lizensierter Zeitraum" fehlte der "http://rzblx1.uni-regensburg.de/ezeit/warpto.phtml.." -Aufruf
+	- EZB: Links zur Homepage war fehlerhaft. In Detail wurde die Variable "bibid" falsch gesetzt. Das war noch ein Überbleibsel aus der Entwicklungsphase von Version 3.0.0
+3.0.1
+	- Subject: start- und endtime wird aus TCA nicht verwendet
+
 3.0.0
 	- Umstellung auf Extbase und Fluid
 		- smarty un div sind nicht mehr notwendig
