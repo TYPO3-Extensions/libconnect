@@ -9,7 +9,7 @@
 <div class="dbis-list-legend">
 <ul>
 	<f:for each="{list.access_infos}" as="info">
-		<li class="dbis-list-accessinfo-{info.id}"><f:escape value="{info.title}" type="raw" /> (<f:escape value="{info.description}" type="raw" />)</li>
+		<li class="dbis-list-accessinfo-{info.id}"><f:escape value="{info.title}" type="raw" /> ({info.description})</li>
 	</f:for>
 </ul>
 </div>
