@@ -38,17 +38,17 @@
 
 		<div class="ezb-list-output">
 		<f:for each="{journals.alphabetical_order.first_fifty}" as="section">
-			<h3><a href="{section.link}"><f:escape value="{section.first_fifty_titles}" type="raw" />...</a></h3>
+			<h3><a href="{section.link}"><f:format.htmlentitiesDecode>{section.first_fifty_titles}</f:format.htmlentitiesDecode>...</a></h3>
 		</f:for>
 
 		<f:if condition="{journals.alphabetical_order.current_title}">
-		<h2><f:escape value="{journals.alphabetical_order.current_title}" type="raw" />...</h2>
+		<h2><f:format.htmlentitiesDecode>{journals.alphabetical_order.current_title}</f:format.htmlentitiesDecode>...</h2>
 		</f:if>
 
 
 		<ul class="ezb-list" {if ! ($journals.alphabetical_order.current_title)}style="padding-left: 0px !important;"{/if}>
 		<f:for each="{journals.alphabetical_order.journals}" as="journal">
-			<li class="ezb-list-accessinfo-access_{journal.color_code}"><a href="{db.detail_link}"><a href="{journal.detail_link}"><f:escape value="{journal.title}" type="raw" /></a></li>
+			<li class="ezb-list-accessinfo-access_{journal.color_code}"><a href="{db.detail_link}"><a href="{journal.detail_link}"><f:format.htmlentitiesDecode>{journal.title}</f:format.htmlentitiesDecode></a></li>
 		</f:for>
 		</ul>
 

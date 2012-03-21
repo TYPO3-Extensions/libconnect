@@ -4,7 +4,7 @@
 Sie suchten nach folgenden Kriterien:<br/>
 <ul>
 	<f:for each="{list.searchDescription}" as="description">
-		<li><f:escape value="{description}" type="raw" /></li>
+		<li><f:format.htmlentitiesDecode>{description}</f:format.htmlentitiesDecode></li>
 	</f:for>
 </ul>
 
@@ -20,7 +20,7 @@ Sie suchten nach folgenden Kriterien:<br/>
 		<div class="dbis-list-legend">
 		<ul>
 			<f:for each="{list.access_infos}" as="info">
-				<li class="dbis-list-accessinfo-{info.id}"><f:escape value="{info.title}" type="raw" /> (<f:escape value="{info.description}" type="raw" />)</li>
+				<li class="dbis-list-accessinfo-{info.id}"><f:format.htmlentitiesDecode>{info.title}</f:format.htmlentitiesDecode> (<f:format.htmlentitiesDecode>{info.description}</f:format.htmlentitiesDecode>)</li>
 			</f:for>
 		</ul>
 		</div>
@@ -30,7 +30,7 @@ Sie suchten nach folgenden Kriterien:<br/>
 			<h2>Top Datenbanken</h2>
 			<ul class="dbis-top-list">
 			<f:for each="{list.top}" as="db">
-				<li><a href="{db.detail_link}"><f:escape value="{db.title}" type="raw" /></a> (<f:escape value="{db.access}" type="raw" />)</li>
+				<li><a href="{db.detail_link}"><f:format.htmlentitiesDecode>{db.title}</f:format.htmlentitiesDecode></a> (<f:format.htmlentitiesDecode>{db.access}</f:format.htmlentitiesDecode>)</li>
 			</f:for>
 			</ul>
 		</div>
@@ -46,7 +46,7 @@ Sie suchten nach folgenden Kriterien:<br/>
 				<ul class="dbis-dblist">
 					<f:for each="{list.values}" as="db" key="titleid">
 						<li>
-							<li class="dbis-list-accessinfo-{db.access_ref}"><a href="{db.detail_link}"><f:escape value="{db.title}" type="raw" /></a></li>
+							<li class="dbis-list-accessinfo-{db.access_ref}"><a href="{db.detail_link}"><f:format.htmlentitiesDecode>{db.title}</f:format.htmlentitiesDecode></a></li>
 						</li>
 					</f:for>
 				</ul>

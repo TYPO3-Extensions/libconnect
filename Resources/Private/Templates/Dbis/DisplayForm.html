@@ -10,7 +10,7 @@
 		<label for="jq_type{jq_type}" class="hiddendebis">Feldangabe</label>
     	<select name="libconnect[search][jq_type{jq_type}]" id="jq_type{jq_type}">
 			<f:for each="{form.jq_type}" as="value" key="key" iteration="foriteration">
-    			<option value="{key}" <f:if condition="{jq_type} == {foriteration.cycle}">selected="selected"</f:if>><f:escape value="{value}" type="raw" /></option>
+    			<option value="{key}" <f:if condition="{jq_type} == {foriteration.cycle}">selected="selected"</f:if>><f:format.htmlentitiesDecode>{value}</f:format.htmlentitiesDecode></option>
     		</f:for>
 		</select>
 

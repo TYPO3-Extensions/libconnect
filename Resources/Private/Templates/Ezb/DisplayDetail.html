@@ -14,7 +14,7 @@
 	</f:then>
 	<f:else>
 		{namespace libconnect=Tx_Libconnect_ViewHelpers}
-		<h1><f:escape value="{journal.title}" type="raw" /></h1>
+		<h1><f:format.htmlentitiesDecode>{journal.title}</f:format.htmlentitiesDecode></h1>
 
 		<table class="ezb-result-details">
 		<tbody>
@@ -62,7 +62,18 @@
 						<f:if condition="{libconnect:trimedstrlen(string: period.label)} > 0">
 						<f:then>
 						<td>
-							<span class="ezb-list-accessinfo-access_{period.color_code}"><a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">{period.label}</a></span>
+							<a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">{period.label}</a>&nbsp;
+							<f:if condition="{period.readme}">
+							<f:then>
+								<a href="<f:format.htmlentitiesDecode>{period.readme}</f:format.htmlentitiesDecode>"><span class="ezb-list-accessinfo-access_{period.color_code}">ReadMe</span></a>
+							</f:then>
+							
+							<f:else>
+								<span class="ezb-list-accessinfo-access_{period.color_code}">&nbsp;</span></a>
+							</f:else>
+							</f:if>
+							
+							
 						</td>
 						</f:then>
 						<f:else>
@@ -124,7 +135,7 @@
 			</td>
 
 			<td>
-			<f:if condition="{journal.first_fulltext.volume}">Jg. <f:escape value="{journal.first_fulltext.volume}" type="raw" /></f:if><f:if condition="{journal.first_fulltext.issue}">, H. <f:escape value="{journal.first_fulltext.issue}" type="raw" /></f:if>
+			<f:if condition="{journal.first_fulltext.volume}">Jg. <f:format.htmlentitiesDecode>{journal.first_fulltext.volume}</f:format.htmlentitiesDecode></f:if><f:if condition="{journal.first_fulltext.issue}">, H. <f:format.htmlentitiesDecode>{journal.first_fulltext.issue}</f:format.htmlentitiesDecode></f:if>
 			({journal.first_fulltext.date})
 			</td>
 		</tr>
@@ -150,7 +161,7 @@
 			</td>
 
 			<td>
-			<f:escape value="{journal.publisher}" type="raw" />
+			<f:format.htmlentitiesDecode>{journal.publisher}</f:format.htmlentitiesDecode>
 			</td>
 		</tr>
 		</f:if>
@@ -176,7 +187,7 @@
 			</td>
 
 			<td>
-			<f:escape value="{journal.subjects_join}" type="raw" />
+			<f:format.htmlentitiesDecode>{journal.subjects_join}</f:format.htmlentitiesDecode>
 			</td>
 		</tr>
 		</f:if>
@@ -188,7 +199,7 @@
 			</td>
 
 			<td>
-			<f:escape value="{journal.keywords_join}" type="raw" />
+			<f:format.htmlentitiesDecode>{journal.keywords_join}</f:format.htmlentitiesDecode>
 			</td>
 		<tr>
 		</f:if>
@@ -200,7 +211,7 @@
 			</td>
 
 			<td>
-			<f:escape value="{journal.eissns_join}" type="raw" />
+			<f:format.htmlentitiesDecode>{journal.eissns_join}</f:format.htmlentitiesDecode>
 			</td>
 		</tr>
 		</f:if>
@@ -212,7 +223,7 @@
 			</td>
 
 			<td>
-			<f:escape value="{journal.pissns_join}" type="raw" />
+			<f:format.htmlentitiesDecode>{journal.pissns_join}</f:format.htmlentitiesDecode>
 			</td>
 		</tr>
 		</f:if>
@@ -224,7 +235,7 @@
 			</td>
 
 			<td>
-			<f:escape value="{journal.appearence}" type="raw" />
+			<f:format.htmlentitiesDecode>{journal.appearence}</f:format.htmlentitiesDecode>
 			</td>
 		</tr>
 		</f:if>
@@ -236,7 +247,7 @@
 			</td>
 
 			<td>
-			<f:escape value="{journal.costs}" type="raw" />
+			<f:format.htmlentitiesDecode>{journal.costs}</f:format.htmlentitiesDecode>
 			</td>
 		</tr>
 		</f:if>
@@ -248,7 +259,7 @@
 			</td>
 
 			<td>
-			<f:escape value="{journal.remarks}" type="raw" />
+			<f:format.htmlentitiesDecode>{journal.remarks}</f:format.htmlentitiesDecode>
 			</td>
 		</tr>
 		</f:if>
