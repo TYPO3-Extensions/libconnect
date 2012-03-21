@@ -3,6 +3,10 @@
 * - TW: Torsten Witt torsten.witt@sub.uni-hamburg.de
 *
 **/
+3.1.0
+	- EZB: In der Detailansicht ist nun der ReadMe-Link eingefügt
+	- <f:escape value="{<Wert>}" type="raw" /> - Ausdruck durch <f:format.htmlentitiesDecode> ersetzt.
+	- DBIS: 1 ul-Tag war nicht geschlossen
 3.0.3
 	- EZB: Url für Emedien korrigiert
 3.0.2
