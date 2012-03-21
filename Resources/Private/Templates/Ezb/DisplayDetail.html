@@ -64,16 +64,14 @@
 						<td>
 							<a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">{period.label}</a>&nbsp;
 							<f:if condition="{period.readme}">
-							<f:then>
-								<a href="<f:format.htmlentitiesDecode>{period.readme}</f:format.htmlentitiesDecode>"><span class="ezb-list-accessinfo-access_{period.color_code}">ReadMe</span></a>
-							</f:then>
-							
-							<f:else>
-								<span class="ezb-list-accessinfo-access_{period.color_code}">&nbsp;</span></a>
-							</f:else>
-							</f:if>
-							
-							
+								<f:then>
+									<a href="<f:format.htmlentitiesDecode>{period.readme}</f:format.htmlentitiesDecode>"><span class="ezb-list-accessinfo-access_{period.color_code}">ReadMe</span></a>
+								</f:then>
+								
+								<f:else>
+									<span class="ezb-list-accessinfo-access_{period.color_code}">&nbsp;</span></a>
+								</f:else>
+							</f:if>							
 						</td>
 						</f:then>
 						<f:else>
