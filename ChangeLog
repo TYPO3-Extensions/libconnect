@@ -3,6 +3,8 @@
 * - TW: Torsten Witt torsten.witt@sub.uni-hamburg.de
 *
 **/
+3.1.1
+	- DBIS: Umlauten in Topdatenbanken waren falsch dargestellt
 3.1.0
 	- EZB: In der Detailansicht ist nun der ReadMe-Link eingefügt
 	- <f:escape value="{<Wert>}" type="raw" /> - Ausdruck durch <f:format.htmlentitiesDecode> ersetzt. --> HTML-Entity-Problem gelöst
