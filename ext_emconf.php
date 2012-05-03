@@ -28,6 +28,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
 	'version' => '3.1.1',
+	'dependencies' => 'cms,extbase,fluid',
 	'constraints' => array(
 		'depends' => array(
 			'cms' => '',

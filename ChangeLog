@@ -3,6 +3,8 @@
 * - TW: Torsten Witt torsten.witt@sub.uni-hamburg.de
 *
 **/
+3.1.2
+	- Einträge "dependencies" in "ext_emconf.php" fehlten
 3.1.1
 	- DBIS: Umlauten in Topdatenbanken waren falsch dargestellt
 3.1.0
