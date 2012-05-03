@@ -24,6 +24,7 @@ class EZB {
 	private $detailview_request_url = 'http://rzblx1.uni-regensburg.de/ezeit/detail.phtml?xmloutput=1&';
 	private $search_url = 'http://rzblx1.uni-regensburg.de/ezeit/search.phtml?xmloutput=1&';
 //	private $journal_link_url = "http://rzblx1.uni-regensburg.de/ezeit/warpto.phtml?bibid=SUBHH&colors=7&lang=de&jour_id=";
+	private $search_result_page = "http://rzblx1.uni-regensburg.de/ezeit/searchres.phtml?&xmloutput=1&";
 //	private $search_result_page = "http://rzblx1.uni-regensburg.de/ezeit/searchres.phtml?&xmloutput=1&bibid=SUBHH&colors=7&lang=de&";
 //	private $search_result_page = "http://ezb.uni-regensburg.de/searchres.phtml?xmloutput=1&bibid=SUBHH&colors=7&lang=de";
 
@@ -279,8 +280,8 @@ class EZB {
 	 */
 	private function createSearchUrl($term, $searchVars/*, $lett = 'k'*/) {
 		$bibid = $this->getBibid();
-		$searchUrl = 'http://ezb.uni-regensburg.de/searchres.phtml?xmloutput=1&bibid='.$bibid.'&colors=7&lang=de';
-
+		$searchUrl = $this->search_result_page.'bibid='.$bibid.'&colors='.$this->colors.'&lang='.$this->lang;
+		
 		// urlencode termi
 		$term = rawurlencode(utf8_decode($term));
 
