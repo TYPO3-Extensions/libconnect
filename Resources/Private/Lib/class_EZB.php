@@ -148,8 +148,9 @@ class EZB {
 		$journal['color'] = (string) $xml_request->ezb_detail_about_journal->journal->journal_color->attributes()->color;
 		$journal['color_code'] = (int) $xml_request->ezb_detail_about_journal->journal->journal_color->attributes()->color_code;
 		$journal['publisher'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->publisher;
-		$journal['ZDB_number'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->ZDB_number;
-		$journal['ZDB_number_link'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->ZDB_number->attributes()->url;
+		$journal['ZDB_number'] = (string) @$xml_request->ezb_detail_about_journal->journal->detail->ZDB_number;
+		$journal['ZDB_number_link'] = (string) @$xml_request->ezb_detail_about_journal->journal->detail->ZDB_number->attributes()->url;
+		$journal['ZDB_number_link'] = (string) @$xml_request->ezb_detail_about_journal->journal->detail->ZDB_number->attributes()->url;
 		$journal['subjects'] = array();
 		if(isset($xml_request->ezb_detail_about_journal->journal->detail->subjects->subject)){
 			foreach($xml_request->ezb_detail_about_journal->journal->detail->subjects->subject as $subject) {
@@ -221,15 +222,19 @@ class EZB {
 		if( isset( $xml_request->ezb_detail_about_journal->journal->periods->period) ){
 			foreach($xml_request->ezb_detail_about_journal->journal->periods->period as $period) {
 				$i = 1;
-				$warpto = urlencode((string) $period->warpto_link->attributes()->url);
+				$warpto="";
+				if(@$period->warpto_link->attributes()->url){
+					$warpto = urlencode((string) $period->warpto_link->attributes()->url);
+				}
 				$journal['periods'][] = array (
 					'label' => (string) $period->label,
-					'color' => (string) $period->journal_color->attributes()->color,
-					'color_code' => $color_map[(string) $period->journal_color->attributes()->color],
+					'color' => (string) @$period->journal_color->attributes()->color,
+
+					'color_code' => $color_map[(string) @$period->journal_color->attributes()->color],
 					//'link' => (string) $period->warpto_link->attributes()->url //alt und fehlerhaft
 					'link' => 'http%3A%2F%2Frzblx1.uni-regensburg.de%2Fezeit%2Fwarpto.phtml?bibid='.$bibid.'&colors='.$this->colors.'&lang='.$this->lang.'&jour_id='.$journalId.'&url='.$warpto,
 					//'link' => str_replace('http%3A%2F%2F', 'http%3A%2F%2Frzblx1.uni-regensburg.de%2Fezeit%2Fwarpto.phtml?bibid='.$bibid.'&colors='.$this->colors.'&lang='.$this->lang.'&jour_id='.$journalId.'&url=http%3A%2F%2F', $warpto, $i
-					'readme' => (string) $period->readme_link->attributes()->url
+					'readme' => (string) @$period->readme_link->attributes()->url
 				);
 			}
 		}
@@ -244,7 +249,7 @@ class EZB {
 	 * @return array
 	 */
 	public function detailSearchFormFields(){
-		$xml_such_form = simplexml_load_file( $this->search_url . "" );
+		$xml_such_form = simplexml_load_file( (string)$this->search_url );
 
 		foreach ($xml_such_form->ezb_search->option_list AS $key => $value){
 			foreach ( $value->option AS $key2 => $value2 ){
