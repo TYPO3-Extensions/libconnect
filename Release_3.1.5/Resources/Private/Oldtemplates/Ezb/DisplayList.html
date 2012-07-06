@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="{f:uri.resource(path:'Styles/ezb.css')}" />
+<h3>EZB Fachgebiet</h3>
+
+<h1><f:escape value="{journals.subject}" type="raw" /></h1>
+
+<div class="ezb-list-legend">
+	<ul>
+		<li class="ezb-list-legend-one">Frei zug&auml;nglich</li>
+		<li class="ezb-list-legend-two">Im Campus-Netz sowie für Angehörige der Universität auch extern zugänglich</li>
+		<li class="ezb-list-legend-six">Nur für einen Teil der erschienenen Jahrgänge zugänglich</li>
+		<li class="ezb-list-legend-four">Für Ihren Standort nicht freigeschaltet. Zum Teil bekommen Sie Zugriff auf Abstracts oder Inhaltsverzeichnisse</li>
+	</ul>
+</div>
+
+<br/><br/>
+
+<div class="ezb-navigation">
+{namespace libconnect=Tx_Libconnect_ViewHelpers}
+<f:for each="{journals.navlist.pages}" as="item">
+	<f:if condition="{libconnect:IsArray(value: item)}">
+		<f:then>
+			<a href="<f:escape value="{item.link}" type="raw" />"><f:escape value="{item.title}" type="raw" /></a>
+		</f:then>
+		<f:else>
+			<em><f:escape value="{item}" type="raw" /></em>
+		</f:else>
+	</f:if>
+</f:for>
+</div>
+
+<br/><br/>
+
+<div class="ezb-list-output">
+<f:for each="{journals.alphabetical_order.first_fifty}" as="section">
+	<h3><a href="{section.link}"><f:escape value="{section.first_fifty_titles}" type="raw" />...</a></h3>
+</f:for>
+
+<h2><f:escape value="{journals.navlist.current_title}" type="raw" />...</h2>
+
+<ul class="ezb-list">
+<f:for each="{journals.alphabetical_order.journals}" as="journal">
+	<li class="ezb-list-accessinfo-access_{journal.color_code}"><a href="<f:escape value="{journal.detail_link}" type="raw" />"><f:escape value="{journal.title}" type="raw" /></a></li>
+</f:for>
+</ul>
+
+<f:for each="{journals.alphabetical_order.next_fifty}" as="section">
+	<h3><a href="<f:escape value="{section.link}" type="raw" />"><f:escape value="{section.next_fifty_titles}" type="raw" />...</a></h3>
+</f:for>
+</div>
