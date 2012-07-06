@@ -3,6 +3,8 @@
 * - TW: Torsten Witt torsten.witt@sub.uni-hamburg.de
 *
 **/
+3.1.5
+	- Kompatibilität zu TYPO3 4.5 hergestellt (getestet mit 4.5.12)
 3.1.4
 	- DBIS: Ergebnismenge in Auflistung der Fachgebiete war überall gleich
 	- EZB: Zugriffsfehler auf nicht gesetzte XML-Attribute behoben.

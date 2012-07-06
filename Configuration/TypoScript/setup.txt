@@ -14,6 +14,11 @@ plugin.tx_libconnect {
 	dbisbibid = sub_hh
 }
 
+[compatVersion = 4.5]
+        plugin.tx_libconnect.view.templateRootPath = EXT:libconnect/Resources/Private/Oldtemplates/
+[global]
+
+
 plugin.tx_libconnect._CSS_DEFAULT_STYLE (
 	input.f3-form-error {
 		background-color:#FF9F9F;

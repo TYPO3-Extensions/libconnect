@@ -18,3 +18,7 @@ plugin.tx_libconnect {
 	ezbbibid = SUBHH
 	dbisbibid = sub_hh
 }
+
+[compatVersion = 4.5]
+	plugin.tx_libconnect.view.templateRootPath = EXT:libconnect/Resources/Private/Oldtemplates/
+[global]
