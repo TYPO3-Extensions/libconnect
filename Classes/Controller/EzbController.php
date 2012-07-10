@@ -94,6 +94,18 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		}
 
 		$journal =  $this->ezbRepository->loadDetail($params['jourid']);
+		
+    //BOF ZDB LocationData
+		//check if locationData is enabled
+		if($this->settings['enableLocationData'] == 1) {
+            $locationData = $this->ezbRepository->loadLocationData($journal);
+            
+            if($locationData) 
+                $journal['locationData'] = $locationData;
+
+		}
+    //EOF ZDB LocationData
+		
 		$this->view->assign('journal', $journal);
 		$this->view->assign('bibid', $this->ezbRepository->getBibid());
 	}
@@ -107,7 +119,19 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		
 		//$this->view->assign('vars', $params['search']);
 		$this->view->assign('form', $form);
-		$this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
+		
+		//BOF search-workaround
+    	//old
+		//$this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
+        //replaced with
+        if(isset($this->settings['EZBSearchResultsPageId']))
+            $this->view->assign('siteUrl', $cObject->getTypolink_URL($this->settings['EZBSearchResultsPageId']));//in TypoScript definierte ID der Suchergebnis-Seite
+		//if(isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['EZBSearchResultsPageId']))
+		    //$this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['EZBSearchResultsPageId']));//in TypoScript definierte ID der Suchergebnis-Seite
+		else
+		    $this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
+		//EOF search-workaround
+		
 		$this->view->assign('searchUrl', $cObject->getTypolink_URL($this->settings['flexform']['searchPid']));//Link zur Suchseite
 		$this->view->assign('listPid', $this->settings['flexform']['searchPid']);//Link zur Listendarstellung
 	}

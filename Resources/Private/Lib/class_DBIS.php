@@ -54,14 +54,29 @@ class DBIS{
 		$bibid = $this->getBibid();
 		$url = 'http://rzblx10.uni-regensburg.de/dbinfo/dbliste.php?xmloutput=1&bib_id='. $bibid .'&' . "colors={$this->colors}&ocolors={$this->ocolors}&sort=".$sort."&";
 
-		if (is_numeric($fachgebiet)) {
-			// notation ist eine id => dbis sammlung
-			$url .= 'lett=f&gebiete=' . $fachgebiet;
+		//BOF workaround for alphabetical listing
+		if($fachgebiet == 'all') {
+		    
+		    $url .='lett=a';
+		    
+		    $tmpParams = t3lib_div::_GP('libconnect'); 
+		    if(!empty($tmpParams['lc']))
+		        $url .= '&lc='.$tmpParams['lc'];
+		    if(!empty($tmpParams['fc']))
+		        $url .= '&fc='.$tmpParams['fc'];
+		    
 		} else {
-			// notation ist ein Zeichen => SUB sammlung
-			$url .= 'lett=c&collid=' . $fachgebiet;
+		    
+		    if (is_numeric($fachgebiet)) {
+                // notation ist eine id => dbis sammlung
+                $url .= 'lett=f&gebiete=' . $fachgebiet;
+            } else {
+                // notation ist ein Zeichen => SUB sammlung
+                $url .= 'lett=c&collid=' . $fachgebiet;
+            }
+		    
 		}
-
+		//EOF workaround for alphabetical listing	
 
 		$xml_fachgebiet_db = simplexml_load_file( $url );
 
@@ -70,6 +85,36 @@ class DBIS{
 			'groups' => array(),
 			'access_infos' => array()
 		);
+		
+		//BOF workaround for alphabetical listing
+		if(is_object($xml_fachgebiet_db->list_dbs->alphabetical_list)) {
+            $alphabeticalNavList = array();
+            foreach($xml_fachgebiet_db->list_dbs->alphabetical_list->block_of_chars as $charBlock) {
+                $tmpCharArray = array();
+                foreach($charBlock->char as $char) {
+                    $tmpCharArray[] = $char;
+                }
+                $alphabeticalNavList[] = array('chars'=>$tmpCharArray,
+                                               'fc'=> $charBlock->attributes()->fc,
+                                               'lc'=> $charBlock->attributes()->lc,
+                                               //check current view for which char is shown
+                                               'current'=>($charBlock->attributes()->lc == $tmpParams['lc'] || $charBlock->attributes()->fc == $tmpParams['lc'] ? true : false)
+                                              );
+            }
+            //check if a current view got set
+            // if not, set the first charBlock as current view
+            $currentChk = false;
+            foreach($alphabeticalNavList as $value) {
+                if($value['current']) {
+                    $currentChk = true;
+                    break;
+                }
+            }
+            if(!$currentChk && count($alphabeticalNavList)) $alphabeticalNavList[0]['current'] = true;
+        }
+        $list['alphNavList'] = (isset($alphabeticalNavList) && count($alphabeticalNavList) ? $alphabeticalNavList : false);
+		//EOF workaround for alphabetical listing
+		
 		foreach ($xml_fachgebiet_db->list_dbs->db_access_infos->db_access_info as $value){
 			$id = (string) $value->attributes()->access_id;
 			$list['access_infos'][$id] = array(
@@ -81,6 +126,18 @@ class DBIS{
 		}
 		if($sort=='access'){
 			$list['groups']=&$list['access_infos'];
+        //BOF workaround for alphabetical listing			
+		} elseif($fachgebiet == 'all') {
+		    foreach ($xml_fachgebiet_db->list_dbs->dbs as $value){
+				$id = (string) $value->attributes()->char;
+				$title = (string) $value->attributes()->char;
+				$list['groups'][$id] = array(
+					'id' => $id,
+					'title' => $title,
+					'dbs' => array()
+				);
+			}
+        //EOF workaround for alphabetical listing
 		}else{
 
 			foreach ($xml_fachgebiet_db->list_dbs->db_type_infos->db_type_info as $value){
@@ -95,7 +152,7 @@ class DBIS{
 		}
 
 		foreach ($xml_fachgebiet_db->list_dbs->dbs as $dbs){
-
+		    
 			foreach($dbs->db as $value) {
 
 				$db = array (
@@ -110,6 +167,11 @@ class DBIS{
 
 				if ($db['top_db']) {
 					$list['top'][]  = $db;
+				//BOF workaround for alphabetical listing			
+                } elseif($fachgebiet == 'all') {
+                    $list['groups'][(string)$dbs->attributes()->char]['dbs'][] = $db;
+                    $sortlist[$db['access']]=$db['access_ref'];
+                //EOF workaround for alphabetical listing
 				} else {
 					if($sort=="alph"){
 						$list['groups']['Treffer']['dbs'][] = $db;

@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{f:uri.resource(path:'Styles/ezb.css')}" />
-<h3>EZB Fachgebiet</h3>
+<h3>EZB <f:if condition="{journals.subject}">Fachgebiet</f:if></h3>
 
-<h1><f:format.htmlentitiesDecode>{journals.subject}</f:format.htmlentitiesDecode></h1>
+<h1><f:if condition="{journals.subject}"><f:then><f:format.htmlentitiesDecode>{journals.subject}</f:format.htmlentitiesDecode></f:then><f:else>Alphabetische Auflistung</f:else></f:if></h1>
 
 <div class="ezb-list-legend">
 	<ul>

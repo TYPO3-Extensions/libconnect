@@ -150,7 +150,6 @@ class EZB {
 		$journal['publisher'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->publisher;
 		$journal['ZDB_number'] = (string) @$xml_request->ezb_detail_about_journal->journal->detail->ZDB_number;
 		$journal['ZDB_number_link'] = (string) @$xml_request->ezb_detail_about_journal->journal->detail->ZDB_number->attributes()->url;
-		$journal['ZDB_number_link'] = (string) @$xml_request->ezb_detail_about_journal->journal->detail->ZDB_number->attributes()->url;
 		$journal['subjects'] = array();
 		if(isset($xml_request->ezb_detail_about_journal->journal->detail->subjects->subject)){
 			foreach($xml_request->ezb_detail_about_journal->journal->detail->subjects->subject as $subject) {
@@ -224,12 +223,11 @@ class EZB {
 				$i = 1;
 				$warpto="";
 				if(@$period->warpto_link->attributes()->url){
-					$warpto = urlencode((string) $period->warpto_link->attributes()->url);
+				    $warpto = urlencode((string) $period->warpto_link->attributes()->url);
 				}
 				$journal['periods'][] = array (
 					'label' => (string) $period->label,
 					'color' => (string) @$period->journal_color->attributes()->color,
-
 					'color_code' => $color_map[(string) @$period->journal_color->attributes()->color],
 					//'link' => (string) $period->warpto_link->attributes()->url //alt und fehlerhaft
 					'link' => 'http%3A%2F%2Frzblx1.uni-regensburg.de%2Fezeit%2Fwarpto.phtml?bibid='.$bibid.'&colors='.$this->colors.'&lang='.$this->lang.'&jour_id='.$journalId.'&url='.$warpto,
@@ -258,7 +256,7 @@ class EZB {
 		}
 
 		// fehlenden Eintrag ergaenzen
-		$form['selected_colors'][2] = 'im Campus-Netz';
+		$form['selected_colors'][2] = 'im Campus-Netz zugänglich';
 
 		// schlagwort und issn tauschen...
 		$form['jq_type'] = array (

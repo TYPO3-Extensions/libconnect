@@ -1,6 +1,7 @@
 <?php
 
 require_once(t3lib_extMgm::extPath('libconnect') . 'Resources/Private/Lib/class_EZB.php');
+require_once(t3lib_extMgm::extPath('libconnect') . 'Resources/Private/Lib/class_ZDB.php');
 
 Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persistence_Repository {
 	private $ezb_to_t3_subjects = array();
@@ -195,5 +196,29 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 	public function getBibid(){
 		return $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid'];
 	}
+	
+//BOF ZDB LocationData
+	public function loadLocationData($journal) {
+		$cObject = t3lib_div::makeInstance('tslib_cObj');
+		$zdb = new ZDB();
+
+		if(!empty($journal['ZDB_number']))
+		    $locationData = $zdb->getJournalLocationDetails( NULL, $journal['ZDB_number']);
+		else {
+		    if(count($journal['pissns']))
+		        $locationData = $zdb->getJournalLocationDetails( "issn=" . reset($journal['pissns']), NULL );
+		    
+		    elseif(count($journal['eissns']))
+		        $locationData = $zdb->getJournalLocationDetails( "eissn=" . reset($journal['eissns']), NULL );
+		}
+
+		if (! $locationData ){
+			return false;
+		}
+	
+		return $locationData; 
+	}
+//EOF ZDB LocationData
+	
 }
 ?>

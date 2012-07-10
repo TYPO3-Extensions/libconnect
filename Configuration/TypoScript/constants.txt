@@ -17,6 +17,17 @@ plugin.tx_libconnect {
 	}
 	ezbbibid = SUBHH
 	dbisbibid = sub_hh
+	
+    settings {
+        allListingId = 44
+        EZBSearchResultsPageId = 
+        DBISSearchResultsPageId = 
+    }
+    zdbsid = vid:dbid
+    //zdbbibid = BIBID
+    //zdbsigel = SIGEL
+    //zdbisil = ISIL
+    //zdbbik = ISIL	
 }
 
 [compatVersion = 4.5]

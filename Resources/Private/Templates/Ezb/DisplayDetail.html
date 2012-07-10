@@ -16,12 +16,12 @@
 		{namespace libconnect=Tx_Libconnect_ViewHelpers}
 		<h1><f:format.htmlentitiesDecode>{journal.title}</f:format.htmlentitiesDecode></h1>
 
-		<table class="ezb-result-details">
+        <table id="ezb-result-details">
 		<tbody>
 		<tr>
-			<td width="130">
+            <th>
 				<strong>Verf&uuml;gbarkeit:</strong>
-			</td>
+            </th>
 
 			<td>
 				<span class="ezb-list-accessinfo-access_{journal.color_code}">
@@ -56,9 +56,9 @@
 			<tr>
 				<f:if condition="{libconnect:strlen(string: period.label)} > 0">
 				<f:then>
-					<td>
+                    <th>
 						<strong>Lizenzierter Zeitraum:</strong>
-					</td>
+                    </th>
 						<f:if condition="{libconnect:trimedstrlen(string: period.label)} > 0">
 						<f:then>
 						<td>
@@ -83,9 +83,9 @@
 						</f:if>
 				</f:then>
 				<f:else>
-				<td>
+                <th>
 					<strong>Restliche Zeitr&auml;ume:</strong>
-				</td>
+                </th>
 				<td>
 					<span class="ezb-list-accessinfo-access_{period.color_code}"><a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">Homepage der Zeitschrift</a></span>
 				</td>
@@ -98,9 +98,9 @@
 		
 		<f:if condition="{libconnect:strlen(string: journal.fulltext)} > 0">
 		<tr>
-			<td>
+            <th>
 			<strong>Volltext:</strong>
-			</td>
+            </th>
 
 			<td>
 				<a class="dbis-research" href="{libconnect:urldecode(url: journal.fulltext_link)}" target="_blank">{libconnect:truncate(string: journal.fulltext, length: 70)}</a>
@@ -110,9 +110,9 @@
 
 		<f:if condition="<f:count subject='{journal.homepages}' /> > 0">
 		<tr>
-			<td>
+            <th>
 			<strong>Homepage(s):</strong>
-			</td>
+            </th>
 
 			<td>
 				<ul>
@@ -128,9 +128,9 @@
 
 		<f:if condition="{journal.first_fulltext.date} > 0">
 		<tr>
-			<td>
+            <th>
 			<strong>Volltext online seit:</strong>
-			</td>
+            </th>
 
 			<td>
 			<f:if condition="{journal.first_fulltext.volume}">Jg. <f:format.htmlentitiesDecode>{journal.first_fulltext.volume}</f:format.htmlentitiesDecode></f:if><f:if condition="{journal.first_fulltext.issue}">, H. <f:format.htmlentitiesDecode>{journal.first_fulltext.issue}</f:format.htmlentitiesDecode></f:if>
@@ -141,9 +141,9 @@
 
 		<f:if condition="{journal.last_fulltext}">
 		<tr>
-			<td>
+            <th>
 			<strong>Volltext online bis:</strong>
-			</td>
+            </th>
 
 			<td>
 			<f:if condition="{journal.last_fulltext.volume}">Jg. {journal.last_fulltext.volume}</f:if><f:if condition="{journal.last_fulltext.issue}">, H. {journal.last_fulltext.issue}</f:if>
@@ -154,9 +154,9 @@
 
 		<f:if condition="{journal.publisher}">
 		<tr>
-			<td>
+            <th>
 			<strong>Verlag:</strong>
-			</td>
+            </th>
 
 			<td>
 			<f:format.htmlentitiesDecode>{journal.publisher}</f:format.htmlentitiesDecode>
@@ -166,9 +166,9 @@
 
 		<f:if condition="{journal.ZDB_number}">
 		<tr>
-			<td>
+            <th>
 			<strong>ZDB Nummer:</strong>
-			</td>
+            </th>
 
 			<td>
 			<f:if condition="{journal.ZDB_number_link}"><a href="{journal.ZDB_number_link}" target="_blank"></f:if>
@@ -180,9 +180,9 @@
 		
 		<f:if condition="{libconnect:strlen(string: journal.subjects_join)} > 0">
 		<tr>
-			<td>
+            <th>
 			<strong>Fachgruppe(n):</strong>
-			</td>
+            </th>
 
 			<td>
 			<f:format.htmlentitiesDecode>{journal.subjects_join}</f:format.htmlentitiesDecode>
@@ -192,9 +192,9 @@
 
 		<f:if condition="{journal.keywords_join}">
 		<tr>
-			<td>
+            <th>
 			<strong>Schlagwort(e):</strong>
-			</td>
+            </th>
 
 			<td>
 			<f:format.htmlentitiesDecode>{journal.keywords_join}</f:format.htmlentitiesDecode>
@@ -204,9 +204,9 @@
 	
 		<f:if condition="{libconnect:strlen(string: journal.eissns_join)} > 0">
 		<tr>
-			<td>
+            <th>
 			<strong>E-ISSN(s):</strong>
-			</td>
+            </th>
 
 			<td>
 			<f:format.htmlentitiesDecode>{journal.eissns_join}</f:format.htmlentitiesDecode>
@@ -216,9 +216,9 @@
 		
 		<f:if condition="{libconnect:strlen(string: journal.pissns_join)} > 0">
 		<tr>
-			<td>
+            <th>
 			<strong>P-ISSN(s):</strong>
-			</td>
+            </th>
 
 			<td>
 			<f:format.htmlentitiesDecode>{journal.pissns_join}</f:format.htmlentitiesDecode>
@@ -228,9 +228,9 @@
 		
 		<f:if condition="{libconnect:strlen(string: journal.appearence)} > 0">
 		<tr>
-			<td>
+            <th>
 			<strong>Form:</strong>
-			</td>
+            </th>
 
 			<td>
 			<f:format.htmlentitiesDecode>{journal.appearence}</f:format.htmlentitiesDecode>
@@ -240,9 +240,9 @@
 
 		<f:if condition="{libconnect:strlen(string: journal.costs)} > 0">
 		<tr>
-			<td>
+            <th>
 			<strong>Kosten:</strong>
-			</td>
+            </th>
 
 			<td>
 			<f:format.htmlentitiesDecode>{journal.costs}</f:format.htmlentitiesDecode>
@@ -252,9 +252,9 @@
 
 		<f:if condition="{libconnect:strlen(string: journal.remarks)} > 0">
 		<tr>
-			<td>
+            <th>
 			<strong>Bemerkung:</strong>
-			</td>
+            </th>
 
 			<td>
 			<f:format.htmlentitiesDecode>{journal.remarks}</f:format.htmlentitiesDecode>
@@ -262,6 +262,77 @@
 		</tr>
 		</f:if>
 
+<!-- code for location data -->
+       <f:if condition="{settings.enableLocationData}">
+        <f:if condition="<f:count subject='{journal.locationData}' /> > 0">
+        <tr>
+            <th>
+                <strong>im Druck vorhanden:</strong><br />
+                (Quelle: <a href="http://www.zdb-opac.de" target="zdbfenster">ZDB</a>)
+            </th>
+            
+            <td>
+                <table width="100%" class="zdb-location-info">
+                    <tbody>
+                    <f:for each="{journal.locationData.resultList}" as="result">                   
+                        <tr>
+                            <td class="zdb-location-info-result">
+                                <table class="zdb-location-detail">
+                                    <tbody>
+                                        <!--<f:if condition="{libconnect:strlen(string: result.Title)} > 0">
+                                        <tr>
+                                            <th>Titel:</th>
+                                            <td><f:format.htmlentitiesDecode>{result.Title}</f:format.htmlentitiesDecode></td>
+                                        </tr>
+                                        </f:if>-->
+                                        <f:if condition="{libconnect:strlen(string: result.Period)} > 0">
+                                        <tr>
+                                            <th>Bestand:</th>
+                                            <td><f:format.htmlentitiesDecode>{result.Period}</f:format.htmlentitiesDecode></td>
+                                        </tr>
+                                        </f:if>
+                                        <f:if condition="{libconnect:strlen(string: result.Signature)} > 0">
+                                        <tr>
+                                            <th>Grundsignatur:</th>
+                                            <td><f:format.htmlentitiesDecode>{result.Signature}</f:format.htmlentitiesDecode></td>
+                                        </tr>
+                                        </f:if>
+                                        <f:if condition="{libconnect:strlen(string: result.Location)} > 0">
+                                        <tr>
+                                            <th>Standort:</th>
+                                            <td><f:format.htmlentitiesDecode>{result.Location}</f:format.htmlentitiesDecode></td>
+                                        </tr>
+                                        </f:if>
+                                    </tbody>
+                                </table>                            
+                            </td>
+                            <td class="zdb-location-info-reference">
+                            <f:for each="{journal.locationData.references}" as="reference">
+                                <p>
+                                    <f:if condition="{settings.useIconService}">
+                                        <f:then>
+                                            <a href="<f:format.htmlentitiesDecode>{journal.locationData.iconInfoUrl}</f:format.htmlentitiesDecode>" target="jopinfo">
+                                            <img src="<f:format.htmlentitiesDecode>{journal.locationData.iconRequest}</f:format.htmlentitiesDecode>" alt="Informationen zur Verfügbarkeit" title="Informationen zur Verfügbarkeit"/>
+                                            </a>
+                                        </f:then>
+                                        <f:else>
+                                            <a href="<f:format.htmlentitiesDecode>{reference.URL}</f:format.htmlentitiesDecode>" target="zdbopac">                                    
+                                            <img src="{f:uri.resource(path:'Img/zdb-state_{result.state}.gif')}" class="zdb-state-{result.state}-icon" alt="<f:format.htmlentitiesDecode>{reference.Label}</f:format.htmlentitiesDecode>" title="<f:format.htmlentitiesDecode>{reference.Label}</f:format.htmlentitiesDecode>"/>
+                                            </a>
+                                        </f:else>
+                                    </f:if>
+                                </p>
+                            </f:for>
+                            </td>
+                        </tr>
+                        </f:for>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </f:if>
+       </f:if>
+<!-- ende code for location data -->          
 		</tbody>
 		</table>
 	</f:else>

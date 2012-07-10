@@ -1,4 +1,14 @@
 <link rel="stylesheet" href="{f:uri.resource(path:'Styles/ezb.css')}" />
+
+<f:if condition="{settings.EZBSearchResultsPageId}">
+<div class="ezb-listings-wrapper">
+  <f:if condition="{settings.allListingId}">
+    <p><f:link.page pageUid="{settings.EZBSearchResultsPageId}" additionalParams="{libconnect: '{subject:settings.allListingId}'}">Alphabetische Auflistung</f:link.page></p>
+  </f:if>
+    <p><f:link.page pageUid="{settings.EZBSearchResultsPageId}">Auflistung nach Fachgebieten</f:link.page></p>
+</div>
+</f:if>
+
 <div class="datenbank-suche-wrapper">
 
 <h1>Suche nach Zeitschriften</h1>

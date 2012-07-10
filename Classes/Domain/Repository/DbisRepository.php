@@ -66,7 +66,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		foreach ($result['list']['groups'] as $group) {
 			$alph_sort_groups[$group['title']] = $group;
 		}
-		ksort($alph_sort_groups);
+		ksort($alph_sort_groups, SORT_STRING); //added sort-flag SORT_STRING for correct sorting of alphabetical listings
 		$result['list']['groups'] = $alph_sort_groups;
 		
 		return array('subject' => $subject['title'], 'list' => $result['list']);

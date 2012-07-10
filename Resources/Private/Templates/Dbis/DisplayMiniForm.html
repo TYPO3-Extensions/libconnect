@@ -1,5 +1,15 @@
 <link rel="stylesheet" href="{f:uri.resource(path:'Styles/dbis.css')}" />
 {namespace libconnect=Tx_Libconnect_ViewHelpers}
+
+<f:if condition="{settings.DBISSearchResultsPageId}">
+<div class="dbis-listings-wrapper">
+  <f:if condition="{settings.allListingId}">
+    <p><f:link.page pageUid="{settings.DBISSearchResultsPageId}" additionalParams="{libconnect: '{subject:settings.allListingId}'}">Alphabetische Auflistung</f:link.page></p>
+  </f:if>
+    <p><f:link.page pageUid="{settings.DBISSearchResultsPageId}">Auflistung nach Fachgebieten</f:link.page></p>
+</div>
+</f:if>
+
 <div class="datenbank-suche-wrapper">
 
 	<h1>Suche nach Datenbanken</h1>
@@ -27,7 +37,7 @@
 
 		<p>
 			<label for="libconnect_dbis_suche" class="hiddendebis">Zugang w&auml;hlen</label>
-			<select name="libconnect[search][zugaenge]" style="width: 180px; padding: 0.06em">
+			<select name="libconnect[search][zugaenge]">
 			<f:for each="{form.zugaenge}" as="value" key="key">
 			<f:if condition="{key} < 1000">
 				<f:if condition="{libconnect:strlen(string: value)} > 0">

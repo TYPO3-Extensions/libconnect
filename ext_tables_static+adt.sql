@@ -63,4 +63,5 @@ INSERT INTO `tx_libconnect_domain_model_subject` (`uid`, `pid`, `tstamp`, `crdat
 (40, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 0, 0, 'Wirtschaftswissenschaften', '16', 'Q'),
 (41, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 0, 0, 'Wissenschaftskunde, Forschungs-, Hochschul-, Museumswesen', '55', 'AK-AL'),
 (42, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 0, 0, 'Bildungsgeschichte', '0', 'DD'),
-(43, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 0, 0, 'Asien-Afrika-Wissenschaften', 'AA', '');
+(43, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 0, 0, 'Asien-Afrika-Wissenschaften', 'AA', ''),
+(44, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 0, 0, 'Alphabetische Auflistung', 'all', 'ALL');
