@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="{f:uri.resource(path:'Styles/dbis.css')}" />
 {namespace libconnect=Tx_Libconnect_ViewHelpers}
 
 <f:if condition="{settings.DBISSearchResultsPageId}">
@@ -14,7 +13,7 @@
 
 	<h1>Suche nach Datenbanken</h1>
 
-	<form action="{siteUrl}" method="GET">
+	<form action="{siteUrl}" method="get">
 	<input type="hidden" name="id" value="{listPid}" />
 		<label for="libconnect_dbis_minisuche" class="hiddendebis">Name der Bibliothek</label>
 		<input id="libconnect_dbis_minisuche" type="text" name="libconnect[search][sword]" size="20" value="{vars.sword}" />
@@ -33,11 +32,11 @@
 	<div class="datenbank-suche-wrapper">
 		<h1>Datenbanken anzeigen</h1>
 
-		<form action="{siteUrl}" method="GET">
+		<form action="{siteUrl}" method="get">
 
 		<p>
 			<label for="libconnect_dbis_suche" class="hiddendebis">Zugang w&auml;hlen</label>
-			<select name="libconnect[search][zugaenge]">
+			<select id="libconnect_dbis_suche" name="libconnect[search][zugaenge]">
 			<f:for each="{form.zugaenge}" as="value" key="key">
 			<f:if condition="{key} < 1000">
 				<f:if condition="{libconnect:strlen(string: value)} > 0">
