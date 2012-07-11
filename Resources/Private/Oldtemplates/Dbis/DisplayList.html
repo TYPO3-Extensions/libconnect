@@ -1,3 +1,4 @@
+{namespace libconnect=Tx_Libconnect_ViewHelpers}
 <h1 class="libconnect-h1">DBIS <f:if condition="{list.alphNavList}"><f:else>Fachgebiet</f:else></f:if></h1>
 
 <h2 class="libconnect-h2">{subject}</h2>
@@ -18,7 +19,7 @@
 	<h3 class="libconnect-h1">Top Datenbanken</h3>
 	<ul class="dbis-top-list">
 	<f:for each="{list.top}" as="db">
-		<li><a href="{db.detail_link}"><f:escape value="{db.title}" type="raw" /></a> ({db.access})</li>
+		<li><a href="{db.detail_link}"><libconnect:strreplace search=" & " replace=" &amp; "><f:escape value="{db.title}" type="raw" /></libconnect:strreplace></a> ({db.access})</li>
 	</f:for>
 	</ul>
 </div>
@@ -64,7 +65,7 @@
 					<div class="accordion-content clearfix">
 						<ul class="dbis-dblist">
 							<f:for each="{group.dbs}" as="db">
-								<li class="dbis-list-accessinfo-{db.access_ref}"><a href="{db.detail_link}"><f:escape value="{db.title}" type="raw" /></a></li>							
+								<li class="dbis-list-accessinfo-{db.access_ref}"><a href="{db.detail_link}"><libconnect:strreplace search=" & " replace=" &amp; "><f:escape value="{db.title}" type="raw" /></libconnect:strreplace></a></li>							
 							</f:for>
 						</ul>
 					</div>

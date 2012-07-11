@@ -31,18 +31,18 @@
 
 <div class="ezb-list-output">
 <f:for each="{journals.alphabetical_order.first_fifty}" as="section">
-	<h3><a href="{section.link}"><f:escape value="{section.first_fifty_titles}" type="raw" />...</a></h3>
+	<h3><a href="{section.link}"><libconnect:strreplace search=" & " replace=" &amp; "><f:escape value="{section.first_fifty_titles}" type="raw" /></libconnect:strreplace>...</a></h3>
 </f:for>
 
 <h2><f:escape value="{journals.navlist.current_title}" type="raw" />...</h2>
 
 <ul class="ezb-list">
 <f:for each="{journals.alphabetical_order.journals}" as="journal">
-	<li class="ezb-list-accessinfo-access_{journal.color_code}"><a href="<f:escape value="{journal.detail_link}" type="raw" />"><f:escape value="{journal.title}" type="raw" /></a></li>
+	<li class="ezb-list-accessinfo-access_{journal.color_code}"><a href="<f:escape value="{journal.detail_link}" type="raw" />"><libconnect:strreplace search=" & " replace=" &amp; "><f:escape value="{journal.title}" type="raw" /></libconnect:strreplace></a></li>
 </f:for>
 </ul>
 
 <f:for each="{journals.alphabetical_order.next_fifty}" as="section">
-	<h3><a href="<f:escape value="{section.link}" type="raw" />"><f:escape value="{section.next_fifty_titles}" type="raw" />...</a></h3>
+	<h3><a href="<f:escape value="{section.link}" type="raw" />"><libconnect:strreplace search=" & " replace=" &amp; "><f:escape value="{section.next_fifty_titles}" type="raw" /></libconnect:strreplace>...</a></h3>
 </f:for>
 </div>
