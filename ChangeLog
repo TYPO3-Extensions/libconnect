@@ -1,8 +1,19 @@
 /**
 * Developer
 * - TW: Torsten Witt torsten.witt@sub.uni-hamburg.de
-*
+* - AL: Andre Lahman
 **/
+3.2.0
+	- DBIS: alphabetische Auflistung aller Datenbanken (AL)
+	- DBIS: Suche im MiniForm von jeder Seite aus möglich (über TS zu konfigurieren) (AL)
+	- EZB: alphabetische Auflistung aller Zeitschriften (AL)
+	- EZB: Suche im MiniForm von jeder Seite aus möglich (über TS zu konfigurieren) (AL)
+	- ZDB: Standortinformationen für Druckausgaben von Zeitschriften in der EZB-Detailansicht (mit/ohne Icondienst von Journals Online & Print) (AL)
+	- Fehlende Templates für TYPO3 4.5 ergänzt (TW)
+	- HTML - Bugfixes (TW)
+		- CSS-Dateien jetzt im Header
+		- Formular-Tag gefixt
+		- &-Zeichen, die nicht als HTML-Entitiy ausgeliefert werden, werden nun durch &amp; ersetzt
 3.1.5
 	- Kompatibilität zu TYPO3 4.5 hergestellt (getestet mit 4.5.12)
 3.1.4
