@@ -3,6 +3,10 @@
 * - TW: Torsten Witt torsten.witt@sub.uni-hamburg.de
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 **/
+3.2.1
+	- DBIS: Im Suchformular werden nun die Umlaute für die Regionen richtig angezeigt
+	- Korrekturen in Dokumentation
+
 3.2.0
 	- DBIS: alphabetische Auflistung aller Datenbanken (AL)
 	- DBIS: Suche im MiniForm von jeder Seite aus möglich (über TS zu konfigurieren) (AL)
