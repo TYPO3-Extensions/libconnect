@@ -84,7 +84,7 @@
 	        <td>
 				<select multiple="multiple" size="5" name="libconnect[search][lcode][]" id="laender" style="height:6.6em;">
 					<f:for each="{form.lcode}" as="value" key="key">
-						<option value="{key}">{value}</option>
+						<option value="{key}"><f:escape value="{value}" type="raw" /></option>
 					</f:for>
 				</select>
 	        </td>
