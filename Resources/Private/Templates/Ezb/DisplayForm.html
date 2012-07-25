@@ -78,9 +78,11 @@
         <tr>
             <td><label id="label_zugaenge" for="zugaenge">Volltextartikel sind:</label></td>
             <td>
-                <f:for each="{form.selected_colors}" as="value" key="key">
-                    <input type="checkbox" name="libconnect[search][selected_colors][]" class="zugaenge" value="{key}" checked="checked"/><span class="ezb-list-accessinfo-access_{key}"></span> {value} <br/>
-                </f:for>
+				<span id="zugangsinfos">
+					<f:for each="{form.selected_colors}" as="value" key="key">
+						<input type="checkbox" name="libconnect[search][selected_colors][]" class="zugaenge" value="{key}" checked="checked"/><span class="ezb-list-accessinfo-access_{key}"></span> {value} <br/>
+					</f:for>
+				</span>
             </td>
         </tr>
     </table>
