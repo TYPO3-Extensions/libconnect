@@ -70,7 +70,7 @@ ul.ezb-list li a {
 .ezb-list-output h3 {
     background: url("/typo3conf/ext/libconnect/Resources/Public/Img/ezb_plus.png") no-repeat scroll 10px 7px #ffffff;
     margin: 0;
-    padding: 0.4em 0 0.35em 2.4em !important;
+    padding: 0.4em 0 0.35em 2.4em;
 }
 
 .ezb-license {
@@ -79,7 +79,7 @@ ul.ezb-list li a {
 
 .ezb-navigation {
     margin: 0 0 0 8px;
-    font-size: 1em;
+    font-size: 0.9em;
     text-decoration: none;
 }
 
@@ -91,13 +91,13 @@ ul.ezb-list li a {
 }
 
 .ezb-navigation em {
-    background: none repeat scroll 0 0 #f09000;
-    border: 1px solid #f09000;
-    color: #FFFFFF;
-    font-style: normal;
-    font-weight: bold;
-    padding: 0 0.4em;
-    text-decoration: none;
+	border:1px solid #990000;
+	font-style:normal;
+	font-weight:bold;
+	padding:0 0.2em;
+	text-decoration:none;
+	background: #990000;
+	color: #FFF;
 }
 
 
