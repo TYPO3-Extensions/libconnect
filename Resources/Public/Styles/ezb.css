@@ -60,8 +60,8 @@ ul.ezb-list li a {
     width:510px;
 }
 
-select {
-    background-color: #EEEEEE;
+#extSearchForm-fieldset-1 select, #extSearchForm-fieldset-2 select {
+    background-color: #FFFFFF;
     border: 0.0625em solid #CCCCCC;
     color: #222222;
     margin: 0 0.75em 0.5em 0;
