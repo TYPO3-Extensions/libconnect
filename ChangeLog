@@ -4,6 +4,7 @@
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 **/
 3.2.3
+	- HTML für bessere CSS-Selektion optimiert
 	- EZB: 
 			-CSS 	-> Selector für SELECT-Tags nun so gestaltet, dass anderer nicht zur Extension gehörige Inhalte nicht betroffen sind
 					-> "#extSearchForm-fieldset-1 legend" nun sichtbar
