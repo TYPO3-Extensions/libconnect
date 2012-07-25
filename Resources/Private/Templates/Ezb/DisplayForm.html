@@ -45,7 +45,7 @@
 	
 	    <tr>
 	        <td colspan="4">
-                <label for="hits_per_page">Treffer pro Seite:</label>
+                <label id="label_hits_per_page" for="hits_per_page">Treffer pro Seite:</label>
                 <select size="1" name="libconnect[search][hits_per_page]" id="hits_per_page">
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -66,7 +66,7 @@
 	
     <table>
         <tr>
-            <td><label for="fachgebiete">Fachgebiete:</label></td>
+            <td><label id="label_fachgebiete" for="fachgebiete">Fachgebiete:</label></td>
             <td>
                 <select multiple="multiple" size="5" name="libconnect[search][Notations][]" id="fachgebiete">
                     <f:for each="{form.Notations}" as="value" key="key">
@@ -76,10 +76,10 @@
             </td>
         </tr>
         <tr>
-            <td><label for="zugaenge">Volltextartikel sind:</label></td>
+            <td><label id="label_zugaenge" for="zugaenge">Volltextartikel sind:</label></td>
             <td>
                 <f:for each="{form.selected_colors}" as="value" key="key">
-                    <input type="checkbox" name="libconnect[search][selected_colors][]" id="zugaenge" value="{key}" checked="checked"/><span class="ezb-list-accessinfo-access_{key}"></span> {value} <br/>
+                    <input type="checkbox" name="libconnect[search][selected_colors][]" class="zugaenge" value="{key}" checked="checked"/><span class="ezb-list-accessinfo-access_{key}"></span> {value} <br/>
                 </f:for>
             </td>
         </tr>
