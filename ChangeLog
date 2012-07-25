@@ -5,8 +5,11 @@
 **/
 3.2.3
 	- EZB: 
-			CSS -> Selector für SELECT-Tags nun so gestaltet, dass anderer nicht zur Extension gehörige Inhalte nicht betroffen sind
-				-> "#extSearchForm-fieldset-1 legend" nun sichtbar
+			-CSS 	-> Selector für SELECT-Tags nun so gestaltet, dass anderer nicht zur Extension gehörige Inhalte nicht betroffen sind
+					-> "#extSearchForm-fieldset-1 legend" nun sichtbar
+	- DBIS:
+			- fehlerhaftes HTML beseitigt
+			- CSS: mehr IDs hinzugefügt
 3.2.1
 	- DBIS: Im Suchformular werden nun die Umlaute für die Regionen richtig angezeigt
 	- Korrekturen in Dokumentation
