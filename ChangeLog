@@ -1,19 +1,23 @@
 /**
 * Developer
-* - TW: Torsten Witt torsten.witt@sub.uni-hamburg.de
+* - TW: Torsten Witt torsten.witt@sub.uni-hamburg.de (Staats- und Universitätsbibliothek Hamburg)
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 **/
 3.2.3
-	- HTML für bessere CSS-Selektion optimiert
+	- HTML für bessere CSS-Selektion optimiert (TW)
+	- EZB & DBIS:	- Verwendung von CURL in Verbindung mit simplexml_load_string statt simplexml_load_file (TW)
+					- Proxykonfiguration mittels TypoScript (TW)
+					
+						Vielen Dank an Herrn Heinermann!
 	- EZB: 
-			-CSS 	-> Selector für SELECT-Tags nun so gestaltet, dass anderer nicht zur Extension gehörige Inhalte nicht betroffen sind
-					-> "#extSearchForm-fieldset-1 legend" nun sichtbar
+			-CSS 	-> Selector für SELECT-Tags nun so gestaltet, dass anderer nicht zur Extension gehörige Inhalte nicht betroffen sind (TW)
+					-> "#extSearchForm-fieldset-1 legend" nun sichtbar (TW)
 	- DBIS:
-			- fehlerhaftes HTML beseitigt
-			- CSS: mehr IDs hinzugefügt
+			- fehlerhaftes HTML beseitigt (TW)
+			- CSS: mehr IDs hinzugefügt (TW)
 3.2.1
-	- DBIS: Im Suchformular werden nun die Umlaute für die Regionen richtig angezeigt
-	- Korrekturen in Dokumentation
+	- DBIS: Im Suchformular werden nun die Umlaute für die Regionen richtig angezeigt (TW)
+	- Korrekturen in Dokumentation (AL)
 
 3.2.0
 	- DBIS: alphabetische Auflistung aller Datenbanken (AL)

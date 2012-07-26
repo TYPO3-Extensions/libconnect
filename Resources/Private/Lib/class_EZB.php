@@ -44,8 +44,14 @@ class EZB {
 	 */
 	public function getFachbereiche(){
 		$bibid = $this->getBibid();
-		$xml_request = simplexml_load_file( "{$this->overview_requst_url}bibid={$bibid}&colors={$this->colors}&lang={$this->lang}&" );
+		//$xml_request = simplexml_load_file(  );
+		
+		$url = "{$this->overview_requst_url}bibid={$bibid}&colors={$this->colors}&lang={$this->lang}&";
+		
+		$xml_request = $this->getXMLObject($url);
+		
 		$fachbereiche = array();
+		
 		foreach ($xml_request->ezb_subject_list->subject AS $key => $value){
 			$fachbereiche[(string) $value['notation'][0]] = array('title' => (string) $value[0], 'journalcount' => (int) $value['journalcount'], 'id' => (string) $value['notation'][0], 'notation' => (string) $value['notation'][0] );
 		}
@@ -66,7 +72,11 @@ class EZB {
 	 */
 	public function getFachbereichJournals($jounal, $sindex = 0, $sc = 'A', $lc = ''){
 		$bibid = $this->getBibid();
-		$xml_request = simplexml_load_file( "{$this->overview_requst_url}bibid={$bibid}&colors={$this->colors}&lang={$this->lang}&notation={$jounal}&sc={$sc}&lc={$lc}&sindex={$sindex}&");
+		//$xml_request = simplexml_load_file( "{$this->overview_requst_url}bibid={$bibid}&colors={$this->colors}&lang={$this->lang}&notation={$jounal}&sc={$sc}&lc={$lc}&sindex={$sindex}&");
+		
+		$url = "{$this->overview_requst_url}bibid={$bibid}&colors={$this->colors}&lang={$this->lang}&notation={$jounal}&sc={$sc}&lc={$lc}&sindex={$sindex}&";
+		
+		$xml_request = $this->getXMLObject($url);
 		
 		$journals = array();
 
@@ -136,12 +146,16 @@ class EZB {
 	public function getJournalDetail($journalId){
 		$bibid = $this->getBibid();
 		$url = "{$this->detailview_request_url}bibid={$bibid}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}";
-
-		$xml_request = simplexml_load_file( $url );
+		
+		$xml_request = $this->getXMLObject($url);
+		
+		//$xml_request = simplexml_load_file( $url );
+		
 		$journal = array();
 
-		if (! is_object($xml_request->ezb_detail_about_journal->journal))
+		if (! is_object($xml_request->ezb_detail_about_journal->journal)){
 			return false;
+		}
 
 		$journal['id'] = (int) $xml_request->ezb_detail_about_journal->journal->attributes()->jourid;
 		$journal['title'] = (string) $xml_request->ezb_detail_about_journal->journal->title;
@@ -247,7 +261,9 @@ class EZB {
 	 * @return array
 	 */
 	public function detailSearchFormFields(){
-		$xml_such_form = simplexml_load_file( (string)$this->search_url );
+		//$xml_such_form = simplexml_load_file( (string)$this->search_url );
+
+		$xml_such_form = $this->getXMLObject((string)$this->search_url);
 
 		foreach ($xml_such_form->ezb_search->option_list AS $key => $value){
 			foreach ( $value->option AS $key2 => $value2 ){
@@ -318,14 +334,20 @@ class EZB {
 	 */
 	public function search( $term, $searchVars = array() ){
 
-		$searchUrl = $this->createSearchUrl($term, $searchVars);
+		$searchUrl = str_replace(" ", "", $this->createSearchUrl($term, $searchVars));
 
-		$xml_request = simplexml_load_file( $searchUrl );
-		if (! $xml_request)
+		$xml_request = $this->getXMLObject($searchUrl);
+		
+		//$xml_request = simplexml_load_file( $searchUrl );
+		
+		if (! $xml_request){
 			return false;
-
+		}
+		$i=0;
+		$result = array('page_vars');
 		foreach ($xml_request->page_vars->children() AS $key => $value){
-			$result['page_vars'][$key] = (string) $value->attributes()->value;
+			$result = array('page_vars' => array($key => (string) $value->attributes()->value));
+			//$result['page_vars'][$key] = (string) $value->attributes()->value;
 		}
 
 		foreach ($xml_request->page_vars->children() AS $key => $value){
@@ -400,6 +422,36 @@ class EZB {
 		}*/
 		
 		return $bibid;
+	}
+	
+	/**
+	 * Verbindung und XML erstellen
+	 *
+	 * @param string URL
+	 *
+	 * @return SimpleXMLElement
+	 */
+	public function getXMLObject($url){
+		$ch = curl_init();
+		$proxy = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['proxy'];
+		$proxy_port = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['proxy_port'];
+
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_PORT, 80); 
+
+		//falls Proxyeinstellungen bekannt
+		if ($proxy &&  $proxyport) {
+			curl_setopt($ch, CURLOPT_PROXY, $proxy);
+			curl_setopt($ch, CURLOPT_PROXYPORT, $proxy_port);
+		}
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
+		$result = curl_exec($ch);
+
+		$xml_request = simplexml_load_string($result);
+		
+		return $xml_request;
 	}
 
 }

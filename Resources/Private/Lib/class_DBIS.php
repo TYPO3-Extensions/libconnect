@@ -77,8 +77,10 @@ class DBIS{
 		    
 		}
 		//EOF workaround for alphabetical listing	
-
-		$xml_fachgebiet_db = simplexml_load_file( $url );
+		
+		$xml_fachgebiet_db = $this->getXMLObject($url);
+		
+		//$xml_fachgebiet_db = simplexml_load_file( $url );
 
 		$list = array(
 			'top' => array(),
@@ -212,8 +214,13 @@ class DBIS{
 	 */
 	public function getDbDetails( $db_id){
 		$bibid = $this->getBibid();
-	
-		$xml_db_details = simplexml_load_file( 'http://rzblx10.uni-regensburg.de/dbinfo/detail.php?xmloutput=1&bib_id='. $bibid ."&colors=&ocolors=&". "lett={$this->lett}&colors={$this->colors}&ocolors={$this->ocolors}&titel_id=" . $db_id );
+		
+		$url = 'http://rzblx10.uni-regensburg.de/dbinfo/detail.php?xmloutput=1&bib_id='. $bibid ."&colors=&ocolors=&". "lett={$this->lett}&colors={$this->colors}&ocolors={$this->ocolors}&titel_id=" . $db_id ;
+		
+		$xml_db_details = $this->getXMLObject($url);
+		
+		//$xml_db_details = simplexml_load_file( 'http://rzblx10.uni-regensburg.de/dbinfo/detail.php?xmloutput=1&bib_id='. $bibid ."&colors=&ocolors=&". "lett={$this->lett}&colors={$this->colors}&ocolors={$this->ocolors}&titel_id=" . $db_id );
+
 		$details = array();
 
 		if (!is_object($xml_db_details->details))
@@ -295,7 +302,10 @@ class DBIS{
 	public function detailSucheFormFelder(){
 		$bibid = $this->getBibid();
 		$url = 'http://rzblx10.uni-regensburg.de/dbinfo/suche.php?xmloutput=1&bib_id='. $bibid . '&' . "colors={$this->colors}&ocolors={$this->ocolors}";
-		$xml_such_form = simplexml_load_file( $url );
+		
+		$xml_such_form = $this->getXMLObject($url);
+		
+		//$xml_such_form = simplexml_load_file( $url );
 
 		foreach ($xml_such_form->dbis_search->option_list AS $key => $value){
 			foreach ( $value->option AS $key2 => $value2 ){
@@ -369,8 +379,10 @@ class DBIS{
 		} else {
 			$searchUrl = $this->createSearchUrl($searchVars);
 		}
-
-		$request = simplexml_load_file($searchUrl);
+		
+		$request = $this->getXMLObject($searchUrl);
+		
+		//$request = simplexml_load_file($searchUrl);
 
 		$list = array(
 			'top' => array(),
@@ -528,5 +540,35 @@ class DBIS{
 		}*/
 
 		return $bibid;
+	}
+	
+	/**
+	 * Verbindung und XML erstellen
+	 *
+	 * @param string URL
+	 *
+	 * @return SimpleXMLElement
+	 */
+	public function getXMLObject($url){
+		$ch = curl_init();
+		$proxy = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['proxy'];
+		$proxy_port = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['proxy_port'];
+
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_PORT, 80); 
+
+		//falls Proxyeinstellungen bekannt
+		if ($proxy &&  $proxyport) {
+			curl_setopt($ch, CURLOPT_PROXY, $proxy);
+			curl_setopt($ch, CURLOPT_PROXYPORT, $proxy_port);
+		}
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
+		$result = curl_exec($ch);
+
+		$xml_request = simplexml_load_string($result);
+		
+		return $xml_request;
 	}
 }
