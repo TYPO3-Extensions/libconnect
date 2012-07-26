@@ -84,7 +84,6 @@
 }
 
 .dbis-result-details th {
-    border-bottom: 1px dotted #CCCCCC;
     vertical-align:top;
     text-align:left;
     line-height:1.5em;
@@ -94,6 +93,11 @@
 .dbis-result-details td {
     line-height:1.5em;
     width:510px;
+}
+
+.dbis-result-details td, .dbis-result-details th {
+    border-top: 1px solid #CCCCCC;
+    padding: 0.5em 0 1.5em;
 }
 
 .alph-nav-list-wrapper {
@@ -144,8 +148,8 @@
 
 #extSearchForm-wrapper input[type="submit"] {
     height:28px;
-    padding: 6px 8px;
-    margin: 0 0 1.2em 1.2em;
+    padding: 0 8px;
+    margin: 0 0 1.2em 0;
 }
 
 #extSearchForm-wrapper input[type="checkbox"] {
@@ -155,7 +159,7 @@
 }
 
 #extSearchForm-wrapper select {
-    background-color: #EEEEEE;
+    background-color: #FFFFFF;
     border: 0.0625em solid #CCCCCC;
     color: #222222;
     margin: 0 0.75em 0.5em 0;
