@@ -119,7 +119,7 @@ ul.ezb-list li a {
 
 #extSearchForm-wrapper input[type="submit"] {
     height:28px;
-    padding: 6px 8px;
+    padding: 0 8px;
     margin: 0 0 1.2em 1.2em;
 }
 
