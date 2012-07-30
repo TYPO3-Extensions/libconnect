@@ -3,6 +3,8 @@
 * - TW: Torsten Witt torsten.witt@sub.uni-hamburg.de (Staats- und Universitätsbibliothek Hamburg)
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 **/
+3.2.3
+	- EZB & DBIS: Fehler in Proxykonfiguration entfernt
 3.2.2
 	- HTML für bessere CSS-Selektion optimiert (TW)
 	- EZB & DBIS:	- Verwendung von CURL in Verbindung mit simplexml_load_string statt simplexml_load_file (TW)

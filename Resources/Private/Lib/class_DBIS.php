@@ -558,7 +558,7 @@ class DBIS{
 		curl_setopt($ch, CURLOPT_PORT, 80); 
 
 		//falls Proxyeinstellungen bekannt
-		if ($proxy &&  $proxyport) {
+		if ($proxy &&  $proxy_port) {
 			curl_setopt($ch, CURLOPT_PROXY, $proxy);
 			curl_setopt($ch, CURLOPT_PROXYPORT, $proxy_port);
 		}
