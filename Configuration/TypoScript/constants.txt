@@ -3,6 +3,15 @@
 #
 
 plugin.tx_libconnect {
+	
+	ezbbibid = SUBHH
+	dbisbibid = sub_hh
+    zdbsid = vid:dbid
+    //zdbbibid = BIBID
+    //zdbsigel = SIGEL
+    //zdbisil = ISIL
+    //zdbbik = ISIL	
+	
 	view {
 		# cat=plugin.tx_libconnect/file; type=string; label=Path to template root (FE)
 		templateRootPath = EXT:libconnect/Resources/Private/Templates/
@@ -15,19 +24,16 @@ plugin.tx_libconnect {
 		# cat=plugin.tx_libconnect//a; type=int+; label=Default storage PID
 		storagePid = 
 	}
-	ezbbibid = SUBHH
-	dbisbibid = sub_hh
 	
     settings {
         allListingId = 44
         EZBSearchResultsPageId = 
         DBISSearchResultsPageId = 
+		file.path {
+			dbisCSS = EXT:libconnect/Resources/Public/Styles/dbis.css
+			ezbCSS = EXT:libconnect/Resources/Public/Styles/ezb.css
+		}
     }
-    zdbsid = vid:dbid
-    //zdbbibid = BIBID
-    //zdbsigel = SIGEL
-    //zdbisil = ISIL
-    //zdbbik = ISIL	
 }
 
 [compatVersion = 4.5]

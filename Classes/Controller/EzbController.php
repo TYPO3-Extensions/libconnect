@@ -35,7 +35,6 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 
 	public function displayListAction() {	
 		$params = t3lib_div::_GET('libconnect');
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');
 		
 		if (!empty($params['subject'])) {//Gewaehltes Fach nach Einstiegspunkt
 			$config['detailPid'] = $this->settings['flexform']['detailPid'];
@@ -85,7 +84,6 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 	
 	public function displayDetailAction() {
 		$params = t3lib_div::_GET('libconnect');
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');
 		
 		//$this->set('bibid', $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid']);
 		if (!($params['jourid'])){
@@ -113,10 +111,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 	
 	public function displayMiniFormAction() {
 		$params = t3lib_div::_GET('libconnect');
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');
-		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
-		
     	$form = $this->ezbRepository->loadMiniForm($params['search']);
 		
 		//$this->view->assign('vars', $params['search']);
@@ -139,11 +134,9 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 	}
 	
 	public function displayFormAction() {
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');
-		$form =  $this->ezbRepository->loadForm();
 		$params = t3lib_div::_GET('libconnect');
-		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
+		$form =  $this->ezbRepository->loadForm();
 		
 		$this->view->assign('vars', $params['search']);
 		$this->view->assign('form', $form);

@@ -3,15 +3,18 @@
 #
 
 plugin.tx_libconnect {
-	cssFile = typo3conf/ext/libconnect/Resources/Public/Styles/dbis.css
-	cssFile2 = typo3conf/ext/libconnect/Resources/Public/Styles/ezb.css
+	
+	ezbbibid = SUBHH
+	dbisbibid = sub_hh
+    zdbsid = vid:dbid
+    //zdbbibid = BIBID
+    //zdbsigel = SIGEL
+    //zdbisil = ISIL
+    //zdbbik = ISIL
 	
 	persistence {
 		storagePid = {$plugin.tx_libconnect.persistence.storagePid}
 	}
-	
-	ezbbibid = SUBHH
-	dbisbibid = sub_hh
 	
 	settings {
 	    allListingId = 44
@@ -21,34 +24,40 @@ plugin.tx_libconnect {
         EZBSearchResultsPageId = 
         DBISSearchResultsPageId = 
     }
-    zdbsid = vid:dbid
-    //zdbbibid = BIBID
-    //zdbsigel = SIGEL
-    //zdbisil = ISIL
-    //zdbbik = ISIL	
+	
+	_CSS_DEFAULT_STYLE (
+		input.f3-form-error {
+			background-color:#FF9F9F;
+			border: 1px #FF0000 solid;
+		}
+
+		.tx-libconnect table {
+			border-collapse:separate;
+			border-spacing:10px;
+		}
+
+		.tx-libconnect table th {
+			font-weight:bold;
+		}
+
+		.tx-libconnect table td {
+			vertical-align:top;
+		}
+	)
 }
 
 [compatVersion = 4.5]
-        plugin.tx_libconnect.view.templateRootPath = EXT:libconnect/Resources/Private/Oldtemplates/
+	plugin.tx_libconnect.view.templateRootPath = EXT:libconnect/Resources/Private/Oldtemplates/
 [global]
 
+[userFunc = user_libconnect_hasSelectedPluginForCSSInclude(dbis)]
+page.includeCSS {
+    DBIS = {$plugin.tx_libconnect.settings.file.path.dbisCSS}
+}
+[global]
 
-plugin.tx_libconnect._CSS_DEFAULT_STYLE (
-	input.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
-
-	.tx-libconnect table {
-		border-collapse:separate;
-		border-spacing:10px;
-	}
-
-	.tx-libconnect table th {
-		font-weight:bold;
-	}
-
-	.tx-libconnect table td {
-		vertical-align:top;
-	}
-)
+[userFunc = user_libconnect_hasSelectedPluginForCSSInclude(ezb)]
+page.includeCSS {
+    EZB = {$plugin.tx_libconnect.settings.file.path.ezbCSS}
+}
+[global]

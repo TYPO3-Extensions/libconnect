@@ -44,7 +44,6 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 	
 	public function displayListAction() {
 		$params = t3lib_div::_GET('libconnect');
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/dbis.css" />');
 		
 		if (!empty($params['subject'])) {//Gewaehltes Fach nach Einstiegspunkt
 			$config['sort'] = $this->settings['flexform']['sortParameter'];
@@ -90,7 +89,6 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 	
 	public function displayDetailAction() {
 		$params = t3lib_div::_GET('libconnect');
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/dbis.css" />');
 
 		if (!($params['titleid'])){
 			$this->view->assign('error', 'Error');
@@ -112,7 +110,6 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
     }
 	
 	public function displayMiniFormAction() {
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/dbis.css" />');
 		$params = t3lib_div::_GET('libconnect');
 		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
@@ -137,7 +134,6 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
     }
 	
 	public function displayFormAction() {
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/dbis.css" />');
 		$params = t3lib_div::_GET('libconnect');
 		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
