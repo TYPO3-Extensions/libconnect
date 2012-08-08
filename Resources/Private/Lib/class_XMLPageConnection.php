@@ -16,30 +16,30 @@ class XMLPageConnection {
     
     public function __construct() {
 	
-	$this->setExtPiVars();
-	$this->setProxy();
-	$this->setProxyPort();
+		$this->setExtPiVars();
+		$this->setProxy();
+		$this->setProxyPort();
     }
     
     /**
      * Läd die im typoscript gesetzten Variablen.
      */
     private function setExtPiVars() {
-	$this->extPiVars = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.'];
+		$this->extPiVars = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.'];
     }
     
     /**
      * Setzt den Proxy Server 
      */
     private function setProxy() {
-	$this->proxy = $this->extPiVars['proxy'];
+		$this->proxy = $this->extPiVars['proxy'];
     }
     
     /**
      * Setzt den Proxy Port 
      */
     private function setProxyPort() {
-	$this->proxyPort = $this->extPiVars['proxy_port'];
+		$this->proxyPort = $this->extPiVars['proxy_port'];
     }
     
     /**
@@ -49,32 +49,32 @@ class XMLPageConnection {
      */
     public function getDataFromXMLPage($url) {
 
-	$xmlObj = FALSE;
-	$ch = curl_init();
-	 
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_PORT, 80);
-	if ($this->proxy && $this->proxyPort) {
-	    curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
-	    curl_setopt($ch, CURLOPT_PROXYPORT, $this->proxyPort);
-	}
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+		$xmlObj = FALSE;
+		$ch = curl_init();
+		 
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_PORT, 80);
+		if ($this->proxy && $this->proxyPort) {
+			curl_setopt($ch, CURLOPT_PROXY, $this->proxy);
+			curl_setopt($ch, CURLOPT_PROXYPORT, $this->proxyPort);
+		}
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 
-	
-	$result = curl_exec($ch);
-	$xmlObj = simplexml_load_string($result);
-	
-	/* HINWEIS FEHLERPRUEFUNG: 
-	 * Die Funktion curl_error() wie auch curl_getinfo() haben keine brauchbaren Rückgabewerte
-	 * zurückgegeben. Deswegen die Pruefung ob später ein Object erzeugt wurde und es ein
-	 * SimpleXMLElement ist. 
-	 */
-	if (!is_object($xmlObj) && get_class($xmlObj) == 'SimpleXMLElement') {
-	    $xmlObj = FALSE;
-	}
+		
+		$result = curl_exec($ch);
+		$xmlObj = simplexml_load_string($result);
+		
+		/* HINWEIS FEHLERPRUEFUNG: 
+		 * Die Funktion curl_error() wie auch curl_getinfo() haben keine brauchbaren Rückgabewerte
+		 * zurückgegeben. Deswegen die Pruefung ob ein Object erzeugt wurde und es ein
+		 * SimpleXMLElement ist. 
+		 */
+		if (!is_object($xmlObj) && get_class($xmlObj) == 'SimpleXMLElement') {
+			$xmlObj = FALSE;
+		}
 
-	return $xmlObj;
+		return $xmlObj;
     }
 }
 ?>
