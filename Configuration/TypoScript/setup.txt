@@ -24,26 +24,6 @@ plugin.tx_libconnect {
         EZBSearchResultsPageId = 
         DBISSearchResultsPageId = 
     }
-	
-	_CSS_DEFAULT_STYLE (
-		input.f3-form-error {
-			background-color:#FF9F9F;
-			border: 1px #FF0000 solid;
-		}
-
-		.tx-libconnect table {
-			border-collapse:separate;
-			border-spacing:10px;
-		}
-
-		.tx-libconnect table th {
-			font-weight:bold;
-		}
-
-		.tx-libconnect table td {
-			vertical-align:top;
-		}
-	)
 }
 
 [compatVersion = 4.5]
