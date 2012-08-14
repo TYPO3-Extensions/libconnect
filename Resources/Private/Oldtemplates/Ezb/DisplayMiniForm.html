@@ -1,23 +1,35 @@
 <f:if condition="{settings.EZBSearchResultsPageId}">
-<div class="ezb-listings-wrapper">
-  <f:if condition="{settings.allListingId}">
-    <p><f:link.page pageUid="{settings.EZBSearchResultsPageId}" additionalParams="{libconnect: '{subject:settings.allListingId}'}">Alphabetische Auflistung</f:link.page></p>
-  </f:if>
-    <p><f:link.page pageUid="{settings.EZBSearchResultsPageId}">Auflistung nach Fachgebieten</f:link.page></p>
-</div>
+	<div class="ezb-listings-wrapper">
+		<f:if condition="{settings.allListingId}">
+			<p>
+				<f:link.page pageUid="{settings.EZBSearchResultsPageId}" additionalParams="{libconnect: '{subject:settings.allListingId}'}">
+					<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.miniform.link.alphabetical" />
+				</f:link.page>
+			</p>
+		</f:if>
+		<p>
+			<f:link.page pageUid="{settings.EZBSearchResultsPageId}">
+				<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.miniform.link.subject" />
+			</f:link.page>
+		</p>
+	</div>
 </f:if>
 
 <div class="datenbank-suche-wrapper">
-
-<h1>Suche nach Zeitschriften</h1>
-
-<form action="{siteUrl}" method="get">
-	<input type="hidden" name="id" value="{listPid}" />
-	<label for="libconnect_ezb_minisuche" class="hiddenezb">Name der Zeitschrift</label>
-	<input id="libconnect_ezb_minisuche" type="text" name="libconnect[search][sword]" size="20" value="{vars.sword}" />
-	<input type="submit" value="Suchen" /> <br/>
-	
-	<p><a href="{searchUrl}">Erweiterte Suche</a></p>
-	
-</form>
+	<h1>
+		<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.miniform.searchform.headline" />
+	</h1>
+	<form action="{siteUrl}" method="get">
+		<input type="hidden" name="id" value="{listPid}" />
+		<label for="libconnect_ezb_minisuche" class="hiddenezb">
+			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.miniform.searchform.label" />
+		</label>
+		<input id="libconnect_ezb_minisuche" type="text" name="libconnect[search][sword]" size="20" value="{vars.sword}" />
+		<input type="submit" value="Suchen" />
+		<p>
+			<a href="{searchUrl}">
+				<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.miniform.link.extended_search" />
+			</a>
+		</p>
+	</form>
 </div>
