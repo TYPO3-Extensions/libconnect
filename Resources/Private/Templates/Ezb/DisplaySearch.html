@@ -1,20 +1,34 @@
 {namespace libconnect=Tx_Libconnect_ViewHelpers}
-<h1>Ergebnisse Ihrer Suche</h1>
+<h1>
+	<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.headline" />
+</h1>
 
 <f:if condition="{journals.page_vars.search_count} != -1">
 	<f:then>
 		<div class="ezb-list-legend">
 			<ul>
-				<li class="ezb-list-legend-one">Frei zugänglich</li>
-				<li class="ezb-list-legend-two">Im Campus-Netz sowie für Angehörige der Universität auch extern zugänglich</li>
-				<li class="ezb-list-legend-six">Nur für einen Teil der erschienenen Jahrgänge zugänglich</li>
-				<li class="ezb-list-legend-four">Für Ihren Standort nicht freigeschaltet. Zum Teil bekommen Sie Zugriff auf Abstracts oder Inhaltsverzeichnisse</li>
+				<li class="ezb-list-legend-one">
+					<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.legend.icon.green" />
+				</li>
+				<li class="ezb-list-legend-two">
+					<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.legend.icon.yellow" />
+				</li>
+				<li class="ezb-list-legend-six">
+					<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.legend.icon.yellow.red" />
+				</li>
+				<li class="ezb-list-legend-four">
+					<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.legend.icon.red" />
+				</li>
 			</ul>
 		</div>
 
 		<br/><br/>
 
-		{journals.page_vars.search_count} Treffer
+		<p>
+			<libconnect:strreplace search="%s" replace=" {journals.page_vars.search_count} ">
+				<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.text.hits" />
+			</libconnect:strreplace>
+		</p>
 
 		<br/><br/>
 
@@ -77,8 +91,13 @@
 		</f:if>
 	</f:then>
 	<f:else>
-		<p><strong>Bei der Suche ist ein Fehler aufgetreten:</strong></p>
-
-		<p>Sie haben keine Suchbegriffe eingegeben und kein Fachgebiet ausgew&auml;hlt.</p>
+		<p>
+			<strong>
+				<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.error.headline" />
+			</strong>
+		</p>
+		<p>
+			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.error.text" />
+		</p>
 	</f:else>
 </f:if>
