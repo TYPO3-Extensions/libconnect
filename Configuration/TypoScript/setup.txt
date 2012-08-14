@@ -12,6 +12,10 @@ plugin.tx_libconnect {
     //zdbisil = ISIL
     //zdbbik = ISIL
 	
+	#Proxy Einstellungen für CURL Verbindung
+    proxy = 
+    proxy_port = 
+	
 	persistence {
 		storagePid = {$plugin.tx_libconnect.persistence.storagePid}
 	}
