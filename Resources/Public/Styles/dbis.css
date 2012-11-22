@@ -221,7 +221,7 @@
     /* height: 18px;    */
     vertical-align:middle;
     margin: 5px 0 0 23px;
-    width:70px;
+    min-width:70px;
 }
 
 .dbis_erw_search {
