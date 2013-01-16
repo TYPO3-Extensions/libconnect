@@ -1,4 +1,4 @@
-@CHARSET "UTF-8";
+@charset "UTF-8";
 .ezb-list-legend ul li.ezb-list-legend-one,
 .ezb-list-accessinfo-access_1 {
 	background-image: url("/typo3conf/ext/libconnect/Resources/Public/Img/ezb-list_1.png");
@@ -17,7 +17,6 @@
 .ezb-list-accessinfo-access_6{
 	background-image: url("/typo3conf/ext/libconnect/Resources/Public/Img/ezb-list_6.png");
 }
-
 
 .ezb-list-legend ul li.ezb-list-legend-one,
 .ezb-list-legend ul li.ezb-list-legend-two,
@@ -46,7 +45,6 @@ ul.ezb-list li a {
     display: block;
     margin: 0 0 0 2.3em;
 }
-
 #ezb-result-details tr {
     border-bottom: 1px dotted #CCCCCC;
     vertical-align:top;
@@ -69,14 +67,15 @@ ul.ezb-list li a {
     margin: 0 0.75em 0.5em 0;
 }
 
-.ezb-list-output h3 {
-    background: url("/typo3conf/ext/libconnect/Resources/Public/Img/ezb_plus.png") no-repeat scroll 10px 7px #ffffff;
+.ezb-list-output h3 a{
     margin: 0;
-    padding: 0.4em 0 0.35em 2.4em;
+    padding: 0 0 0.35em 2.4em;
+    display: block;
+    background: url("/typo3conf/ext/libconnect/Resources/Public/Img/ezb_plus.png") no-repeat scroll 10px 10px #FFFFFF;
 }
 
 .ezb-license {
-    font-weight:bold;
+    font-weight: bold;
 }
 
 .ezb-navigation {
@@ -101,7 +100,6 @@ ul.ezb-list li a {
 	background: #990000;
 	color: #FFF;
 }
-
 
 /**
  * begin - extended search styles 
@@ -173,7 +171,7 @@ ul.ezb-list li a {
  */  
  
 .datenbank-suche-wrapper input[type="submit"] {
-    border: 0m solid #CCCCCC; 
+    border: 1px solid #CCCCCC; 
     color: #FFFFFF;
     /* height: 18px;    */
     vertical-align:middle;

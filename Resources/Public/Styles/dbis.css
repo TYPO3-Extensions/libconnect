@@ -1,4 +1,4 @@
-@CHARSET "UTF-8";
+@charset "UTF-8";
 .dbis-list-legend ul li.dbis-list-legend-one,
 .dbis-list-accessinfo-access_0 {
 	background-image: url("/typo3conf/ext/libconnect/Resources/Public/Img/dbis-list_0.png");
@@ -62,17 +62,17 @@
 }
 
 .hiddendebis, #extSearchForm-wrapper .hiddendebis{
-	display:none;
+	display: none;
 }
 
  .libconnect-h1{
 	font-size: 1em;
 	font-weight: bold;
- } 
+} 
  .libconnect-h2{
 	font-size: 1.5em;
 	margin-bottom: 1em;
- }
+}
 
  ul.dbis-dblist li a {
     display: block;
@@ -84,15 +84,15 @@
 }
 
 .dbis-result-details th {
-    vertical-align:top;
-    text-align:left;
-    line-height:1.5em;
-    width:160px;
+    vertical-align: top;
+    text-align: left;
+    line-height: 1.5em;
+    width: 160px;
 }
 
 .dbis-result-details td {
-    line-height:1.5em;
-    width:510px;
+    line-height: 1.5em;
+    width: 510px;
 }
 
 .dbis-result-details td, .dbis-result-details th {
@@ -141,20 +141,20 @@
 }
 
 #extSearchForm-wrapper input {
-    height:18px;
-    vertical-align:bottom;
+    height: 18px;
+    vertical-align: bottom;
     margin: 0 0.75em 0.5em 0;
 }
 
 #extSearchForm-wrapper input[type="submit"] {
-    height:28px;
+    height: 28px;
     padding: 0 8px;
     margin: 0 0 1.2em 0;
 }
 
 #extSearchForm-wrapper input[type="checkbox"] {
-    height:18px;
-    vertical-align:top;
+    height: 18px;
+    vertical-align: top;
     margin: 0 0.75em 0.5em 0;
 }
 
@@ -188,16 +188,16 @@
 
 #extSearchForm-fieldset-2 table td:first-child {
     vertical-align: top;
-    width:120px;
+    width: 120px;
 }
 
 #fachgebiete, #typen, #laender {
-    height:6.6em;
-    width:430px;
+    height: 6.6em;
+    width: 430px;
 }
 
 #zugaenge, #formal_type {
-    width:430px;
+    width: 430px;
 }
 
 /**
@@ -216,10 +216,10 @@
 } 
  
 .datenbank-suche-wrapper input[type="submit"] {
-    border: 0m solid #CCCCCC;
+    border: 1px solid #CCCCCC;
     color: #FFFFFF;
     /* height: 18px;    */
-    vertical-align:middle;
+    vertical-align: middle;
     margin: 5px 0 0 23px;
     min-width:70px;
 }
