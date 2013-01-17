@@ -8,6 +8,13 @@
  * @subpackage	tx_libconnect
  */
 
+/**
+ * check for plugins on selected page
+ * 
+ * @param string	$type: Name of selected PlugIn
+ * 
+ * @return boolean		
+ */
 function user_libconnect_hasSelectedPluginForCSSInclude($type) {
     
 	    $pid = $GLOBALS['TSFE']->id;
