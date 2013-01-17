@@ -1,4 +1,4 @@
-<h1>Ergebnisse Ihrer Suche </h1>
+<h1>Ergebnisse Ihrer Suche</h1>
 
 Sie suchten nach folgenden Kriterien:<br/>
 <ul>
@@ -11,7 +11,7 @@ Sie suchten nach folgenden Kriterien:<br/>
 
 <f:if condition="{list.error}">
 	<f:then>
-	
+
 	</f:then>
 	<f:else>
 		<h3>Zugriffe:</h3>
@@ -44,9 +44,9 @@ Sie suchten nach folgenden Kriterien:<br/>
 			<div class="accordion-content clearfix">
 				<ul class="dbis-dblist">
 					<f:for each="{list.values}" as="db" key="titleid">
-						<li>
-							<li class="dbis-list-accessinfo-{db.access_ref}"><a href="{db.detail_link}"><f:format.htmlentitiesDecode>{db.title}</f:format.htmlentitiesDecode></a></li>
-						</li>
+							<li class="dbis-list-accessinfo-{db.access_ref}">
+								<a href="{db.detail_link}"><f:format.htmlentitiesDecode>{db.title}</f:format.htmlentitiesDecode></a>
+							</li>
 					</f:for>
 				</ul>
 			</div>
@@ -54,5 +54,3 @@ Sie suchten nach folgenden Kriterien:<br/>
 		</div>
 </f:else>
 </f:if>
-
-
