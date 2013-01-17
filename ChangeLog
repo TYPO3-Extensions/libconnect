@@ -4,6 +4,16 @@
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
+3.2.4
+	- alte nicht mehr verwendete CSS-Styles gelöscht (BH)
+	- Umstellung der Templates auf locallang.xml (BH)
+	- zwecks Barrierefreiheit Darstellung der Grafiken wieder als img-Tag (BH)
+	- CURL-Verbindung in separater Klasse (BH)
+	- Code aufgeräumt (BH)
+	- CSS nun valide (TW)
+	- PHP-Warning in DBIS behoben (TW)
+	- HTML in Suche korrigiert (TW)
+	- neue UserFunc für CSS (noch nicht aktiv) (AL)
 3.2.3
 	- EZB & DBIS: Fehler in Proxykonfiguration entfernt
 3.2.2
