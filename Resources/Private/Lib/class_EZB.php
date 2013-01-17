@@ -93,7 +93,7 @@ class EZB {
      * @return array()
      */
     public function getFachbereichJournals($jounal, $sindex = 0, $sc = 'A', $lc = '') {
-	
+		
 		$journals = array();
 		$url = "{$this->overview_requst_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&notation={$jounal}&sc={$sc}&lc={$lc}&sindex={$sindex}&";
 		$xml_request = $this->XMLPageConnection->getDataFromXMLPage($url);
