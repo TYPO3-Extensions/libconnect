@@ -12,7 +12,7 @@ plugin.tx_libconnect {
     //zdbisil = ISIL
     //zdbbik = ISIL
 	
-	#Proxy Einstellungen für CURL Verbindung
+	#Proxy Einstellungen fï¿½r CURL Verbindung
     proxy = 
     proxy_port = 
 	
@@ -34,14 +34,14 @@ plugin.tx_libconnect {
 	plugin.tx_libconnect.view.templateRootPath = EXT:libconnect/Resources/Private/Oldtemplates/
 [global]
 
-[userFunc = user_libconnect_hasSelectedPluginForCSSInclude(dbis)]
-page.includeCSS {
-    DBIS = {$plugin.tx_libconnect.settings.file.path.dbisCSS}
-}
-[global]
+#[userFunc = user_libconnect_hasSelectedPluginForCSSInclude(dbis)]
+#page.includeCSS {
+#    DBIS = {$plugin.tx_libconnect.settings.file.path.dbisCSS}
+#}
+#[global]
 
-[userFunc = user_libconnect_hasSelectedPluginForCSSInclude(ezb)]
-page.includeCSS {
-    EZB = {$plugin.tx_libconnect.settings.file.path.ezbCSS}
-}
-[global]
+#[userFunc = user_libconnect_hasSelectedPluginForCSSInclude(ezb)]
+#page.includeCSS {
+#    EZB = {$plugin.tx_libconnect.settings.file.path.ezbCSS}
+#}
+#[global]

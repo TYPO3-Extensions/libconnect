@@ -32,9 +32,13 @@
  *
  */
 class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_ActionController {
-
+	
+	 /**
+	 * Zeigt eine Liste von Datenbanken (für allgemein, Suche und das gewählte Fach)
+	 */
 	public function displayListAction() {	
 		$params = t3lib_div::_GET('libconnect');
+		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');
 		
 		if (!empty($params['subject'])) {//Gewaehltes Fach nach Einstiegspunkt
 			$config['detailPid'] = $this->settings['flexform']['detailPid'];
@@ -82,9 +86,13 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		$this->subjectRepository = $subjectRepository;
 	}
 	
+	/**
+	 * Zeigt die Detailansicht
+	 */
 	public function displayDetailAction() {
 		$params = t3lib_div::_GET('libconnect');
-		
+		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');
+
 		//$this->set('bibid', $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid']);
 		if (!($params['jourid'])){
 			$this->view->assign('error', 'Error');
@@ -109,8 +117,13 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		$this->view->assign('bibid', $this->ezbRepository->getBibid());
 	}
 	
+	/**
+	 * zeigt die Sidebar
+	 */
 	public function displayMiniFormAction() {
 		$params = t3lib_div::_GET('libconnect');
+		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');
+		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
     	$form = $this->ezbRepository->loadMiniForm($params['search']);
 		
@@ -133,8 +146,13 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		$this->view->assign('listPid', $this->settings['flexform']['searchPid']);//Link zur Listendarstellung
 	}
 	
+	/**
+	 * zeigt die Suche
+	 */
 	public function displayFormAction() {
 		$params = t3lib_div::_GET('libconnect');
+		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');
+		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 		$form =  $this->ezbRepository->loadForm();
 		

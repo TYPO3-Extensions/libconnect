@@ -33,6 +33,9 @@
  */
 class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_ActionController {
 	
+	/**
+	 * zeigt die Top-Datenbanken an
+	 */
 	public function displayTopAction() {
 		$config['subject'] = $this->settings['flexform']['subject'];
 		$config['detailPid'] = $this->settings['flexform']['detailPid'];
@@ -42,8 +45,12 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		$this->view->assign('top', $top);
 	}
 	
+	/**
+	 * Zeigt eine Liste von Datenbanken (für allgemein, Suche und das gewählte Fach)
+	 */
 	public function displayListAction() {
 		$params = t3lib_div::_GET('libconnect');
+		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/dbis.css" />');
 		
 		if (!empty($params['subject'])) {//Gewaehltes Fach nach Einstiegspunkt
 			$config['sort'] = $this->settings['flexform']['sortParameter'];
@@ -87,9 +94,13 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		$this->subjectRepository = $subjectRepository;
 	}
 	
+	/**
+	 * Zeigt die Detailansicht
+	 */
 	public function displayDetailAction() {
 		$params = t3lib_div::_GET('libconnect');
-
+		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/dbis.css" />');
+		
 		if (!($params['titleid'])){
 			$this->view->assign('error', 'Error');
 			return;
@@ -109,8 +120,12 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		}		
     }
 	
+	/**
+	 * zeigt die Sidebar
+	 */
 	public function displayMiniFormAction() {
 		$params = t3lib_div::_GET('libconnect');
+		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/dbis.css" />');		
 		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 		
@@ -133,9 +148,13 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		$this->view->assign('listPid', $this->settings['flexform']['listPid']);//Link zur Listendarstellung
     }
 	
+	/**
+	 * zeigt die Suche
+	 */
 	public function displayFormAction() {
 		$params = t3lib_div::_GET('libconnect');
-		
+		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/dbis.css" />');
+				
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 	
     	$form = $this->dbisRepository->loadForm($params['search']);
