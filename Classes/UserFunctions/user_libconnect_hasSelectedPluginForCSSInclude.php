@@ -9,9 +9,9 @@
  */
 
 /**
- * check for plugins on selected page
+ * Prüft welches PlugIn installiert wurde
  * 
- * @param string	$type: Name of selected PlugIn
+ * @param string	$type: Name des gewählten PlugIns
  * 
  * @return boolean		
  */
