@@ -145,18 +145,20 @@ class DBIS {
 		//BOF workaround for alphabetical listing
 		if (is_object($xml_fachgebiet_db->list_dbs->alphabetical_list)) {
 			$alphabeticalNavList = array();
-			foreach ($xml_fachgebiet_db->list_dbs->alphabetical_list->block_of_chars as $charBlock) {
-				$tmpCharArray = array();
-				foreach ($charBlock->char as $char) {
-					$tmpCharArray[] = $char;
+			if(isset($xml_fachgebiet_db->list_dbs->alphabetical_list->block_of_chars)){
+				foreach ($xml_fachgebiet_db->list_dbs->alphabetical_list->block_of_chars as $charBlock) {
+					$tmpCharArray = array();
+					foreach ($charBlock->char as $char) {
+						$tmpCharArray[] = $char;
+					}
+					$alphabeticalNavList[] = array(
+						'chars' => $tmpCharArray,
+						'fc' => $charBlock->attributes()->fc,
+						'lc' => $charBlock->attributes()->lc,
+						//check current view for which char is shown
+						'current' => ($charBlock->attributes()->lc == $tmpParams['lc'] || $charBlock->attributes()->fc == $tmpParams['lc'] ? true : false)
+					);
 				}
-				$alphabeticalNavList[] = array(
-					'chars' => $tmpCharArray,
-					'fc' => $charBlock->attributes()->fc,
-					'lc' => $charBlock->attributes()->lc,
-					//check current view for which char is shown
-					'current' => ($charBlock->attributes()->lc == $tmpParams['lc'] || $charBlock->attributes()->fc == $tmpParams['lc'] ? true : false)
-				);
 			}
 			//check if a current view got set
 			// if not, set the first charBlock as current view
