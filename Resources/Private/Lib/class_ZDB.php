@@ -84,7 +84,7 @@ class ZDB {
 	 *
 	 */    
     function __construct() {
-        $this->sid = $this->getSid();
+		ZDB::getSid();
 	    if(!$this->sid) {
 	        //todo: Fehlermeldung ausgeben
 	        //error_log('typo3 extension libconnect - missing ZDB source-identifier: refer to documentation - chapter configuration.');

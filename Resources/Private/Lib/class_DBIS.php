@@ -35,14 +35,14 @@ class DBIS {
     public function __construct() {
 
 		$this->XMLPageConnection = new XMLPageConnection();
-		$this->bibID = $this->setBibID();
+		DBIS::setBibID();
     }
 
     /**
      * Funktion setzt die DBIS Bibliothek ID Klassenvariable
      *
      */
-    private function setBibID() {
+    public function setBibID() {
 		$this->bibID = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['dbisbibid'];
     }
     

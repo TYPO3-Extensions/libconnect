@@ -53,7 +53,7 @@ class EZB {
     public function __construct() {
 	
 		$this->XMLPageConnection = new XMLPageConnection();
-		$this->bibID = $this->setBibID();
+		EZB::setBibID();
     }
     
     /**
