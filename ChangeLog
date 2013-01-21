@@ -6,6 +6,7 @@
 **/
 3.2.5
 	- Problem beim Auslesen der jeweiligen Konfiguration aus TypoScript behoben. (TW)
+	- DBIS: Umlautproblem in Template behoben
 3.2.4
 	- alte nicht mehr verwendete CSS-Styles gelöscht (BH)
 	- Umstellung der Templates auf locallang.xml (BH)
