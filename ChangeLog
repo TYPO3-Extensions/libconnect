@@ -4,6 +4,8 @@
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
+3.2.5
+	- Problem beim Auslesen der jeweiligen Konfiguration aus TypoScript behoben. (TW)
 3.2.4
 	- alte nicht mehr verwendete CSS-Styles gelöscht (BH)
 	- Umstellung der Templates auf locallang.xml (BH)
@@ -123,7 +125,7 @@
 - Problem mit Umlauten in der Suche geloest
 - kleine Bugfixes
 2.0.1
-- Kleiner fixes
+- kleine fixes
 - Dokumentation erstellt
 2.0.0
 - Initial upload – docs pending
