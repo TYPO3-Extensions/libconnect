@@ -19,7 +19,7 @@
 	<h3 class="libconnect-h1">Top Datenbanken</h3>
 	<ul class="dbis-top-list">
 	<f:for each="{list.top}" as="db">
-		<li><a href="{db.detail_link}"><libconnect:strreplace search=" & " replace=" &amp; "><f:escape value="{db.title}" type="raw" /></libconnect:strreplace></a> ({db.access})</li>
+		<li><a href="{db.detail_link}"><libconnect:strreplace search=" & " replace=" &amp; "><f:escape value="{db.title}" type="raw" /></libconnect:strreplace></a> (<f:escape value="{db.access}" type="raw" />)</li>
 	</f:for>
 	</ul>
 </div>
