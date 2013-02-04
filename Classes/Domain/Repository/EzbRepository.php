@@ -119,9 +119,10 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		foreach ($searchVars as $key => $value) {
 			$linkParams["libconnect[search][$key]"] = $value;
 		}
-
+		
+		//Suche von Sidebar
 		$term = $searchVars['sword'];
-		unset($searchVars['sword']);
+		unset($searchVars['sword']);//in weiterr Verarbeitung nicht sinnvoll
 
 		$ezb = new EZB();
 		$journals = $ezb->search($term, $searchVars);
