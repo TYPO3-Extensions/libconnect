@@ -4,6 +4,8 @@
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
+3.2.6
+	- EZB+DBIS: erweiterte Suche mit 2 Suchbegriffen war fehlerhaft --> urlencode
 3.2.5
 	- Problem beim Auslesen der jeweiligen Konfiguration aus TypoScript behoben. (TW)
 	- DBIS: Umlautproblem in Template behoben
