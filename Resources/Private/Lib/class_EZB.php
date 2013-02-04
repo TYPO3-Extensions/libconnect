@@ -311,10 +311,11 @@ class EZB {
     private function createSearchUrl($term, $searchVars/* , $lett = 'k' */) {
 	
 		$searchUrl = $this->search_result_page . 'bibid=' . $this->bibID . '&colors=' . $this->colors . '&lang=' . $this->lang;
-
+		
 		// urlencode termi
 		$term = rawurlencode(utf8_decode($term));
-
+		
+		//Bei Suche mittels Sidebar
 		if (strlen($term)) {
 			$searchUrl .= "&jq_type1=KT&jq_term1={$term}";
 		}
@@ -326,10 +327,10 @@ class EZB {
 		foreach ($searchVars as $var => $values) {
 
 			if (!is_array($values)) {
-				$searchUrl .= '&' . $var . '=' . utf8_decode($values);
+				$searchUrl .= '&' . $var . '=' . urlencode(utf8_decode($values));
 			} else {
 				foreach ($values as $value) {
-					$searchUrl .= '&' . $var . '[]=' . utf8_decode($value);
+					$searchUrl .= '&' . $var . '[]=' . urlencode(utf8_decode($value));
 				}
 			}
 		}
@@ -345,7 +346,7 @@ class EZB {
      * @return array
      */
     public function search($term, $searchVars = array()) {
-	
+
 		$searchUrl = str_replace(" ", "", $this->createSearchUrl($term, $searchVars));
 		$xml_request = $this->XMLPageConnection->getDataFromXMLPage($searchUrl);
 

@@ -389,10 +389,10 @@ class DBIS {
 		foreach ($searchVars as $var => $values) {
 
 			if (!is_array($values)) {
-				$searchUrl .= "&$var=" . utf8_decode($values);
+				$searchUrl .= "&$var=" . urlencode(utf8_decode($values));
 			} else {
 				foreach ($values as $value) {
-					$searchUrl .= '&' . $var . '[]=' . utf8_decode($value);
+					$searchUrl .= '&' . $var . '[]=' . urlencode(utf8_decode($value));
 				}
 			}
 		}
