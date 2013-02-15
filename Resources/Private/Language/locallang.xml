@@ -10,7 +10,7 @@
 			<label index="tx_libconnect_domain_model_subject.title">Name des Fachgebiets</label>
 			<label index="tx_libconnect_domain_model_subject.dbisid">Notation im DBIS-System</label>
 			<label index="tx_libconnect_domain_model_subject.ezbnotation">Notation im EZB-System</label>
-			<label index="tx_libconnect_domain_model_dbis">DBIs</label>
+			<label index="tx_libconnect_domain_model_dbis">DBIS</label>
 			<label index="tx_libconnect_domain_model_ezb">EZB</label>
 			
 			<label index="tx_libconnect.ezb.overview.headline">Elektronische Zeitschriftenbibliothek</label>
