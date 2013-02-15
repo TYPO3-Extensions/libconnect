@@ -53,33 +53,30 @@
 		<f:if condition="<f:count subject='{journal.periods}' /> > 0">
 			<f:for each="{journal.periods}" as="period">
 			<tr>
-				<f:if condition="{libconnect:strlen(string: period.label)} > 0">
+			    <f:if condition="{libconnect:strlen(string: period.label)} > 0">
 				<f:then>
                     <th>
 						<strong>Lizenzierter Zeitraum:</strong>
                     </th>
+						<td>
 						<f:if condition="{libconnect:trimedstrlen(string: period.label)} > 0">
 						<f:then>
-						<td>
 							<a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">{period.label}</a>&nbsp;
-							<f:if condition="{period.readme}">
-								<f:then>
-									<a href="<f:format.htmlentitiesDecode>{period.readme}</f:format.htmlentitiesDecode>"><span class="ezb-list-accessinfo-access_{period.color_code}">ReadMe</span></a>
-								</f:then>
-								
-								<f:else>
-									<span class="ezb-list-accessinfo-access_{period.color_code}">&nbsp;</span></a>
-								</f:else>
-							</f:if>							
-						</td>
 						</f:then>
 						<f:else>
-						<td>
-							<img src="{f:uri.resource(path:'Img/ezb-list_{period.color_code}.png')}" alt="" />
-							<a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">gesamter Zeitraum</a>
-						</td>
+						    <a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">gesamter Zeitraum</a>
 						</f:else>
-						</f:if>
+						</f:if>    
+                        <f:if condition="{period.readme}">
+                            <f:then>
+                                <a class="ezb-readme" href="<f:format.htmlentitiesDecode>{period.readme}</f:format.htmlentitiesDecode>"><span class="ezb-list-accessinfo-access_{period.color_code}">ReadMe</span></a>
+                            </f:then>
+                            
+                            <f:else>
+                                <span class="ezb-list-accessinfo-access_{period.color_code}">&nbsp;</span></a>
+                            </f:else>
+                        </f:if>							
+						</td>
 				</f:then>
 				<f:else>
                 <th>
