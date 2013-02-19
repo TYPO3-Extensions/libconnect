@@ -58,28 +58,25 @@
 					<th>
 						<strong>Lizenzierter Zeitraum:</strong>
 					</th>
+					<td>
 						<f:if condition="{libconnect:trimedstrlen(string: period.label)} > 0">
 						<f:then>
-						<td>
 							<a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">{period.label}</a>&nbsp;
-							<f:if condition="{period.readme}">
-								<f:then>
-									<a href="<f:escape value="{period.readme}" type="raw" />"><span class="ezb-list-accessinfo-access_{period.color_code}">ReadMe</span></a>
-								</f:then>
-								
-								<f:else>
-									<span class="ezb-list-accessinfo-access_{period.color_code}">&nbsp;</span></a>
-								</f:else>
-							</f:if>							
-						</td>
 						</f:then>
 						<f:else>
-						<td>
-							<img src="{f:uri.resource(path:'Img/ezb-list_{period.color_code}.png')}" alt="" />
-							<a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">gesamter Zeitraum</a>
-						</td>
+						    <a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">gesamter Zeitraum</a>
 						</f:else>
 						</f:if>
+                        <f:if condition="{period.readme}">
+                            <f:then>
+                                <a href="<f:escape value="{period.readme}" type="raw" />"><span class="ezb-list-accessinfo-access_{period.color_code}">ReadMe</span></a>
+                            </f:then>
+                            
+                            <f:else>
+                                <span class="ezb-list-accessinfo-access_{period.color_code}">&nbsp;</span></a>
+                            </f:else>
+                        </f:if>							
+                    </td>
 				</f:then>
 				<f:else>
 				<th>
@@ -311,7 +308,7 @@
                                     <f:if condition="{settings.useIconService}">
                                         <f:then>
                                             <a href="<f:escape value="{journal.locationData.iconInfoUrl}" type="raw" />" target="jopinfo">
-                                            <img src="<f:escape value="{journal.locationData.iconRequest}" type="raw" />" alt="Informationen zur Verfügbarkeit" title="Informationen zur Verfügbarkeit"/>
+                                            <img src="<f:escape value="{journal.locationData.iconRequest}" type="raw" />" alt="Informationen zur VerfÃ¼gbarkeit" title="Informationen zur VerfÃ¼gbarkeit"/>
                                             </a>
                                         </f:then>
                                         <f:else>
@@ -332,6 +329,19 @@
         </f:if>
        </f:if>
 <!-- ende code for location data -->   
+		
+		<f:if condition="{libconnect:strlen(string: journal.participants)} > 0">
+		<tr>
+            <th>
+			<strong>&nbsp;</strong>
+            </th>
+
+			<td>
+			<a href="<f:escape value="{journal.participants}" type="raw" />" target="zdbopac">Liste der teilnehmenden Institutionen, die Volltextzugriff bieten.</a>
+			</td>
+		</tr>
+		</f:if>
+		
 		</tbody>
 		</table>
 	</f:else>

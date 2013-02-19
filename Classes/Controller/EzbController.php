@@ -126,24 +126,13 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
     	$form = $this->ezbRepository->loadMiniForm($params['search']);
-		
-		//$this->view->assign('vars', $params['search']);
+				
+		$this->view->assign('vars', $params['search']);
 		$this->view->assign('form', $form);
-		
-		//BOF search-workaround
-    	//old
-		//$this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
-        //replaced with
-        if(isset($this->settings['EZBSearchResultsPageId']))
-            $this->view->assign('siteUrl', $cObject->getTypolink_URL($this->settings['EZBSearchResultsPageId']));//in TypoScript definierte ID der Suchergebnis-Seite
-		//if(isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['EZBSearchResultsPageId']))
-		    //$this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['EZBSearchResultsPageId']));//in TypoScript definierte ID der Suchergebnis-Seite
-		else
-		    $this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
-		//EOF search-workaround
-		
+		$this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
 		$this->view->assign('searchUrl', $cObject->getTypolink_URL($this->settings['flexform']['searchPid']));//Link zur Suchseite
-		$this->view->assign('listPid', $this->settings['flexform']['searchPid']);//Link zur Listendarstellung
+		$this->view->assign('listUrl', $cObject->getTypolink_URL($this->settings['flexform']['listPid']));//Link zur Suchseite
+	    $this->view->assign('listPid', $this->settings['flexform']['listPid']);//ID der Listendarstellung
 	}
 	
 	/**
@@ -160,7 +149,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		$this->view->assign('form', $form);
 		$this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
 		$this->view->assign('listUrl', $cObject->getTypolink_URL($this->settings['flexform']['listPid']));//Link zur Suchseite
-		$this->view->assign('listPid', $this->settings['flexform']['listPid']);//Link zur Listendarstellung
+		$this->view->assign('listPid', $this->settings['flexform']['listPid']);//ID der Listendarstellung
 	}
 }
 ?>

@@ -208,6 +208,10 @@
 /**
  * begin - miniform search styles
  */ 
+#libconnect_dbis_minisuche {
+    height:18px;
+    width:190px;
+}
  
 .dbis-listings-wrapper {
     margin: 15px 0 5px 0;

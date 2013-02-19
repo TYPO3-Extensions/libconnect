@@ -45,8 +45,16 @@
  *
  */
  
+require_once(t3lib_extMgm::extPath('libconnect') . 'Resources/Private/Lib/class_XMLPageConnection.php'); 
+ 
  
 class ZDB {
+
+   /**
+    * Enable debug for logging errors to devLog
+    *
+    */
+    private $debug = false;
 
    /**
     * Source-Identifier (sid – Vendor-ID:Database-ID) needs to be arranged with
@@ -76,7 +84,10 @@ class ZDB {
     *
     */    
     //private $briefformat_request_url = "http://services.d-nb.de/fize-service/gvr/brief.xml?";
-    private $fullformat_request_url = "http://services.d-nb.de/fize-service/gvr/full.xml?";    
+    private $fullformat_request_url = "http://services.d-nb.de/fize-service/gvr/full.xml?";
+
+    // XML Data Object
+    private $XMLPageConnection;    
     
 
     /**
@@ -84,11 +95,13 @@ class ZDB {
 	 *
 	 */    
     function __construct() {
-		ZDB::getSid();
-	    if(!$this->sid) {
+        $this->XMLPageConnection = new XMLPageConnection();
+
+	    if(!ZDB::getSid()) {
 	        //todo: Fehlermeldung ausgeben
 	        //error_log('typo3 extension libconnect - missing ZDB source-identifier: refer to documentation - chapter configuration.');
-	        return false;
+	        if($this->debug) t3lib_div::devLog('invalid SID given: '.$this->sid, 'libconnect', 1);
+            return false;
 	    }
         
         //get the bibid
@@ -113,7 +126,7 @@ class ZDB {
             $this->pid = substr($this->pid,0,strlen($this->pid)-3);
         
         //only print location data are requested (default is off, so online and print will be delivered)
-        if($onlyPrintFlag)
+        if($this->onlyPrintFlag)
             $this->pid .= (strlen($this->pid) > 0 ? urlencode("&print=1") : urlencode("print=1"));
         
     }
@@ -128,7 +141,7 @@ class ZDB {
 	 *
 	 * @return string
 	 */
-	public function getJournalLocationDetails($JournalIdentifier, $ZDBID, $genre = 'journal'){
+	public function getJournalLocationDetails($journalIdentifier, $ZDBID, $genre = 'journal'){
 	   /**
 	    * to identify a journal either the ISSN or the eISSN is mandatory as primary key
 	    * alternatively the ZDB-ID is allowed but does not conform with Open-URL-Standard
@@ -137,26 +150,29 @@ class ZDB {
 	    * - ZDBID is a string of a ZDB-ID
 	    *
 	    */
-	    if(empty($JournalIdentifier) && empty($ZDBID))
+	    if(empty($journalIdentifier) && empty($ZDBID))
 	        return false;
 	    else {
 	        if(!empty($ZDBID)) {
 	            $this->pid .= (strlen($this->pid) > 0 ? urlencode("&zdbid={$ZDBID}") : urlencode("zdbid={$ZDBID}"));  
 	        } 
-	        if(!empty($JournalIdentifier)) {
-	            $JournalIdentifier = "&{$JournalIdentifier}";
+	        if(!empty($journalIdentifier)) {
+	            $journalIdentifier = "&{$journalIdentifier}";
 	        }
 	    }
 
-		$url = "{$this->fullformat_request_url}sid={$this->sid}" . (!empty($this->pid) ? "&pid={$this->pid}" : "" ) . $JournalIdentifier . "&genre={$genre}";
+		$url = "{$this->fullformat_request_url}sid={$this->sid}" . (!empty($this->pid) ? "&pid={$this->pid}" : "" ) . $journalIdentifier . "&genre={$genre}";
 
-		$xml_request = simplexml_load_file( $url );
+		$xml_request = $this->XMLPageConnection->getDataFromXMLPage($url);
 		
 		$locationDetail = array();
 
 		// root-element = OpenURLResponseXML->Full/Brief
 		// only Full-objects got all the info we want
-		if (! is_object($xml_request->Full))
+		if (! is_object($xml_request->Full)) {
+		    if($this->debug) t3lib_div::devLog('invalid XML-Object - URL: '.$url, 'libconnect', 1);
+			return false;
+		} elseif ($xml_request->Full->Error->attributes()->code != NULL) {
 		   /**
 		    * possible Error-Codes:
 		    *     Code        Meaning
@@ -167,65 +183,77 @@ class ZDB {
 		    *     unknown     Unbekannter Fehler
 		    *
 		    */
+		    if($this->debug) t3lib_div::devLog('Error-Code: ' . $xml_request->Full->Error->attributes()->code . ' - URL: '.$url, 'libconnect', 1);
 			return false;
+		}
 
 			
-		$locationDetail['library'] = (string) $xml_request->Full->PrintData->Library;			
-			
+		$locationDetail['library'] = (string) $xml_request->Full->PrintData->Library;
 		
-	   /**
-	    * two branches: <ElectronicData> : electronic availability
-	    *               <PrintData> : print 
-	    *
-	    * as only the location of the printed journal is of any concern, only the
-	    * branch PrintData is regarded
-	    *
-	    * states
-	    * ------
-	    * -1, 10 = Error: ZDB-ID, ISSN, Sigel or ISBN unknown or not unique
-	    * 2 = available
-	    * 3 = limited availability (moving wall, etc.)
-	    * 4 = journal not available
-	    *
-	    * check for any valid (for display) state - default is 2 and 3 (custom
-	    * configuration in typoscript):
-	    *     tx_libconnect.validStatesList = 1,2,3,4,5,6
-	    */
-	    $validStatesArray = (isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['validStatesList']) && !empty($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['validStatesList']) ?
-	                         explode(',', $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['validStatesList']) :
-	                         array(2,3)
-	                        );
-	    array_walk($validStatesArray, create_function('&$val', '$val = trim($val);')); //remove all whitespaces from states 
-	    $tmpStates = $xml_request->Full->PrintData->ResultList->children();
-	    $validStateFlag = false;
-	    if(count($tmpStates)) {
-	        foreach($tmpStates as $tmpState) {
-	            if(in_array($tmpState->attributes()->state, $validStatesArray))
-	                $validStateFlag = true;
-	        }
+		//check if returned XML-Object provides ResultList (as only this contains location data, exit if no ResultList is provided) 
+	    if (is_object($xml_request->Full->PrintData->ResultList) && get_class($xml_request->Full->PrintData->ResultList) == 'SimpleXMLElement') {
+            $tmpStates = $xml_request->Full->PrintData->ResultList->children();	        
+            $tmpResultList = $xml_request->Full->PrintData->ResultList->children();
+        } else {
+            if($this->debug) t3lib_div::devLog('invalid ResultList - URL: '.$url, 'libconnect', 1);
+            return false;
+        }
+	    
+        //as the script is stil running the XML-Object contains all the data necessary for the location information, so continue
+       /**
+        * two branches: <ElectronicData> : electronic availability
+        *               <PrintData> : print 
+        *
+        * as only the location of the printed journal is of any concern, only the
+        * branch PrintData is regarded
+        *
+        * states
+        * ------
+        * -1, 10 = Error: ZDB-ID, ISSN, Sigel or ISBN unknown or not unique
+        * 2 = available
+        * 3 = limited availability (moving wall, etc.)
+        * 4 = journal not available
+        *
+        * check for any valid (for display) state - default is 2 and 3 (custom
+        * configuration in typoscript):
+        *     tx_libconnect.validStatesList = 1,2,3,4,5,6
+        */
+        $validStatesArray = (isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['validStatesList']) && !empty($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['validStatesList']) ?
+                             explode(',', $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['validStatesList']) :
+                             array(2,3)
+                            );
+        array_walk($validStatesArray, create_function('&$val', '$val = trim($val);')); //remove all whitespaces from states	        
+        $validStateFlag = false;
+        if (count($tmpStates)) {
+            foreach($tmpStates as $tmpState) {
+                if (in_array($tmpState->attributes()->state, $validStatesArray))
+                    $validStateFlag = true;
+            }
+        }
+        //no valid state found -> exit
+	    if(!$validStateFlag) {
+	        if($this->debug) t3lib_div::devLog('non valid state - URL: '.$url, 'libconnect', 0);
+            return false;
 	    }
-	    //no valid state found -> exit
-	    if(!$validStateFlag)
-	        return false;	    
 
 
        /**
-		* Result
-		* --------
-		*     Attributes:     (integer)    state
-		*     Children:       (string)     Title
-		*                     (string)     Location
-		*                     (string)     Signature
-		*                     (string)     Period
-		*
-		* subelement Additionals is not considered as it's not used for PrintData yet
-		*
-		*/
-		$tmpResultList = $xml_request->Full->PrintData->ResultList->children();
-		$locationDetail['resultList'] = array();
-		if(count($tmpResultList)) {
-		    foreach($tmpResultList as $tmpResult) {
-		        if(in_array($tmpResult->attributes()->state, $validStatesArray)) {
+        * Result
+        * --------
+        *     Attributes:     (integer)    state
+        *     Children:       (string)     Title
+        *                     (string)     Location
+        *                     (string)     Signature
+        *                     (string)     Period
+        *
+        * subelement Additionals is not considered as it's not used for PrintData yet
+        *
+        */
+
+        $locationDetail['resultList'] = array();
+        if(count($tmpResultList)) {
+            foreach($tmpResultList as $tmpResult) {
+                if(in_array($tmpResult->attributes()->state, $validStatesArray)) {
                     array_push($locationDetail['resultList'],
                                array('state'     => (int) $tmpResult->attributes()->state,
                                      'Title'     => (string) $tmpResult->Title,
@@ -234,8 +262,9 @@ class ZDB {
                                      'Period'    => (string) $tmpResult->Period)
                                );
                 }
-		    }
-		}
+            }
+        }
+
 		
 		
 	   /**
@@ -244,24 +273,26 @@ class ZDB {
 		*     Children:       (string)     URL
 		*                     (string)     Label
 		*/
-		$tmpReferences = $xml_request->Full->PrintData->References->children();
-		$locationDetail['references'] = array();
-		if(count($tmpReferences)) {
-		    foreach($tmpReferences as $tmpReference) {
-		        array_push($locationDetail['references'],
-		                   array('URL'   => (string) $tmpReference->URL,
-		                         'Label' => (string) $tmpReference->Label)
-		                   );
-		    }
-		}
+		if (is_object($xml_request->Full->PrintData->References) && get_class($xml_request->Full->PrintData->References) == 'SimpleXMLElement') {
+            $tmpReferences = $xml_request->Full->PrintData->References->children();
+            $locationDetail['references'] = array();
+            if(count($tmpReferences)) {
+                foreach($tmpReferences as $tmpReference) {
+                    array_push($locationDetail['references'],
+                               array('URL'   => (string) $tmpReference->URL,
+                                     'Label' => (string) $tmpReference->Label)
+                               );
+                }
+            }
+        }		
 		
 	   /**
 		* Icon-Service
 		* ------------
 		*     
 		*/
-		$locationDetail['iconRequest'] = $this->buildIconRequest($JournalIdentifier, $genre);
-		$locationDetail['iconInfoUrl'] = $this->buildIconInfoUrl($JournalIdentifier, $genre);
+		$locationDetail['iconRequest'] = $this->buildIconRequest($journalIdentifier, $genre);
+		$locationDetail['iconInfoUrl'] = $this->buildIconInfoUrl($journalIdentifier, $genre);
 		
 		
 		return $locationDetail;
@@ -277,7 +308,7 @@ class ZDB {
 	 */
 	private function buildIconRequest($journalIdentifier, $genre){
 		
-		return "http://services.d-nb.de/fize-service/gvr/icon?sid={$this->getSid()}" . (!empty($this->pid) ? "&pid={$this->pid}" : "" ) . $JournalIdentifier . "&genre={$genre}";
+		return "http://services.d-nb.de/fize-service/gvr/icon?sid={$this->sid}" . (!empty($this->pid) ? "&pid={$this->pid}" : "" ) . $journalIdentifier . "&genre={$genre}";
 	}
 	
 
@@ -289,7 +320,7 @@ class ZDB {
 	 */
 	private function buildIconInfoUrl($journalIdentifier, $genre){
 		
-		return "http://services.d-nb.de/fize-service/gvr/html-service.htm?sid={$this->getSid()}" . (!empty($this->pid) ? "&pid={$this->pid}" : "" ) . $JournalIdentifier . "&genre={$genre}";
+		return "http://services.d-nb.de/fize-service/gvr/html-service.htm?sid={$this->sid}" . (!empty($this->pid) ? "&pid={$this->pid}" : "" ) . $journalIdentifier . "&genre={$genre}";
 	}
 	
 	
@@ -299,13 +330,13 @@ class ZDB {
 	 * @return string
 	 */
 	private function getSid(){
-		$sid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbsid'];
+		$this->sid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbsid'];
 
-		if(is_null($sid) or !$sid or empty($sid)){	
+		if(is_null($this->sid) or !$this->sid or empty($this->sid)){	
 			return false;
 		}
 		
-		return $sid;
+		return true;
 	}
 	
 }

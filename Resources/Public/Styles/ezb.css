@@ -33,7 +33,7 @@
 	padding: 0 0 0.2em 2.3em !important;
 }
 
-#accessinfo_readme {
+.ezb-readme {
     float:right;   
 }
 
@@ -44,7 +44,8 @@
 ul.ezb-list li a {
     display: block;
     margin: 0 0 0 2.3em;
-}
+}
+
 #ezb-result-details tr {
     border-bottom: 1px dotted #CCCCCC;
     vertical-align:top;

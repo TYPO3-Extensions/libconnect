@@ -34,7 +34,7 @@
 			<label index="tx_libconnect.ezb.miniform.searchform.label">Name der Zeitschrift</label>
 			
 			<label index="tx_libconnect.ezb.search.headline">Ergebnisse Ihrer Suche</label>
-			<label index="tx_libconnect.ezb.search.text.hits">Die Suche ergabe %s Treffer:</label>
+			<label index="tx_libconnect.ezb.search.text.hits">Die Suche ergab %s Treffer:</label>
 			<label index="tx_libconnect.ezb.search.error.headline">Bei der Suche ist ein Fehler aufgetreten:</label>
 			<label index="tx_libconnect.ezb.search.error.text">Sie haben keine Suchbegriffe eingegeben und kein Fachgebiet ausgewählt.</label>
 		</languageKey>

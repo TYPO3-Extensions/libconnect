@@ -1,25 +1,23 @@
-<f:if condition="{settings.EZBSearchResultsPageId}">
 	<div class="ezb-listings-wrapper">
 		<f:if condition="{settings.allListingId}">
 			<p>
-				<f:link.page pageUid="{settings.EZBSearchResultsPageId}" additionalParams="{libconnect: '{subject:settings.allListingId}'}">
+				<f:link.page pageUid="{listPid}" additionalParams="{libconnect: '{subject:settings.allListingId}'}">
 					<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.miniform.link.alphabetical" />
 				</f:link.page>
 			</p>
 		</f:if>
 		<p>
-			<f:link.page pageUid="{settings.EZBSearchResultsPageId}">
+			<f:link.page pageUid="{listPid}">
 				<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.miniform.link.subject" />
 			</f:link.page>
 		</p>
 	</div>
-</f:if>
 
 <div class="datenbank-suche-wrapper">
 	<h1>
 		<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.miniform.searchform.headline" />
 	</h1>
-	<form action="{siteUrl}" method="get">
+	<form action="{listUrl}" method="get">
 		<input type="hidden" name="id" value="{listPid}" />
 		<label for="libconnect_ezb_minisuche" class="hiddenezb">
 			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.miniform.searchform.label" />

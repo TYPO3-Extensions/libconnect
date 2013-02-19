@@ -30,6 +30,10 @@ class EZB {
     private $search_result_page = "http://rzblx1.uni-regensburg.de/ezeit/searchres.phtml?&xmloutput=1&";
     //private $search_result_page = "http://rzblx1.uni-regensburg.de/ezeit/searchres.phtml?&xmloutput=1&bibid=SUBHH&colors=7&lang=de&";
     //private $search_result_page = "http://ezb.uni-regensburg.de/searchres.phtml?xmloutput=1&bibid=SUBHH&colors=7&lang=de";
+    private $participants_url = "http://rzblx1.uni-regensburg.de/ezeit/where.phtml?";
+    private $participants_xml_url = "http://rzblx1.uni-regensburg.de/ezeit/where.phtml?&xmloutput=1&";
+    //private $contact_url = "http://rzblx1.uni-regensburg.de/ezeit/kontakt.phtml?&xmloutput=1&";
+    
 
     private $lang = 'de';
     private $colors = 7;
@@ -232,10 +236,17 @@ class EZB {
 			'date' => (int) $xml_request->ezb_detail_about_journal->journal->detail->last_fulltext_issue->last_date
 			);
 		}
+		$jounral['moving_wall'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->moving_wall;
 		$journal['appearence'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->appearence;
 		$journal['costs'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->costs;
 		$journal['remarks'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->remarks;
 
+		// generate link to institutions having access to this journal
+		$participants_xml_request = $this->XMLPageConnection->getDataFromXMLPage("{$this->participants_xml_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}");
+		if ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution->count() > 0) {
+		    $journal['participants'] = "{$this->participants_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}";
+		}
+		
 		// periods
 
 		$color_map = array(

@@ -35,7 +35,7 @@
 	            <em><f:for each="{charBlock.chars}" as="char"><f:escape value="{char}" type="raw" /></f:for></em>
 	        </f:then>
 	        <f:else>
-	            <f:link.page pageUid="{settings.DBISSearchResultsPageId}" additionalParams="{libconnect: '{subject:44, lc:charBlock.lc, fc:charBlock.fc}'}"><f:for each="{charBlock.chars}" as="char"><f:escape value="{char}" type="raw" /></f:for></f:link.page>
+	            <f:link.page pageUid="{listPid}" additionalParams="{libconnect: '{subject:44, lc:charBlock.lc, fc:charBlock.fc}'}"><f:for each="{charBlock.chars}" as="char"><f:escape value="{char}" type="raw" /></f:for></f:link.page>
 	        </f:else>
 	    </f:if>
 	</f:for>

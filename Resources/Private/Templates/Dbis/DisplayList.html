@@ -19,7 +19,7 @@
 	<h3 class="libconnect-h1">Top Datenbanken</h3>
 	<ul class="dbis-top-list">
 	<f:for each="{list.top}" as="db">
-		<li><a href="{db.detail_link}"><libconnect:strreplace search=" & " replace=" &amp; "><f:format.htmlentitiesDecode>{db.title}</f:format.htmlentitiesDecode></libconnect:strreplace></a> (<f:format.htmlentitiesDecode>{db.access}</f:format.htmlentitiesDecode>)</li>
+		<li class="dbis-list-accessinfo-{db.access_ref}"><a href="{db.detail_link}"><libconnect:strreplace search=" & " replace=" &amp; "><f:format.htmlentitiesDecode>{db.title}</f:format.htmlentitiesDecode></libconnect:strreplace></a> (<f:format.htmlentitiesDecode>{db.access}</f:format.htmlentitiesDecode>)</li>
 	</f:for>
 	</ul>
 </div>
@@ -35,7 +35,7 @@
 	            <em><f:for each="{charBlock.chars}" as="char"><f:format.htmlentitiesDecode>{char}</f:format.htmlentitiesDecode></f:for></em>
 	        </f:then>
 	        <f:else>
-	            <f:link.page pageUid="{settings.DBISSearchResultsPageId}" additionalParams="{libconnect: '{subject:44, lc:charBlock.lc, fc:charBlock.fc}'}"><f:for each="{charBlock.chars}" as="char"><f:format.htmlentitiesDecode>{char}</f:format.htmlentitiesDecode></f:for></f:link.page>
+	            <f:link.page pageUid="{listPid}" additionalParams="{libconnect: '{subject:44, lc:charBlock.lc, fc:charBlock.fc}'}"><f:for each="{charBlock.chars}" as="char"><f:format.htmlentitiesDecode>{char}</f:format.htmlentitiesDecode></f:for></f:link.page>
 	        </f:else>
 	    </f:if>
 	</f:for>
