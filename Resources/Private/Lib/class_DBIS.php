@@ -422,7 +422,11 @@ class DBIS {
 		}
 
 		$request = $this->XMLPageConnection->getDataFromXMLPage($searchUrl);
-
+		
+		if (!$request) {
+			return false;
+		}
+		
 		$list = array(
 			'top' => array(),
 			//'groups' => array(),
