@@ -95,6 +95,11 @@ class ZDB {
 	 *
 	 */    
     function __construct() {
+        
+        $ext_conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['libconnect']);
+        if ($ext_conf['debug'] == true) $this->debug = true;
+        if ($ext_conf['debug'] == false) $this->debug = false; 
+        
         $this->XMLPageConnection = new XMLPageConnection();
 
 	    if(!ZDB::getSid()) {
@@ -294,6 +299,7 @@ class ZDB {
 		$locationDetail['iconRequest'] = $this->buildIconRequest($journalIdentifier, $genre);
 		$locationDetail['iconInfoUrl'] = $this->buildIconInfoUrl($journalIdentifier, $genre);
 		
+		if($this->debug) t3lib_div::devLog('Request successful - URL: '.$url, 'libconnect', 0);
 		
 		return $locationDetail;
 	    
