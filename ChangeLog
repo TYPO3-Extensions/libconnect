@@ -4,6 +4,16 @@
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
+3.2.7
+	- EZB: 
+		- Link „Liste der teilnehmenden Institutionen, die Volltextzugriff bieten.“ zur EZB in EZB-Detailansicht hinzugefügt 
+		  (where.phtml) (AL)
+		- Leere Select-Felder aus erweiterten Suche entfernt (TW)
+	- Readme wird nun auch bei ZS ohne Zeitraumangabe angezeigt (AL)
+	- ZDB auf CURL-Verbindung umgestellt (AL)
+	- Konfiguration des Miniform nun über Flexforms (keine Konfiguration in TS mit settings.EZBSearchResultsPageId und 
+	  settings.DBISSearchResultsPageId mehr notwendig) (AL)
+	
 3.2.6
 	- EZB+DBIS: erweiterte Suche mit 2 Suchbegriffen war fehlerhaft --> urlencode
 3.2.5
