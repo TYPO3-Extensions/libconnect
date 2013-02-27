@@ -261,7 +261,8 @@ class DBIS {
 
 		return array('groups' => $access_infos, 'list' => $list);
     }
-
+	
+	
     /**
      * liefert Detailinformationen
      *
@@ -275,66 +276,70 @@ class DBIS {
 		$url = 'http://rzblx10.uni-regensburg.de/dbinfo/detail.php?xmloutput=1&bib_id=' . $this->bibID . "&colors=&ocolors=&" . "lett={$this->lett}&colors={$this->colors}&ocolors={$this->ocolors}&titel_id=" . $db_id;
 		$xml_db_details = $this->XMLPageConnection->getDataFromXMLPage($url);
 
+		//@todo Fehlerbehandlung
 		if (!is_object($xml_db_details->details)) {
 			return false;
 		}
 
-		foreach ($xml_db_details->details->children() as $key => $value) {
+		if (count($xml_db_details->details->children()) > 0){
+		
+			foreach ($xml_db_details->details->children() as $key => $value) {
 
-			if ($key == 'titles') {
-				$details['else_titles'] = array();
-				foreach ($value->children() as $key2 => $value2) {
-					if (((string) $value2->attributes()->main) == 'Y') {
-						$details['title'] = (string) $value2;
-					} else {
-						$details['else_titles'][] = (string) $value2;
+				if ($key == 'titles') {
+					$details['else_titles'] = array();
+					foreach ($value->children() as $key2 => $value2) {
+						if (((string) $value2->attributes()->main) == 'Y') {
+							$details['title'] = (string) $value2;
+						} else {
+							$details['else_titles'][] = (string) $value2;
+						}
 					}
-				}
-			} else if ($key == 'db_access_info') {
-				$details['access_id'] = (string) $value->attributes()->access_id;
-				$details['access_icon'] = (string) $value->attributes()->access_icon;
-				$details['db_access'] = (string) $value->db_access;
-				$details['db_access_short_text'] = (string) $value->db_access_short_text;
-			} else if ($key == 'accesses') {
+				} else if ($key == 'db_access_info') {
+					$details['access_id'] = (string) $value->attributes()->access_id;
+					$details['access_icon'] = (string) $value->attributes()->access_icon;
+					$details['db_access'] = (string) $value->db_access;
+					$details['db_access_short_text'] = (string) $value->db_access_short_text;
+				} else if ($key == 'accesses') {
 
-				foreach ($value->access as $access) {
+					foreach ($value->access as $access) {
 
-					$main = (string) $access->attributes()->main;
-					$type = (string) $access->attributes()->type;
-					$href = (string) $access->attributes()->href;
-					if ($main == 'Y') {
-						$details['access'] = array(
-							'main' => $main,
-							'type' => $type,
-							'href' => $href
-						);
-					} else {
-						$details['access_lic'][] = array(
-							'name' => (string) $access,
-							'main' => $main,
-							'type' => $type,
-							'href' => $href
-						);
+						$main = (string) $access->attributes()->main;
+						$type = (string) $access->attributes()->type;
+						$href = (string) $access->attributes()->href;
+						if ($main == 'Y') {
+							$details['access'] = array(
+								'main' => $main,
+								'type' => $type,
+								'href' => $href
+							);
+						} else {
+							$details['access_lic'][] = array(
+								'name' => (string) $access,
+								'main' => $main,
+								'type' => $type,
+								'href' => $href
+							);
+						}
 					}
+				} else if ($key == 'subjects') {
+					foreach ($value->children() as $key2 => $value2) {
+						$details['subjects'][] = (string) $value2;
+					}
+				} else if ($key == 'keywords') {
+					foreach ($value->children() as $key2 => $value2) {
+						$details['keywords'][] = (string) $value2;
+					}
+					$details['keywords_join'] = join(', ', $details['keywords']);
+				} else if ($key == 'db_type_infos') {
+					foreach ($value->children() as $value2) {
+						$details['db_type_infos'][] = (string) $value2->db_type;
+					}
+					$details['db_type_infos_join'] = join(', ', $details['db_type_infos']);
 				}
-			} else if ($key == 'subjects') {
-				foreach ($value->children() as $key2 => $value2) {
-					$details['subjects'][] = (string) $value2;
+				// copy all left values into array
+				else {
+					$details[$key] = (string) $value;
 				}
-			} else if ($key == 'keywords') {
-				foreach ($value->children() as $key2 => $value2) {
-					$details['keywords'][] = (string) $value2;
-				}
-				$details['keywords_join'] = join(', ', $details['keywords']);
-			} else if ($key == 'db_type_infos') {
-				foreach ($value->children() as $value2) {
-					$details['db_type_infos'][] = (string) $value2->db_type;
-				}
-				$details['db_type_infos_join'] = join(', ', $details['db_type_infos']);
-			}
-			// copy all left values into array
-			else {
-				$details[$key] = (string) $value;
 			}
 		}
 		return $details;
@@ -493,7 +498,7 @@ class DBIS {
 
 		$list['searchDescription'] = array();
 		foreach ($request->search_desc->search_desc_item as $searchDesc) {
-			$list['searchDescription'][] = $searchDesc;
+			$list['searchDescription'][] = (string)$searchDesc;
 		}
 
 		if (isset($request->error)) {
