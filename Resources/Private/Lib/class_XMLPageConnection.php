@@ -59,11 +59,21 @@ class XMLPageConnection {
 			curl_setopt($ch, CURLOPT_PROXYPORT, $this->proxyPort);
 		}
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
 		
 		$result = curl_exec($ch);
 		$xmlObj = simplexml_load_string($result);
+		
+		
+		//Pruefung ob Abfrage fehlerfrei erfolgte
+		$http_code = curl_getinfo($ch);
+		curl_close($ch);//Session schliessen
+				
+		if($http_code['http_code']!=200){
+			$xmlObj = FALSE;
+		}
+		
 		
 		/* HINWEIS FEHLERPRUEFUNG: 
 		 * Die Funktion curl_error() wie auch curl_getinfo() haben keine brauchbaren Rückgabewerte
