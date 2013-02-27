@@ -69,9 +69,11 @@ class XMLPageConnection {
 		//Pruefung ob Abfrage fehlerfrei erfolgte
 		$http_code = curl_getinfo($ch);
 		curl_close($ch);//Session schliessen
-				
+		
 		if($http_code['http_code']!=200){
 			$xmlObj = FALSE;
+			
+			return $xmlObj;
 		}
 		
 		
