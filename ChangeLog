@@ -13,7 +13,15 @@
 	- ZDB auf CURL-Verbindung umgestellt (AL)
 	- Konfiguration des Miniform nun über Flexforms (keine Konfiguration in TS mit settings.EZBSearchResultsPageId und 
 	  settings.DBISSearchResultsPageId mehr notwendig) (AL)
-	
+	- Debugging für ZDB-Standortinformationen kann nun über Extension-Konfiguration ein/ausgeschaltet werden (AL)
+	- Prüfung auf Response-Code !=200 --> um folgendes zu umgehen:
+		"HTTP error, got response: HTTP/1.1 302 Found" (TW)
+	- Verbindungstimeout herunter gesetzt auf 10 Sekunden
+		--> Verhindert, dass Nutzer wegen zu langer Wartezeit neu laden und den Server dazu bringen immer mehr Verbindungen aufzubauen,
+			die noch nicht abgearbeitet wurden (TW)
+	- DBIS:
+		- PHP-Warning korrigiert: "DBIS::getDbDetails() [<a href='dbis.getdbdetails'>dbis.getdbdetails</a>]: Node no longer exists" (TW)
+		- Fehler bei Suche korrigiert: "Cannot cast object of type 'SimpleXMLElement' to string." (TW)
 3.2.6
 	- EZB+DBIS: erweiterte Suche mit 2 Suchbegriffen war fehlerhaft --> urlencode
 3.2.5
