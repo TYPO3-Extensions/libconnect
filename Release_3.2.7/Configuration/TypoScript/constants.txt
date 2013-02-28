@@ -1,0 +1,39 @@
+#
+# content here will be included after plugin activation automatically. No template inclusion necessary.
+#
+
+plugin.tx_libconnect {
+	
+	ezbbibid = SUBHH
+	dbisbibid = sub_hh
+    zdbsid = vid:dbid
+    //zdbbibid = BIBID
+    //zdbsigel = SIGEL
+    //zdbisil = ISIL
+    //zdbbik = ISIL	
+	
+	view {
+		# cat=plugin.tx_libconnect/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:libconnect/Resources/Private/Templates/
+		# cat=plugin.tx_libconnect/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:libconnect/Resources/Private/Partials/
+		# cat=plugin.tx_libconnect/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:libconnect/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_libconnect//a; type=int+; label=Default storage PID
+		storagePid = 
+	}
+	
+    settings {
+        allListingId = 44
+		file.path {
+			dbisCSS = EXT:libconnect/Resources/Public/Styles/dbis.css
+			ezbCSS = EXT:libconnect/Resources/Public/Styles/ezb.css
+		}
+    }
+}
+
+[compatVersion = 4.5]
+	plugin.tx_libconnect.view.templateRootPath = EXT:libconnect/Resources/Private/Oldtemplates/
+[global]
