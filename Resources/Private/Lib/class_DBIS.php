@@ -25,6 +25,7 @@ class DBIS {
     public $top_five_dbs;
     // typoscript Konfigurationsvariablen
     private $bibID;
+	private $licenceForbid = array();
     // XML Daten
     private $XMLPageConnection;
 
@@ -80,6 +81,14 @@ class DBIS {
      */
     public function setOcolors($ocolors) {
 		$this->ocolors = $ocolors;
+    }
+	
+	/**
+     * Set the array with unused licences
+     *
+     */
+    public function setLicenceForbid() {
+		$this->licenceForbid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['settings.']['dbislicenceforbid.'];
     }
 
     /**
@@ -354,14 +363,21 @@ class DBIS {
 
 		$url = 'http://rzblx10.uni-regensburg.de/dbinfo/suche.php?xmloutput=1&bib_id=' . $this->bibID . '&' . "colors={$this->colors}&ocolors={$this->ocolors}";
 		$xml_such_form = $this->XMLPageConnection->getDataFromXMLPage($url);
-
+		
+		//Zugaenge werden ermittelt
 		foreach ($xml_such_form->dbis_search->option_list AS $key => $value) {
 			foreach ($value->option AS $key2 => $value2) {
 				$form[(string) $value->attributes()->name][(string) $value2->attributes()->value] = (string) $value2;
 			}
 		}
-
-		$zugaenge = array(
+		
+		//zu sperrende Zugaenge auslesen und aus Gesamtmenge entfernen
+		DBIS::setLicenceForbid();
+		foreach($this->licenceForbid as $key =>$licence){
+			unset($form['zugaenge'][$key]);
+		}
+		
+		/*$zugaenge = array(
 			1000 => $form[zugaenge][1000],
 			0 => $form[zugaenge][0],
 			1 => $form[zugaenge][1],
@@ -369,12 +385,13 @@ class DBIS {
 			5 => $form[zugaenge][5],
 			6 => $form[zugaenge][6],
 			2 => $form[zugaenge][2],
+			3 => $form[zugaenge][3],
 			4 => $form[zugaenge][4],
 			500 => $form[zugaenge][500],
 			300 => $form[zugaenge][300],
 		);
-
-		$form[zugaenge] = $zugaenge;
+		
+		$form[zugaenge] = $zugaenge;*/
 
 		return $form;
     }
