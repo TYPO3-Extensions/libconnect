@@ -4,6 +4,12 @@
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
+3.3.0
+	- DBIS:erweiterte Suche: 
+		- Feature: Lizenzen per TypoScript nun möglich zu entfernen
+		- Bugfix: 
+			- Es fehlten Lizenzen, da die Liste in der Klasse vorgegeben war.
+			- leere Einträge in Lizenzliste
 3.2.7
 	- EZB: 
 		- Link „Liste der teilnehmenden Institutionen, die Volltextzugriff bieten.“ zur EZB in EZB-Detailansicht hinzugefügt 
