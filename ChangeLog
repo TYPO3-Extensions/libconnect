@@ -6,10 +6,10 @@
 **/
 3.3.0
 	- DBIS:erweiterte Suche: 
-		- Feature: Lizenzen per TypoScript nun möglich zu entfernen
+		- Feature: Lizenzen per TypoScript nun möglich zu entfernen (TW)
 		- Bugfix: 
-			- Es fehlten Lizenzen, da die Liste in der Klasse vorgegeben war.
-			- leere Einträge in Lizenzliste
+			- Es fehlten Lizenzen, da die Liste in der Klasse vorgegeben war. (TW)
+			- leere Einträge in Lizenzliste (TW)
 3.2.7
 	- EZB: 
 		- Link „Liste der teilnehmenden Institutionen, die Volltextzugriff bieten.“ zur EZB in EZB-Detailansicht hinzugefügt 
@@ -32,7 +32,7 @@
 	- EZB+DBIS: erweiterte Suche mit 2 Suchbegriffen war fehlerhaft --> urlencode
 3.2.5
 	- Problem beim Auslesen der jeweiligen Konfiguration aus TypoScript behoben. (TW)
-	- DBIS: Umlautproblem in Template behoben
+	- DBIS: Umlautproblem in Template behoben (TW)
 3.2.4
 	- alte nicht mehr verwendete CSS-Styles gelöscht (BH)
 	- Umstellung der Templates auf locallang.xml (BH)
