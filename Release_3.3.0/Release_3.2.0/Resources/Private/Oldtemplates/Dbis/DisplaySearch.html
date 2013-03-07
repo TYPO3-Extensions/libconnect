@@ -1,0 +1,56 @@
+<h1>Ergebnisse Ihrer Suche </h1>
+
+Sie suchten nach folgenden Kriterien:<br/>
+<ul>
+	<f:for each="{list.searchDescription}" as="description">
+		<li><f:escape value="{description}" type="raw" /></li>
+	</f:for>
+</ul>
+
+<br/><br/>
+
+<f:if condition="{list.error}">
+	<f:then>
+	
+	</f:then>
+	<f:else>
+		<h3>Zugriffe:</h3>
+
+		<div class="dbis-list-legend">
+		<ul>
+			<f:for each="{list.access_infos}" as="info">
+				<li class="dbis-list-accessinfo-{info.id}"><f:escape value="{info.title}" type="raw" /> (<f:escape value="{info.description}" type="raw" />)</li>
+			</f:for>
+		</ul>
+		</div>
+
+		<f:if condition="<f:count subject='{list.top}' /> > 0">
+		<div class="top-database-wrapper">
+			<h2>Top Datenbanken</h2>
+			<ul class="dbis-top-list">
+			<f:for each="{list.top}" as="db">
+				<li><a href="{db.detail_link}"><f:escape value="{db.title}" type="raw" /></a> (<f:escape value="{db.access}" type="raw" />)</li>
+			</f:for>
+			</ul>
+		</div>
+		</f:if>
+
+		<br/><br/>
+
+		<f:count subject='{list.values}' /> Treffer
+
+		<div class="dbis-list">
+		<f:if condition="<f:count subject='{list.values}' /> > 0">
+			<div class="accordion-content clearfix">
+				<ul class="dbis-dblist">
+					<f:for each="{list.values}" as="db" key="titleid">
+						<li>
+							<li class="dbis-list-accessinfo-{db.access_ref}"><a href="{db.detail_link}"><f:escape value="{db.title}" type="raw" /></a></li>
+						</li>
+					</f:for>
+				</ul>
+			</div>
+		</f:if>
+		</div>
+</f:else>
+</f:if>

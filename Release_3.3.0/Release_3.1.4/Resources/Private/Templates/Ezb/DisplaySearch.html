@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="{f:uri.resource(path:'Styles/ezb.css')}" />
+{namespace libconnect=Tx_Libconnect_ViewHelpers}
+<h1>Ergebnisse Ihrer Suche</h1>
+
+<f:if condition="{journals.page_vars.search_count} != -1">
+	<f:then>
+		<div class="ezb-list-legend">
+			<ul>
+				<li class="ezb-list-legend-one">Frei zugänglich</li>
+				<li class="ezb-list-legend-two">Im Campus-Netz sowie für Angehörige der Universität auch extern zugänglich</li>
+				<li class="ezb-list-legend-six">Nur für einen Teil der erschienenen Jahrgänge zugänglich</li>
+				<li class="ezb-list-legend-four">Für Ihren Standort nicht freigeschaltet. Zum Teil bekommen Sie Zugriff auf Abstracts oder Inhaltsverzeichnisse</li>
+			</ul>
+		</div>
+
+		<br/><br/>
+
+		{journals.page_vars.search_count} Treffer
+
+		<br/><br/>
+
+		<f:if condition="{libconnect:IsArray(value: journals.navlist.pages)}">
+			<div class="ezb-navigation">
+			<f:for each="{journals.navlist.pages}" as="item">
+				<f:if condition="{libconnect:IsArray(value: item)}">
+				<f:then>
+					<a href="{item.link}">{item.title}</a>
+				</f:then>
+				<f:else>
+					<em>{item}</em>
+				</f:else>
+				</f:if>
+			</f:for>
+			</div>
+
+			<br/><br/>
+		</f:if>
+
+		<div class="ezb-list-output">
+		<f:for each="{journals.alphabetical_order.first_fifty}" as="section">
+			<h3><a href="{section.link}"><f:format.htmlentitiesDecode>{section.first_fifty_titles}</f:format.htmlentitiesDecode>...</a></h3>
+		</f:for>
+
+		<f:if condition="{journals.alphabetical_order.current_title}">
+		<h2><f:format.htmlentitiesDecode>{journals.alphabetical_order.current_title}</f:format.htmlentitiesDecode>...</h2>
+		</f:if>
+
+
+		<ul class="ezb-list" {if ! ($journals.alphabetical_order.current_title)}style="padding-left: 0px !important;"{/if}>
+		<f:for each="{journals.alphabetical_order.journals}" as="journal">
+			<li class="ezb-list-accessinfo-access_{journal.color_code}"><a href="{db.detail_link}"><a href="{journal.detail_link}"><f:format.htmlentitiesDecode>{journal.title}</f:format.htmlentitiesDecode></a></li>
+		</f:for>
+		</ul>
+
+
+		<f:for each="{journals.alphabetical_order.next_fifty}" as="section">
+			<h3><a href="{section.link}">{section.next_fifty_titles}...</a></h3>
+		</f:for>
+		</div>
+
+		<f:if condition="{libconnect:IsArray(value: journals.navlist.pages)}">
+			<f:then>
+				<br/><br/>
+
+				<div class="ezb-navigation">
+				<f:for each="{journals.navlist.pages}" as="item">
+					<f:if condition="{libconnect:IsArray(value: item)}">
+					<f:then>
+						<a href="{item.link}">{item.title}</a>
+					</f:then>
+					<f:else>
+						<em>{item}</em>
+					</f:else>
+					</f:if>
+				</f:for>
+				</div>
+			</f:then>
+		</f:if>
+	</f:then>
+	<f:else>
+		<p><strong>Bei der Suche ist ein Fehler aufgetreten:</strong></p>
+
+		<p>Sie haben keine Suchbegriffe eingegeben und kein Fachgebiet ausgew&auml;hlt.</p>
+	</f:else>
+</f:if>
