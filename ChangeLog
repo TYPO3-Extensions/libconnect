@@ -4,6 +4,9 @@
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
+3.3.1
+	- DBIS: PHP-Warning behoben. (TW)
+	- Dokumentation als PDF hinzugefügt (TW)
 3.3.0
 	- DBIS:erweiterte Suche: 
 		- Feature: Lizenzen per TypoScript nun möglich zu entfernen (TW)
@@ -83,7 +86,7 @@
 3.1.2
 	- Einträge "dependencies" in "ext_emconf.php" fehlten
 3.1.1
-	- DBIS: Umlauten in Topdatenbanken waren falsch dargestellt
+	- DBIS: Umlaute in Topdatenbanken waren falsch dargestellt
 3.1.0
 	- EZB: In der Detailansicht ist nun der ReadMe-Link eingefügt
 	- <f:escape value="{<Wert>}" type="raw" /> - Ausdruck durch <f:format.htmlentitiesDecode> ersetzt. --> HTML-Entity-Problem gelöst
@@ -152,7 +155,7 @@
 - Problem mit Umlauten in der Suche geloest
 - kleine Bugfixes
 2.0.1
-- kleine fixes
+- kleine Bugfixes
 - Dokumentation erstellt
 2.0.0
 - Initial upload – docs pending
