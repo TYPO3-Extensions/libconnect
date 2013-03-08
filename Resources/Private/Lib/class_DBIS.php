@@ -373,8 +373,10 @@ class DBIS {
 		
 		//zu sperrende Zugaenge auslesen und aus Gesamtmenge entfernen
 		DBIS::setLicenceForbid();
-		foreach($this->licenceForbid as $key =>$licence){
-			unset($form['zugaenge'][$key]);
+		if((!empty($this->licenceForbid)) && ($this->licenceForbid!= false)){
+			foreach($this->licenceForbid as $key =>$licence){
+				unset($form['zugaenge'][$key]);
+			}
 		}
 		
 		/*$zugaenge = array(
