@@ -1,0 +1,54 @@
+{namespace libconnect=Tx_Libconnect_ViewHelpers}
+
+<f:if condition="{settings.DBISSearchResultsPageId}">
+<div class="dbis-listings-wrapper">
+  <f:if condition="{settings.allListingId}">
+    <p><f:link.page pageUid="{settings.DBISSearchResultsPageId}" additionalParams="{libconnect: '{subject:settings.allListingId}'}">Alphabetische Auflistung</f:link.page></p>
+  </f:if>
+    <p><f:link.page pageUid="{settings.DBISSearchResultsPageId}">Auflistung nach Fachgebieten</f:link.page></p>
+</div>
+</f:if>
+
+<div class="datenbank-suche-wrapper">
+
+	<h1>Suche nach Datenbanken</h1>
+
+	<form action="{siteUrl}" method="get">
+	<input type="hidden" name="id" value="{listPid}" />
+		<label for="libconnect_dbis_minisuche" class="hiddendebis">Name der Bibliothek</label>
+		<input id="libconnect_dbis_minisuche" type="text" name="libconnect[search][sword]" size="20" value="{vars.sword}" />
+		<input type="submit" value="Suchen" />
+
+		<p><a href="{searchUrl}">Erweiterte Suche</a></p>
+
+	</form>
+
+</div>
+
+<f:if condition="{vars.sword}">
+	<f:then>
+	</f:then>
+	<f:else>
+	<div class="datenbank-suche-wrapper">
+		<h1>Datenbanken anzeigen</h1>
+
+		<form action="{siteUrl}" method="get">
+
+		<p>
+			<label for="libconnect_dbis_suche" class="hiddendebis">Zugang w&auml;hlen</label>
+			<select id="libconnect_dbis_suche" name="libconnect[search][zugaenge]">
+			<f:for each="{form.zugaenge}" as="value" key="key">
+			<f:if condition="{key} < 1000">
+				<f:if condition="{libconnect:strlen(string: value)} > 0">
+					<option  <f:if condition="{vars.zugaenge}"><f:if condition="{vars.zugaenge} == {key}">selected="selected"</f:if></f:if> value="{key}" >{value}</option>
+				</f:if>
+			</f:if>
+			</f:for>
+			</select>
+		</p>
+			<input type="submit" value="Zugang ausw&auml;hlen" />
+		</form>
+
+	</div>
+	</f:else>
+</f:if>
