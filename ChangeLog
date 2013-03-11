@@ -4,6 +4,9 @@
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
+3.3.2
+	- Als Abhängigkeit die TYPO3-Version mit angegeben, da im TER Extension mit fehlender Angabe nicht mehr ausgeliefert werden.
+	- Korrektur in Dokumentatoin
 3.3.1
 	- DBIS: PHP-Warning behoben. (TW)
 	- Dokumentation als PDF hinzugefügt (TW)
