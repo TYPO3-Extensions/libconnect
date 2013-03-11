@@ -31,6 +31,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'dependencies' => 'cms,extbase,fluid',
 	'constraints' => array(
 		'depends' => array(
+			'typo3' => '4.5.0-6.0.0',
 			'cms' => '',
 			'extbase' => '',
 			'fluid' => '',
