@@ -77,13 +77,15 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 				));
 			}
 		}
-		foreach(array_keys($journals['alphabetical_order']['journals']) as $journal) {
-			$journals['alphabetical_order']['journals'][$journal]['detail_link'] = $cObject->getTypolink_URL(
-					intval($config['detailPid']),
-					array(
-						'libconnect[jourid]' => $journals['alphabetical_order']['journals'][$journal]['jourid'],
-					)
-			);
+		if(isset($journals['alphabetical_order']['journals'])){
+            foreach(array_keys($journals['alphabetical_order']['journals']) as $journal) {
+                $journals['alphabetical_order']['journals'][$journal]['detail_link'] = $cObject->getTypolink_URL(
+                        intval($config['detailPid']),
+                        array(
+                            'libconnect[jourid]' => $journals['alphabetical_order']['journals'][$journal]['jourid'],
+                        )
+                );
+            }		    
 		}
 		if(isset($journals['alphabetical_order']['next_fifty'])){
 			foreach(array_keys($journals['alphabetical_order']['next_fifty']) as $section) {

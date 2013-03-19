@@ -177,7 +177,7 @@ class ZDB {
 		if (! is_object($xml_request->Full)) {
 		    if($this->debug) t3lib_div::devLog('invalid XML-Object - URL: '.$url, 'libconnect', 1);
 			return false;
-		} elseif ($xml_request->Full->Error->attributes()->code != NULL) {
+		} elseif (property_exists($xml_request->Full, "Error")) {
 		   /**
 		    * possible Error-Codes:
 		    *     Code        Meaning
