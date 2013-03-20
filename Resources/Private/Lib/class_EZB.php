@@ -243,8 +243,10 @@ class EZB {
 
 		// generate link to institutions having access to this journal
 		$participants_xml_request = $this->XMLPageConnection->getDataFromXMLPage("{$this->participants_xml_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}");
-		if ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution->count() > 0) {
-		    $journal['participants'] = "{$this->participants_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}";
+		if (isset($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution)) {
+		    if ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution->count() > 0) {
+                $journal['participants'] = "{$this->participants_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}";
+            }
 		}
 		
 		// periods
