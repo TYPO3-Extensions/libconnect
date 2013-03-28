@@ -10,6 +10,12 @@
 
 class XMLPageConnection {
     
+   /**
+    * Enable debug for logging errors to devLog
+    *
+    */
+    private $debug = false;    
+    
     private $extPiVars;
     private $proxy;
     private $proxyPort;
@@ -17,6 +23,7 @@ class XMLPageConnection {
     public function __construct() {
 	
 		$this->setExtPiVars();
+		$this->setExtConfVars();
 		$this->setProxy();
 		$this->setProxyPort();
     }
@@ -28,6 +35,15 @@ class XMLPageConnection {
 		$this->extPiVars = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.'];
     }
     
+    /**
+     * Lädt die in der Extension Konfiguration gesetzten Variablen.
+     */
+    private function setExtConfVars() {
+		$ext_conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['libconnect']);
+        if ($ext_conf['debug'] == true) $this->debug = true;
+        if ($ext_conf['debug'] == false) $this->debug = false;
+    }
+
     /**
      * Setzt den Proxy Server 
      */
@@ -61,10 +77,32 @@ class XMLPageConnection {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
-		
 		$result = curl_exec($ch);
-		$xmlObj = simplexml_load_string($result);
 		
+		//curl_exec with CURLOPT_RETURNTRANSFER set 1 returns FALSE on error or
+		//the result on success, so check for result.
+		if ($result) {
+		    
+		    //simplexml_load_string will produce E_WARNING error messages for each error 
+            //found in the XML data. Therefore suppress error messages in any mode and
+            //handle errors for debug-mode differently.
+            libxml_use_internal_errors(true);
+            
+            //parse the XML data.
+            $xmlObj = simplexml_load_string($result);
+            
+            //log url to devlog in debug-mode if XML data contained errors.
+            if ($this->debug) {
+                $error_array = libxml_get_errors();
+                if (count($error_array) > 0) {
+                    t3lib_div::devLog('XML data contained errors: '.$url, 'libconnect', 1);
+                }
+            }
+            
+            //reset libxml error buffering and clear any existing libxml errors
+            libxml_use_internal_errors(false);
+            
+		}
 		
 		//Pruefung ob Abfrage fehlerfrei erfolgte
 		$http_code = curl_getinfo($ch);
@@ -73,19 +111,22 @@ class XMLPageConnection {
 		if($http_code['http_code']!=200){
 			$xmlObj = FALSE;
 			
+			if ($this->debug) t3lib_div::devLog('Got HTTP Code ' . $http_code['http_code'] . ' for request: ' . $url, 'libconnect', 1);
+			
 			return $xmlObj;
 		}
-		
 		
 		/* HINWEIS FEHLERPRUEFUNG: 
 		 * Die Funktion curl_error() wie auch curl_getinfo() haben keine brauchbaren Rückgabewerte
 		 * zurückgegeben. Deswegen die Pruefung ob ein Object erzeugt wurde und es ein
 		 * SimpleXMLElement ist. 
 		 */
-		if (!is_object($xmlObj) && get_class($xmlObj) == 'SimpleXMLElement') {
-			$xmlObj = FALSE;
+		if ($xmlObj != FALSE) { //get_class produces E_WARNING for non-object arguments
+		    if (!is_object($xmlObj) && get_class($xmlObj) == 'SimpleXMLElement' ) {
+                $xmlObj = FALSE;
+            }
 		}
-
+		
 		return $xmlObj;
     }
 }

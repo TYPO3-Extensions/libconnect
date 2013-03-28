@@ -79,8 +79,10 @@ class EZB {
 		$url = "{$this->overview_requst_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&";
 		$xml_request = $this->XMLPageConnection->getDataFromXMLPage($url);
 
-		foreach ($xml_request->ezb_subject_list->subject AS $key => $value) {
-			$fachbereiche[(string) $value['notation'][0]] = array('title' => (string) $value[0], 'journalcount' => (int) $value['journalcount'], 'id' => (string) $value['notation'][0], 'notation' => (string) $value['notation'][0]);
+		if (isset($xml_request->ezb_subject_list->subject)) {
+		    foreach ($xml_request->ezb_subject_list->subject AS $key => $value) {
+                $fachbereiche[(string) $value['notation'][0]] = array('title' => (string) $value[0], 'journalcount' => (int) $value['journalcount'], 'id' => (string) $value['notation'][0], 'notation' => (string) $value['notation'][0]);
+            }
 		}
 
 		return $fachbereiche;
@@ -126,32 +128,39 @@ class EZB {
 		$journals['navlist']['pages'][$journals['navlist']['current_page']] = $journals['navlist']['current_page'];
 		ksort($journals['navlist']['pages']);
 
-		foreach ($xml_request->ezb_alphabetical_list->alphabetical_order->journals->journal AS $key => $value) {
-			$journals['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['title'] = (string) $value->title;
-			$journals['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['jourid'] = (int) $value->attributes()->jourid;
-			$journals['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['color_code'] = (int) $value->journal_color->attributes()->color_code;
-			$journals['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['color'] = (string) $value->journal_color->attributes()->color;
-			$journals['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['detail_link'] = '';
-			$journals['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['warpto_link'] = $this->journal_link_url . $value->attributes()->jourid;
+		if (isset($xml_request->ezb_alphabetical_list->alphabetical_order->journals->journal)) {
+		    foreach ($xml_request->ezb_alphabetical_list->alphabetical_order->journals->journal AS $key => $value) {
+                $journals['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['title'] = (string) $value->title;
+                $journals['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['jourid'] = (int) $value->attributes()->jourid;
+                $journals['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['color_code'] = (int) $value->journal_color->attributes()->color_code;
+                $journals['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['color'] = (string) $value->journal_color->attributes()->color;
+                $journals['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['detail_link'] = '';
+                $journals['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['warpto_link'] = $this->journal_link_url . $value->attributes()->jourid;
+            }
 		}
+		
 		$i = 0;
 
-		foreach ($xml_request->ezb_alphabetical_list->next_fifty AS $key => $value) {
-			$journals['alphabetical_order']['next_fifty'][$i]['sc'] = (string) $value->attributes()->sc;
-			$journals['alphabetical_order']['next_fifty'][$i]['lc'] = (string) $value->attributes()->lc;
-			$journals['alphabetical_order']['next_fifty'][$i]['sindex'] = (string) $value->attributes()->sindex;
-			$journals['alphabetical_order']['next_fifty'][$i]['next_fifty_titles'] = (string) $value->next_fifty_titles;
-			$i++;
+		if (isset($xml_request->ezb_alphabetical_list->next_fifty)) {
+		    foreach ($xml_request->ezb_alphabetical_list->next_fifty AS $key => $value) {
+                $journals['alphabetical_order']['next_fifty'][$i]['sc'] = (string) $value->attributes()->sc;
+                $journals['alphabetical_order']['next_fifty'][$i]['lc'] = (string) $value->attributes()->lc;
+                $journals['alphabetical_order']['next_fifty'][$i]['sindex'] = (string) $value->attributes()->sindex;
+                $journals['alphabetical_order']['next_fifty'][$i]['next_fifty_titles'] = (string) $value->next_fifty_titles;
+                $i++;
+            }
 		}
 
 		$i = 0;
 
-		foreach ($xml_request->ezb_alphabetical_list->first_fifty AS $key => $value) {
-			$journals['alphabetical_order']['first_fifty'][$i]['sc'] = (string) $value->attributes()->sc;
-			$journals['alphabetical_order']['first_fifty'][$i]['lc'] = (string) $value->attributes()->lc;
-			$journals['alphabetical_order']['first_fifty'][$i]['sindex'] = (string) $value->attributes()->sindex;
-			$journals['alphabetical_order']['first_fifty'][$i]['first_fifty_titles'] = (string) $value->first_fifty_titles;
-			$i++;
+		if (isset($xml_request->ezb_alphabetical_list->first_fifty)) {
+		    foreach ($xml_request->ezb_alphabetical_list->first_fifty AS $key => $value) {
+                $journals['alphabetical_order']['first_fifty'][$i]['sc'] = (string) $value->attributes()->sc;
+                $journals['alphabetical_order']['first_fifty'][$i]['lc'] = (string) $value->attributes()->lc;
+                $journals['alphabetical_order']['first_fifty'][$i]['sindex'] = (string) $value->attributes()->sindex;
+                $journals['alphabetical_order']['first_fifty'][$i]['first_fifty_titles'] = (string) $value->first_fifty_titles;
+                $i++;
+            }
 		}
 
 		return $journals;
@@ -236,7 +245,7 @@ class EZB {
 			'date' => (int) $xml_request->ezb_detail_about_journal->journal->detail->last_fulltext_issue->last_date
 			);
 		}
-		$jounral['moving_wall'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->moving_wall;
+		$journal['moving_wall'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->moving_wall;
 		$journal['appearence'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->appearence;
 		$journal['costs'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->costs;
 		$journal['remarks'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->remarks;

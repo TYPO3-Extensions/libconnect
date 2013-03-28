@@ -101,9 +101,12 @@ class DBIS {
 		$xml_categories = $this->getRequestFachliste('');
 		$categories = array();
 
-		foreach ($xml_categories->list_subjects_collections->list_subjects_collections_item AS $key => $value) {
-			$categories[(string) $value['notation']] = array('title' => (string) $value, 'id' => (string) $value['notation'], 'count' => (int) (string) $value['number'], 'lett' => (string) $value['lett']);
+		if (isset($xml_categories->list_subjects_collections->list_subjects_collections_item)) {
+		    foreach ($xml_categories->list_subjects_collections->list_subjects_collections_item AS $key => $value) {
+                $categories[(string) $value['notation']] = array('title' => (string) $value, 'id' => (string) $value['notation'], 'count' => (int) (string) $value['number'], 'lett' => (string) $value['lett']);
+            }
 		}
+
 		return $categories;
     }
 
@@ -185,79 +188,88 @@ class DBIS {
 		$list['alphNavList'] = (isset($alphabeticalNavList) && count($alphabeticalNavList) ? $alphabeticalNavList : false);
 		//EOF workaround for alphabetical listing
 
-		foreach ($xml_fachgebiet_db->list_dbs->db_access_infos->db_access_info as $value) {
-			$id = (string) $value->attributes()->access_id;
-			$list['access_infos'][$id] = array(
-				'id' => $id,
-				'title' => (string) $value->db_access,
-				'description' => (string) $value->db_access_short_text,
-				'dbs' => array()
-			);
+		if (isset($xml_fachgebiet_db->list_dbs->db_access_infos->db_access_info)) {
+		    foreach ($xml_fachgebiet_db->list_dbs->db_access_infos->db_access_info as $value) {
+                $id = (string) $value->attributes()->access_id;
+                $list['access_infos'][$id] = array(
+                    'id' => $id,
+                    'title' => (string) $value->db_access,
+                    'description' => (string) $value->db_access_short_text,
+                    'dbs' => array()
+                );
+            }
 		}
+		
 		if ($sort == 'access') {
 			$list['groups'] = &$list['access_infos'];
 			//BOF workaround for alphabetical listing			
 		} elseif ($fachgebiet == 'all') {
-			foreach ($xml_fachgebiet_db->list_dbs->dbs as $value) {
-				$id = (string) $value->attributes()->char;
-				$title = (string) $value->attributes()->char;
-				$list['groups'][$id] = array(
-					'id' => $id,
-					'title' => $title,
-					'dbs' => array()
-				);
-			}
+		    if (isset($xml_fachgebiet_db->list_dbs->dbs)) {
+		        foreach ($xml_fachgebiet_db->list_dbs->dbs as $value) {
+                    $id = (string) $value->attributes()->char;
+                    $title = (string) $value->attributes()->char;
+                    $list['groups'][$id] = array(
+                        'id' => $id,
+                        'title' => $title,
+                        'dbs' => array()
+                    );
+                }
+		    }
 			//EOF workaround for alphabetical listing
 		} else {
-
-			foreach ($xml_fachgebiet_db->list_dbs->db_type_infos->db_type_info as $value) {
-				$id = (string) $value->attributes()->db_type_id;
-				$title = (string) $value->db_type;
-				$list['groups'][$id] = array(
-					'id' => $id,
-					'title' => $title,
-					'dbs' => array()
-				);
-			}
+		    if (isset($xml_fachgebiet_db->list_dbs->db_type_infos->db_type_info)) {
+		        foreach ($xml_fachgebiet_db->list_dbs->db_type_infos->db_type_info as $value) {
+                    $id = (string) $value->attributes()->db_type_id;
+                    $title = (string) $value->db_type;
+                    $list['groups'][$id] = array(
+                        'id' => $id,
+                        'title' => $title,
+                        'dbs' => array()
+                    );
+                }
+		    }
 		}
 
-		foreach ($xml_fachgebiet_db->list_dbs->dbs as $dbs) {
-
-			foreach ($dbs->db as $value) {
-
-			$db = array(
-				'id' => (int) $value['title_id'],
-				'title' => (string) $value,
-				'access_ref' => (string) $value['access_ref'],
-				'access' => $list['access_infos'][(string) $value['access_ref']]['title'],
-				'db_type_refs' => (string) $value['db_type_refs'],
-				'top_db' => (int) $value['top_db'],
-				'link' => 'http://rzblx10.uni-regensburg.de/dbinfo/detail.php?xmloutput=1&bib_id=' . $this->bibID . '&colors=&ocolors=&' . "lett={$this->lett}&titel_id={$value['title_id']}",
-			);
-
-			if ($db['top_db']) {
-				$list['top'][] = $db;
-				//BOF workaround for alphabetical listing			
-			} elseif ($fachgebiet == 'all') {
-				$list['groups'][(string) $dbs->attributes()->char]['dbs'][] = $db;
-				$sortlist[$db['access']] = $db['access_ref'];
-				//EOF workaround for alphabetical listing
-			} else {
-				if ($sort == "alph") {
-					$list['groups']['Treffer']['dbs'][] = $db;
-					$sortlist['Treffer'] = $db['Treffer'];
-				} elseif ($sort == 'access') {
-					$list['access_infos'][$db['access_ref']]['dbs'][] = $db;
-					$sortlist[$db['access']] = $db['access_ref'];
-				} else {
-					foreach (explode(' ', $db['db_type_refs']) as $ref) {
-						$list['groups'][$ref]['dbs'][] = $db;
-						$sortlist[$db['access']] = $db['access_ref'];
-					}
-				}
-			}
-			}
+		if (isset($xml_fachgebiet_db->list_dbs->dbs)) {
+		    foreach ($xml_fachgebiet_db->list_dbs->dbs as $dbs) {
+    
+                foreach ($dbs->db as $value) {
+    
+                    $db = array(
+                        'id' => (int) $value['title_id'],
+                        'title' => (string) $value,
+                        'access_ref' => (string) $value['access_ref'],
+                        'access' => $list['access_infos'][(string) $value['access_ref']]['title'],
+                        'db_type_refs' => (string) $value['db_type_refs'],
+                        'top_db' => (int) $value['top_db'],
+                        'link' => 'http://rzblx10.uni-regensburg.de/dbinfo/detail.php?xmloutput=1&bib_id=' . $this->bibID . '&colors=&ocolors=&' . "lett={$this->lett}&titel_id={$value['title_id']}",
+                    );
+        
+                    if ($db['top_db']) {
+                        $list['top'][] = $db;
+                        //BOF workaround for alphabetical listing			
+                    } elseif ($fachgebiet == 'all') {
+                        $list['groups'][(string) $dbs->attributes()->char]['dbs'][] = $db;
+                        $sortlist[$db['access']] = $db['access_ref'];
+                        //EOF workaround for alphabetical listing
+                    } else {
+                        if ($sort == "alph") {
+                            $list['groups']['Treffer']['dbs'][] = $db;
+                            $sortlist['Treffer'] = $db['Treffer'];
+                        } elseif ($sort == 'access') {
+                            $list['access_infos'][$db['access_ref']]['dbs'][] = $db;
+                            $sortlist[$db['access']] = $db['access_ref'];
+                        } else {
+                            foreach (explode(' ', $db['db_type_refs']) as $ref) {
+                                $list['groups'][$ref]['dbs'][] = $db;
+                                $sortlist[$db['access']] = $db['access_ref'];
+                            }
+                        }
+                    }
+                }
+            }
 		}
+		
 
 		if (!empty($sortlist) && ($sort == 'access')) {
 			natsort($sortlist);
@@ -286,7 +298,7 @@ class DBIS {
 		$xml_db_details = $this->XMLPageConnection->getDataFromXMLPage($url);
 
 		//@todo Fehlerbehandlung
-		if (!is_object($xml_db_details->details)) {
+		if (!isset($xml_db_details->details)) {
 			return false;
 		}
 
@@ -365,10 +377,12 @@ class DBIS {
 		$xml_such_form = $this->XMLPageConnection->getDataFromXMLPage($url);
 		
 		//Zugaenge werden ermittelt
-		foreach ($xml_such_form->dbis_search->option_list AS $key => $value) {
-			foreach ($value->option AS $key2 => $value2) {
-				$form[(string) $value->attributes()->name][(string) $value2->attributes()->value] = (string) $value2;
-			}
+		if (isset($xml_such_form->dbis_search->option_list)) {
+            foreach ($xml_such_form->dbis_search->option_list AS $key => $value) {
+                foreach ($value->option AS $key2 => $value2) {
+                    $form[(string) $value->attributes()->name][(string) $value2->attributes()->value] = (string) $value2;
+                }
+            }
 		}
 		
 		//zu sperrende Zugaenge auslesen und aus Gesamtmenge entfernen
@@ -516,10 +530,12 @@ class DBIS {
 		}
 
 		$list['searchDescription'] = array();
-		foreach ($request->search_desc->search_desc_item as $searchDesc) {
-			$list['searchDescription'][] = (string)$searchDesc;
+		if (isset($request->search_desc->search_desc_item)) {
+		    foreach ($request->search_desc->search_desc_item as $searchDesc) {
+                $list['searchDescription'][] = (string)$searchDesc;
+            }
 		}
-
+		
 		if (isset($request->error)) {
 			$list['error'] = (string) $request->error;
 		}
