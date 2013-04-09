@@ -425,12 +425,18 @@ class DBIS {
 		$searchUrl = 'http://rzblx10.uni-regensburg.de/dbinfo/dbliste.php?xmloutput=1&bib_id=' . $this->bibID . '&' . "colors={$this->colors}&ocolors={$this->ocolors}&lett={$lett}";
 
 		foreach ($searchVars as $var => $values) {
-
 			if (!is_array($values)) {
-				$searchUrl .= "&$var=" . urlencode(utf8_decode($values));
+				//falls jemand kein utf-8 verwendet
+				if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == "utf-8"){
+					$values = utf8_decode($values);
+				}
+				$searchUrl .= "&$var=" . urlencode($values);
 			} else {
 				foreach ($values as $value) {
-					$searchUrl .= '&' . $var . '[]=' . urlencode(utf8_decode($value));
+					if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == "utf-8"){
+						$value = utf8_decode($value);
+					}
+					$searchUrl .= '&' . $var . '[]=' . urlencode($value);
 				}
 			}
 		}
@@ -448,9 +454,13 @@ class DBIS {
      * @return array
      */
     public function search($term, $searchVars = false, $lett = 'fs') {
-
+		//falls jemand kein utf-8 verwendet
+		if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == "utf-8"){
+			$term = utf8_decode($term);
+		}
+		
 		// encode term
-		$term = rawurlencode(utf8_decode($term));
+		$term = urlencode($term);
 
 		$searchUrl = '';
 		if (!$searchVars) {

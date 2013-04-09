@@ -349,10 +349,17 @@ class EZB {
 		foreach ($searchVars as $var => $values) {
 
 			if (!is_array($values)) {
-				$searchUrl .= '&' . $var . '=' . urlencode(utf8_decode($values));
+				//falls jemand kein utf-8 verwendet
+				if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == "utf-8"){
+					$values = utf8_decode($values);
+				}
+				$searchUrl .= '&' . $var . '=' . urlencode($values);
 			} else {
 				foreach ($values as $value) {
-					$searchUrl .= '&' . $var . '[]=' . urlencode(utf8_decode($value));
+					if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == "utf-8"){
+						$value = utf8_decode($value);
+					}
+					$searchUrl .= '&' . $var . '[]=' . urlencode($value);
 				}
 			}
 		}
