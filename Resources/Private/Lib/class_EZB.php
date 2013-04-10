@@ -252,10 +252,10 @@ class EZB {
 
 		// generate link to institutions having access to this journal
 		$participants_xml_request = $this->XMLPageConnection->getDataFromXMLPage("{$this->participants_xml_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}");
-		if (isset($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution)) {
-		    if ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution->count() > 0) {
-                $journal['participants'] = "{$this->participants_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}";
-            }
+		//if ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution->count() > 0) {
+		foreach ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution->children() as $childs)  {
+		    $journal['participants'] = "{$this->participants_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}";
+			break;
 		}
 		
 		// periods
@@ -307,7 +307,7 @@ class EZB {
 		// fehlenden Eintrag ergaenzen
 		$form['selected_colors'][2] = 'im Campus-Netz zugänglich';
 
-		// schlagwort und issn tauschen...
+		// Schlagwort und issn tauschen...
 		$form['jq_type'] = array(
 			'KT' => 'Titelwort(e)',
 			'KS' => 'Titelanfang',
@@ -334,8 +334,13 @@ class EZB {
 	
 		$searchUrl = $this->search_result_page . 'bibid=' . $this->bibID . '&colors=' . $this->colors . '&lang=' . $this->lang;
 		
+		//falls jemand kein utf-8 verwendet
+		if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == "utf-8"){
+			$term = utf8_decode($term)
+		}
+		
 		// urlencode termi
-		$term = rawurlencode(utf8_decode($term));
+		$term = rawurlencode($term);
 		
 		//Bei Suche mittels Sidebar
 		if (strlen($term)) {
