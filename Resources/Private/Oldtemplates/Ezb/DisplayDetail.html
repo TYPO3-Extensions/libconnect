@@ -129,7 +129,8 @@
 			</th>
 
 			<td>
-			<f:if condition="{journal.first_fulltext.volume}">Jg. <f:escape value="{journal.first_fulltext.volume}" type="raw" /></f:if><f:if condition="{journal.first_fulltext.issue}">, H. <f:escape value="{journal.first_fulltext.issue}" type="raw" /></f:if>
+			<f:if condition="{journal.first_fulltext.volume}">Jg. <f:escape value="{journal.first_fulltext.volume}" type="raw" /></f:if>
+			<f:if condition="{journal.first_fulltext.issue}"><f:if condition="{journal.first_fulltext.volume}">, </f:if>H. <f:escape value="{journal.first_fulltext.issue}" type="raw" /></f:if>
 			({journal.first_fulltext.date})
 			</td>
 		</tr>
@@ -142,7 +143,8 @@
 			</th>
 
 			<td>
-			<f:if condition="{journal.last_fulltext.volume}">Jg. {journal.last_fulltext.volume}</f:if><f:if condition="{journal.last_fulltext.issue}">, H. {journal.last_fulltext.issue}</f:if>
+			<f:if condition="{journal.last_fulltext.volume}">Jg. {journal.last_fulltext.volume}</f:if>
+			<f:if condition="{journal.last_fulltext.issue}"><f:if condition="{journal.first_fulltext.volume}">, </f:if>H. {journal.last_fulltext.issue}</f:if>
 			({journal.last_fulltext.date})
 			</td>
 		</tr>

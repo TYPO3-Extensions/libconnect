@@ -129,7 +129,8 @@
             </th>
 
 			<td>
-			<f:if condition="{journal.first_fulltext.volume}">Jg. <f:format.htmlentitiesDecode>{journal.first_fulltext.volume}</f:format.htmlentitiesDecode></f:if><f:if condition="{journal.first_fulltext.issue}">, H. <f:format.htmlentitiesDecode>{journal.first_fulltext.issue}</f:format.htmlentitiesDecode></f:if>
+			<f:if condition="{journal.first_fulltext.volume}">Jg. <f:format.htmlentitiesDecode>{journal.first_fulltext.volume}</f:format.htmlentitiesDecode></f:if>
+			<f:if condition="{journal.first_fulltext.issue}"><f:if condition="{journal.first_fulltext.volume}">, </f:if>H. <f:format.htmlentitiesDecode>{journal.first_fulltext.issue}</f:format.htmlentitiesDecode></f:if>
 			({journal.first_fulltext.date})
 			</td>
 		</tr>
@@ -142,7 +143,8 @@
             </th>
 
 			<td>
-			<f:if condition="{journal.last_fulltext.volume}">Jg. {journal.last_fulltext.volume}</f:if><f:if condition="{journal.last_fulltext.issue}">, H. {journal.last_fulltext.issue}</f:if>
+			<f:if condition="{journal.last_fulltext.volume}">Jg. {journal.last_fulltext.volume}</f:if>
+			<f:if condition="{journal.last_fulltext.issue}"><f:if condition="{journal.last_fulltext.volume}">, </f:if>H. {journal.last_fulltext.issue}</f:if>
 			({journal.last_fulltext.date})
 			</td>
 		</tr>
