@@ -12,7 +12,7 @@
 		- Abwärtskompatibilität zu PHP 5.2 erhöht (Workaround für SimpleXMLElement::count gefunden) (TW)
 
 3.3.2
-	- Als Abhängigkeit die TYPO3-Version mit angegeben, da im TER Extension mit fehlender Angabe nicht mehr ausgeliefert werden.
+	- Als Abhängigkeit die TYPO3-Version mit angegeben, da im TER Extensions mit fehlender Angabe nicht mehr ausgeliefert werden.
 	- Korrektur in Dokumentation
 3.3.1
 	- DBIS: PHP-Warning behoben. (TW)
