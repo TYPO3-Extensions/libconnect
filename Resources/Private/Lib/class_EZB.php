@@ -336,7 +336,7 @@ class EZB {
 		
 		//falls jemand kein utf-8 verwendet
 		if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == "utf-8"){
-			$term = utf8_decode($term)
+			$term = utf8_decode($term);
 		}
 		
 		// urlencode termi
