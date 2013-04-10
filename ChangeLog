@@ -4,9 +4,16 @@
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
+3.3.3
+	- jede Menge Bugfixes um vielerlei Warnings zu beheben. (AL)
+	- EZB+DBIS: Sollte die Website in "iso-8859-15" kodiert sein, führte das bisher zu fehlerhaften Such-URLs (TW)
+	- EZB: 
+		- Bei Angabe zur ersten bzw. letzten Volltextausgabe kam es teilweise dazu, dass ein einzelnes Komma voran stand. (TW)
+		- Abwärtskompatibilität zu PHP 5.2 erhöht (Workaround für SimpleXMLElement::count gefunden) (TW)
+
 3.3.2
 	- Als Abhängigkeit die TYPO3-Version mit angegeben, da im TER Extension mit fehlender Angabe nicht mehr ausgeliefert werden.
-	- Korrektur in Dokumentatoin
+	- Korrektur in Dokumentation
 3.3.1
 	- DBIS: PHP-Warning behoben. (TW)
 	- Dokumentation als PDF hinzugefügt (TW)
