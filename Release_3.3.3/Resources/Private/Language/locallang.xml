@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for the libconnect extension in the FRONTEND</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_libconnect_domain_model_subject">Subject</label>
+			<label index="tx_libconnect_domain_model_subject.title">Name des Fachgebiets</label>
+			<label index="tx_libconnect_domain_model_subject.dbisid">Notation im DBIS-System</label>
+			<label index="tx_libconnect_domain_model_subject.ezbnotation">Notation im EZB-System</label>
+			<label index="tx_libconnect_domain_model_dbis">DBIS</label>
+			<label index="tx_libconnect_domain_model_ezb">EZB</label>
+			
+			<label index="tx_libconnect.ezb.overview.headline">Elektronische Zeitschriftenbibliothek</label>
+			
+			<label index="tx_libconnect.ezb.list.headline.alphabetical">EZB - Alphabetische Auflistung</label>
+			<label index="tx_libconnect.ezb.list.headline.subject">EZB - Auflistung nach Fachgebieten</label>
+			<label index="tx_libconnect.ezb.list.pages.article">Artikelliste</label>
+			<label index="tx_libconnect.ezb.list.pages.opened">offen</label>
+			<label index="tx_libconnect.ezb.list.pages.closed">geschlossen</label>
+			
+			<label index="tx_libconnect.ezb.legend.headline">Legende:</label>
+			<label index="tx_libconnect.ezb.legend.icon.green">Frei zugänglich</label>
+			<label index="tx_libconnect.ezb.legend.icon.yellow">Im Campus-Netz sowie für Angehörige der Universität auch extern zugänglich</label>
+			<label index="tx_libconnect.ezb.legend.icon.red">Für Ihren Standort nicht freigeschaltet. Zum Teil bekommen Sie Zugriff auf Abstracts</label>
+			<label index="tx_libconnect.ezb.legend.icon.yellow.red">Nur für einen Teil der erschienenen Jahrgänge zugänglich</label>
+			
+			<label index="tx_libconnect.ezb.miniform.link.alphabetical">Alphabetische Auflistung</label>
+			<label index="tx_libconnect.ezb.miniform.link.subject">Auflistung nach Fachgebieten</label>
+			<label index="tx_libconnect.ezb.miniform.link.extended_search">Erweiterte Suche</label>
+			<label index="tx_libconnect.ezb.miniform.searchform.headline">Suche nach Zeitschriften</label>
+			<label index="tx_libconnect.ezb.miniform.searchform.label">Name der Zeitschrift</label>
+			
+			<label index="tx_libconnect.ezb.search.headline">Ergebnisse Ihrer Suche</label>
+			<label index="tx_libconnect.ezb.search.text.hits">Die Suche ergab %s Treffer:</label>
+			<label index="tx_libconnect.ezb.search.error.headline">Bei der Suche ist ein Fehler aufgetreten:</label>
+			<label index="tx_libconnect.ezb.search.error.text">Sie haben keine Suchbegriffe eingegeben und kein Fachgebiet ausgewählt.</label>
+		</languageKey>
+	</data>
+</T3locallang>
