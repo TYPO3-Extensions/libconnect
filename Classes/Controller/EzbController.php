@@ -107,8 +107,9 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		if($this->settings['enableLocationData'] == 1) {
             $locationData = $this->ezbRepository->loadLocationData($journal);
             
-            if($locationData) 
+            if($locationData) {
                 $journal['locationData'] = $locationData;
+			}
 
 		}
     //EOF ZDB LocationData
