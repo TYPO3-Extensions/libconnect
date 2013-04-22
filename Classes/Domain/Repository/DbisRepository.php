@@ -84,7 +84,6 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		$this->loadSubjects();
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 		
-		
 		$dbis = new DBIS();
 		
 		$list = $dbis->getFachliste();
