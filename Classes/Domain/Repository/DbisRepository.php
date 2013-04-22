@@ -36,11 +36,19 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 
 		$dbis = new DBIS();
 		
-		$subject = $this->t3_to_dbis_subjects[$subject_id];
+		if(is_numeric($subject_id)){
+			$subject = $this->t3_to_dbis_subjects[$subject_id];
 
-		$dbis_id = $subject['dbisid'];
+			$dbis_id = $subject['dbisid'];
 	
-		$result = $dbis->getDbliste($dbis_id, $config['sort']);
+			$result = $dbis->getDbliste($dbis_id, $config['sort']);
+		}else{
+			$result = $dbis->getDbliste($subject_id, $config['sort']);
+			
+			$subject['title'] = $result['headline'];
+		}
+		
+		
 		
 		foreach(array_keys($result['list']['top']) as $db) {
 			$result['list']['top'][$db]['detail_link'] = $cObject->getTypolink_URL(
@@ -82,10 +90,19 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		$list = $dbis->getFachliste();
 
 		foreach($list as $el) {
-			$subject = $this->dbis_to_t3_subjects[$el['id']];
-			$el['link'] = $cObject->getTypolink_URL($GLOBALS['TSFE']->id, array(
-				'libconnect[subject]' => $subject['uid'])
-			);
+		
+			if($el['lett'] != "c"){
+				//id aus Datenbank holen
+				$subject = $this->dbis_to_t3_subjects[$el['id']];
+				
+				$el['link'] = $cObject->getTypolink_URL($GLOBALS['TSFE']->id, array(
+					'libconnect[subject]' => $subject['uid'])
+				);
+			}else{
+				$el['link'] = $cObject->getTypolink_URL($GLOBALS['TSFE']->id, array(
+					'libconnect[subject]' => $el['id'])
+				);
+			}
 			
 			$list[$el['id']] = $el;
 		}

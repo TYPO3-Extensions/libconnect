@@ -121,7 +121,8 @@ class DBIS {
 
 		$sortlist = array();
 		$url = 'http://rzblx10.uni-regensburg.de/dbinfo/dbliste.php?xmloutput=1&bib_id=' . $this->bibID . '&' . "colors={$this->colors}&ocolors={$this->ocolors}&sort=" . $sort . "&";
-
+		$headline = "";
+		
 		//BOF workaround for alphabetical listing
 		if ($fachgebiet == 'all') {
 
@@ -140,7 +141,7 @@ class DBIS {
 				// notation ist eine id => dbis sammlung
 				$url .= 'lett=f&gebiete=' . $fachgebiet;
 			} else {
-				// notation ist ein Zeichen => SUB sammlung
+				// notation ist ein Zeichen => eigene sammlung
 				$url .= 'lett=c&collid=' . $fachgebiet;
 			}
 		}
@@ -153,7 +154,12 @@ class DBIS {
 			'groups' => array(),
 			'access_infos' => array()
 		);
-
+		
+		// Name der eigenen Sammlung
+		if (isset($xml_fachgebiet_db->headline)){
+			$headline = $xml_fachgebiet_db->headline;
+		}
+		
 		//BOF workaround for alphabetical listing
 		if (is_object($xml_fachgebiet_db->list_dbs->alphabetical_list)) {
 			$alphabeticalNavList = array();
@@ -280,7 +286,7 @@ class DBIS {
 
 		$list['alphasort'] = $sortlist;
 
-		return array('groups' => $access_infos, 'list' => $list);
+		return array('groups' => $access_infos, 'list' => $list, 'headline' =>$headline);
     }
 	
 	
