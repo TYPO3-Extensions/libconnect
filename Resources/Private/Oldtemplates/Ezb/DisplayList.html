@@ -10,26 +10,30 @@
 	</f:if>
 </h3>
 
-<f:if condition="{journals.subject}">
-	<h1>
-		<f:escape value="{journals.subject}" type="raw" />
-	</h1>
-</f:if>
-
 <div class="ezb-list-legend">
 	<ul>
-		<li class="ezb-list-legend-one">
-			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.legend.icon.green" />
-		</li>
-		<li class="ezb-list-legend-two">
-			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.legend.icon.yellow" />
-		</li>
-		<li class="ezb-list-legend-six">
-			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.legend.icon.yellow.red" />
-		</li>
-		<li class="ezb-list-legend-four">
-			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.legend.icon.red" />
-		</li>
+		<f:for each="{journals.selected_colors}" as="section" key="key">
+			<f:if condition="{key} == 1">
+				<li class="ezb-list-legend-one">
+					<f:escape value="{section}" type="raw" />
+				</li>
+			</f:if>
+			<f:if condition="{key} == 2">
+				<li class="ezb-list-legend-two">
+					<f:escape value="{section}" type="raw" />
+				</li>
+			</f:if>
+			<f:if condition="{key} == 6">
+				<li class="ezb-list-legend-six">
+					<f:escape value="{section}" type="raw" />
+				</li>
+			</f:if>
+			<f:if condition="{key} == 4">
+				<li class="ezb-list-legend-four">
+					<f:escape value="{section}" type="raw" />
+				</li>
+			</f:if>
+		</f:for>
 	</ul>
 </div>
 

@@ -49,6 +49,10 @@ class EZB {
     
     // XML Daten
     private $XMLPageConnection;
+	
+	// Lizenzinfos
+	private $shortAccessInfos = Array();
+	private $longAccessInfos = Array();
 
     /**
      * Konstruktor
@@ -303,9 +307,14 @@ class EZB {
 				$form[(string) $value->attributes()->name][(string) $value2->attributes()->value] = (string) $value2;
 			}
 		}
-
-		// fehlenden Eintrag ergaenzen
-		$form['selected_colors'][2] = 'im Campus-Netz zugänglich';
+		
+		//falls eine kürzere Form erwünscht ist
+		EZB::setShortAccessInfos();
+		if((!empty($this->shortAccessInfos)) && ($this->shortAccessInfos!= false)){
+			foreach($this->shortAccessInfos as $key =>$text){
+				 $form['selected_colors'][$key] = $text;
+			}
+		}
 
 		// Schlagwort und issn tauschen...
 		$form['jq_type'] = array(
@@ -450,6 +459,14 @@ class EZB {
 		}
 
 		return $result;
+    }
+	
+	public function setShortAccessInfos() {
+		$this->shortAccessInfos = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['settings.']['ezbshortaccessinfos.'][$this->lang.'.'];
+    }
+	
+	public function setLongAccessInfos() {
+		$this->shortAccessInfos = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['settings.']['ezblongaccessinfos.'][$this->lang.'.'];
     }
 }
 ?>
