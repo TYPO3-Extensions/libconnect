@@ -4,6 +4,14 @@
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
+3.3.4
+	- DBIS: Eigene Sammlungen wurden in Einstiegsseite nicht richtig verlinkt (TW)
+		- Name der Sammlung wird nicht aus der Datenbank, sondern über die Schnittstelle ermittelt.
+	- EZB: 
+		- Die Zugriffsinformationen in der Listenansicht waren bisher statisch. Diese werden nun über die Schnittstelle geladen. (TW)
+			- Für Listenansicht stehen die Zugriffsinformationen nicht zur Verfügung, daher werden diese über die Suche geholt.
+			- Für das Suchformular können die Texte nun in Kurzfassung über TypoScript überschrieben werden.
+		- Alle statische Texte nun aus locallang.xml. (TW)
 3.3.3
 	- jede Menge Bugfixes um vielerlei Warnings zu beheben. (AL)
 	- EZB+DBIS: Sollte die Website in "iso-8859-15" kodiert sein, führte das bisher zu fehlerhaften Such-URLs (TW)
