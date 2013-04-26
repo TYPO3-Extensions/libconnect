@@ -37,6 +37,17 @@
 			<label index="tx_libconnect.ezb.search.text.hits">Die Suche ergab %s Treffer:</label>
 			<label index="tx_libconnect.ezb.search.error.headline">Bei der Suche ist ein Fehler aufgetreten:</label>
 			<label index="tx_libconnect.ezb.search.error.text">Sie haben keine Suchbegriffe eingegeben und kein Fachgebiet ausgewählt.</label>
+			
+			<label index="tx_libconnect.ezb.form.label.extsearchform">Erweiterte Suche nach Zeitschriften</label>
+			<label index="tx_libconnect.ezb.form.label.searchterm">Suchbegriff</label>
+			<label index="tx_libconnect.ezb.form.label.link">Verknüpfung</label>
+			<label index="tx_libconnect.ezb.form.label.type">Feldangabe</label>
+			<label index="tx_libconnect.ezb.form.label.hits">Treffer pro Seite</label>
+			<label index="tx_libconnect.ezb.form.legend.limit">Suche einschränken</label>
+			<label index="tx_libconnect.ezb.form.label.subject">Fachgebiete</label>
+			<label index="tx_libconnect.ezb.form.option.hits">alle</label>
+			<label index="tx_libconnect.ezb.form.label.access">Volltextartikel sind</label>
+			<label index="tx_libconnect.ezb.form.input.search">Suchen</label>
 		</languageKey>
 	</data>
 </T3locallang>
