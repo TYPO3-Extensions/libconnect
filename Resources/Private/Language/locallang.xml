@@ -48,6 +48,38 @@
 			<label index="tx_libconnect.ezb.form.option.hits">alle</label>
 			<label index="tx_libconnect.ezb.form.label.access">Volltextartikel sind</label>
 			<label index="tx_libconnect.ezb.form.input.search">Suchen</label>
+			
+			<label index="tx_libconnect.ezb.detail.error.h1">Fehler</label>
+			<label index="tx_libconnect.ezb.detail.error.p1">Es ist ein Fehler bei der Anfrage der elektronische Zeitschrift aufgetreten.</label>
+			<label index="tx_libconnect.ezb.detail.error.p2">Möglicherweise ist die angefragte Zeitschrift nicht vorhanden. Bitte versuchen Sie es erneut oder wenden Sie sich an das Web-Team der Bibliothek, das Ihnen beim Auffinden des Datensatzes gerne behilflich ist.</label>
+			<label index="tx_libconnect.ezb.detail.result.th">Verfügbarkeit</label>
+			<label index="tx_libconnect.ezb.detail.license.th">Lizenzierter Zeitraum</label>
+			<label index="tx_libconnect.ezb.detail.period.a">gesamter Zeitraum</label>
+			<label index="tx_libconnect.ezb.detail.period.readme">ReadMe</label>
+			<label index="tx_libconnect.ezb.detail.period.rest">Restliche Zeiträume</label>
+			<label index="tx_libconnect.ezb.detail.period.homepage">Homepage der Zeitschrift</label>
+			<label index="tx_libconnect.ezb.detail.fulltext.th">Volltext</label>
+			<label index="tx_libconnect.ezb.detail.homepages.th">Homepage(s)</label>
+			<label index="tx_libconnect.ezb.detail.since.th">Volltext online seit</label>
+			<label index="tx_libconnect.ezb.detail.volume.td">Jg.</label>
+			<label index="tx_libconnect.ezb.detail.issue.td">H.</label>
+			<label index="tx_libconnect.ezb.detail.untilthen.th">Volltext online bis</label>
+			<label index="tx_libconnect.ezb.detail.publisher.th">Verlag</label>
+			<label index="tx_libconnect.ezb.detail.zdb.th">ZDB Nummer</label>
+			<label index="tx_libconnect.ezb.detail.subjects_join">Fachgruppe(n)</label>
+			<label index="tx_libconnect.ezb.detail.keywords_join">Schlagwort(e)</label>
+			<label index="tx_libconnect.ezb.detail.eissns_join">E-ISSN(s)</label>
+			<label index="tx_libconnect.ezb.detail.pissns_join">P-ISSN(s)</label>
+			<label index="tx_libconnect.ezb.detail.appearence">Form</label>
+			<label index="tx_libconnect.ezb.detail.costs">Kosten</label>
+			<label index="tx_libconnect.ezb.detail.remarks">Bemerkung</label>
+			<label index="tx_libconnect.ezb.detail.print.yes">im Druck vorhanden</label>
+			<label index="tx_libconnect.ezb.detail.print.source">Quelle</label>
+			<label index="tx_libconnect.ezb.detail.print.period">Bestand</label>
+			<label index="tx_libconnect.ezb.detail.print.signature">Grundsignatur</label>
+			<label index="tx_libconnect.ezb.detail.print.location">Standort</label>
+			<label index="tx_libconnect.ezb.detail.print.info">Informationen zur Verfügbarkeit</label>
+			<label index="tx_libconnect.ezb.detail.participants">Liste der teilnehmenden Institutionen, die Volltextzugriff bieten.</label>
 		</languageKey>
 	</data>
 </T3locallang>

@@ -1,14 +1,12 @@
 <div id="ezb-detail">
 <f:if condition="{error}">
 	<f:then>
-		<h1>Fehler</h1>
+		<h1><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.error.h1" /></h1>
 		<p>
-			Es ist ein Fehler bei der Anfrage der elektronische Zeitschrift aufgetreten.
+			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.error.p1" />
 		</p>
 		<p>
-			M&ouml;glicherweise ist die angefragte Zeitschrift nicht vorhanden. Bitte versuchen Sie es erneut
-			oder wenden Sie sich an das Web-Team der Bibliothek, das Ihnen beim Auffinden des Datensatzes
-			gerne behilflich ist.
+			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.error.p2" />
 		</p>
 	</f:then>
 	<f:else>
@@ -19,33 +17,12 @@
 		<tbody>
 		<tr>
 			<th>
-				<strong>Verf&uuml;gbarkeit:</strong>
+				<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.result.th" />:</strong>
 			</th>
 
 			<td>
-				<span class="ezb-list-accessinfo-access_{journal.color_code}">
-				<f:if condition="{journal.color_code} == 1">
-				<f:then>
-					Frei zug&auml;nglich
-				</f:then>
-				<f:else>
-					<f:if condition="{journal.color_code} == 2">
-					<f:then>
-						Im Campus-Netz sowie f&uuml;r Angeh&ouml;rige der Universit&auml;t auch extern zug&auml;nglich
-					</f:then>
-					<f:else>
-						<f:if condition="{journal.color_code} == 6">
-						<f:then>
-							Nur f&uuml;r einen Teil der erschienenen Jahrg&auml;nge zug&auml;nglich
-						</f:then>
-						<f:else>
-							F&uuml;r Ihren Standort nicht freigeschaltet. Zum Teil bekommen Sie Zugriff auf Abstracts oder Inhaltsverzeichnisse
-						</f:else>
-						</f:if>
-					</f:else>
-					</f:if>
-				</f:else>
-				</f:if>
+				<span class="ezb-list-accessinfo-access_{journal.color_code.color}">
+					{journal.color_code.text}
 				</span>
 			</td>
 		</tr>
@@ -56,7 +33,7 @@
 				<f:if condition="{libconnect:strlen(string: period.label)} > 0">
 				<f:then>
 					<th>
-						<strong>Lizenzierter Zeitraum:</strong>
+						<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.license.th" />:</strong>
 					</th>
 					<td>
 						<f:if condition="{libconnect:trimedstrlen(string: period.label)} > 0">
@@ -64,12 +41,12 @@
 							<a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">{period.label}</a>&nbsp;
 						</f:then>
 						<f:else>
-						    <a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">gesamter Zeitraum</a>
+						    <a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.period.a" /></a>
 						</f:else>
 						</f:if>
                         <f:if condition="{period.readme}">
                             <f:then>
-                                <a href="<f:escape value="{period.readme}" type="raw" />"><span class="ezb-list-accessinfo-access_{period.color_code}">ReadMe</span></a>
+                                <a href="<f:escape value="{period.readme}" type="raw" />"><span class="ezb-list-accessinfo-access_{period.color_code}"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.period.readme" /></span></a>
                             </f:then>
                             
                             <f:else>
@@ -80,10 +57,10 @@
 				</f:then>
 				<f:else>
 				<th>
-					<strong>Restliche Zeitr&auml;ume:</strong>
+					<strong><span class="ezb-list-accessinfo-access_{period.color_code}"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.period.rest" />:</strong>
 				</th>
 				<td>
-					<span class="ezb-list-accessinfo-access_{period.color_code}"><a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">Homepage der Zeitschrift</a></span>
+					<span class="ezb-list-accessinfo-access_{period.color_code}"><a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.period.homepage" /></a></span>
 				</td>
 				</f:else>
 				</f:if>
@@ -95,7 +72,7 @@
 		<f:if condition="{libconnect:strlen(string: journal.fulltext)} > 0">
 		<tr>
 			<th>
-			<strong>Volltext:</strong>
+			<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.fulltext.th" />:</strong>
 			</th>
 
 			<td>
@@ -107,7 +84,7 @@
 		<f:if condition="<f:count subject='{journal.homepages}' /> > 0">
 		<tr>
 			<th>
-			<strong>Homepage(s):</strong>
+			<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.homepages.th" />:</strong>
 			</th>
 
 			<td>
@@ -125,12 +102,12 @@
 		<f:if condition="{journal.first_fulltext.date} > 0">
 		<tr>
 			<th>
-			<strong>Volltext online seit:</strong>
+			<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.since.th" />:</strong>
 			</th>
 
 			<td>
-			<f:if condition="{journal.first_fulltext.volume}">Jg. <f:escape value="{journal.first_fulltext.volume}" type="raw" /></f:if>
-			<f:if condition="{journal.first_fulltext.issue}"><f:if condition="{journal.first_fulltext.volume}">, </f:if>H. <f:escape value="{journal.first_fulltext.issue}" type="raw" /></f:if>
+			<f:if condition="{journal.first_fulltext.volume}"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.volume.td" /> <f:escape value="{journal.first_fulltext.volume}" type="raw" /></f:if>
+			<f:if condition="{journal.first_fulltext.issue}"><f:if condition="{journal.first_fulltext.volume}">, </f:if><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.issue.td" /> <f:escape value="{journal.first_fulltext.issue}" type="raw" /></f:if>
 			({journal.first_fulltext.date})
 			</td>
 		</tr>
@@ -139,12 +116,12 @@
 		<f:if condition="{journal.last_fulltext}">
 		<tr>
 			<th>
-			<strong>Volltext online bis:</strong>
+			<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.untilthen.th" />:</strong>
 			</th>
 
 			<td>
-			<f:if condition="{journal.last_fulltext.volume}">Jg. {journal.last_fulltext.volume}</f:if>
-			<f:if condition="{journal.last_fulltext.issue}"><f:if condition="{journal.first_fulltext.volume}">, </f:if>H. {journal.last_fulltext.issue}</f:if>
+			<f:if condition="{journal.last_fulltext.volume}"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.volume.td" /> {journal.last_fulltext.volume}</f:if>
+			<f:if condition="{journal.last_fulltext.issue}"><f:if condition="{journal.first_fulltext.volume}">, </f:if><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.issue.td" /> {journal.last_fulltext.issue}</f:if>
 			({journal.last_fulltext.date})
 			</td>
 		</tr>
@@ -153,7 +130,7 @@
 		<f:if condition="{journal.publisher}">
 		<tr>
 			<th>
-			<strong>Verlag:</strong>
+			<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.publisher.th" />:</strong>
 			</th>
 
 			<td>
@@ -165,7 +142,7 @@
 		<f:if condition="{journal.ZDB_number}">
 		<tr>
 			<th>
-			<strong>ZDB Nummer:</strong>
+			<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.zdb.th" />:</strong>
 			</th>
 
 			<td>
@@ -179,7 +156,7 @@
 		<f:if condition="{libconnect:strlen(string: journal.subjects_join)} > 0">
 		<tr>
 			<th>
-			<strong>Fachgruppe(n):</strong>
+			<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.subjects_join" />:</strong>
 			</th>
 
 			<td>
@@ -191,7 +168,7 @@
 		<f:if condition="{journal.keywords_join}">
 		<tr>
 			<th>
-			<strong>Schlagwort(e):</strong>
+			<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.keywords_join" />:</strong>
 			</th>
 
 			<td>
@@ -203,7 +180,7 @@
 		<f:if condition="{libconnect:strlen(string: journal.eissns_join)} > 0">
 		<tr>
 			<th>
-			<strong>E-ISSN(s):</strong>
+			<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.eissns_join" />:</strong>
 			</th>
 
 			<td>
@@ -215,7 +192,7 @@
 		<f:if condition="{libconnect:strlen(string: journal.pissns_join)} > 0">
 		<tr>
 			<th>
-			<strong>P-ISSN(s):</strong>
+			<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.pissns_join" />:</strong>
 			</th>
 
 			<td>
@@ -227,7 +204,7 @@
 		<f:if condition="{libconnect:strlen(string: journal.appearence)} > 0">
 		<tr>
 			<th>
-			<strong>Form:</strong>
+			<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.appearence" />:</strong>
 			</th>
 
 			<td>
@@ -239,7 +216,7 @@
 		<f:if condition="{libconnect:strlen(string: journal.costs)} > 0">
 		<tr>
 			<th>
-			<strong>Kosten:</strong>
+			<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.costs" />:</strong>
 			</th>
 
 			<td>
@@ -251,7 +228,7 @@
 		<f:if condition="{libconnect:strlen(string: journal.remarks)} > 0">
 		<tr>
 			<th>
-			<strong>Bemerkung:</strong>
+			<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.remarks" />:</strong>
 			</th>
 
 			<td>
@@ -265,8 +242,8 @@
         <f:if condition="<f:count subject='{journal.locationData}' /> > 0">
         <tr>
             <th>
-                <strong>im Druck vorhanden:</strong><br />
-                (Quelle: <a href="http://www.zdb-opac.de" target="zdbfenster">ZDB</a>)
+                <strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.print.yes" />:</strong><br />
+                (<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.print.source" />: <a href="http://www.zdb-opac.de" target="zdbfenster">ZDB</a>)
             </th>
             
             <td>
@@ -285,19 +262,19 @@
                                         </f:if>-->
                                         <f:if condition="{libconnect:strlen(string: result.Period)} > 0">
                                         <tr>
-                                            <th>Bestand:</th>
+                                            <th><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.print.period" />:</th>
                                             <td><f:escape value="{result.Period}" type="raw" /></td>
                                         </tr>
                                         </f:if>
                                         <f:if condition="{libconnect:strlen(string: result.Signature)} > 0">
                                         <tr>
-                                            <th>Grundsignatur:</th>
+                                            <th><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.print.signature" />:</th>
                                             <td><f:escape value="{result.Signature}" type="raw" /></td>
                                         </tr>
                                         </f:if>
                                         <f:if condition="{libconnect:strlen(string: result.Location)} > 0">
                                         <tr>
-                                            <th>Standort:</th>
+                                            <th><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.print.location" />:</th>
                                             <td><f:escape value="{result.Location}" type="raw" /></td>
                                         </tr>
                                         </f:if>
@@ -339,7 +316,7 @@
             </th>
 
 			<td>
-			<a href="<f:escape value="{journal.participants}" type="raw" />" target="zdbopac">Liste der teilnehmenden Institutionen, die Volltextzugriff bieten.</a>
+			<a href="<f:escape value="{journal.participants}" type="raw" />" target="zdbopac"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.print.participants" /></a>
 			</td>
 		</tr>
 		</f:if>

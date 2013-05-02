@@ -113,7 +113,15 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		if (! $journal ){
 			return false;
 		}
-	
+		
+		//Zugriffsinformationen holen
+		$form = $ezb->detailSearchFormFields();
+		$journal['selected_colors'] = $form['selected_colors'];
+		$color = $journal['color_code'];
+		unset($journal['color_code']);
+		$journal['color_code']['text'] = $journal['selected_colors'][$color];
+		$journal['color_code']['color'] = $color;
+		
 		return $journal; 
 	}
 	
@@ -181,7 +189,11 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 					)));
 			}
 		}
-
+		
+		//Zugriffsinformationen holen
+		$form = $ezb->detailSearchFormFields();
+		$journals['selected_colors'] = $form['selected_colors'];
+		
 		return $journals;
 	}
 
