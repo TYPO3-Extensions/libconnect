@@ -59,29 +59,8 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		$ezb = new EZB();
 		$journals = $ezb->getFachbereichJournals($subject['ezbnotation'], $index, $sc, $lc);
 		
-		/*BEGIN Zugriffsinformationen holen*/
-		
-		//Standardtexte holen
-		$LongAccessInfos = $ezb->getLongAccessInfos();
-		
-		$colortext = array();
-		if((!empty($LongAccessInfos['longAccessInfos'])) && ($LongAccessInfos['longAccessInfos']!= false)){
-			foreach($LongAccessInfos as $key =>$text){
-				 $colortext[$key] = $text;
-			}
-		}
-		
-		//Texte aus dem Web holen
-		$form = $ezb->detailSearchFormFields();
-		$journal['selected_colors'] = $form['selected_colors'];
-
-		if((!isset($journal['selected_colors'])) or (empty($journal['selected_colors'])) or ($LongAccessInfos['force'] == 'true')){
-			$journals['selected_colors'] = $colortext['longAccessInfos'];
-		}else{
-			$journals['selected_colors'] = $journal['selected_colors'];
-		}
-		
-		/*END Zugriffsinformationen holen*/
+		//Zugriffsinformationen holen
+		$journals['selected_colors'] = $this->getAccessInfos();
 		
 
 		foreach(array_keys($journals['navlist']['pages']) as $page) {
@@ -234,8 +213,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		}
 		
 		//Zugriffsinformationen holen
-		$form = $ezb->detailSearchFormFields();
-		$journals['selected_colors'] = $form['selected_colors'];
+		$journals['selected_colors'] = $this->getAccessInfos();
 		
 		return $journals;
 	}
@@ -321,6 +299,38 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 	
 	public function getLongAccessInfos(){
 		return $this->longAccessInfos;
+	}
+	
+	public function getAccessInfos(){
+		$ezb = new EZB();
+		
+		//Standardtexte holen
+		$LongAccessInfos = $ezb->getLongAccessInfos();
+		
+		$colortext = array();
+		if((!empty($LongAccessInfos['longAccessInfos'])) && ($LongAccessInfos['longAccessInfos']!= false)){
+			foreach($LongAccessInfos as $key =>$text){
+				 $colortext[$key] = $text;
+			}
+		}
+		
+		//Texte aus dem Web holen
+		$form = $ezb->detailSearchFormFields();
+		$journal['selected_colors'] = $form['selected_colors'];
+
+		if((!isset($journal['selected_colors'])) or (empty($journal['selected_colors'])) or ($LongAccessInfos['force'] == 'true')){
+			$journals['selected_colors'] = $colortext['longAccessInfos'];
+		}else{
+			$journals['selected_colors'] = $journal['selected_colors'];
+			//Falls Lizenzinformationen fehlen
+			foreach($colortext['longAccessInfos'] as $key =>$text){
+				 if(!isset($journals['selected_colors'][$key])){
+					$journals['selected_colors'][$key] = $text;
+				 }
+			} 
+		}
+		
+		return $journals['selected_colors'];
 	}
 }
 ?>
