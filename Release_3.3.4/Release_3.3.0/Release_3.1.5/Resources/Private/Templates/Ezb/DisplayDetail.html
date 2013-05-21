@@ -1,0 +1,269 @@
+<link rel="stylesheet" href="{f:uri.resource(path:'Styles/ezb.css')}" />
+<div id="ezb-detail">
+<f:if condition="{error}">
+	<f:then>
+		<h1>Fehler</h1>
+		<p>
+			Es ist ein Fehler bei der Anfrage der elektronische Zeitschrift aufgetreten.
+		</p>
+		<p>
+			M&ouml;glicherweise ist die angefragte Zeitschrift nicht vorhanden. Bitte versuchen Sie es erneut
+			oder wenden Sie sich an das Web-Team der Bibliothek, das Ihnen beim Auffinden des Datensatzes
+			gerne behilflich ist.
+		</p>
+	</f:then>
+	<f:else>
+		{namespace libconnect=Tx_Libconnect_ViewHelpers}
+		<h1><f:format.htmlentitiesDecode>{journal.title}</f:format.htmlentitiesDecode></h1>
+
+		<table class="ezb-result-details">
+		<tbody>
+		<tr>
+			<td width="130">
+				<strong>Verf&uuml;gbarkeit:</strong>
+			</td>
+
+			<td>
+				<span class="ezb-list-accessinfo-access_{journal.color_code}">
+				<f:if condition="{journal.color_code} == 1">
+				<f:then>
+					Frei zug&auml;nglich
+				</f:then>
+				<f:else>
+					<f:if condition="{journal.color_code} == 2">
+					<f:then>
+						Im Campus-Netz sowie f&uuml;r Angeh&ouml;rige der Universit&auml;t auch extern zug&auml;nglich
+					</f:then>
+					<f:else>
+						<f:if condition="{journal.color_code} == 6">
+						<f:then>
+							Nur f&uuml;r einen Teil der erschienenen Jahrg&auml;nge zug&auml;nglich
+						</f:then>
+						<f:else>
+							F&uuml;r Ihren Standort nicht freigeschaltet. Zum Teil bekommen Sie Zugriff auf Abstracts oder Inhaltsverzeichnisse
+						</f:else>
+						</f:if>
+					</f:else>
+					</f:if>
+				</f:else>
+				</f:if>
+				</span>
+			</td>
+		</tr>
+
+		<f:if condition="<f:count subject='{journal.periods}' /> > 0">
+			<f:for each="{journal.periods}" as="period">
+			<tr>
+				<f:if condition="{libconnect:strlen(string: period.label)} > 0">
+				<f:then>
+					<td>
+						<strong>Lizenzierter Zeitraum:</strong>
+					</td>
+						<f:if condition="{libconnect:trimedstrlen(string: period.label)} > 0">
+						<f:then>
+						<td>
+							<a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">{period.label}</a>&nbsp;
+							<f:if condition="{period.readme}">
+								<f:then>
+									<a href="<f:format.htmlentitiesDecode>{period.readme}</f:format.htmlentitiesDecode>"><span class="ezb-list-accessinfo-access_{period.color_code}">ReadMe</span></a>
+								</f:then>
+								
+								<f:else>
+									<span class="ezb-list-accessinfo-access_{period.color_code}">&nbsp;</span></a>
+								</f:else>
+							</f:if>							
+						</td>
+						</f:then>
+						<f:else>
+						<td>
+							<img src="{f:uri.resource(path:'Img/ezb-list_{period.color_code}.png')}" alt="" />
+							<a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">gesamter Zeitraum</a>
+						</td>
+						</f:else>
+						</f:if>
+				</f:then>
+				<f:else>
+				<td>
+					<strong>Restliche Zeitr&auml;ume:</strong>
+				</td>
+				<td>
+					<span class="ezb-list-accessinfo-access_{period.color_code}"><a class="ezb-license" href="{libconnect:urldecode(url: period.link)}" target="_blank">Homepage der Zeitschrift</a></span>
+				</td>
+				</f:else>
+				</f:if>
+			</tr>
+			</f:for>
+		</f:if>
+
+		
+		<f:if condition="{libconnect:strlen(string: journal.fulltext)} > 0">
+		<tr>
+			<td>
+			<strong>Volltext:</strong>
+			</td>
+
+			<td>
+				<a class="dbis-research" href="{libconnect:urldecode(url: journal.fulltext_link)}" target="_blank">{libconnect:truncate(string: journal.fulltext, length: 70)}</a>
+			</td>
+		</tr>
+		</f:if>
+
+		<f:if condition="<f:count subject='{journal.homepages}' /> > 0">
+		<tr>
+			<td>
+			<strong>Homepage(s):</strong>
+			</td>
+
+			<td>
+				<ul>
+				<f:for each="{journal.homepages}" as="homepage">
+					<li>
+						<a class="dbis-research" href="http://ezb.uni-regensburg.de/warpto.phtml?bibid={bibid}&colors=7&lang=de&jour_id={journal.id}&url={libconnect:urldecode(url: homepage)}" target="_blank">{libconnect:truncate(string: homepage, length: 70)}</a>
+					</li>
+				</f:for>
+				</ul>
+			</td>
+		</tr>
+		</f:if>
+
+		<f:if condition="{journal.first_fulltext.date} > 0">
+		<tr>
+			<td>
+			<strong>Volltext online seit:</strong>
+			</td>
+
+			<td>
+			<f:if condition="{journal.first_fulltext.volume}">Jg. <f:format.htmlentitiesDecode>{journal.first_fulltext.volume}</f:format.htmlentitiesDecode></f:if><f:if condition="{journal.first_fulltext.issue}">, H. <f:format.htmlentitiesDecode>{journal.first_fulltext.issue}</f:format.htmlentitiesDecode></f:if>
+			({journal.first_fulltext.date})
+			</td>
+		</tr>
+		</f:if>
+
+		<f:if condition="{journal.last_fulltext}">
+		<tr>
+			<td>
+			<strong>Volltext online bis:</strong>
+			</td>
+
+			<td>
+			<f:if condition="{journal.last_fulltext.volume}">Jg. {journal.last_fulltext.volume}</f:if><f:if condition="{journal.last_fulltext.issue}">, H. {journal.last_fulltext.issue}</f:if>
+			({journal.last_fulltext.date})
+			</td>
+		</tr>
+		</f:if>
+
+		<f:if condition="{journal.publisher}">
+		<tr>
+			<td>
+			<strong>Verlag:</strong>
+			</td>
+
+			<td>
+			<f:format.htmlentitiesDecode>{journal.publisher}</f:format.htmlentitiesDecode>
+			</td>
+		</tr>
+		</f:if>
+
+		<f:if condition="{journal.ZDB_number}">
+		<tr>
+			<td>
+			<strong>ZDB Nummer:</strong>
+			</td>
+
+			<td>
+			<f:if condition="{journal.ZDB_number_link}"><a href="{journal.ZDB_number_link}" target="_blank"></f:if>
+			{journal.ZDB_number}
+			<f:if condition="{journal.ZDB_number_link}"></a></f:if>
+			</td>
+		</tr>
+		</f:if>
+		
+		<f:if condition="{libconnect:strlen(string: journal.subjects_join)} > 0">
+		<tr>
+			<td>
+			<strong>Fachgruppe(n):</strong>
+			</td>
+
+			<td>
+			<f:format.htmlentitiesDecode>{journal.subjects_join}</f:format.htmlentitiesDecode>
+			</td>
+		</tr>
+		</f:if>
+
+		<f:if condition="{journal.keywords_join}">
+		<tr>
+			<td>
+			<strong>Schlagwort(e):</strong>
+			</td>
+
+			<td>
+			<f:format.htmlentitiesDecode>{journal.keywords_join}</f:format.htmlentitiesDecode>
+			</td>
+		<tr>
+		</f:if>
+	
+		<f:if condition="{libconnect:strlen(string: journal.eissns_join)} > 0">
+		<tr>
+			<td>
+			<strong>E-ISSN(s):</strong>
+			</td>
+
+			<td>
+			<f:format.htmlentitiesDecode>{journal.eissns_join}</f:format.htmlentitiesDecode>
+			</td>
+		</tr>
+		</f:if>
+		
+		<f:if condition="{libconnect:strlen(string: journal.pissns_join)} > 0">
+		<tr>
+			<td>
+			<strong>P-ISSN(s):</strong>
+			</td>
+
+			<td>
+			<f:format.htmlentitiesDecode>{journal.pissns_join}</f:format.htmlentitiesDecode>
+			</td>
+		</tr>
+		</f:if>
+		
+		<f:if condition="{libconnect:strlen(string: journal.appearence)} > 0">
+		<tr>
+			<td>
+			<strong>Form:</strong>
+			</td>
+
+			<td>
+			<f:format.htmlentitiesDecode>{journal.appearence}</f:format.htmlentitiesDecode>
+			</td>
+		</tr>
+		</f:if>
+
+		<f:if condition="{libconnect:strlen(string: journal.costs)} > 0">
+		<tr>
+			<td>
+			<strong>Kosten:</strong>
+			</td>
+
+			<td>
+			<f:format.htmlentitiesDecode>{journal.costs}</f:format.htmlentitiesDecode>
+			</td>
+		</tr>
+		</f:if>
+
+		<f:if condition="{libconnect:strlen(string: journal.remarks)} > 0">
+		<tr>
+			<td>
+			<strong>Bemerkung:</strong>
+			</td>
+
+			<td>
+			<f:format.htmlentitiesDecode>{journal.remarks}</f:format.htmlentitiesDecode>
+			</td>
+		</tr>
+		</f:if>
+
+		</tbody>
+		</table>
+	</f:else>
+</f:if>
+</div>

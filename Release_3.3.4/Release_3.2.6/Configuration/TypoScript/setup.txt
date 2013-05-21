@@ -1,0 +1,47 @@
+#
+# content here will be included after plugin activation automatically. No template inclusion necessary.
+#
+
+plugin.tx_libconnect {
+	
+	ezbbibid = SUBHH
+	dbisbibid = sub_hh
+    zdbsid = vid:dbid
+    //zdbbibid = BIBID
+    //zdbsigel = SIGEL
+    //zdbisil = ISIL
+    //zdbbik = ISIL
+	
+	#Proxy Einstellungen f�r CURL Verbindung
+    proxy = 
+    proxy_port = 
+	
+	persistence {
+		storagePid = {$plugin.tx_libconnect.persistence.storagePid}
+	}
+	
+	settings {
+	    allListingId = 44
+        enableLocationData = 0
+        useIconService = 1
+        validStatesList = 2,3
+        EZBSearchResultsPageId = 
+        DBISSearchResultsPageId = 
+    }
+}
+
+[compatVersion = 4.5]
+	plugin.tx_libconnect.view.templateRootPath = EXT:libconnect/Resources/Private/Oldtemplates/
+[global]
+
+#[userFunc = user_libconnect_hasSelectedPluginForCSSInclude(dbis)]
+#page.includeCSS {
+#    DBIS = {$plugin.tx_libconnect.settings.file.path.dbisCSS}
+#}
+#[global]
+
+#[userFunc = user_libconnect_hasSelectedPluginForCSSInclude(ezb)]
+#page.includeCSS {
+#    EZB = {$plugin.tx_libconnect.settings.file.path.ezbCSS}
+#}
+#[global]

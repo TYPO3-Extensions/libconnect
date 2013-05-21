@@ -1,0 +1,89 @@
+{namespace libconnect=Tx_Libconnect_ViewHelpers}
+<h3>
+	<f:if condition="{journals.subject}">
+		<f:then>
+			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.list.headline.subject" />
+		</f:then>
+		<f:else>
+			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.list.headline.alphabetical" />
+		</f:else>
+	</f:if>
+</h3>
+
+<f:if condition="{journals.subject}">
+	<h1>
+		<f:escape value="{journals.subject}" type="raw" />
+	</h1>
+</f:if>
+
+<div class="ezb-list-legend">
+	<ul>
+		<li class="ezb-list-legend-one">
+			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.legend.icon.green" />
+		</li>
+		<li class="ezb-list-legend-two">
+			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.legend.icon.yellow" />
+		</li>
+		<li class="ezb-list-legend-six">
+			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.legend.icon.yellow.red" />
+		</li>
+		<li class="ezb-list-legend-four">
+			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.legend.icon.red" />
+		</li>
+	</ul>
+</div>
+
+<br/><br/>
+
+<div class="ezb-navigation">
+	<f:for each="{journals.navlist.pages}" as="item">
+		<f:if condition="{libconnect:IsArray(value: item)}">
+			<f:then>
+				<a href="<f:escape value="{item.link}" type="raw" />"><f:escape value="{item.title}" type="raw" /></a>
+			</f:then>
+			<f:else>
+				<em><f:escape value="{item}" type="raw" /></em>
+			</f:else>
+		</f:if>
+	</f:for>
+</div>
+
+<br/><br/>
+
+<div class="ezb-list-output">
+	<f:for each="{journals.alphabetical_order.first_fifty}" as="section">
+		<h3>
+			<a href="{section.link}">
+				<libconnect:strreplace search=" & " replace=" &amp; ">
+					<f:escape value="{section.first_fifty_titles}" type="raw" />
+				</libconnect:strreplace>...
+			</a>
+		</h3>
+	</f:for>
+
+	<h2>
+		<f:escape value="{journals.navlist.current_title}" type="raw" />...
+	</h2>
+
+	<ul class="ezb-list">
+		<f:for each="{journals.alphabetical_order.journals}" as="journal">
+			<li class="ezb-list-accessinfo-access_{journal.color_code}">
+				<a href="<f:escape value="{journal.detail_link}" type="raw" />">
+					<libconnect:strreplace search=" & " replace=" &amp; ">
+						<f:escape value="{journal.title}" type="raw" />
+					</libconnect:strreplace>
+				</a>
+			</li>
+		</f:for>
+	</ul>
+
+	<f:for each="{journals.alphabetical_order.next_fifty}" as="section">
+		<h3>
+			<a href="<f:escape value="{section.link}" type="raw" />">
+				<libconnect:strreplace search=" & " replace=" &amp; ">
+					<f:escape value="{section.next_fifty_titles}" type="raw" />
+				</libconnect:strreplace>...
+			</a>
+		</h3>
+	</f:for>
+</div>
