@@ -8,10 +8,11 @@
 	- DBIS: Eigene Sammlungen wurden in Einstiegsseite nicht richtig verlinkt (TW)
 		- Name der Sammlung wird nicht aus der Datenbank, sondern über die Schnittstelle ermittelt.
 	- EZB: 
-		- Die Zugriffsinformationen in der Listenansicht und Detailseite waren bisher statisch. Diese werden nun über die Schnittstelle geladen. (TW)
-			- Die Zugriffsinformationen stehen nicht zur Verfügung, daher werden diese über die Suche geholt.
-			- Für das Suchformular können die Texte nun in Kurzfassung über TypoScript überschrieben werden.
+		- Die Zugriffsinformationen waren bisher statisch. Diese werden nun über die Schnittstelle geladen. Grund dafür sind leider immer noch Fehler in der Schnittstelle.  (TW)
+		  Nun können aber fehlende Texte durch statische ersetzt oder mittels "force" komplett ersetzt werden.
+			- Für das Suchformular werden die Texte in Kurzfassung über TypoScript überschrieben.
 		- Alle statische Texte nun aus locallang.xml. (TW)
+		- Template für erweiterte Suche - Fehler in CSS-Klassenbezeichnung behoben (TW)
 3.3.3
 	- jede Menge Bugfixes um vielerlei Warnings zu beheben. (AL)
 	- EZB+DBIS: Sollte die Website in "iso-8859-15" kodiert sein, führte das bisher zu fehlerhaften Such-URLs (TW)
