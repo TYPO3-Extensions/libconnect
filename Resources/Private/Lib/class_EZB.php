@@ -257,9 +257,11 @@ class EZB {
 		// generate link to institutions having access to this journal
 		$participants_xml_request = $this->XMLPageConnection->getDataFromXMLPage("{$this->participants_xml_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}");
 		//if ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution->count() > 0) {
-		foreach ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution->children() as $childs)  {
-		    $journal['participants'] = "{$this->participants_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}";
-			break;
+		if ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution){
+			foreach ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution->children() as $childs)  {
+				$journal['participants'] = "{$this->participants_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}";
+				break;
+			}
 		}
 		
 		// periods
@@ -305,14 +307,6 @@ class EZB {
 		foreach ($xml_such_form->ezb_search->option_list AS $key => $value) {
 			foreach ($value->option AS $key2 => $value2) {
 				$form[(string) $value->attributes()->name][(string) $value2->attributes()->value] = (string) $value2;
-			}
-		}
-		
-		//falls eine kürzere Form erwünscht ist
-		EZB::setShortAccessInfos();
-		if((!empty($this->shortAccessInfos)) && ($this->shortAccessInfos!= false)){
-			foreach($this->shortAccessInfos as $key =>$text){
-				 $form['selected_colors'][$key] = $text;
 			}
 		}
 
@@ -465,8 +459,24 @@ class EZB {
 		$this->shortAccessInfos = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['settings.']['ezbshortaccessinfos.'][$this->lang.'.'];
     }
 	
+	public function getShortAccessInfos(){
+		$this->setShortAccessInfos();
+		
+		$return = array('shortAccessInfos' => $this->shortAccessInfos);
+		
+		return $return;
+	}
+	
 	public function setLongAccessInfos() {
-		$this->shortAccessInfos = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['settings.']['ezblongaccessinfos.'][$this->lang.'.'];
+		$this->longAccessInfos = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['settings.']['ezblongaccessinfos.'][$this->lang.'.'];
     }
+	
+	public function getLongAccessInfos(){
+		$this->setLongAccessInfos();
+		
+		$return = array('longAccessInfos' => $this->longAccessInfos, 'force' => $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['settings.']['ezblongaccessinfos.']['force']);
+		
+		return $return;
+	}
 }
 ?>

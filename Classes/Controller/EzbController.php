@@ -99,6 +99,8 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 			//return "<strong>Fehler: Es wurde keine Zeitschrift mit der angegeben URL gefunden.</strong>";
 			return;
 		}
+		
+		//$this->ezbRepository->setLongAccessInfos($this->ezblongaccessinfos->de);
 
 		$journal =  $this->ezbRepository->loadDetail($params['jourid']);
 		

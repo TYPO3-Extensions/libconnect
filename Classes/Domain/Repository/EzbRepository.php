@@ -7,6 +7,8 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 	private $ezb_to_t3_subjects = array();
 	private $t3_to_ezb_subjects = array();
 	
+	private $longAccessInfos = array();
+	
 	public function injectSubjectRepository(Tx_Libconnect_Domain_Repository_SubjectRepository $subjectRepository){
 		$this->subjectRepository = $subjectRepository;
 	}
@@ -57,9 +59,30 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		$ezb = new EZB();
 		$journals = $ezb->getFachbereichJournals($subject['ezbnotation'], $index, $sc, $lc);
 		
-		//Zugriffsinformationen holen
+		/*BEGIN Zugriffsinformationen holen*/
+		
+		//Standardtexte holen
+		$LongAccessInfos = $ezb->getLongAccessInfos();
+		
+		$colortext = array();
+		if((!empty($LongAccessInfos['longAccessInfos'])) && ($LongAccessInfos['longAccessInfos']!= false)){
+			foreach($LongAccessInfos as $key =>$text){
+				 $colortext[$key] = $text;
+			}
+		}
+		
+		//Texte aus dem Web holen
 		$form = $ezb->detailSearchFormFields();
-		$journals['selected_colors'] = $form['selected_colors'];
+		$journal['selected_colors'] = $form['selected_colors'];
+
+		if((!isset($journal['selected_colors'])) or (empty($journal['selected_colors'])) or ($LongAccessInfos['force'] == 'true')){
+			$journals['selected_colors'] = $colortext['longAccessInfos'];
+		}else{
+			$journals['selected_colors'] = $journal['selected_colors'];
+		}
+		
+		/*END Zugriffsinformationen holen*/
+		
 
 		foreach(array_keys($journals['navlist']['pages']) as $page) {
 			if (is_array($journals['navlist']['pages'][$page])) {
@@ -114,13 +137,33 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 			return false;
 		}
 		
-		//Zugriffsinformationen holen
+		/*BEGIN Zugriffsinformationen holen*/
+		
+		//Standardtexte holen
+		$LongAccessInfos = $ezb->getLongAccessInfos();
+		
+		$colortext = array();
+		if((!empty($LongAccessInfos['longAccessInfos'])) && ($LongAccessInfos['longAccessInfos']!= false)){
+			foreach($LongAccessInfos as $key =>$text){
+				 $colortext[$key] = $text;
+			}
+		}
+		
+		//Texte aus dem Web holen
 		$form = $ezb->detailSearchFormFields();
 		$journal['selected_colors'] = $form['selected_colors'];
-		$color = $journal['color_code'];
+
+		$color = $journal['color_code'];//Farbangabe
 		unset($journal['color_code']);
-		$journal['color_code']['text'] = $journal['selected_colors'][$color];
+		$journal['color_code'] = array();
+
+		if((!isset($journal['selected_colors'][$color])) or (empty($journal['selected_colors'][$color])) or ($LongAccessInfos['force'] == 'true')){
+			$journal['color_code']['text'] = $colortext['longAccessInfos'][$color];
+		}else{
+			$journal['color_code']['text'] = $journal['selected_colors'][$color];
+		}
 		$journal['color_code']['color'] = $color;
+		/*END Zugriffsinformationen holen*/
 		
 		return $journal; 
 	}
@@ -207,7 +250,39 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 
 	public function loadForm() {
 		$ezb = new EZB();
+		
+		/*BEGIN Zugriffsinformationen holen*/
+		
+		//Standardtexte holen
+		$LongAccessInfos = $ezb->getLongAccessInfos();
+		
+		$colortext = array();
+		if((!empty($LongAccessInfos['longAccessInfos'])) && ($LongAccessInfos['longAccessInfos']!= false)){
+			foreach($LongAccessInfos as $key =>$text){
+				 $colortext[$key] = $text;
+			}
+		}
+		
+		//Texte aus dem Web holen
 		$form = $ezb->detailSearchFormFields();
+		$journal['selected_colors'] = $form['selected_colors'];
+
+		if((!isset($journal['selected_colors'])) or (empty($journal['selected_colors'])) or ($LongAccessInfos['force'] == 'true')){
+			$form['selected_colors'] = $colortext['longAccessInfos'];
+		}else{
+			$form['selected_colors'] = $journal['selected_colors'];
+		}
+		
+		//falls eine kürzere Form erwünscht ist
+		$ShortAccessInfos = $ezb->getShortAccessInfos();
+		if((!empty($ShortAccessInfos)) && ($ShortAccessInfos!= false)){
+			foreach($ShortAccessInfos['shortAccessInfos'] as $key =>$text){
+				 $form['selected_colors'][$key] = $text;
+			}
+		}
+		
+		unset($form['selected_colors'][6]);
+		/*END Zugriffsinformationen holen*/
 	
 		return $form;
 	}
@@ -238,6 +313,14 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		return $locationData; 
 	}
 //EOF ZDB LocationData
+
+
+	public function setLongAccessInfos($longAccessInfos) {
+		$this->longAccessInfos = $longAccessInfos;
+    }
 	
+	public function getLongAccessInfos(){
+		return $this->longAccessInfos;
+	}
 }
 ?>
