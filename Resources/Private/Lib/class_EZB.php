@@ -337,7 +337,7 @@ class EZB {
 	
 		$searchUrl = $this->search_result_page . 'bibid=' . $this->bibID . '&colors=' . $this->colors . '&lang=' . $this->lang;
 		
-		//falls jemand kein utf-8 verwendet
+		//falls jemand kein utf-8 verwendet, sollte das nicht gemacht werden
 		if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == "utf-8"){
 			$term = utf8_decode($term);
 		}
@@ -357,7 +357,7 @@ class EZB {
 		foreach ($searchVars as $var => $values) {
 
 			if (!is_array($values)) {
-				//falls jemand kein utf-8 verwendet
+				//falls jemand kein utf-8 verwendet, sollte das nicht gemacht werden
 				if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == "utf-8"){
 					$values = utf8_decode($values);
 				}
