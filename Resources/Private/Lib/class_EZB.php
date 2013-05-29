@@ -33,6 +33,7 @@ class EZB {
     private $participants_url = "http://rzblx1.uni-regensburg.de/ezeit/where.phtml?";
     private $participants_xml_url = "http://rzblx1.uni-regensburg.de/ezeit/where.phtml?&xmloutput=1&";
     //private $contact_url = "http://rzblx1.uni-regensburg.de/ezeit/kontakt.phtml?&xmloutput=1&";
+	private $search_zd_id = "http://ezb.uni-regensburg.de/?";
     
 
     private $lang = 'de';
@@ -335,7 +336,14 @@ class EZB {
      */
     private function createSearchUrl($term, $searchVars/* , $lett = 'k' */) {
 	
-		$searchUrl = $this->search_result_page . 'bibid=' . $this->bibID . '&colors=' . $this->colors . '&lang=' . $this->lang;
+		//Falls Suchweiterleitung aus der ursprünglichen EZB-Ansicht
+		if(isset($searchVars['jq_type1']) && $searchVars['jq_type1'] == 'ZD'){
+			$searchUrl = $this->search_zd_id . $searchVars['jq_term1']. '&bibid=' . $this->bibID .'&xmloutput=1';
+
+			return $searchUrl;
+		}else{
+			$searchUrl = $this->search_result_page . 'bibid=' . $this->bibID . '&colors=' . $this->colors . '&lang=' . $this->lang;
+		}		
 		
 		//falls jemand kein utf-8 verwendet, sollte das nicht gemacht werden
 		if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == "utf-8"){
@@ -400,7 +408,28 @@ class EZB {
 		foreach ($xml_request->page_vars->children() AS $key => $value) {
 			$result['page_vars'][$key] = (string) $value->attributes()->value;
 		}
-
+		
+		//Zur Bearbeitung einer Suchweiterleitung aus der ursprünglichen EZB-Ansicht
+		if(isset($xml_request->ezb_alphabetical_list)){
+			
+			if (isset($xml_request->ezb_alphabetical_list->alphabetical_order->journals->journal)) {
+				foreach ($xml_request->ezb_alphabetical_list->alphabetical_order->journals->journal AS $key => $value) {
+					$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['title'] = (string) $value->title;
+					$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['jourid'] = (int) $value->attributes()->jourid;
+					$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['color_code'] = (int) $value->journal_color->attributes()->color_code;
+					$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['color'] = (string) $value->journal_color->attributes()->color;
+					$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['detail_link'] = '';
+					$result['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['warpto_link'] = $this->journal_link_url . $value->attributes()->jourid;
+				}
+				
+				//Anzahl Suchergebnisse
+				$result['page_vars']['search_count'] = count($xml_request->ezb_alphabetical_list->alphabetical_order->journals->journal);
+			}
+			
+			return $result;
+		}
+		
+		//Anzahl Suchergebnisse
 		$result['page_vars']['search_count'] = (int) $xml_request->ezb_alphabetical_list_searchresult->search_count;
 
 		if (isset($xml_request->ezb_alphabetical_list_searchresult->navlist->other_pages)) {
