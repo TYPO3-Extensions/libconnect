@@ -24,7 +24,8 @@
                 <label for="jq_term{jq_type}" class="hiddenezb"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.form.label.searchterm" /></label> 
                 <input type="text" size="30" class="ezb-input" name="libconnect[search][jq_term{jq_type}]" id="jq_term{jq_type}" value="" />
             </td>
-            <td><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.form.label.link" /></label> 
+            <td>
+				<label for="jq_bool{jq_type}" class="hiddenezb><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.form.label.link" /></label> 
                 <select name="libconnect[search][jq_bool{jq_type}]" id="jq_bool{jq_type}">
                     <f:for each="{form.jq_bool}" as="value" key="key">
                         <option value="{key}">{value}</option>
