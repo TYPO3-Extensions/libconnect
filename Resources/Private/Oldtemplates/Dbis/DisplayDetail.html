@@ -12,6 +12,7 @@
 		</p>
 	</f:then>
 	<f:else>
+		{namespace libconnect=Tx_Libconnect_ViewHelpers}
 		<h3>Datenbank</h3>
 		<h1><f:escape value="{db.title}" type="raw" /></h1>
 
@@ -43,19 +44,38 @@
 		</f:if>
 
 		<f:if condition="<f:count subject='{db.access_lic}' /> > 0">
-		<tr>
-			<th>
-				<strong>Weitere lizenzierte Zug&auml;nge:</strong>
-			</th>
-
-			<td>
-				<ul>
-				<f:for each="{db.access_lic}" as="a_lic">
-					<li><a href="http://rzblx10.uni-regensburg.de/dbinfo/{a_lic.href}" target="_blank">{a_lic.name}</a></li>
-				</f:for>
-				</ul>
-			</td>
-		</tr>
+			<f:for each="{db.access_lic}" as="a_lics" key="accesstype">
+				<f:if condition="{libconnect:compare(a: accesstype, b: 'free')}">
+				<f:then>
+					<tr>
+						<th>
+							<strong>Weitere freie Zug&auml;nge:</strong>
+						</th>
+						<td>
+							<ul>
+							<f:for each="{a_lics}" as="a_lic">
+								<li><a href="http://rzblx10.uni-regensburg.de/dbinfo/{a_lic.href}" target="_blank">{a_lic.name}</a>{a_lic.type}</li>
+							</f:for>
+							</ul>
+						</td>
+					</tr>
+				</f:then>
+				<f:else>
+					<tr>
+						<th>
+							<strong>Weitere lizenzierte Zug&auml;nge:</strong>
+						</th>
+						<td>
+							<ul>
+							<f:for each="{a_lics}" as="a_lic">
+								<li><a href="http://rzblx10.uni-regensburg.de/dbinfo/{a_lic.href}" target="_blank">{a_lic.name}</a>{a_lic.type}</li>
+							</f:for>
+							</ul>
+						</td>
+					</tr>
+				 </f:else>
+				</f:if>
+			</f:for>
 		</f:if>
 
 		<f:if condition="{db.db_access_short_text}">
@@ -65,10 +85,7 @@
 			</th>
 
 			<td>
-			<span class="dbis-list-accessinfo-{db.access_id}"><f:escape value="{db.db_access_short_text}" type="raw" />
-			</span>
-			
-			
+				<span class="dbis-list-accessinfo-{db.access_id}"><f:escape value="{db.db_access_short_text}" type="raw" /></span>
 			</td>
 		</tr>
 		</f:if>
