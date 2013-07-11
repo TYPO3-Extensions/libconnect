@@ -327,7 +327,8 @@ class DBIS {
 					$details['db_access'] = (string) $value->db_access;
 					$details['db_access_short_text'] = (string) $value->db_access_short_text;
 				} else if ($key == 'accesses') {
-
+					
+					//Zugänge
 					foreach ($value->access as $access) {
 
 						$main = (string) $access->attributes()->main;
@@ -340,10 +341,9 @@ class DBIS {
 								'href' => $href
 							);
 						} else {
-							$details['access_lic'][] = array(
+							$details['access_lic'][$type][] = array(
 								'name' => (string) $access,
 								'main' => $main,
-								'type' => $type,
 								'href' => $href
 							);
 						}
