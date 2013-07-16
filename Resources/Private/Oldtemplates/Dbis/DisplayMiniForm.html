@@ -1,11 +1,11 @@
 {namespace libconnect=Tx_Libconnect_ViewHelpers}
 
-<div class="dbis-listings-wrapper">
-  <f:if condition="{settings.allListingId}">
-    <p><f:link.page pageUid="{settings.listPid}" additionalParams="{libconnect: '{subject:settings.allListingId}'}">Alphabetische Auflistung</f:link.page></p>
-  </f:if>
-    <p><f:link.page pageUid="{settings.listPid}">Auflistung nach Fachgebieten</f:link.page></p>
-</div>
+<f:if condition="{listingsWrapper}">
+	<div class="dbis-listings-wrapper">
+		<p><f:link.page pageUid="{listPid}" additionalParams="{libconnect: '{sort:\'alph\'}'}" addQueryString="1">Alphabetische Auflistung</f:link.page></p>
+	    <p><f:link.page pageUid="{listPid}" additionalParams="{libconnect: '{sort:\'type\'}'}" addQueryString="1">Auflistung nach Fachgebieten</f:link.page></p>
+	</div>
+</f:if>
 
 <div class="datenbank-suche-wrapper">
 

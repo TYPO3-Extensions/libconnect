@@ -56,6 +56,11 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 			$config['sort'] = $this->settings['flexform']['sortParameter'];
 			$config['detailPid'] = $this->settings['flexform']['detailPid'];
 			
+			//Sortierung der Liste durch User
+			if(isset($params['sort']) && !empty($params['sort'])) {
+				$config['sort'] = 	$params['sort'];
+			}
+			
 			$liste =  $this->dbisRepository->loadList($params['subject'], $config);
 			
 
@@ -137,6 +142,12 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		$this->view->assign('searchUrl', $cObject->getTypolink_URL($this->settings['flexform']['searchPid']));//Link zur Suchseite
 		$this->view->assign('listUrl', $cObject->getTypolink_URL($this->settings['flexform']['listPid']));//Link zur Suchseite
 		$this->view->assign('listPid', $this->settings['flexform']['listPid']);//ID der Listendarstellung
+		
+		//Möglichkeit zur Sortierung der Einträge des Fachgebietes erst nach Wahl des Fachgebietes
+		if (!empty($params['subject'])) {
+			$this->view->assign('listingsWrapper', true);
+		}
+		
     }
 	
 	/**
