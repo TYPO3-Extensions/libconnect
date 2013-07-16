@@ -37,6 +37,12 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 	private $dbis_to_t3_subjects = array();
 	private $t3_to_dbis_subjects = array();
 	
+	/**
+	 * zeigt die Top-Datenbanken an
+	 * 
+	 * @param array $config
+	 * @return array
+	 */
 	public function loadTop($config) {
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 
@@ -60,6 +66,12 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		return $result['list']['top'];
 	}
 	
+	/**
+	 * Zeigt eine Liste von Datenbanken (für allgemein, Suche und das gewählte Fach),
+	 * 
+	 * @param integer $subject_id
+	 * @param array array('subject'=>array(), 'list'=>array())
+	 */
 	public function loadList($subject_id, $config) {
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 
@@ -111,6 +123,11 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		return array('subject' => $subject['title'], 'list' => $result['list']);
 	}
 	
+	/**
+	 * Zeigt Einstiegspunkt
+	 * 
+	 * @return array $list
+	 */
 	public function loadOverview() {
 		$this->loadSubjects();
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
@@ -140,8 +157,14 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		return $list;
 	}
 	
+	/**
+	 * Fächer aus Datenbank laden
+	 * 
+	 */
 	private function loadSubjects() {
+		//Datenbankabruf -> hierfür dient subjectRepository
 		$res = $this->subjectRepository->findAll();
+		
 		foreach($res as $row){		
 
 			$this->dbis_to_t3_subjects[$row->getDbisId()]['dbisid'] = $row->getDbisId();
@@ -154,6 +177,13 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		}
 	}
 	
+	
+	/**
+	 * Zeigt die Detailansicht
+	 * 
+	 * @param integer $title_id
+	 * @return array $db
+	 */
 	public function loadDetail($title_id) {
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 		$dbis = new DBIS();
@@ -166,6 +196,14 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		return $db;
 	}
 	
+	/**
+	 * Suche durchführen
+	 * 
+	 * @param array $searchVars
+	 * @param array $config
+	 * 
+	 * @return array $result
+	 */
 	public function loadSearch($searchVars, $config) {
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 		$this->loadSubjects();
@@ -196,6 +234,12 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		return $result['list'];
 	}
 	
+	
+	 /**
+     * MiniFormular ausgeben
+     *
+     * @return array
+     */
 	public function loadMiniForm() {
 		$dbis = new DBIS();
 		$form = $dbis->detailSucheFormFelder();
@@ -203,6 +247,11 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		return $form;
 	}
 	
+	/**
+     * Detailsuche Formular ausgeben
+     *
+     * @return array
+     */
 	public function loadForm() {
 		$dbis = new DBIS();
 		$form = $dbis->detailSucheFormFelder();

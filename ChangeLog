@@ -4,6 +4,18 @@
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
+3.3.6
+	- DBIS:
+		- Wenn es weitere Zugänge gibt, wurde bisher immer der gleiche Text ausgegeben: "Weitere lizenzierte Zugänge" - auch bei freien Zugängen. 
+		  Jetzt wird auch entsprechend die Angabe "weitere freie Zugänge" gemacht.(TW)
+		- Umbau der Anzeige zur Sortierung der Einträge: (TW)
+ 			- Es funktioniert (wieder) das der Nutzer selbst entscheiden kann, wie die Einträge sortiert sind
+ 			- Möglichkeit zur Sortierung erst dann anbieten, wenn es einen Effekt gibt, d.h. erst nach Wahl des Faches
+	- EZB:
+		- Fehler in der Suchergnisseite behoben: (TW)
+			- "Could not analyse class:TYPO3\CMS\Fluid\ViewHelpers" -> Hier war ein Aufruf für die alten Templates drin.
+		- Anzeige zur Sortierung der Einträge zunächst entfernt, hier muss noch eine Möglichkeit geschaffen werden, dass das funktioniert. (TW)
+
 3.3.5
 	- EZB: 
 		- Im Template für das Suchformular fehlte das Labeltag umd die Labelbezeichnung (TW)
