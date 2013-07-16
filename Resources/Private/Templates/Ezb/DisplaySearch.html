@@ -10,22 +10,22 @@
 				<f:for each="{journals.selected_colors}" as="section" key="key">
 					<f:if condition="{key} == 1">
 						<li class="ezb-list-legend-one">
-							<f:escape value="{section}" type="raw" />
+							<f:format.htmlentitiesDecode>{section}</f:format.htmlentitiesDecode>
 						</li>
 					</f:if>
 					<f:if condition="{key} == 2">
 						<li class="ezb-list-legend-two">
-							<f:escape value="{section}" type="raw" />
+							<f:format.htmlentitiesDecode>{section}</f:format.htmlentitiesDecode>
 						</li>
 					</f:if>
 					<f:if condition="{key} == 6">
 						<li class="ezb-list-legend-six">
-							<f:escape value="{section}" type="raw" />
+							<f:format.htmlentitiesDecode>{section}</f:format.htmlentitiesDecode>
 						</li>
 					</f:if>
 					<f:if condition="{key} == 4">
 						<li class="ezb-list-legend-four">
-							<f:escape value="{section}" type="raw" />
+							<f:format.htmlentitiesDecode>{section}</f:format.htmlentitiesDecode>
 						</li>
 					</f:if>
 				</f:for>
