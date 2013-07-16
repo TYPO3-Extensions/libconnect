@@ -41,7 +41,8 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		$config['detailPid'] = $this->settings['flexform']['detailPid'];
 
 		$top =  $this->dbisRepository->loadTop($config);
-
+		
+		//Variable Template übergeben
 		$this->view->assign('top', $top);
 	}
 	
@@ -63,7 +64,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 			
 			$liste =  $this->dbisRepository->loadList($params['subject'], $config);
 			
-
+			//Variablen Template übergeben
 			$this->view->assign('subject', $liste['subject']);
 			$this->view->assign('list', $liste['list']);
 
@@ -77,6 +78,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 			$controllerContext->getRequest()->setControllerActionName('displaySearch');
 			$this->view->setControllerContext($controllerContext);
 			
+			//Variable Template übergeben
 			$this->view->assign('list', $liste);
 
 		} else {//Einstiegspunkt
@@ -87,6 +89,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 			$controllerContext->getRequest()->setControllerActionName('displayOverview');
 			$this->view->setControllerContext($controllerContext);
 			
+			//Variable Template übergeben
 			$this->view->assign('list', $liste);
 		}
     }
@@ -107,12 +110,15 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/dbis.css" />');
 		
 		if (!($params['titleid'])){
+			//Variable Template übergeben
 			$this->view->assign('error', 'Error');
+			
 			return;
 		}
 		$liste =  $this->dbisRepository->loadDetail($params['titleid']);
 		
 		if(!$liste){
+			//Variable Template übergeben
 			$this->view->assign('error', 'Error');
 			
 		}else{
@@ -120,7 +126,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 			if($liste['access_id']!='access_4'){
 				$liste['access_workaround']=$liste['access_id'];
 			}
-		
+			//Variable Template übergeben
 			$this->view->assign('db', $liste);
 		}		
     }
@@ -136,6 +142,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		
     	$form = $this->dbisRepository->loadMiniForm($params['search']);
 		
+		//Variablen Template übergeben
 		$this->view->assign('vars', $params['search']);
 		$this->view->assign('form', $form);
 		$this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
@@ -161,6 +168,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 	
     	$form = $this->dbisRepository->loadForm($params['search']);
 		
+		//Variablen Template übergeben
 		$this->view->assign('vars', $params['search']);
 		$this->view->assign('form', $form);
 		$this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL

@@ -53,6 +53,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 				$config
 			);
 
+			//Variable Template übergeben
 			$this->view->assign('journals', $liste);
 				
 		} else if (!empty($params['search'])) {//Suchergebnisse
@@ -65,6 +66,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 			$controllerContext->getRequest()->setControllerActionName('displaySearch');
 			$this->view->setControllerContext($controllerContext);
 			
+			//Variable Template übergeben
 			$this->view->assign('journals', $journals);
 		} else {//Einstiegspunkt
 			$liste =  $this->ezbRepository->loadOverview();
@@ -74,6 +76,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 			$controllerContext->getRequest()->setControllerActionName('displayOverview');
 			$this->view->setControllerContext($controllerContext);
 			
+			//Variable Template übergeben
 			$this->view->assign('list', $liste);
 		}
 	}
@@ -116,6 +119,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		}
     //EOF ZDB LocationData
 		
+		//Variablen Template übergeben
 		$this->view->assign('journal', $journal);
 		$this->view->assign('bibid', $this->ezbRepository->getBibid());
 	}
@@ -129,7 +133,8 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
     	$form = $this->ezbRepository->loadMiniForm($params['search']);
-				
+		
+		//Variablen Template übergeben	
 		$this->view->assign('vars', $params['search']);
 		$this->view->assign('form', $form);
 		$this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
@@ -148,6 +153,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 		$form =  $this->ezbRepository->loadForm();
 		
+		//Variablen Template übergeben
 		$this->view->assign('vars', $params['search']);
 		$this->view->assign('form', $form);
 		$this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
