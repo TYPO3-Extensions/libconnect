@@ -1,6 +1,6 @@
-<h1>Ergebnisse Ihrer Suche</h1>
+<h1><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.results" /></h1>
 
-Sie suchten nach folgenden Kriterien:<br/>
+<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.criterion" /><br/>
 <ul>
 	<f:for each="{list.searchDescription}" as="description">
 		<li><f:escape value="{description}" type="raw" /></li>
@@ -14,7 +14,7 @@ Sie suchten nach folgenden Kriterien:<br/>
 	
 	</f:then>
 	<f:else>
-		<h3>Zugriffe:</h3>
+		<h3><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.licence" /></h3>
 
 		<div class="dbis-list-legend">
 		<ul>
@@ -26,7 +26,7 @@ Sie suchten nach folgenden Kriterien:<br/>
 
 		<f:if condition="<f:count subject='{list.top}' /> > 0">
 		<div class="top-database-wrapper">
-			<h2>Top Datenbanken</h2>
+			<h2><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.top_databases" /></h2>
 			<ul class="dbis-top-list">
 			<f:for each="{list.top}" as="db">
 				<li><a href="{db.detail_link}"><f:escape value="{db.title}" type="raw" /></a> (<f:escape value="{db.access}" type="raw" />)</li>
@@ -37,7 +37,7 @@ Sie suchten nach folgenden Kriterien:<br/>
 
 		<br/><br/>
 
-		<f:count subject='{list.values}' /> Treffer
+		<f:count subject='{list.values}' /> <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.hits" />
 
 		<div class="dbis-list">
 		<f:if condition="<f:count subject='{list.values}' /> > 0">

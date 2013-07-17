@@ -1,25 +1,23 @@
 <div id="dbis-detail">
 <f:if condition="{error}">
 	<f:then>
-		<h1>Fehler</h1>
+		<h1><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.error.h1" /></h1>
 		<p>
-			Es ist ein Fehler bei der Anfrage der Datenbank aufgetreten.
+			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.error.p1" />
 		</p>
 		<p>
-			M&ouml;glicherweise ist die angefragte Datenbank nicht vorhanden. Bitte versuchen Sie es erneut
-			oder wenden Sie sich an das Web-Team der Bibliothek, das Ihnen beim Auffinden des Datensatzes
-			gerne behilflich ist.
+			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.error.p2" />
 		</p>
 	</f:then>
 	<f:else>
 		{namespace libconnect=Tx_Libconnect_ViewHelpers}
-		<h3>Datenbank</h3>
+		<h3><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.h3.database" /></h3>
 		<h1><f:format.htmlentitiesDecode>{db.title}</f:format.htmlentitiesDecode></h1>
 
 		<f:if condition="{db.access_workaround}">
 			<f:if condition="{db.access.href}">
 			<p>
-				<a class="dbis-research" href="http://rzblx10.uni-regensburg.de/dbinfo/{db.access.href}" target="_blank">Recherche starten</a>
+				<a class="dbis-research" href="http://rzblx10.uni-regensburg.de/dbinfo/{db.access.href}" target="_blank"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.recherche" /></a>
 			</p>
 			</f:if>
 		</f:if>
@@ -30,7 +28,7 @@
 		<f:if condition="<f:count subject='{db.else_titles}' /> > 0">
 		<tr>
 			<th>
-				<strong>Weitere Titel:</strong>
+				<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.othertitle" /></strong>
 			</th>
 
 			<td>
@@ -49,7 +47,7 @@
 				<f:then>
 					<tr>
 						<th>
-							<strong>Weitere freie Zug&auml;nge:</strong>
+							<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.access.lic" /></strong>
 						</th>
 						<td>
 							<ul>
@@ -63,7 +61,7 @@
 				<f:else>
 					<tr>
 						<th>
-							<strong>Weitere lizenzierte Zug&auml;nge:</strong>
+							<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.access.alic" /></strong>
 						</th>
 						<td>
 							<ul>
@@ -81,14 +79,11 @@
 		<f:if condition="{db.db_access_short_text}">
 		<tr>
 			<th>
-				<strong>Verf&uuml;gbarkeit:</strong>
+				<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.access.text" /></strong>
 			</th>
 
 			<td>
-			<span class="dbis-list-accessinfo-{db.access_id}"><f:format.htmlentitiesDecode>{db.db_access_short_text}</f:format.htmlentitiesDecode>
-			</span>
-			
-			
+				<span class="dbis-list-accessinfo-{db.access_id}"><f:format.htmlentitiesDecode>{db.db_access_short_text}</f:format.htmlentitiesDecode></span>
 			</td>
 		</tr>
 		</f:if>
@@ -96,7 +91,7 @@
 		<f:if condition="{db.hints}">
 		<tr>
 			<th>
-				<strong>Hinweise:</strong>
+				<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.access.hints" /></strong>
 			</th>
 
 			<td>
@@ -108,7 +103,7 @@
 		<f:if condition="{db.content}">
 		<tr>
 			<th>
-				<strong>Inhalte:</strong>
+				<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.content" /></strong>
 			</th>
 
 			<td>
@@ -120,7 +115,7 @@
 		<f:if condition="{db.subjects}">
 		<tr>
 			<th>
-				<strong>Fachgebiete:</strong>
+				<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.subjects" /></strong>
 			</th>
 
 			<td>
@@ -136,7 +131,7 @@
 		<f:if condition="{db.keywords_join}">
 		<tr>
 			<th>
-				<strong>Schlagw&ouml;rter:</strong>
+				<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.keywords" /></strong>
 			</th>
 
 			<td>
@@ -148,7 +143,7 @@
 		<f:if condition="{db.appearence}">
 		<tr>
 			<th>
-				<strong>Erscheinungsform:</strong>
+				<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.appearence" /></strong>
 			</th>
 
 			<td>
@@ -160,7 +155,7 @@
 		<f:if condition="{db.db_type_infos_join}">
 		<tr>
 			<th>
-				<strong>Datenbank-Typ:</strong>
+				<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.dbtype" /></strong>
 			</th>
 
 			<td>
@@ -172,7 +167,7 @@
 		<f:if condition="{db.publisher}">
 		<tr>
 			<th>
-				<strong>Verlag:</strong>
+				<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.publisher" /></strong>
 			</th>
 
 			<td>
@@ -184,7 +179,7 @@
 		<f:if condition="{db.report_periods}">
 		<tr>
 			<th>
-				<strong>Berichtszeitraum:</strong>
+				<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.report_periods" /></strong>
 			</th>
 
 			<td>
@@ -196,7 +191,7 @@
 		<f:if condition="{db.update}">
 		<tr>
 			<th>
-				<strong>Erscheinungsweise:</strong>
+				<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.update" /></strong>
 			</th>
 
 			<td>
@@ -208,7 +203,7 @@
 		<f:if condition="{db.license}">
 		<tr>
 			<th>
-				<strong>Lizenz:</strong>
+				<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.license" /></strong>
 			</th>
 
 			<td>
@@ -221,7 +216,7 @@
 		<f:if condition="{db.remarks}">
 		<tr>
 			<th>
-				<strong>Weitere Bemerkungen:</strong>
+				<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.remarks" /></strong>
 			</th>
 
 			<td>

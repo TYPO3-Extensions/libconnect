@@ -1,9 +1,9 @@
 {namespace libconnect=Tx_Libconnect_ViewHelpers}
-<h1 class="libconnect-h1">DBIS <f:if condition="{list.alphNavList}"><f:else>Fachgebiet</f:else></f:if></h1>
+<h1 class="libconnect-h1"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.list.headline.dbis" /> <f:if condition="{list.alphNavList}"><f:else><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.list.headline.subject" /></f:else></f:if></h1>
 
 <h2 class="libconnect-h2">{subject}</h2>
 
-<h3 class="libconnect-h3">Zugriffe:</h3>
+<h3 class="libconnect-h3"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.list.legend.headline" /></h3>
 
 <div class="dbis-list-legend">
 <ul>
@@ -16,7 +16,7 @@
 
 <f:if condition="{list.top}">
 <div class="top-database-wrapper">
-	<h3 class="libconnect-h1">Top Datenbanken</h3>
+	<h3 class="libconnect-h1"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.list.topdatabases" /></h3>
 	<ul class="dbis-top-list">
 	<f:for each="{list.top}" as="db">
 		<li><a href="{db.detail_link}"><libconnect:strreplace search=" & " replace=" &amp; "><f:escape value="{db.title}" type="raw" /></libconnect:strreplace></a> (<f:escape value="{db.access}" type="raw" />)</li>
@@ -57,7 +57,7 @@
 							<f:escape value="{group.title}" type="raw" />
 						</f:then>
 						<f:else>
-							Gesamtangebot
+							<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.list.full_list" />
 						</f:else>
 					</f:if>
 					  (<f:count subject="{group.dbs}" />)</h2>

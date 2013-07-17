@@ -1,23 +1,22 @@
 {namespace libconnect=Tx_Libconnect_ViewHelpers}
-
 <f:if condition="{listingsWrapper}">
 	<div class="dbis-listings-wrapper">
-		<p><f:link.page pageUid="{listPid}" additionalParams="{libconnect: '{sort:\'alph\'}'}" addQueryString="1">Alphabetische Auflistung</f:link.page></p>
-	    <p><f:link.page pageUid="{listPid}" additionalParams="{libconnect: '{sort:\'type\'}'}" addQueryString="1">Auflistung nach Fachgebieten</f:link.page></p>
+		<p><f:link.page pageUid="{listPid}" additionalParams="{libconnect: '{sort:\'alph\'}'}" addQueryString="1"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.listing_alph" /></f:link.page></p>
+	    <p><f:link.page pageUid="{listPid}" additionalParams="{libconnect: '{sort:\'type\'}'}" addQueryString="1"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.listing_subject" /></f:link.page></p>
 	</div>
 </f:if>
 
 <div class="datenbank-suche-wrapper">
 
-	<h1>Suche nach Datenbanken</h1>
+	<h1><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.search_header" /></h1>
 
 	<form action="{listUrl}" method="get">
-	<input type="hidden" name="id" value="{listPid}" />
-		<label for="libconnect_dbis_minisuche" class="hiddendebis">Name der Bibliothek</label>
+		<input type="hidden" name="id" value="{listPid}" />
+		<label for="libconnect_dbis_minisuche" class="hiddendebis"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.search_term" /></label>
 		<input id="libconnect_dbis_minisuche" type="text" name="libconnect[search][sword]" size="20" value="{vars.sword}" />
 		<input type="submit" value="Suchen" />
 
-		<p><a href="{searchUrl}">Erweiterte Suche</a></p>
+		<p><a href="{searchUrl}"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.search_link" /></a></p>
 
 	</form>
 
@@ -28,23 +27,22 @@
 	</f:then>
 	<f:else>
 	<div class="datenbank-suche-wrapper">
-		<h1>Datenbanken anzeigen</h1>
+		<h1><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.show_databases" /></h1>
 
 		<form action="{listUrl}" method="get">
-
-		<p>
-		    <input type="hidden" name="id" value="{listPid}" />
-			<label for="libconnect_dbis_suche" class="hiddendebis">Zugang w&auml;hlen</label>
-			<select id="libconnect_dbis_suche" name="libconnect[search][zugaenge]">
-			<f:for each="{form.zugaenge}" as="value" key="key">
-			<f:if condition="{key} < 1000">
-				<f:if condition="{libconnect:strlen(string: value)} > 0">
-					<option  <f:if condition="{vars.zugaenge}"><f:if condition="{vars.zugaenge} == {key}">selected="selected"</f:if></f:if> value="{key}" >{value}</option>
+			<p>
+			    <input type="hidden" name="id" value="{listPid}" />
+				<label for="libconnect_dbis_suche" class="hiddendebis"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.select_access" /></label>
+				<select id="libconnect_dbis_suche" name="libconnect[search][zugaenge]">
+				<f:for each="{form.zugaenge}" as="value" key="key">
+				<f:if condition="{key} < 1000">
+					<f:if condition="{libconnect:strlen(string: value)} > 0">
+						<option  <f:if condition="{vars.zugaenge}"><f:if condition="{vars.zugaenge} == {key}">selected="selected"</f:if></f:if> value="{key}" >{value}</option>
+					</f:if>
 				</f:if>
-			</f:if>
-			</f:for>
-			</select>
-		</p>
+				</f:for>
+				</select>
+			</p>
 			<input type="submit" value="Zugang ausw&auml;hlen" />
 		</form>
 
