@@ -137,7 +137,8 @@ class EZB {
     public function getFachbereichJournals($jounal, $sindex = 0, $sc = 'A', $lc = '') {
 		
 		$journals = array();
-		$url = "{$this->overview_requst_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&notation={$jounal}&sc={$sc}&lc={$lc}&sindex={$sindex}&";
+		$url = "{$this->overview_requst_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&sc={$sc}&lc={$lc}&sindex={$sindex}&notation={$jounal}&";
+		
 		$xml_request = $this->XMLPageConnection->getDataFromXMLPage($url);
 
 		if ($xml_request->page_vars) {
@@ -146,7 +147,8 @@ class EZB {
 			$this->lc = (string) $xml_request->page_vars->lc->attributes()->value;
 			$this->sindex = (string) $xml_request->page_vars->sindex->attributes()->value;
 		}
-
+		
+		//Navigationsliste
 		if ($xml_request->ezb_alphabetical_list) {
 
 			$journals['subject'] = (string) $xml_request->ezb_alphabetical_list->subject;
@@ -163,7 +165,9 @@ class EZB {
 		}
 		$journals['navlist']['pages'][$journals['navlist']['current_page']] = $journals['navlist']['current_page'];
 		ksort($journals['navlist']['pages']);
-
+		
+		
+		//Ergebnisse
 		if (isset($xml_request->ezb_alphabetical_list->alphabetical_order->journals->journal)) {
 		    foreach ($xml_request->ezb_alphabetical_list->alphabetical_order->journals->journal AS $key => $value) {
                 $journals['alphabetical_order']['journals'][(int) $value->attributes()->jourid]['title'] = (string) $value->title;

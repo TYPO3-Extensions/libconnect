@@ -35,7 +35,7 @@
  *
  */
 class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_ActionController {
-	
+
 	 /**
 	 * Zeigt eine Liste von Datenbanken (für allgemein, Suche und das gewählte Fach)
 	 */
@@ -43,13 +43,18 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		$params = t3lib_div::_GET('libconnect');
 		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');
 		
-		if (!empty($params['subject'])) {//Gewaehltes Fach nach Einstiegspunkt
+		if ((!empty($params['subject'])) || (!empty($params['notation']))) {//Gewaehltes Fach nach Einstiegspunkt
 			$config['detailPid'] = $this->settings['flexform']['detailPid'];
 			
 			$options['index'] = $params['index'];
 			$options['sc'] = $params['sc'];
 			$options['lc'] = $params['lc'];
+			$options['notation'] = $params['notation'];
 			
+			//damit nicht NULL in der Abfrage steht oder sonst es zu Problemen kommt
+			if(!isset($params['subject'])){
+				$params['subject'] = "";
+			}
 			$liste =  $this->ezbRepository->loadList(
 				$params['subject'], 
 				$options,

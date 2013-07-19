@@ -88,15 +88,25 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 		$this->loadSubjects();
+		
+		//Notation für Fach holen
 		$subject = $this->t3_to_ezb_subjects[$subject_id];
 
 		$ezb = new EZB();
+		if($options['notation'] == 'All'){
+			$subject['ezbnotation'] = 'All';
+		}
+		//$ezb->notation = $options['notation'];
 		$journals = $ezb->getFachbereichJournals($subject['ezbnotation'], $index, $sc, $lc);
 		
 		//Zugriffsinformationen holen
 		$journals['selected_colors'] = $this->getAccessInfos();
 		
-
+		
+		/**
+		 * Links bauen
+		 */
+		//Navigation
 		foreach(array_keys($journals['navlist']['pages']) as $page) {
 			if (is_array($journals['navlist']['pages'][$page])) {
 				$journals['navlist']['pages'][$page]['link'] = $cObject->getTypolink_URL($GLOBALS['TSFE']->id, array(
@@ -104,9 +114,12 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 					'libconnect[index]' => 0,
 				    'libconnect[sc]' => $journals['navlist']['pages'][$page]['sc']? $journals['navlist']['pages'][$page]['sc'] : 'A',
 					'libconnect[lc]' => $journals['navlist']['pages'][$page]['lc'],
+					'libconnect[notation]' => $subject['ezbnotation']
 				));
 			}
 		}
+		
+		//Ergenisse
 		if(isset($journals['alphabetical_order']['first_fifty'])){
 			foreach(array_keys($journals['alphabetical_order']['first_fifty']) as $section) {
 				$journals['alphabetical_order']['first_fifty'][$section]['link'] = $cObject->getTypolink_URL($GLOBALS['TSFE']->id, array(
@@ -114,6 +127,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 						'libconnect[index]' => $journals['alphabetical_order']['first_fifty'][$section]['sindex'],
 					    'libconnect[sc]' => $journals['alphabetical_order']['first_fifty'][$section]['sc']? $journals['alphabetical_order']['first_fifty'][$section]['sc'] : 'A',
 						'libconnect[lc]' => $journals['alphabetical_order']['first_fifty'][$section]['lc'],
+						'libconnect[notation]' => $subject['ezbnotation']
 				));
 			}
 		}
@@ -122,7 +136,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
                 $journals['alphabetical_order']['journals'][$journal]['detail_link'] = $cObject->getTypolink_URL(
                         intval($config['detailPid']),
                         array(
-                            'libconnect[jourid]' => $journals['alphabetical_order']['journals'][$journal]['jourid'],
+                            'libconnect[jourid]' => $journals['alphabetical_order']['journals'][$journal]['jourid']
                         )
                 );
             }		    
@@ -134,6 +148,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 						'libconnect[index]' => $journals['alphabetical_order']['next_fifty'][$section]['sindex'],
 					    'libconnect[sc]' => $journals['alphabetical_order']['next_fifty'][$section]['sc']? $journals['alphabetical_order']['next_fifty'][$section]['sc'] : 'A',
 						'libconnect[lc]' => $journals['alphabetical_order']['next_fifty'][$section]['lc'],
+						'libconnect[notation]' => $subject['ezbnotation']
 				));
 			}
 		}
