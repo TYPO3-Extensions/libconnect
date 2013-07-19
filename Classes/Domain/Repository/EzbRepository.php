@@ -314,6 +314,11 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		return $form;
 	}
 	
+	/**
+	 * holt BibID
+	 * 
+	 * @return string
+	 */
 	public function getBibid(){
 		return $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid'];
 	}
