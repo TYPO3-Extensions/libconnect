@@ -80,6 +80,11 @@
 			<label index="tx_libconnect.ezb.detail.print.location">Standort</label>
 			<label index="tx_libconnect.ezb.detail.print.info">Informationen zur Verfügbarkeit</label>
 			<label index="tx_libconnect.ezb.detail.participants">Liste der teilnehmenden Institutionen, die Volltextzugriff bieten.</label>
+
+			<label index="tx_libconnect.ezb.new.headline.alphabetical">Neu in der EZB - Alphabetische Auflistung</label>
+			<label index="tx_libconnect.ezb.new.headline.subject">Neu in der EZB - Auflistung nach Fachgebieten</label>
+			<label index="tx_libconnect.ezb.new.since">Es gibt seit dem </label>
+			<label index="tx_libconnect.ezb.new.hits"> %s neue Einträge:</label>
 			
 			<label index="tx_libconnect.dbis.overview.headline">Datenbank-Infosystem</label>
 			
@@ -135,9 +140,6 @@
 			<label index="tx_libconnect.dbis.search.licence">Zugriffe:</label>
 			<label index="tx_libconnect.dbis.search.top_databases">Top Datenbanken</label>
 			<label index="tx_libconnect.dbis.search.hits">Top Datenbanken</label>
-			
-			<label index="tx_libconnect.ezb.new.headline.alphabetical">Neu in der EZB - Alphabetische Auflistung</label>
-			<label index="tx_libconnect.ezb.new.headline.subject">Neu in der EZB - Auflistung nach Fachgebieten</label>
 		</languageKey>
 	</data>
 </T3locallang>
