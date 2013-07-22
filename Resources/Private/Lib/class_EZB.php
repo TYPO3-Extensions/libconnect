@@ -387,11 +387,6 @@ class EZB {
 		
 		// urlencode termi
 		$term = rawurlencode($term);
-		
-		//Bei Suche mittels Sidebar
-		if (strlen($term)) {
-			$searchUrl .= "&jq_type1=KT&jq_term1={$term}";
-		}
 
 		if (!$searchVars['sc']) {
 			$searchVars['sc'] = 'A';

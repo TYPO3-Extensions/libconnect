@@ -196,25 +196,41 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		return $journal; 
 	}
 	
+	/**
+	 * Suche vorbereiten
+	 * 
+	 * @param array $searchVars
+	 * @param array $config
+	 * @return array $journals
+	 */
 	public function loadSearch($searchVars, $config) {
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 		$this->loadSubjects();
+
+		//Suche von Sidebar
+		if (strlen($searchVars['sword'])) {
+			$searchVars['jq_type1'] = 'KT';
+			$searchVars['jq_term1'] = $searchVars['sword'];
+		}
+		unset($searchVars['sword']);//in weiterer Verarbeitung nicht sinnvoll
+		
 
 		$linkParams = array();
 		foreach ($searchVars as $key => $value) {
 			$linkParams["libconnect[search][$key]"] = $value;
 		}
 		
-		//Suche von Sidebar
-		$term = $searchVars['sword'];
-		unset($searchVars['sword']);//in weiterr Verarbeitung nicht sinnvoll
-
+		
 		$ezb = new EZB();
 		$journals = $ezb->search($term, $searchVars);
 
-		if (! $journals)
+		if (! $journals){
 			return false;
-
+		}
+		/**
+		 * Links bauen
+		 */
+		//Navigation
 		if (is_array($journals['navlist']['pages'])) {
 
 			foreach(array_keys($journals['navlist']['pages']) as $page) {
@@ -226,7 +242,8 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 				}
 			}
 		}
-
+		
+		//Ergenisse
 		if (is_array($journals['alphabetical_order']['first_fifty'])) {
 
 			foreach(array_keys($journals['alphabetical_order']['first_fifty']) as $section) {
