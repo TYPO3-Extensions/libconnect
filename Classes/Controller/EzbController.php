@@ -192,8 +192,6 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		//Datum berechnen
 		$date = date("d-m-Y",$today-($numDays * $oneDay));
 		$params['jq_term1'] = $date;//Datum bis wann Eintrag neu
-
-		
 		
 		$config['detailPid'] = $this->settings['flexform']['detailPid'];
 			

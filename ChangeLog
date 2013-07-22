@@ -5,16 +5,21 @@
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
 3.3.6
+	- mehr Kommentare hinzugefügt (TW)
 	- DBIS:
 		- Wenn es weitere Zugänge gibt, wurde bisher immer der gleiche Text ausgegeben: "Weitere lizenzierte Zugänge" - auch bei freien Zugängen. 
 		  Jetzt wird auch entsprechend die Angabe "weitere freie Zugänge" gemacht.(TW)
 		- Umbau der Anzeige zur Sortierung der Einträge: (TW)
  			- Es funktioniert (wieder) das der Nutzer selbst entscheiden kann, wie die Einträge sortiert sind
  			- Möglichkeit zur Sortierung erst dann anbieten, wenn es einen Effekt gibt, d.h. erst nach Wahl des Faches
+ 		- Die statischen Texte der DBIS-Templates werden stehen nun in der locallang.xml (TW)
 	- EZB:
 		- Fehler in der Suchergnisseite behoben: (TW)
 			- "Could not analyse class:TYPO3\CMS\Fluid\ViewHelpers" -> Hier war ein Aufruf für die alten Templates drin.
 		- Anzeige zur Sortierung der Einträge zunächst entfernt, hier muss noch eine Möglichkeit geschaffen werden, dass das funktioniert. (TW)
+		- Umbau der Anzeige zur Sortierung der Einträge: (TW)
+			- Es funktioniert (wieder) das der Nutzer selbst entscheiden kann, wie die Einträge sortiert sind
+		- Neue Funktion: neue Einträge werden dort "beworben". Als neu gilt alles, das nicht älter als 7 Tage ist. (TW)
 
 3.3.5
 	- EZB: 
