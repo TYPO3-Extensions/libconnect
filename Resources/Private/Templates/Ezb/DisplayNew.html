@@ -47,6 +47,16 @@
 
 <br/><br/>
 
+<p>
+	<libconnect:strreplace search="%s" replace=" {journals.page_vars.search_count} ">
+		<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.new.since" />
+		{new_date}
+		<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.new.hits" />
+	</libconnect:strreplace>
+</p>
+
+<br/><br/>
+
 <div class="ezb-navigation">
 	<f:for each="{journals.navlist.pages}" as="item">
 		<f:if condition="{libconnect:IsArray(value: item)}">

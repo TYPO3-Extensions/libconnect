@@ -201,6 +201,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		
 		//Variable Template übergeben
 		$this->view->assign('journals', $journals);
+		$this->view->assign('new_date', date("d.m.Y",$today-($numDays * $oneDay)));
 	}
 }
 ?>
