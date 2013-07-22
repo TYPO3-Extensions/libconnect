@@ -168,5 +168,39 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		$this->view->assign('listUrl', $cObject->getTypolink_URL($this->settings['flexform']['listPid']));//Link zur Suchseite
 		$this->view->assign('listPid', $this->settings['flexform']['listPid']);//ID der Listendarstellung
 	}
+	
+	/**
+	 * zeigt die neuesten Einträge
+	 */
+	public function displayNewAction() {
+		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');
+		$params = t3lib_div::_GET('libconnect');
+		$params['jq_type1'] = 'ID';
+		$params['sc'] = $params['search']['sc'];
+		unset($params['search']);
+		
+		date_default_timezone_set('GMT+1');//@todo aus dem System auslesen
+		
+		$oneDay = 86400;//Sekunden
+		$numDays = 7; //Standard sind 7 Tage
+		$today = strtotime('now');
+  
+		if(!empty($this->settings['flexform']['countDays'])){
+			$numDays = $this->settings['flexform']['countDays'];
+		}
+		
+		//Datum berechnen
+		$date = date("d-m-Y",$today-($numDays * $oneDay));
+		$params['jq_term1'] = $date;//Datum bis wann Eintrag neu
+
+		
+		
+		$config['detailPid'] = $this->settings['flexform']['detailPid'];
+			
+		$journals =  $this->ezbRepository->loadSearch($params, $config);
+		
+		//Variable Template übergeben
+		$this->view->assign('journals', $journals);
+	}
 }
 ?>

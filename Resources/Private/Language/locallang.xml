@@ -135,6 +135,9 @@
 			<label index="tx_libconnect.dbis.search.licence">Zugriffe:</label>
 			<label index="tx_libconnect.dbis.search.top_databases">Top Datenbanken</label>
 			<label index="tx_libconnect.dbis.search.hits">Top Datenbanken</label>
+			
+			<label index="tx_libconnect.ezb.new.headline.alphabetical">Neu in der EZB - Alphabetische Auflistung</label>
+			<label index="tx_libconnect.ezb.new.headline.subject">Neu in der EZB - Auflistung nach Fachgebieten</label>
 		</languageKey>
 	</data>
 </T3locallang>
