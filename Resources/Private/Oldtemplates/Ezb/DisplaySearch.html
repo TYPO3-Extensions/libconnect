@@ -3,6 +3,13 @@
 	<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.headline" />
 </h1>
 
+<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.criterion" /><br/>
+<ul>
+	<f:for each="{journals.searchDescription}" as="description">
+			<li></li><f:escape value="{description}" type="raw" /></li>
+	</f:for>
+</ul>
+
 <f:if condition="{journals.page_vars.search_count} != -1">
 	<f:then>
 		<div class="ezb-list-legend">

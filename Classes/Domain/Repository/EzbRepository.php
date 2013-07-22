@@ -223,10 +223,13 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		
 		$ezb = new EZB();
 		$journals = $ezb->search($term, $searchVars);
-
+		
 		if (! $journals){
 			return false;
 		}
+		
+		$journals['searchDescription'] = $this->getSearchDescription($searchVars);
+		
 		/**
 		 * Links bauen
 		 */
@@ -280,6 +283,8 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		
 		//Zugriffsinformationen holen
 		$journals['selected_colors'] = $this->getAccessInfos();
+		
+		
 		
 		return $journals;
 	}
@@ -405,6 +410,46 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		}
 		
 		return $journals['selected_colors'];
+	}
+	
+	private function getSearchDescription($searchVars){
+		$list = array();
+		$ezb = new EZB();
+		
+		//Sucbbegriffe und deren Kategorien
+		$jq = "";
+		
+		for($i=1;$i<=4;$i++){
+			if((!empty($searchVars['jq_type'.$i])) && (!empty($searchVars['jq_term'.$i]))){
+					
+				$jq.=$ezb->jq_type[$searchVars['jq_type'.$i]]. ' "'. $searchVars['jq_term'.$i].'" ';
+				
+				if(!empty($searchVars['jq_type2'])){
+					$jq.= ' '.$searchVars['jq_bool'.$i].' ';
+				}
+			}
+		}
+		if(!empty($jq)){
+			$list = array(1 =>$jq);
+		}
+		
+	    /*foreach ($searchVars as $searchDesc) {
+	        $list['searchDescription'][] = (string)$searchDesc;
+			
+			//$jq_type
+	    }*/
+	    
+	    //Lizenzen
+	    $accessInfos = $this-> getAccessInfos();
+		var_dump($searchVars['selected_colors']);
+		foreach($searchVars['selected_colors'] as $key=>$color){
+			if($accessInfos[$color]){
+				$list[]=$accessInfos[$color];
+			}
+		}
+
+		
+		return $list;
 	}
 }
 ?>

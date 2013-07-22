@@ -85,6 +85,17 @@ class EZB {
 	// Lizenzinfos
 	private $shortAccessInfos = Array();
 	private $longAccessInfos = Array();
+	
+	//Suchtypen
+	public $jq_type = 	array(
+			'KT' => 'Titelwort(e)',
+			'KS' => 'Titelanfang',
+			'IS' => 'ISSN',
+			'PU' => 'Verlag',
+			'KW' => 'Schlagwort(e)',
+			'ID' => 'Eingabedatum',
+			'LC' => 'Letzte Änderung',
+			'ZD' => 'ZDB-Nummer');
 
     /**
      * Konstruktor
@@ -347,16 +358,7 @@ class EZB {
 		}
 
 		// Schlagwort und issn tauschen...
-		$form['jq_type'] = array(
-			'KT' => 'Titelwort(e)',
-			'KS' => 'Titelanfang',
-			'IS' => 'ISSN',
-			'PU' => 'Verlag',
-			'KW' => 'Schlagwort(e)',
-			'ID' => 'Eingabedatum',
-			'LC' => 'Letzte Änderung',
-			'ZD' => 'ZDB-Nummer',
-		);
+		$form['jq_type'] = $this->jq_type;
 
 		return $form;
     }
@@ -510,7 +512,7 @@ class EZB {
 			$result['alphabetical_order']['first_fifty'][$i]['first_fifty_titles'] = (string) $value->first_fifty_titles;
 			$i++;
 		}
-
+		
 		return $result;
     }
 	
@@ -537,5 +539,6 @@ class EZB {
 		
 		return $return;
 	}
+		
 }
 ?>
