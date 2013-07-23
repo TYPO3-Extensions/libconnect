@@ -88,12 +88,11 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 			$dbis_id = $subject['dbisid'];
 	
 			$result = $dbis->getDbliste($dbis_id, $config['sort']);
-		}else{
+		}else{//für eigene Sammlung
 			$result = $dbis->getDbliste($subject_id, $config['sort']);
 			
 			$subject['title'] = $result['headline'];
 		}
-		
 		
 		
 		foreach(array_keys($result['list']['top']) as $db) {
