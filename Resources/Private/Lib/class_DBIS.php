@@ -47,10 +47,10 @@ class DBIS {
     private $colors = 255;
     private $ocolors = 40;
     private $lett = 'f';
-    //private $fachliste_url = "http://rzblx10.uni-regensburg.de/dbinfo/fachliste.php?xmloutput=1&bib_id=sub_hh&";
-    //private $dbliste_url = "http://rzblx10.uni-regensburg.de/dbinfo/dbliste.php?xmloutput=1&bib_id=sub_hh&";
-    //private $db_detail_url = "http://rzblx10.uni-regensburg.de/dbinfo/detail.php?xmloutput=1&bib_id=sub_hh&colors=&ocolors=&";
-    //private $db_detail_suche_url = "http://rzblx10.uni-regensburg.de/dbinfo/suche.php?xmloutput=1&bib_id=sub_hh&";
+    private $fachliste_url =  'http://rzblx10.uni-regensburg.de/dbinfo/fachliste.php?xmloutput=1&bib_id=';
+    private $dbliste_url = 'http://rzblx10.uni-regensburg.de/dbinfo/dbliste.php?xmloutput=1&bib_id=';
+    private $db_detail_url = 'http://rzblx10.uni-regensburg.de/dbinfo/detail.php?xmloutput=1&bib_id=';
+    private $db_detail_suche_url = 'http://rzblx10.uni-regensburg.de/dbinfo/suche.php?xmloutput=1&bib_id=';
 
     public $all;
     public $top_five_dbs;
@@ -151,7 +151,7 @@ class DBIS {
     public function getDbliste($fachgebiet, $sort = "type") {
 
 		$sortlist = array();
-		$url = 'http://rzblx10.uni-regensburg.de/dbinfo/dbliste.php?xmloutput=1&bib_id=' . $this->bibID . '&' . "colors={$this->colors}&ocolors={$this->ocolors}&sort=" . $sort . "&";
+		$url =  $this->dbliste_url. $this->bibID . '&' . "colors={$this->colors}&ocolors={$this->ocolors}&sort=" . $sort . "&";
 		$headline = "";
 		
 		//BOF workaround for alphabetical listing
@@ -279,7 +279,7 @@ class DBIS {
                         'access' => $list['access_infos'][(string) $value['access_ref']]['title'],
                         'db_type_refs' => (string) $value['db_type_refs'],
                         'top_db' => (int) $value['top_db'],
-                        'link' => 'http://rzblx10.uni-regensburg.de/dbinfo/detail.php?xmloutput=1&bib_id=' . $this->bibID . '&colors=&ocolors=&' . "lett={$this->lett}&titel_id={$value['title_id']}",
+                        'link' => $this->db_detail_url . $this->bibID . '&colors=&ocolors=&' . "lett={$this->lett}&titel_id={$value['title_id']}",
                     );
         
                     if ($db['top_db']) {
@@ -331,7 +331,7 @@ class DBIS {
     public function getDbDetails($db_id) {
 
 		$details = array();
-		$url = 'http://rzblx10.uni-regensburg.de/dbinfo/detail.php?xmloutput=1&bib_id=' . $this->bibID . "&colors=&ocolors=&" . "lett={$this->lett}&colors={$this->colors}&ocolors={$this->ocolors}&titel_id=" . $db_id;
+		$url =  $this->db_detail_url. $this->bibID . "&colors=&ocolors=&" . "lett={$this->lett}&colors={$this->colors}&ocolors={$this->ocolors}&titel_id=" . $db_id;
 		$xml_db_details = $this->XMLPageConnection->getDataFromXMLPage($url);
 
 		//@todo Fehlerbehandlung
@@ -410,7 +410,7 @@ class DBIS {
      */
     public function detailSucheFormFelder() {
 
-		$url = 'http://rzblx10.uni-regensburg.de/dbinfo/suche.php?xmloutput=1&bib_id=' . $this->bibID . '&' . "colors={$this->colors}&ocolors={$this->ocolors}";
+		$url =  $this->db_detail_suche_url. $this->bibID . '&' . "colors={$this->colors}&ocolors={$this->ocolors}";
 		$xml_such_form = $this->XMLPageConnection->getDataFromXMLPage($url);
 		
 		//Zugaenge werden ermittelt
@@ -459,7 +459,7 @@ class DBIS {
      */
     private function createSearchUrl($searchVars, $lett = 'k') {
 
-		$searchUrl = 'http://rzblx10.uni-regensburg.de/dbinfo/dbliste.php?xmloutput=1&bib_id=' . $this->bibID . '&' . "colors={$this->colors}&ocolors={$this->ocolors}&lett={$lett}";
+		$searchUrl = $this->dbliste_url . $this->bibID . '&' . "colors={$this->colors}&ocolors={$this->ocolors}&lett={$lett}";
 
 		foreach ($searchVars as $var => $values) {
 			if (!is_array($values)) {
@@ -501,7 +501,7 @@ class DBIS {
 
 		$searchUrl = '';
 		if (!$searchVars) {
-			$searchUrl = 'http://rzblx10.uni-regensburg.de/dbinfo/dbliste.php?xmloutput=1&bib_id=' . $this->bibID . '&' . "colors={$this->colors}&ocolors={$this->ocolors}&lett={$lett}&Suchwort={$term}";
+			$searchUrl = $this->dbliste_url . $this->bibID . '&' . "colors={$this->colors}&ocolors={$this->ocolors}&lett={$lett}&Suchwort={$term}";
 		} else {
 			$searchUrl = $this->createSearchUrl($searchVars);
 		}
@@ -560,7 +560,7 @@ class DBIS {
 						'access' => $list['access_infos'][(string) $value['access_ref']]['title'],
 						'db_type_refs' => (string) $value['db_type_refs'],
 						'top_db' => (int) $value['top_db'],
-						'link' => 'http://rzblx10.uni-regensburg.de/dbinfo/detail.php?xmloutput=1&bib_id=' . $this->bibID . '&colors=&ocolors=&' . "lett={$this->lett}&titel_id={$value['title_id']}",
+						'link' => $this->db_detail_url . $this->bibID . '&colors=&ocolors=&' . "lett={$this->lett}&titel_id={$value['title_id']}",
 					);
 
 					if ($db['top_db']) {
@@ -598,7 +598,7 @@ class DBIS {
      * @return array
      */
     public function getRequestFachliste($request) {
-		$url = 'http://rzblx10.uni-regensburg.de/dbinfo/fachliste.php?xmloutput=1&bib_id=' . $this->bibID . '&' . $request;
+		$url = $this->fachliste_url . $this->bibID . '&' . $request;
 		$xml_request = $this->XMLPageConnection->getDataFromXMLPage($url);
 		return $xml_request;
     }
@@ -611,7 +611,7 @@ class DBIS {
      * @return array
      */
     public function getRequestDbliste($request) {
-		$url = 'http://rzblx10.uni-regensburg.de/dbinfo/dbliste.php?xmloutput=1&bib_id=' . $this->bibID . '&' . $request;
+		$url = $this->dbliste_url . $this->bibID . '&' . $request;
 		$xml_request = $this->XMLPageConnection->getDataFromXMLPage($url);
 		return $xml_request;
     }
