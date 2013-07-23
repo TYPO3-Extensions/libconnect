@@ -432,22 +432,26 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		if(!empty($jq)){
 			$list = array(1 =>$jq);
 		}
-		
-	    /*foreach ($searchVars as $searchDesc) {
-	        $list['searchDescription'][] = (string)$searchDesc;
+
+		//Fächer
+		if(!empty($searchVars['Notations'])){
+			foreach($searchVars['Notations'] as $notation){
+				if((!empty($this->ezb_to_t3_subjects[$notation])) && ($notation != '-')){
+					$list[] = $this->ezb_to_t3_subjects[$notation]['title'];
+				}
+			}	
 			
-			//$jq_type
-	    }*/
+		}
 	    
 	    //Lizenzen
-	    $accessInfos = $this-> getAccessInfos();
-		var_dump($searchVars['selected_colors']);
-		foreach($searchVars['selected_colors'] as $key=>$color){
-			if($accessInfos[$color]){
-				$list[]=$accessInfos[$color];
+	    if(!empty($searchVars['selected_colors'])){
+		    $accessInfos = $this-> getAccessInfos();
+			foreach($searchVars['selected_colors'] as $key=>$color){
+				if($accessInfos[$color]){
+					$list[]=$accessInfos[$color];
+				}
 			}
 		}
-
 		
 		return $list;
 	}
