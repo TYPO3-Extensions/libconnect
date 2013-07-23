@@ -109,7 +109,7 @@
 			<label index="tx_libconnect.dbis.detail.subjects">Fachgebiete:</label>
 			<label index="tx_libconnect.dbis.detail.keywords">Schlagwörter:</label>
 			<label index="tx_libconnect.dbis.detail.appearence">Erscheinungsform:</label>
-			<label index="tx_libconnect.dbis.detail.dbytpe">Datenbank-Typ:</label>
+			<label index="tx_libconnect.dbis.detail.dbtype">Datenbank-Typ:</label>
 			<label index="tx_libconnect.dbis.detail.publisher">Verlag:</label>
 			<label index="tx_libconnect.dbis.detail.report_periods">Berichtszeitraum:</label>
 			<label index="tx_libconnect.dbis.detail.update">Erscheinungsweise:</label>
