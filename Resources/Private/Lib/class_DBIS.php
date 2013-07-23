@@ -47,10 +47,10 @@ class DBIS {
     private $colors = 255;
     private $ocolors = 40;
     private $lett = 'f';
-    private $fachliste_url =  'http://rzblx10.uni-regensburg.de/dbinfo/fachliste.php?xmloutput=1&bib_id=';
-    private $dbliste_url = 'http://rzblx10.uni-regensburg.de/dbinfo/dbliste.php?xmloutput=1&bib_id=';
-    private $db_detail_url = 'http://rzblx10.uni-regensburg.de/dbinfo/detail.php?xmloutput=1&bib_id=';
-    private $db_detail_suche_url = 'http://rzblx10.uni-regensburg.de/dbinfo/suche.php?xmloutput=1&bib_id=';
+    private $fachliste_url =  'http://dbis.uni-regensburg.de/dbinfo/fachliste.php?xmloutput=1&bib_id=';
+    private $dbliste_url = 'http://dbis.uni-regensburg.de/dbinfo/dbliste.php?xmloutput=1&bib_id=';
+    private $db_detail_url = 'http://dbis.uni-regensburg.de/dbinfo/detail.php?xmloutput=1&bib_id=';
+    private $db_detail_suche_url = 'http://dbis.uni-regensburg.de/dbinfo/suche.php?xmloutput=1&bib_id=';
 
     public $all;
     public $top_five_dbs;

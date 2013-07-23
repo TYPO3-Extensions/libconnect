@@ -54,15 +54,15 @@ class EZB {
     private $date; // YYYY-MM-DD YYYY-MM YYYY
     
     // general config
-    private $overview_requst_url = 'http://rzblx1.uni-regensburg.de/ezeit/fl.phtml?xmloutput=1&';
-    private $detailview_request_url = 'http://rzblx1.uni-regensburg.de/ezeit/detail.phtml?xmloutput=1&';
-    private $search_url = 'http://rzblx1.uni-regensburg.de/ezeit/search.phtml?xmloutput=1&';
+    private $overview_requst_url = 'http://ezb.uni-regensburg.de/ezeit/fl.phtml?xmloutput=1&';
+    private $detailview_request_url = 'http://ezb.uni-regensburg.de/ezeit/detail.phtml?xmloutput=1&';
+    private $search_url = 'http://ezb.uni-regensburg.de/ezeit/search.phtml?xmloutput=1&';
     //private $journal_link_url = "http://rzblx1.uni-regensburg.de/ezeit/warpto.phtml?bibid=SUBHH&colors=7&lang=de&jour_id=";
-    private $search_result_page = "http://rzblx1.uni-regensburg.de/ezeit/searchres.phtml?&xmloutput=1&";
+    private $search_result_page = "http://ezb.uni-regensburg.de/ezeit/searchres.phtml?&xmloutput=1&";
     //private $search_result_page = "http://rzblx1.uni-regensburg.de/ezeit/searchres.phtml?&xmloutput=1&bibid=SUBHH&colors=7&lang=de&";
     //private $search_result_page = "http://ezb.uni-regensburg.de/searchres.phtml?xmloutput=1&bibid=SUBHH&colors=7&lang=de";
-    private $participants_url = "http://rzblx1.uni-regensburg.de/ezeit/where.phtml?";
-    private $participants_xml_url = "http://rzblx1.uni-regensburg.de/ezeit/where.phtml?&xmloutput=1&";
+    private $participants_url = "http://ezb.uni-regensburg.de/ezeit/where.phtml?";
+    private $participants_xml_url = "http://ezb.uni-regensburg.de/ezeit/where.phtml?&xmloutput=1&";
     //private $contact_url = "http://rzblx1.uni-regensburg.de/ezeit/kontakt.phtml?&xmloutput=1&";
 	private $search_zd_id = "http://ezb.uni-regensburg.de/?";
     
