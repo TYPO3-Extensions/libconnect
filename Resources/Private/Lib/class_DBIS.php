@@ -389,10 +389,15 @@ class DBIS {
 					}
 					$details['keywords_join'] = join(', ', $details['keywords']);
 				} else if ($key == 'db_type_infos') {
+					$i=0;
 					foreach ($value->children() as $value2) {
-						$details['db_type_infos'][] = (string) $value2->db_type;
+						//(string)$value->attributes()->db_type_id
+						//@todo da muss noch iergendwie die id rein und nicht nur i
+						$details['db_type_infos'][$i]['type'] = (string) $value2->db_type;
+						$details['db_type_infos'][$i]['long_text'] = (string) $value2->db_type_long_text;
+						$i++;
 					}
-					$details['db_type_infos_join'] = join(', ', $details['db_type_infos']);
+					//$details['db_type_infos_join'] = join(', ', $details['db_type_infos']);
 				}
 				// copy all left values into array
 				else {

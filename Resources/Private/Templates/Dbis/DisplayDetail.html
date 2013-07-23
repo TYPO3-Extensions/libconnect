@@ -152,14 +152,21 @@
 		</tr>
 		</f:if>
 
-		<f:if condition="{db.db_type_infos_join}">
+		<f:if condition="{db.db_type_infos}">
 		<tr>
 			<th>
 				<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.dbtype" /></strong>
 			</th>
 
 			<td>
-				<f:format.htmlentitiesDecode>{db.db_type_infos_join}</f:format.htmlentitiesDecode>
+				<f:for each="{db.db_type_infos}" as="info" key="key">
+					<div class="dbtype">
+						<f:format.htmlentitiesDecode>{info.type}</f:format.htmlentitiesDecode>
+						<ul>
+							<li><f:format.htmlentitiesDecode>{info.long_text}</f:format.htmlentitiesDecode></li>
+						</ul>
+					</div>
+				</f:for>
 			</td>
 		</tr>
 		</f:if>
