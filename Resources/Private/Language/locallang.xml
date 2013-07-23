@@ -119,7 +119,7 @@
 			<label index="tx_libconnect.dbis.miniform.listing_alph">Alphabetische Auflistung</label>
 			<label index="tx_libconnect.dbis.miniform.listing_subject">Auflistung nach Fachgebieten</label>
 			<label index="tx_libconnect.dbis.miniform.search_header">Suche nach Datenbanken</label>
-			<label index="tx_libconnect.dbis.miniform.search_term">Name der Bibliothek</label>
+			<label index="tx_libconnect.dbis.miniform.search_term">Suchbegriff</label>
 			<label index="tx_libconnect.dbis.miniform.search_link">Erweiterte Suche</label>
 			<label index="tx_libconnect.dbis.miniform.show_databases">Datenbanken anzeigen</label>
 			<label index="tx_libconnect.dbis.miniform.select_access">Zugang wählen</label>
