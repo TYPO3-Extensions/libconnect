@@ -29,8 +29,8 @@ function user_libconnect_hasSelectedPluginForCSSInclude($type) {
 	    $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
 	    
 	    if ($GLOBALS['TYPO3_DB']->sql_num_rows($res)) {
-		return TRUE;
-    }
+			return TRUE;
+		}
     
     return FALSE;
 }
