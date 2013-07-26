@@ -26,7 +26,6 @@ plugin.tx_libconnect {
 	}
 	
     settings {
-        allListingId = 44
 		file.path {
 			dbisCSS = EXT:libconnect/Resources/Public/Styles/dbis.css
 			ezbCSS = EXT:libconnect/Resources/Public/Styles/ezb.css
