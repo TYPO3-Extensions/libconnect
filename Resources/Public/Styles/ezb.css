@@ -238,3 +238,14 @@ ul.ezb-list li a {
 /**
  * end - ZDB styles
  */
+
+/**
+ * begin - New in EZB
+ */
+
+.ezb-newdate {
+    font-weight: bold;
+}
+/**
+ * end - New in EZB
+ */
