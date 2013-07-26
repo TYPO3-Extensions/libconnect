@@ -34,6 +34,9 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  *
  */
+ 
+require_once(t3lib_extMgm::extPath('libconnect') . 'Classes/UserFunctions/IsfirstPlugInUserFunction.php');
+
 class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_ActionController {
 
 	 /**
@@ -41,7 +44,9 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 	 */
 	public function displayListAction() {	
 		$params = t3lib_div::_GET('libconnect');
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');
+		
+		//CSS includieren
+		$this->decideIncludeCSS();
 		
 		if ((!empty($params['subject'])) || (!empty($params['notation']))) {//Gewaehltes Fach nach Einstiegspunkt
 			$config['detailPid'] = $this->settings['flexform']['detailPid'];
@@ -102,7 +107,9 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 	 */
 	public function displayDetailAction() {
 		$params = t3lib_div::_GET('libconnect');
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');
+		
+		//CSS includieren
+		$this->decideIncludeCSS();
 
 		//$this->set('bibid', $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid']);
 		if (!($params['jourid'])){
@@ -137,7 +144,9 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 	 */
 	public function displayMiniFormAction() {
 		$params = t3lib_div::_GET('libconnect');
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');
+		
+		//CSS includieren
+		$this->decideIncludeCSS();
 		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
     	$form = $this->ezbRepository->loadMiniForm($params['search']);
@@ -156,7 +165,9 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 	 */
 	public function displayFormAction() {
 		$params = t3lib_div::_GET('libconnect');
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');
+		
+		//CSS includieren
+		$this->decideIncludeCSS();
 		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 		$form =  $this->ezbRepository->loadForm();
@@ -173,11 +184,13 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 	 * zeigt die neuesten Einträge
 	 */
 	public function displayNewAction() {
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');
 		$params = t3lib_div::_GET('libconnect');
 		$params['jq_type1'] = 'ID';
 		$params['sc'] = $params['search']['sc'];
 		unset($params['search']);
+		
+		//CSS includieren
+		$this->decideIncludeCSS();
 		
 		date_default_timezone_set('GMT+1');//@todo aus dem System auslesen
 		
@@ -200,6 +213,22 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		//Variable Template übergeben
 		$this->view->assign('journals', $journals);
 		$this->view->assign('new_date', date("d.m.Y",$today-($numDays * $oneDay)));
+	}
+
+	/**
+	 * prüft ob eine CSS-Datei eingebunden werden muss und macht es dann
+	 */
+	private function decideIncludeCSS(){
+		$params = t3lib_div::_GET('libconnect');
+		//UID des PlugIns ermitteln
+		$this->contentObj = $this->configurationManager->getContentObject();
+		$uid = $this->contentObj->data['uid'];
+		unset($this->contentObj);
+		
+		//Nur das erste PlugIn auf der Seite soll die CSS-Datei einbinden
+		if(IsfirstPlugInUserFunction('ezb', $uid)){
+			$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');	
+		}
 	}
 }
 ?>

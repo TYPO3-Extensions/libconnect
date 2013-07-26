@@ -34,12 +34,18 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  *
  */
+
+require_once(t3lib_extMgm::extPath('libconnect') . 'Classes/UserFunctions/IsfirstPlugInUserFunction.php'); 
+
 class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_ActionController {
 	
 	/**
 	 * zeigt die Top-Datenbanken an
 	 */
 	public function displayTopAction() {
+		//CSS includieren
+		$this->decideIncludeCSS();
+		
 		$config['subject'] = $this->settings['flexform']['subject'];
 		$config['detailPid'] = $this->settings['flexform']['detailPid'];
 
@@ -54,7 +60,15 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 	 */
 	public function displayListAction() {
 		$params = t3lib_div::_GET('libconnect');
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/dbis.css" />');
+		
+		//Test wegen Kompatibilität
+		/*$version = t3lib_div::int_from_ver(TYPO3_version);
+		if($version < 40060000){//Älter als Version 4.6?
+			$this->view->setTemplateRootPath(t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Private/Oldtemplates/');	
+		}*/
+		
+		//CSS includieren
+		$this->decideIncludeCSS();
 		
 		if (!empty($params['subject'])) {//Gewaehltes Fach nach Einstiegspunkt
 			$config['sort'] = $this->settings['flexform']['sortParameter'];
@@ -110,7 +124,9 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 	 */
 	public function displayDetailAction() {
 		$params = t3lib_div::_GET('libconnect');
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/dbis.css" />');
+		
+		//CSS includieren
+		$this->decideIncludeCSS();
 		
 		if (!($params['titleid'])){
 			//Variable Template übergeben
@@ -139,7 +155,9 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 	 */
 	public function displayMiniFormAction() {
 		$params = t3lib_div::_GET('libconnect');
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/dbis.css" />');		
+		
+		//CSS includieren
+		$this->decideIncludeCSS();
 		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 		
@@ -165,7 +183,9 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 	 */
 	public function displayFormAction() {
 		$params = t3lib_div::_GET('libconnect');
-		$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/dbis.css" />');
+		
+		//CSS includieren
+		$this->decideIncludeCSS();
 				
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 	
@@ -178,5 +198,21 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		$this->view->assign('listUrl', $cObject->getTypolink_URL($this->settings['flexform']['listPid']));//Link zur Suchseite
 		$this->view->assign('listPid', $this->settings['flexform']['listPid']);//Link zur Listendarstellung
     }
+
+	/**
+	 * prüft ob eine CSS-Datei eingebunden werden muss und macht es dann
+	 */
+	private function decideIncludeCSS(){
+		$params = t3lib_div::_GET('libconnect');
+		//UID des PlugIns ermitteln
+		$this->contentObj = $this->configurationManager->getContentObject();
+		$uid = $this->contentObj->data['uid'];
+		unset($this->contentObj);
+		
+		//Nur das erste PlugIn auf der Seite soll die CSS-Datei einbinden
+		if(IsfirstPlugInUserFunction('dbis', $uid)){
+			$this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/dbis.css" />');	
+		}
+	}
 }
 ?>
