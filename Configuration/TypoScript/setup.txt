@@ -44,9 +44,9 @@ plugin.tx_libconnect {
 	}
 }
 
-[compatVersion = 4.5]
-	plugin.tx_libconnect.view.templateRootPath = EXT:libconnect/Resources/Private/Oldtemplates/
-[global]
+#[compatVersion = 4.5]
+#	plugin.tx_libconnect.view.templateRootPath = EXT:libconnect/Resources/Private/Oldtemplates/
+#[global]
 
 #[userFunc = user_libconnect_hasSelectedPluginForCSSInclude(dbis)]
 #page.includeCSS {
