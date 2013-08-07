@@ -140,7 +140,7 @@
 			<label index="tx_libconnect.dbis.search.criterion">Sie suchten nach folgenden Kriterien:</label>
 			<label index="tx_libconnect.dbis.search.licence">Zugriffe:</label>
 			<label index="tx_libconnect.dbis.search.top_databases">Top Datenbanken</label>
-			<label index="tx_libconnect.dbis.search.hits">Top Datenbanken</label>
+			<label index="tx_libconnect.dbis.search.hits"> Treffer:</label>
 		</languageKey>
 	</data>
 </T3locallang>
