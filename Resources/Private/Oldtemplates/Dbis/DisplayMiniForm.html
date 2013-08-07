@@ -1,19 +1,4 @@
 {namespace libconnect=Tx_Libconnect_ViewHelpers}
-<f:if condition="{listingsWrapper}">
-	<div class="dbis-listings-wrapper">
-		<p>
-			<f:link.page pageUid="{listPid}" additionalParams="{libconnect: '{sort:\'alph\'}'}" addQueryString="1">
-				<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.listing_alph" />
-			</f:link.page>
-		</p>
-		
-	    <p>
-	    	<f:link.page pageUid="{listPid}" additionalParams="{libconnect: '{sort:\'type\'}'}" addQueryString="1">
-	    		<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.listing_subject" />
-	    	</f:link.page>
-	    </p>
-	</div>
-</f:if>
 
 <div class="datenbank-suche-wrapper">
 
@@ -57,4 +42,20 @@
 
 	</div>
 	</f:else>
+</f:if>
+
+<f:if condition="{listingsWrapper}">
+	<div class="dbis-listings-wrapper">
+		<p>
+			<f:link.page pageUid="{listPid}" additionalParams="{libconnect: '{sort:\'alph\'}'}" addQueryString="1">
+				<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.listing_alph" />
+			</f:link.page>
+		</p>
+		
+	    <p>
+	    	<f:link.page pageUid="{listPid}" additionalParams="{libconnect: '{sort:\'type\'}'}" addQueryString="1">
+	    		<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.listing_subject" />
+	    	</f:link.page>
+	    </p>
+	</div>
 </f:if>
