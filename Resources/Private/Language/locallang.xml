@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+Au<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallang>
 	<meta type="array">
 		<type>module</type>
@@ -117,7 +117,7 @@
 			<label index="tx_libconnect.dbis.detail.remarks">Weitere Bemerkungen:</label>
 			
 			<label index="tx_libconnect.dbis.miniform.listing_alph">Alphabetische Auflistung</label>
-			<label index="tx_libconnect.dbis.miniform.listing_subject">Auflistung nach Fachgebieten</label>
+			<label index="tx_libconnect.dbis.miniform.listing_subject">Auflistung nach Datenbanktyp</label>
 			<label index="tx_libconnect.dbis.miniform.search_header">Suche nach Datenbanken</label>
 			<label index="tx_libconnect.dbis.miniform.search_term">Suchbegriff</label>
 			<label index="tx_libconnect.dbis.miniform.search_link">Erweiterte Suche</label>
