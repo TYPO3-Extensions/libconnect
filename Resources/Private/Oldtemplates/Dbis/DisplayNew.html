@@ -13,19 +13,6 @@
 </ul>
 </div>
 
-
-<f:if condition="{list.top}">
-<div class="top-database-wrapper">
-	<h3 class="libconnect-h1"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.list.topdatabases" /></h3>
-	<ul class="dbis-top-list">
-	<f:for each="{list.top}" as="db">
-		<li><a href="{db.detail_link}"><libconnect:strreplace search=" & " replace=" &amp; "><f:escape value="{db.title}" type="raw" /></libconnect:strreplace></a> (<f:escape value="{db.access}" type="raw" />)</li>
-	</f:for>
-	</ul>
-</div>
-</f:if>
-
-
 <br/><br/>
 
 <p>
