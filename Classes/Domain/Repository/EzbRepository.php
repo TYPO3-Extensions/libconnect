@@ -462,7 +462,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 	public function getSubject($subject_id){
 		$this->loadSubjects();
 		
-		return $this->t3_to_ezb_subjects[$subject_id]['ezbnotation'];
+		return $this->t3_to_ezb_subjects[$subject_id];
 	}
 }
 ?>

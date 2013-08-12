@@ -200,8 +200,8 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		$params['jq_type1'] = 'ID';
 		$params['sc'] = $params['search']['sc'];
 		if(!empty($params['subject'])){
-			$subjectId = $this->ezbRepository->getSubject($params['subject']);
-			$params['Notations']=array($subjectId);
+			$subject = $this->ezbRepository->getSubject($params['subject']);
+			$params['Notations']=array($subject['ezbnotation']);
 		}
 		unset($params['subject']);
 		unset($params['search']);
@@ -231,6 +231,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		//Variable Template übergeben
 		$this->view->assign('journals', $journals);
 		$this->view->assign('new_date', date("d.m.Y",$today-($numDays * $oneDay)));
+		$this->view->assign('subject', $subject['title']);
 	}
 
 	/**

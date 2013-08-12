@@ -213,8 +213,8 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		$params['jq_type1'] = 'LD';
 		$params['sc'] = $params['search']['sc'];
 		if(!empty($params['subject'])){
-			$subjectId = $this->dbisRepository->getSubject($params['subject']);
-			$params['gebiete']=array($subjectId);
+			$subject = $this->dbisRepository->getSubject($params['subject']);
+			$params['gebiete']=array($subject['dbisid']);
 		}
 		unset($params['subject']);
 		unset($params['search']);
@@ -244,6 +244,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		//Variable Template übergeben
 		$this->view->assign('list', $liste);
 		$this->view->assign('new_date', date("d.m.Y",$today-($numDays * $oneDay)));
+		$this->view->assign('subject', $subject['title']);
 	}
 
 	/**
