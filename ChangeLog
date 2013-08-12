@@ -10,12 +10,20 @@
 		- Ein mehrfaches Laden der CSS-Dateien wird nun unterbunden. (TW)
 		- mehr Kommentare hinzugefügt (TW)
 		- TYPO3 4.5-Kompatibilität entautomatisiert (TW)
+		- mehr CSS-Klassen hinzugefügt für bessere Gestaltung
+		- Neue Funktion: (TW)
+			- neue Einträge werden dort "beworben". Standardmäßig gilt alles als neu, das nicht älter als 7 Tage ist. Dies kann aber
+			  entsprechend konfiguriert werden.
+			- Im PlugIn "Sidebar" kann auf das neue PlugIn verwiesen werden. Bei vorheriger Wahl eines Fachbereiches zeigt dann das neue PlugIn
+			  Einträge entsprechend dieses Fachbereiches an.
 	- DBIS:
 		- Wenn es weitere Zugänge gibt, wurde bisher immer der gleiche Text ausgegeben: "Weitere lizenzierte Zugänge" - auch bei freien Zugängen. 
 		  Jetzt wird auch entsprechend die Angabe "weitere freie Zugänge" gemacht.(TW)
 		- Umbau der Anzeige zur Sortierung der Einträge: (TW)
  			- Es funktioniert (wieder), dass der Nutzer selbst entscheiden kann, wie die Einträge sortiert sind
  			- Möglichkeit zur Sortierung erst dann anbieten, wenn es einen Effekt gibt, d.h. erst nach Wahl des Faches
+ 			- Links sind nach unten gesetzt worden
+ 			- Linktext geändert
  		- Die statischen Texte der DBIS-Templates stehen nun in der locallang.xml (TW)
  		- Sidebar: falsche bzw. irreführende Bezeichnung im label-Tag geändert (TW)
  		- kleine Codeverbesserungen (TW)
@@ -25,9 +33,7 @@
 			- "Could not analyse class:TYPO3\CMS\Fluid\ViewHelpers" -> Hier war ein Aufruf für die alten Templates drin.
 		- Umbau der Anzeige zur Sortierung der Einträge: (TW)
 			- Es funktioniert (wieder) das der Nutzer selbst entscheiden kann, wie die Einträge sortiert sind
-		- Neue Funktion: 
-			- neue Einträge werden dort "beworben". Standardmäßig gilt alles als neu, das nicht älter als 7 Tage ist. Dies kann aber 
-		  entsprechend konfiguriert werden. (TW)
+			- Links sind nach unten gesetzt worden (TW)
 		- nun werden nach der Sidebarsuche und der erweiterten Suche die Suchbegriffe bzw. die Suchkriterien ähnlich wie bei DBIS aufgelistet (TW)
 
 3.3.5
