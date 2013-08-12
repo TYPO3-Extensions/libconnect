@@ -1,7 +1,7 @@
 <div id="dbis-detail">
 <f:if condition="{error}">
 	<f:then>
-		<h1><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.error.h1" /></h1>
+		<h1 class="libconnect-h1"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.error.h1" /></h1>
 		<p>
 			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.error.p1" />
 		</p>
@@ -11,8 +11,8 @@
 	</f:then>
 	<f:else>
 		{namespace libconnect=Tx_Libconnect_ViewHelpers}
-		<h3><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.h3.database" /></h3>
-		<h1><f:escape value="{db.title}" type="raw" /></h1>
+		<h1 class="libconnect-h1"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.database" /></h3>
+		<h2 class="libconnect-h2"><f:escape value="{db.title}" type="raw" /></h2>
 
 		<f:if condition="{db.access_workaround}">
 			<f:if condition="{db.access.href}">

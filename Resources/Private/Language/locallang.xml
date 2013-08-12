@@ -102,7 +102,7 @@
 			<label index="tx_libconnect.dbis.detail.error.h1">Fehler</label>
 			<label index="tx_libconnect.dbis.detail.error.p1">Es ist ein Fehler bei der Anfrage der Datenbank aufgetreten.</label>
 			<label index="tx_libconnect.dbis.detail.error.p2">Möglicherweise ist die angefragte Datenbank nicht vorhanden. Bitte versuchen Sie es erneut oder wenden Sie sich an das Web-Team der Bibliothek, das Ihnen beim Auffinden des Datensatzes gerne behilflich ist.</label>
-			<label index="tx_libconnect.dbis.detail.h3.database">Datenbank</label>
+			<label index="tx_libconnect.dbis.detail.database">Datenbank</label>
 			<label index="tx_libconnect.dbis.detail.recherche">Recherche starten</label>
 			<label index="tx_libconnect.dbis.detail.othertitle">Weitere Titel:</label>
 			<label index="tx_libconnect.dbis.detail.access.lic">Weitere freie Zugänge:</label>

@@ -1,5 +1,5 @@
 {namespace libconnect=Tx_Libconnect_ViewHelpers}
-<h3>
+<h1 class="ezb">
 	<f:if condition="{journals.subject}">
 		<f:then>
 			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.list.headline.subject" />
@@ -8,14 +8,14 @@
 			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.list.headline.alphabetical" />
 		</f:else>
 	</f:if>
-</h3>
+</h1>
 
 <f:if condition="{journals.subject}">
-	<h1>
+	<h2 class="ezb">
 		<f:format.htmlentitiesDecode>
 			{journals.subject}
 		</f:format.htmlentitiesDecode>
-	</h1>
+	</h2>
 </f:if>
 
 <div class="ezb-list-legend">
