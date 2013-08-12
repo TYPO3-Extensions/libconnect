@@ -160,8 +160,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		$this->decideIncludeCSS();
 		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
-		
-    	$form = $this->dbisRepository->loadMiniForm($params['search']);
+    	$form = $this->dbisRepository->loadMiniForm();
 		
 		//Variablen Template übergeben
 		$this->view->assign('vars', $params['search']);
@@ -174,6 +173,13 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		//Möglichkeit zur Sortierung der Einträge des Fachgebietes erst nach Wahl des Fachgebietes
 		if (!empty($params['subject'])) {
 			$this->view->assign('listingsWrapper', true);
+			
+			//Wenn New aktiviert soll hier auch das Neu im Fach aktiviert werden
+			if(!empty($this->settings['flexform']['newPid'])){
+				$cObject = t3lib_div::makeInstance('tslib_cObj');
+				$this->view->assign('newURL', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid']), 
+					array('libconnect' => array('subject' => $params['subject'] )) ) );//URL der New-Darstellung
+			}
 		}
 		
     }
@@ -198,6 +204,47 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		$this->view->assign('listUrl', $cObject->getTypolink_URL($this->settings['flexform']['listPid']));//Link zur Suchseite
 		$this->view->assign('listPid', $this->settings['flexform']['listPid']);//Link zur Listendarstellung
     }
+
+	/**
+	 * zeigt die neuesten Einträge
+	 */
+	public function displayNewAction() {
+		$params = t3lib_div::_GET('libconnect');
+		$params['jq_type1'] = 'LD';
+		$params['sc'] = $params['search']['sc'];
+		if(!empty($params['subject'])){
+			$subjectId = $this->dbisRepository->getSubject($params['subject']);
+			$params['gebiete']=array($subjectId);
+		}
+		unset($params['subject']);
+		unset($params['search']);
+		
+		//CSS einbinden
+		$this->decideIncludeCSS();
+		
+		date_default_timezone_set('GMT+1');//@todo aus dem System auslesen
+		
+		$oneDay = 86400;//Sekunden
+		$numDays = 7; //Standard sind 7 Tage
+		$today = strtotime('now');
+  
+		if(!empty($this->settings['flexform']['countDays'])){
+			$numDays = $this->settings['flexform']['countDays'];
+		}
+		
+		//Datum berechnen
+		$date = date("d.m.Y",$today-($numDays * $oneDay));
+		$params['jq_term1'] = $date;//Datum bis wann Eintrag neu
+		
+		$config['detailPid'] = $this->settings['flexform']['detailPid'];
+		
+		//Liste abfragen
+		$liste =  $this->dbisRepository->loadSearch($params, $config);
+
+		//Variable Template übergeben
+		$this->view->assign('list', $liste);
+		$this->view->assign('new_date', date("d.m.Y",$today-($numDays * $oneDay)));
+	}
 
 	/**
 	 * prüft ob eine CSS-Datei eingebunden werden muss und macht es dann

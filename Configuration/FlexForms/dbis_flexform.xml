@@ -39,7 +39,11 @@
 								<numIndex index="4">
 									<numIndex index="0">Suchformular</numIndex>
 									<numIndex index="1">Dbis->displayForm</numIndex>
-								</numIndex>									
+								</numIndex>								
+									<numIndex index="5" type="array">
+									<numIndex index="0">Neu in DBIS</numIndex>
+									<numIndex index="1">Dbis->displayNew</numIndex>
+								</numIndex>		
 							</items>
 						</config>
 					</TCEforms>
@@ -115,7 +119,7 @@
 					<TCEforms>
 						<exclude>1</exclude>
 						<label>Sortierung</label>
-						<displayCond><![CDATA[FIELD:switchableControllerActions:=:Dbis->displayList]]></displayCond>
+						<displayCond><![CDATA[FIELD:switchableControllerActions:=:Dbis->displayList, Dbis->displayNew]]></displayCond>
 						<config>
 							<type>select</type>
 							<items type="array">
@@ -134,7 +138,39 @@
 							</items>
 						</config>
 					</TCEforms>
-				</settings.flexform.sortParameter>				
+				</settings.flexform.sortParameter>
+
+				<settings.flexform.countDays>
+					<TCEforms>
+						<exclude>1</exclude>
+						<label>Wieviel Tage gelten Einträge als neu? (Standard: 7)</label>
+						<displayCond><![CDATA[FIELD:switchableControllerActions:=:Dbis->displayNew]]></displayCond>
+						<config>
+					  		<type>input</type>
+  							<size>30</size>
+  							<max>500</max>
+  							<eval>trim</eval>
+						</config>
+					</TCEforms>
+				</settings.flexform.countDays>
+				
+				<settings.flexform.newPid>
+					<TCEforms>
+						<exclude>1</exclude>
+						<label>Neu in DBIS</label>
+						<displayCond><![CDATA[FIELD:switchableControllerActions:IN:Dbis->displayMiniForm]]></displayCond>
+						<config>
+							<type>group</type>
+							<internal_type>db</internal_type>
+							<allowed>pages</allowed>
+							<size>1</size>
+							<maxitems>1</maxitems>
+							<minitems>0</minitems>
+							<show_thumbs>1</show_thumbs>
+						</config>
+					</TCEforms>
+				</settings.flexform.newPid>				
+
 			</el>
 		</ROOT>
     </sDEF>

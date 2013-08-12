@@ -27,11 +27,15 @@
 			<label index="tx_libconnect.ezb.legend.icon.red">Für Ihren Standort nicht freigeschaltet. Zum Teil bekommen Sie Zugriff auf Abstracts</label>
 			<label index="tx_libconnect.ezb.legend.icon.yellow.red">Nur für einen Teil der erschienenen Jahrgänge zugänglich</label>
 			
-			<label index="tx_libconnect.ezb.miniform.link.alphabetical">Alphabetische Auflistung</label>
-			<label index="tx_libconnect.ezb.miniform.link.subject">Auflistung nach Fachgebieten</label>
+			<label index="tx_libconnect.ezb.miniform.link.sort">Sortierung</label>
+			<label index="tx_libconnect.ezb.miniform.link.alphabetical">alphabetisch</label>
+			<label index="tx_libconnect.ezb.miniform.link.subject">nach Fachgebieten</label>
+			<label index="tx_libconnect.ezb.miniform.link.allsubjects">Übersicht Fachgebiete</label>
 			<label index="tx_libconnect.ezb.miniform.link.extended_search">Erweiterte Suche</label>
 			<label index="tx_libconnect.ezb.miniform.searchform.headline">Suche nach Zeitschriften</label>
 			<label index="tx_libconnect.ezb.miniform.searchform.label">Name der Zeitschrift</label>
+			<label index="tx_libconnect.ezb.miniform.new.all">Neu in der EZB</label>
+			<label index="tx_libconnect.ezb.miniform.new.subject">Neu in in Ihrem Fach</label>
 			
 			<label index="tx_libconnect.ezb.search.headline">Ergebnisse Ihrer Suche</label>
 			<label index="tx_libconnect.ezb.search.text.hits">Die Suche ergab %s Treffer:</label>
@@ -116,13 +120,16 @@
 			<label index="tx_libconnect.dbis.detail.license">Lizenz:</label>
 			<label index="tx_libconnect.dbis.detail.remarks">Weitere Bemerkungen:</label>
 			
-			<label index="tx_libconnect.dbis.miniform.listing_alph">Alphabetische Auflistung</label>
-			<label index="tx_libconnect.dbis.miniform.listing_subject">Auflistung nach Datenbanktyp</label>
+			<label index="tx_libconnect.dbis.miniform.link.sort">Sortierung</label>
+			<label index="tx_libconnect.dbis.miniform.listing_alph">alphabetisch</label>
+			<label index="tx_libconnect.dbis.miniform.listing_subject">nach Datenbanktyp</label>
 			<label index="tx_libconnect.dbis.miniform.search_header">Suche nach Datenbanken</label>
 			<label index="tx_libconnect.dbis.miniform.search_term">Suchbegriff</label>
 			<label index="tx_libconnect.dbis.miniform.search_link">Erweiterte Suche</label>
 			<label index="tx_libconnect.dbis.miniform.show_databases">Datenbanken anzeigen</label>
 			<label index="tx_libconnect.dbis.miniform.select_access">Zugang wählen</label>
+			<label index="tx_libconnect.dbis.miniform.new.all">Neu in DBIS</label>
+			<label index="tx_libconnect.dbis.miniform.new.subject">Neu in Ihrem Fachgebiete</label>
 			
 			<label index="tx_libconnect.dbis.form.extended_search">Erweiterte Suche nach Datenbanken</label>
 			<label index="tx_libconnect.dbis.form.field">Feldangabe</label>
@@ -141,6 +148,11 @@
 			<label index="tx_libconnect.dbis.search.licence">Zugriffe:</label>
 			<label index="tx_libconnect.dbis.search.top_databases">Top Datenbanken</label>
 			<label index="tx_libconnect.dbis.search.hits"> Treffer:</label>
+			
+			<label index="tx_libconnect.dbis.new.headline.alphabetical">Neu in der DBIS - Alphabetische Auflistung</label>
+			<label index="tx_libconnect.dbis.new.headline.subject">Neu in der DBIS - Auflistung nach Datenbanktyp</label>
+			<label index="tx_libconnect.dbis.new.since">Es gibt seit dem </label>
+			<label index="tx_libconnect.dbis.new.hits">neue Einträge:</label>
 		</languageKey>
 	</data>
 </T3locallang>

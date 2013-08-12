@@ -149,7 +149,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		$this->decideIncludeCSS();
 		
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
-    	$form = $this->ezbRepository->loadMiniForm($params['search']);
+    	$form = $this->ezbRepository->loadMiniForm();
 		
 		//Variablen Template übergeben	
 		$this->view->assign('vars', $params['search']);
@@ -158,6 +158,18 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		$this->view->assign('searchUrl', $cObject->getTypolink_URL($this->settings['flexform']['searchPid']));//Link zur Suchseite
 		$this->view->assign('listUrl', $cObject->getTypolink_URL($this->settings['flexform']['listPid']));//Link zur Suchseite
 	    $this->view->assign('listPid', $this->settings['flexform']['listPid']);//ID der Listendarstellung
+	    
+    	//Wenn Fach gewählt, soll Link zur Fachübersicht dargestellt werden
+		if ((!empty($params['subject'])) || (!empty($params['notation']))) {
+			$this->view->assign('showSubjectLink', true);
+			
+			//Wenn New aktiviert soll hier auch das Neu im Fach aktiviert werden
+			if(!empty($this->settings['flexform']['newPid'])){
+				$cObject = t3lib_div::makeInstance('tslib_cObj');
+				$this->view->assign('newURL', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid']), 
+					array('libconnect' => array('subject' => $params['subject'] )) ) );//URL der New-Darstellung
+			}
+		}
 	}
 	
 	/**
@@ -187,9 +199,14 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		$params = t3lib_div::_GET('libconnect');
 		$params['jq_type1'] = 'ID';
 		$params['sc'] = $params['search']['sc'];
+		if(!empty($params['subject'])){
+			$subjectId = $this->ezbRepository->getSubject($params['subject']);
+			$params['Notations']=array($subjectId);
+		}
+		unset($params['subject']);
 		unset($params['search']);
 		
-		//CSS includieren
+		//CSS einbinden
 		$this->decideIncludeCSS();
 		
 		date_default_timezone_set('GMT+1');//@todo aus dem System auslesen
@@ -207,7 +224,8 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 		$params['jq_term1'] = $date;//Datum bis wann Eintrag neu
 		
 		$config['detailPid'] = $this->settings['flexform']['detailPid'];
-			
+		
+		//Liste abfragen
 		$journals =  $this->ezbRepository->loadSearch($params, $config);
 		
 		//Variable Template übergeben

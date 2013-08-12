@@ -213,9 +213,10 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		$term = $searchVars['sword'];//wird bei MiniForm verwendet
 		unset($searchVars['sword']);
 
+		//Suche abschicken
 		$dbis = new DBIS();
 		$result = $dbis->search($term, $searchVars);
-
+		
 		foreach(array_keys($result['list']['top']) as $db) {
 			$result['list']['top'][$db]['detail_link'] = $cObject->getTypolink_URL(
 				intval($config['detailPid']),
@@ -263,6 +264,15 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 	
 	public function injectSubjectRepository(Tx_Libconnect_Domain_Repository_SubjectRepository $subjectRepository){
 		$this->subjectRepository = $subjectRepository;
+	}
+	
+	/**
+	 * liefert DBIS-Id von einem Fach
+	 */
+	public function getSubject($subject_id){
+		$this->loadSubjects();
+		
+		return $this->t3_to_dbis_subjects[$subject_id]['dbisid'];
 	}
 }
 ?>

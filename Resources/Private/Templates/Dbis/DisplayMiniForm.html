@@ -2,7 +2,7 @@
 
 <div class="datenbank-suche-wrapper">
 
-    <h1><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.search_header" /></h1>
+    <h2><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.search_header" /></h2>
 
 	<form action="{listUrl}" method="get">
 		<input type="hidden" name="id" value="{listPid}" />
@@ -46,15 +46,29 @@
 
 <f:if condition="{listingsWrapper}">
 	<div class="dbis-listings-wrapper">
-		<p>
-			<f:link.page pageUid="{listPid}" additionalParams="{libconnect: '{sort:\'alph\'}'}" addQueryString="1">
-				<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.listing_alph" />
-			</f:link.page></p>
-		</p>
+		<h2 class="ezb-sort"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.miniform.link.sort" /></h2>
 		<p>
 			<f:link.page pageUid="{listPid}" additionalParams="{libconnect: '{sort:\'type\'}'}" addQueryString="1">
 				<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.listing_subject" />
 			</f:link.page>
 		</p>
+
+		<p>
+			<f:link.page pageUid="{listPid}" additionalParams="{libconnect: '{sort:\'alph\'}'}" addQueryString="1">
+				<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.listing_alph" />
+			</f:link.page></p>
+		</p>
+		
+		<f:if condition="{newURL}">
+   		<f:then>
+   			<p id="dbis-newmini">
+				<a href="{newURL}">
+					<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.new.subject" />
+				</a>
+			</p>
+		</f:then>
+		<f:else>
+		</f:else>
+   	</f:if>
 	</div>
 </f:if>

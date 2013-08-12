@@ -455,5 +455,14 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		
 		return $list;
 	}
+	
+	/**
+	 * liefert EZB-Id von einem Fach
+	 */
+	public function getSubject($subject_id){
+		$this->loadSubjects();
+		
+		return $this->t3_to_ezb_subjects[$subject_id]['ezbnotation'];
+	}
 }
 ?>
