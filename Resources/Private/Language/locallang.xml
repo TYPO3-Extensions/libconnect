@@ -129,7 +129,7 @@
 			<label index="tx_libconnect.dbis.miniform.show_databases">Datenbanken anzeigen</label>
 			<label index="tx_libconnect.dbis.miniform.select_access">Zugang wählen</label>
 			<label index="tx_libconnect.dbis.miniform.new.all">Neu in DBIS</label>
-			<label index="tx_libconnect.dbis.miniform.new.subject">Neu in Ihrem Fachgebiete</label>
+			<label index="tx_libconnect.dbis.miniform.new.subject">Neu in Ihrem Fachgebiet</label>
 			
 			<label index="tx_libconnect.dbis.form.extended_search">Erweiterte Suche nach Datenbanken</label>
 			<label index="tx_libconnect.dbis.form.field">Feldangabe</label>
