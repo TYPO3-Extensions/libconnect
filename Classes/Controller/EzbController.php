@@ -165,10 +165,17 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 			
 			//Wenn New aktiviert soll hier auch das Neu im Fach aktiviert werden
 			if(!empty($this->settings['flexform']['newPid'])){
+					
 				$cObject = t3lib_div::makeInstance('tslib_cObj');
-				$this->view->assign('newURL', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid']), 
-					array('libconnect' => array('subject' => $params['subject'] )) ) );//URL der New-Darstellung
+				
+				if(!empty($params['subject'])){
+					$this->view->assign('newUrlSub', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid']), 
+						array('libconnect' => array('subject' => $params['subject'] )) ) );//URL der New-Darstellung
+				}
 			}
+				
+		}elseif(!empty($this->settings['flexform']['newPid'])){
+			$this->view->assign('newUrl', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid'])) );
 		}
 	}
 	

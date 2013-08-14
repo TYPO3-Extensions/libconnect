@@ -59,16 +59,21 @@
 	    	</f:link.page>
 	    </p>
 	    
-	    <f:if condition="{newURL}">
-   		<f:then>
-			<p id="dbis-newmini">
-				<a href="{newURL}">
+		<f:if condition="{newUrlSub}">
+			<p id="dbis-newminiSub">
+				<a href="{newUrlSub}">
 					<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.new.subject" />
 				</a>
 			</p>
-		</f:then>
-		<f:else>
-		</f:else>
-   	</f:if>
+   		</f:if>
+	</div>
+</f:if>
+<f:if condition="{newUrl}">
+	<div class="dbis-new">
+		<p id="dbis-newmini">
+			<a href="{newUrl}">
+				<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.new.all" />
+			</a>
+		</p>
 	</div>
 </f:if>

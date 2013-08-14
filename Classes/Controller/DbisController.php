@@ -177,9 +177,13 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 			//Wenn New aktiviert soll hier auch das Neu im Fach aktiviert werden
 			if(!empty($this->settings['flexform']['newPid'])){
 				$cObject = t3lib_div::makeInstance('tslib_cObj');
-				$this->view->assign('newURL', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid']), 
+				
+				$this->view->assign('newUrlSub', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid']), 
 					array('libconnect' => array('subject' => $params['subject'] )) ) );//URL der New-Darstellung
 			}
+
+		}elseif(!empty($this->settings['flexform']['newPid'])){
+			$this->view->assign('newUrl', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid'])) );
 		}
 		
     }
