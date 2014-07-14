@@ -122,17 +122,17 @@ class EZB {
      */
     public function getFachbereiche() {
 		
-		$fachbereiche = array();
-		$url = "{$this->overview_requst_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&";
-		$xml_request = $this->XMLPageConnection->getDataFromXMLPage($url);
+        $fachbereiche = array();
+        $url = "{$this->overview_requst_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&";
+        $xml_request = $this->XMLPageConnection->getDataFromXMLPage($url);
 
-		if (isset($xml_request->ezb_subject_list->subject)) {
-		    foreach ($xml_request->ezb_subject_list->subject AS $key => $value) {
+        if (isset($xml_request->ezb_subject_list->subject)) {
+            foreach ($xml_request->ezb_subject_list->subject AS $key => $value) {
                 $fachbereiche[(string) $value['notation'][0]] = array('title' => (string) $value[0], 'journalcount' => (int) $value['journalcount'], 'id' => (string) $value['notation'][0], 'notation' => (string) $value['notation'][0]);
             }
-		}
+        }
 
-		return $fachbereiche;
+        return $fachbereiche;
     }
 
     /**
@@ -231,7 +231,7 @@ class EZB {
 		$xml_request = $this->XMLPageConnection->getDataFromXMLPage($url);
 
 		if (!is_object($xml_request->ezb_detail_about_journal->journal)) {
-			return false;
+			return FALSE;
 		}
 
 		$journal['id'] = (int) $xml_request->ezb_detail_about_journal->journal->attributes()->jourid;
@@ -428,7 +428,7 @@ class EZB {
 		$xml_request = $this->XMLPageConnection->getDataFromXMLPage($searchUrl);
 
 		if (!$xml_request) {
-			return false;
+			return FALSE;
 		}
 		$i = 0;
 		$result = array('page_vars');

@@ -54,7 +54,7 @@ class ZDB {
     * Enable debug for logging errors to devLog
     *
     */
-    private $debug = false;
+    private $debug = FALSE;
 
    /**
     * Source-Identifier (sid – Vendor-ID:Database-ID) needs to be arranged with
@@ -97,29 +97,39 @@ class ZDB {
     function __construct() {
         
         $ext_conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['libconnect']);
-        if ($ext_conf['debug'] == true) $this->debug = true;
-        if ($ext_conf['debug'] == false) $this->debug = false; 
+        if ($ext_conf['debug'] == TRUE) $this->debug = TRUE;
+        if ($ext_conf['debug'] == FALSE) $this->debug = FALSE; 
         
         $this->XMLPageConnection = new XMLPageConnection();
 
-	    if(!ZDB::getSid()) {
+        if(!ZDB::getSid()) {
 	        //todo: Fehlermeldung ausgeben
 	        //error_log('typo3 extension libconnect - missing ZDB source-identifier: refer to documentation - chapter configuration.');
 	        if($this->debug) t3lib_div::devLog('invalid SID given: '.$this->sid, 'libconnect', 1);
             return false;
-	    }
+        }
         
         //get the bibid
-        if(isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbbibid'])) $this->bibid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbbibid'];
+        if (isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbbibid'])) {
+            $this->bibid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbbibid'];
+        }
         //if no explicit bibid for zdb is set, try to find the bibid which needs to setup for libconnect without zdb-support
-        elseif(isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid'])) $this->bibid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid'];
-        
+        elseif (isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid'])) {
+            $this->bibid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid'];
+        }
+
         //get the library sigel
-        if(isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbsigel'])) $this->sigel = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbsigel'];
+        if (isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbsigel'])) {
+            $this->sigel = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbsigel'];
+        }
         //get the isil
-        if(isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbisil'])) $this->isil = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbisil'];
+        if (isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbisil'])) {
+            $this->isil = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbisil'];
+        }
         //get the bik
-        if(isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbbik'])) $this->bik = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbbik'];
+        if (isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbbik'])) {
+            $this->bik = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbbik'];
+        }
 
         $this->pid = urlencode((!empty($this->bibid) ? 'bibid=' . $this->bibid .'&' : '') .
                                (!empty($this->sigel) ? 'sigel=' . $this->sigel .'&' : '') .
@@ -127,13 +137,14 @@ class ZDB {
                                (!empty($this->bik) ? 'bik=' . $this->bik : ''));
                      
         //remove last &(urlencode: %26) if existant (only if bik is empty but any other info above is given)
-        if(strlen($this->pid)-3 == strrpos($this->pid, '%26')) 
-            $this->pid = substr($this->pid,0,strlen($this->pid)-3);
-        
+        if (strlen($this->pid) - 3 == strrpos($this->pid, '%26')) {
+            $this->pid = substr($this->pid, 0, strlen($this->pid) - 3);
+        }
+
         //only print location data are requested (default is off, so online and print will be delivered)
-        if($this->onlyPrintFlag)
+        if ($this->onlyPrintFlag) {
             $this->pid .= (strlen($this->pid) > 0 ? urlencode('&print=1') : urlencode('print=1'));
-        
+        }
     }
   
     
@@ -155,9 +166,9 @@ class ZDB {
 	    * - ZDBID is a string of a ZDB-ID
 	    *
 	    */
-	    if(empty($journalIdentifier) && empty($ZDBID))
-	        return false;
-	    else {
+	    if(empty($journalIdentifier) && empty($ZDBID)){
+	        return FALSE;
+	    }else {
 	        if(!empty($ZDBID)) {
 	            $this->pid .= (strlen($this->pid) > 0 ? urlencode("&zdbid={$ZDBID}") : urlencode("zdbid={$ZDBID}"));  
 	        } 
@@ -175,8 +186,10 @@ class ZDB {
 		// root-element = OpenURLResponseXML->Full/Brief
 		// only Full-objects got all the info we want
 		if (! is_object($xml_request->Full)) {
-		    if($this->debug) t3lib_div::devLog('invalid XML-Object - URL: '.$url, 'libconnect', 1);
-			return false;
+		    if ($this->debug) {
+                        t3lib_div::devLog('invalid XML-Object - URL: ' . $url, 'libconnect', 1);
+                    }
+                    return FALSE;
 		} elseif (property_exists($xml_request->Full, 'Error')) {
 		   /**
 		    * possible Error-Codes:
@@ -188,8 +201,10 @@ class ZDB {
 		    *     unknown     Unbekannter Fehler
 		    *
 		    */
-		    if($this->debug) t3lib_div::devLog('Error-Code: ' . $xml_request->Full->Error->attributes()->code . ' - URL: '.$url, 'libconnect', 1);
-			return false;
+                if ($this->debug) {
+                    t3lib_div::devLog('Error-Code: ' . $xml_request->Full->Error->attributes()->code . ' - URL: ' . $url, 'libconnect', 1);
+                }
+                    return FALSE;
 		}
 
 			
@@ -200,8 +215,10 @@ class ZDB {
             $tmpStates = $xml_request->Full->PrintData->ResultList->children();	        
             $tmpResultList = $xml_request->Full->PrintData->ResultList->children();
         } else {
-            if($this->debug) t3lib_div::devLog('invalid ResultList - URL: '.$url, 'libconnect', 1);
-            return false;
+            if ($this->debug) {
+                t3lib_div::devLog('invalid ResultList - URL: ' . $url, 'libconnect', 1);
+            }
+            return FALSE;
         }
 	    
         //as the script is stil running the XML-Object contains all the data necessary for the location information, so continue
@@ -232,14 +249,16 @@ class ZDB {
         if (count($tmpStates)) {
             foreach($tmpStates as $tmpState) {
                 if (in_array($tmpState->attributes()->state, $validStatesArray))
-                    $validStateFlag = true;
+                    $validStateFlag = TRUE;
             }
         }
         //no valid state found -> exit
-	    if(!$validStateFlag) {
-	        if($this->debug) t3lib_div::devLog('non valid state - URL: '.$url, 'libconnect', 0);
-            return false;
-	    }
+        if(!$validStateFlag) {
+            if ($this->debug) {
+                t3lib_div::devLog('non valid state - URL: ' . $url, 'libconnect', 0);
+            }
+            return FALSE;
+        }
 
 
        /**
@@ -291,19 +310,21 @@ class ZDB {
             }
         }		
 		
-	   /**
-		* Icon-Service
-		* ------------
-		*     
-		*/
-		$locationDetail['iconRequest'] = $this->buildIconRequest($journalIdentifier, $genre);
-		$locationDetail['iconInfoUrl'] = $this->buildIconInfoUrl($journalIdentifier, $genre);
+        /**
+         * Icon-Service
+         * ------------
+         *     
+         */
+         $locationDetail['iconRequest'] = $this->buildIconRequest($journalIdentifier, $genre);
+         $locationDetail['iconInfoUrl'] = $this->buildIconInfoUrl($journalIdentifier, $genre);
 		
-		if($this->debug) t3lib_div::devLog('Request successful - URL: '.$url, 'libconnect', 0);
-		
-		return $locationDetail;
+        if ($this->debug) {
+            t3lib_div::devLog('Request successful - URL: ' . $url, 'libconnect', 0);
+        }
+
+        return $locationDetail;
 	    
-	}
+    }
     
 	
     /**
@@ -342,7 +363,7 @@ class ZDB {
 			return false;
 		}
 		
-		return true;
+		return TRUE;
 	}
 	
 }

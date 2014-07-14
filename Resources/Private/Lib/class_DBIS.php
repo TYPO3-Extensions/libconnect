@@ -129,16 +129,16 @@ class DBIS {
      */
     public function getFachliste() {
 	
-		$xml_categories = $this->getRequestFachliste('');
-		$categories = array();
+        $xml_categories = $this->getRequestFachliste('');
+        $categories = array();
 
-		if (isset($xml_categories->list_subjects_collections->list_subjects_collections_item)) {
-		    foreach ($xml_categories->list_subjects_collections->list_subjects_collections_item AS $key => $value) {
+        if (isset($xml_categories->list_subjects_collections->list_subjects_collections_item)) {
+            foreach ($xml_categories->list_subjects_collections->list_subjects_collections_item AS $key => $value) {
                 $categories[(string) $value['notation']] = array('title' => (string) $value, 'id' => (string) $value['notation'], 'count' => (int) (string) $value['number'], 'lett' => (string) $value['lett']);
             }
-		}
+        }
 
-		return $categories;
+        return $categories;
     }
 
     /**
@@ -205,24 +205,24 @@ class DBIS {
 						'fc' => $charBlock->attributes()->fc,
 						'lc' => $charBlock->attributes()->lc,
 						//check current view for which char is shown
-						'current' => ($charBlock->attributes()->lc == $tmpParams['lc'] || $charBlock->attributes()->fc == $tmpParams['lc'] ? true : false)
+						'current' => ($charBlock->attributes()->lc == $tmpParams['lc'] || $charBlock->attributes()->fc == $tmpParams['lc'] ? TRUE : FALSE)
 					);
 				}
 			}
 			//check if a current view got set
 			// if not, set the first charBlock as current view
-			$currentChk = false;
+			$currentChk = FALSE;
 			foreach ($alphabeticalNavList as $value) {
 				if ($value['current']) {
-					$currentChk = true;
+					$currentChk = TRUE;
 					break;
 				}
 			}
 			if (!$currentChk && count($alphabeticalNavList)) {
-				$alphabeticalNavList[0]['current'] = true;
+				$alphabeticalNavList[0]['current'] = TRUE;
 			}
 		}
-		$list['alphNavList'] = (isset($alphabeticalNavList) && count($alphabeticalNavList) ? $alphabeticalNavList : false);
+		$list['alphNavList'] = (isset($alphabeticalNavList) && count($alphabeticalNavList) ? $alphabeticalNavList : FALSE);
 		//EOF workaround for alphabetical listing
 
 		if (isset($xml_fachgebiet_db->list_dbs->db_access_infos->db_access_info)) {
