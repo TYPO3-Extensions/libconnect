@@ -97,15 +97,21 @@ class ZDB {
     function __construct() {
         
         $ext_conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['libconnect']);
-        if ($ext_conf['debug'] == TRUE) $this->debug = TRUE;
-        if ($ext_conf['debug'] == FALSE) $this->debug = FALSE; 
-        
+        if ($ext_conf['debug'] == TRUE) {
+            $this->debug = TRUE;
+        }
+        if ($ext_conf['debug'] == FALSE) {
+            $this->debug = FALSE;
+        }
+
         $this->XMLPageConnection = new XMLPageConnection();
 
         if(!ZDB::getSid()) {
-	        //todo: Fehlermeldung ausgeben
-	        //error_log('typo3 extension libconnect - missing ZDB source-identifier: refer to documentation - chapter configuration.');
-	        if($this->debug) t3lib_div::devLog('invalid SID given: '.$this->sid, 'libconnect', 1);
+            //todo: Fehlermeldung ausgeben
+            //error_log('typo3 extension libconnect - missing ZDB source-identifier: refer to documentation - chapter configuration.');
+            if ($this->debug) {
+                t3lib_div::devLog('invalid SID given: ' . $this->sid, 'libconnect', 1);
+            }
             return false;
         }
         
