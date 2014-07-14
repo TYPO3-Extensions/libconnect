@@ -12,7 +12,7 @@ $TCA['tx_libconnect_domain_model_subject'] = array(
 	'types' => array(
 		//'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, dbisid, ezbnotation,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
 		//'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, dbisid, ezbnotation,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
-		"0" => array("showitem" => "hidden;;1;;1-1-1, title, dbisid, ezbnotation")
+		'0' => array('showitem' => 'hidden;;1;;1-1-1, title, dbisid, ezbnotation')
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),

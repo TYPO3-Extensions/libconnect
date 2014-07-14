@@ -56,7 +56,7 @@ class DBIS {
     public $top_five_dbs;
     // typoscript Konfigurationsvariablen
     private $bibID;
-	private $licenceForbid = array();
+    private $licenceForbid = array();
     // XML Daten
     private $XMLPageConnection;
 
@@ -148,11 +148,11 @@ class DBIS {
      *
      * @return array
      */
-    public function getDbliste($fachgebiet, $sort = "type") {
+    public function getDbliste($fachgebiet, $sort = 'type') {
 
 		$sortlist = array();
-		$url =  $this->dbliste_url. $this->bibID . '&' . "colors={$this->colors}&ocolors={$this->ocolors}&sort=" . $sort . "&";
-		$headline = "";
+		$url =  $this->dbliste_url. $this->bibID . '&' . "colors={$this->colors}&ocolors={$this->ocolors}&sort=" . $sort . '&';
+		$headline = '';
 		
 		//BOF workaround for alphabetical listing
 		if ($fachgebiet == 'all') {
@@ -290,7 +290,7 @@ class DBIS {
                         $sortlist[$db['access']] = $db['access_ref'];
                         //EOF workaround for alphabetical listing
                     } else {
-                        if ($sort == "alph") {
+                        if ($sort == 'alph') {
                             $list['groups']['Treffer']['dbs'][] = $db;
                             $sortlist['Treffer'] = $db['Treffer'];
                         } elseif ($sort == 'access') {
@@ -331,7 +331,7 @@ class DBIS {
     public function getDbDetails($db_id) {
 
 		$details = array();
-		$url =  $this->db_detail_url. $this->bibID . "&colors=&ocolors=&" . "lett={$this->lett}&colors={$this->colors}&ocolors={$this->ocolors}&titel_id=" . $db_id;
+		$url =  $this->db_detail_url. $this->bibID . '&colors=&ocolors=&' . "lett={$this->lett}&colors={$this->colors}&ocolors={$this->ocolors}&titel_id=" . $db_id;
 		$xml_db_details = $this->XMLPageConnection->getDataFromXMLPage($url);
 
 		//@todo Fehlerbehandlung
@@ -469,13 +469,13 @@ class DBIS {
 		foreach ($searchVars as $var => $values) {
 			if (!is_array($values)) {
 				//falls jemand kein utf-8 verwendet
-				if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == "utf-8"){
+				if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == 'utf-8'){
 					$values = utf8_decode($values);
 				}
-				$searchUrl .= "&$var=" . urlencode($values);
+				$searchUrl .= '&$var=' . urlencode($values);
 			} else {
 				foreach ($values as $value) {
-					if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == "utf-8"){
+					if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == 'utf-8'){
 						$value = utf8_decode($value);
 					}
 					$searchUrl .= '&' . $var . '[]=' . urlencode($value);
@@ -497,7 +497,7 @@ class DBIS {
      */
     public function search($term, $searchVars = false, $lett = 'fs') {
 		//falls jemand kein utf-8 verwendet
-		if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == "utf-8"){
+		if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == 'utf-8'){
 			$term = utf8_decode($term);
 		}
 		
@@ -584,8 +584,8 @@ class DBIS {
 		$list['searchDescription'] = array();
 		if (isset($request->search_desc->search_desc_item)) {
 		    foreach ($request->search_desc->search_desc_item as $searchDesc) {
-                $list['searchDescription'][] = (string)$searchDesc;
-            }
+                        $list['searchDescription'][] = (string)$searchDesc;
+                     }
 		}
 		
 		if (isset($request->error)) {

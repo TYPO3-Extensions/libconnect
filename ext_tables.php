@@ -37,7 +37,7 @@ $TCA['tx_libconnect_domain_model_subject'] = array(
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'default_sortby' => "ORDER BY title",
+		'default_sortby' => 'ORDER BY title',
 		//'dividers2tabs' => TRUE,
 		//'versioningWS' => 2,
 		//'versioning_followPages' => TRUE,
@@ -110,9 +110,9 @@ $TCA['tx_libconnect_domain_model_ezb'] = array(
 	),
 );*/
 
-if (TYPO3_MODE == "BE") {
-    $TBE_MODULES_EXT["xMOD_db_new_content_el"]["addElClasses"]["tx_libconnect_dbis_wizicon"] = t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/Wizicon/class.tx_libconnect_dbis_wizicon.php';
-    $TBE_MODULES_EXT["xMOD_db_new_content_el"]["addElClasses"]["tx_libconnect_ezb_wizicon"] = t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/Wizicon/class.tx_libconnect_ezb_wizicon.php';
+if (TYPO3_MODE == 'BE') {
+    $TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_libconnect_dbis_wizicon'] = t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/Wizicon/class.tx_libconnect_dbis_wizicon.php';
+    $TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_libconnect_ezb_wizicon'] = t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/Wizicon/class.tx_libconnect_ezb_wizicon.php';
 }
 
 ?>

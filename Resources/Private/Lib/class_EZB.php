@@ -57,14 +57,14 @@ class EZB {
     private $overview_requst_url = 'http://ezb.uni-regensburg.de/ezeit/fl.phtml?xmloutput=1&';
     private $detailview_request_url = 'http://ezb.uni-regensburg.de/ezeit/detail.phtml?xmloutput=1&';
     private $search_url = 'http://ezb.uni-regensburg.de/ezeit/search.phtml?xmloutput=1&';
-    //private $journal_link_url = "http://rzblx1.uni-regensburg.de/ezeit/warpto.phtml?bibid=SUBHH&colors=7&lang=de&jour_id=";
-    private $search_result_page = "http://ezb.uni-regensburg.de/ezeit/searchres.phtml?&xmloutput=1&";
-    //private $search_result_page = "http://rzblx1.uni-regensburg.de/ezeit/searchres.phtml?&xmloutput=1&bibid=SUBHH&colors=7&lang=de&";
-    //private $search_result_page = "http://ezb.uni-regensburg.de/searchres.phtml?xmloutput=1&bibid=SUBHH&colors=7&lang=de";
-    private $participants_url = "http://ezb.uni-regensburg.de/ezeit/where.phtml?";
-    private $participants_xml_url = "http://ezb.uni-regensburg.de/ezeit/where.phtml?&xmloutput=1&";
-    //private $contact_url = "http://rzblx1.uni-regensburg.de/ezeit/kontakt.phtml?&xmloutput=1&";
-	private $search_zd_id = "http://ezb.uni-regensburg.de/?";
+    //private $journal_link_url = 'http://rzblx1.uni-regensburg.de/ezeit/warpto.phtml?bibid=SUBHH&colors=7&lang=de&jour_id=';
+    private $search_result_page = 'http://ezb.uni-regensburg.de/ezeit/searchres.phtml?&xmloutput=1&';
+    //private $search_result_page = 'http://rzblx1.uni-regensburg.de/ezeit/searchres.phtml?&xmloutput=1&bibid=SUBHH&colors=7&lang=de&';
+    //private $search_result_page = 'http://ezb.uni-regensburg.de/searchres.phtml?xmloutput=1&bibid=SUBHH&colors=7&lang=de';
+    private $participants_url = 'http://ezb.uni-regensburg.de/ezeit/where.phtml?';
+    private $participants_xml_url = 'http://ezb.uni-regensburg.de/ezeit/where.phtml?&xmloutput=1&';
+    //private $contact_url = 'http://rzblx1.uni-regensburg.de/ezeit/kontakt.phtml?&xmloutput=1&';
+    private $search_zd_id = 'http://ezb.uni-regensburg.de/?';
     
 
     private $lang = 'de';
@@ -323,7 +323,7 @@ class EZB {
 		if (isset($xml_request->ezb_detail_about_journal->journal->periods->period)) {
 			foreach ($xml_request->ezb_detail_about_journal->journal->periods->period as $period) {
 				$i = 1;
-				$warpto = "";
+				$warpto = '';
 				if (@$period->warpto_link->attributes()->url) {
 					$warpto = urlencode((string) $period->warpto_link->attributes()->url);
 				}
@@ -383,7 +383,7 @@ class EZB {
 		}		
 		
 		//falls jemand kein utf-8 verwendet, sollte das nicht gemacht werden
-		if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == "utf-8"){
+		if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == 'utf-8'){
 			$term = utf8_decode($term);
 		}
 		
@@ -398,13 +398,13 @@ class EZB {
 
 			if (!is_array($values)) {
 				//falls jemand kein utf-8 verwendet, sollte das nicht gemacht werden
-				if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == "utf-8"){
+				if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == 'utf-8'){
 					$values = utf8_decode($values);
 				}
 				$searchUrl .= '&' . $var . '=' . urlencode($values);
 			} else {
 				foreach ($values as $value) {
-					if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == "utf-8"){
+					if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == 'utf-8'){
 						$value = utf8_decode($value);
 					}
 					$searchUrl .= '&' . $var . '[]=' . urlencode($value);
@@ -424,7 +424,7 @@ class EZB {
      */
     public function search($term, $searchVars = array()) {
 
-		$searchUrl = str_replace(" ", "", $this->createSearchUrl($term, $searchVars));
+		$searchUrl = str_replace(' ', '', $this->createSearchUrl($term, $searchVars));
 		$xml_request = $this->XMLPageConnection->getDataFromXMLPage($searchUrl);
 
 		if (!$xml_request) {

@@ -83,8 +83,8 @@ class ZDB {
     * request URLs
     *
     */    
-    //private $briefformat_request_url = "http://services.d-nb.de/fize-service/gvr/brief.xml?";
-    private $fullformat_request_url = "http://services.d-nb.de/fize-service/gvr/full.xml?";
+    //private $briefformat_request_url = 'http://services.d-nb.de/fize-service/gvr/brief.xml?';
+    private $fullformat_request_url = 'http://services.d-nb.de/fize-service/gvr/full.xml?';
 
     // XML Data Object
     private $XMLPageConnection;    
@@ -132,7 +132,7 @@ class ZDB {
         
         //only print location data are requested (default is off, so online and print will be delivered)
         if($this->onlyPrintFlag)
-            $this->pid .= (strlen($this->pid) > 0 ? urlencode("&print=1") : urlencode("print=1"));
+            $this->pid .= (strlen($this->pid) > 0 ? urlencode('&print=1') : urlencode('print=1'));
         
     }
   
@@ -177,7 +177,7 @@ class ZDB {
 		if (! is_object($xml_request->Full)) {
 		    if($this->debug) t3lib_div::devLog('invalid XML-Object - URL: '.$url, 'libconnect', 1);
 			return false;
-		} elseif (property_exists($xml_request->Full, "Error")) {
+		} elseif (property_exists($xml_request->Full, 'Error')) {
 		   /**
 		    * possible Error-Codes:
 		    *     Code        Meaning
@@ -278,7 +278,7 @@ class ZDB {
 		*     Children:       (string)     URL
 		*                     (string)     Label
 		*/
-		if (is_object($xml_request->Full->PrintData->References) && get_class($xml_request->Full->PrintData->References) == 'SimpleXMLElement') {
+        if (is_object($xml_request->Full->PrintData->References) && get_class($xml_request->Full->PrintData->References) == 'SimpleXMLElement') {
             $tmpReferences = $xml_request->Full->PrintData->References->children();
             $locationDetail['references'] = array();
             if(count($tmpReferences)) {
@@ -314,7 +314,7 @@ class ZDB {
 	 */
 	private function buildIconRequest($journalIdentifier, $genre){
 		
-		return "http://services.d-nb.de/fize-service/gvr/icon?sid={$this->sid}" . (!empty($this->pid) ? "&pid={$this->pid}" : "" ) . $journalIdentifier . "&genre={$genre}";
+		return "http://services.d-nb.de/fize-service/gvr/icon?sid='.{$this->sid}" . (!empty($this->pid) ? "&pid={$this->pid}" : '' ) . $journalIdentifier . "&genre={$genre}";
 	}
 	
 
@@ -326,7 +326,7 @@ class ZDB {
 	 */
 	private function buildIconInfoUrl($journalIdentifier, $genre){
 		
-		return "http://services.d-nb.de/fize-service/gvr/html-service.htm?sid={$this->sid}" . (!empty($this->pid) ? "&pid={$this->pid}" : "" ) . $journalIdentifier . "&genre={$genre}";
+		return "http://services.d-nb.de/fize-service/gvr/html-service.htm?sid={$this->sid}" . (!empty($this->pid) ? "&pid={$this->pid}" : '' ) . $journalIdentifier . "&genre={$genre}";
 	}
 	
 	
