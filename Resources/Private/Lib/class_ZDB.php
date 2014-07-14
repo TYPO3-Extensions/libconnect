@@ -152,8 +152,6 @@ class ZDB {
             $this->pid .= (strlen($this->pid) > 0 ? urlencode('&print=1') : urlencode('print=1'));
         }
     }
-  
-    
     
     /**
 	 * Standortdetails zu einem Journal laden
