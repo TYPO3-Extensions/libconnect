@@ -3,7 +3,7 @@
 #
 
 plugin.tx_libconnect {
-	
+
 	ezbbibid = SUBHH
 	dbisbibid = sub_hh
     zdbsid = vid:dbid
@@ -15,17 +15,17 @@ plugin.tx_libconnect {
 	#Proxy Einstellungen für CURL Verbindung
     proxy = 
     proxy_port = 
-	
+
 	persistence {
 		storagePid = {$plugin.tx_libconnect.persistence.storagePid}
 	}
-	
+
 	settings {
 	    allListingId = 44
         enableLocationData = 0
         useIconService = 1
         validStatesList = 2,3
-    
+
 		ezblongaccessinfos{
 			force = false
 			de{
@@ -35,7 +35,7 @@ plugin.tx_libconnect {
 				6 = Nur für einen Teil der erschienenen Jahrgänge zugänglich
 			}
 		}
-		
+
 		ezbshortaccessinfos.de{
 			1 = frei zugänglich 
 			2 = im Campus-Netz zugänglich

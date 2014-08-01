@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS tx_libconnect_domain_model_subject;
+
 CREATE TABLE tx_libconnect_domain_model_subject (
     uid int(11) NOT NULL auto_increment,
     pid int(11) DEFAULT '0' NOT NULL,
@@ -14,7 +15,6 @@ CREATE TABLE tx_libconnect_domain_model_subject (
     PRIMARY KEY (uid),
     KEY parent (pid)
 );
-
 
 --
 -- Daten für Tabelle `tx_libconnect_domain_model_subject`

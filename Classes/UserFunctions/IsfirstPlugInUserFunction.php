@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class 'IsfirstPlugInUserFunction' for the 'libconnect' extension.
  *
@@ -20,7 +19,7 @@ function IsfirstPlugInUserFunction($type, $uid) {
     $pid = $GLOBALS['TSFE']->id;
 
     $list_type = 'libconnect_'.$type;
-    
+
     $select = 'uid, pid, list_type, sorting';
     $from = 'tt_content';
     $where = 'pid = "'.$pid.'" AND list_type = "'.$list_type.'" AND deleted = "0"';

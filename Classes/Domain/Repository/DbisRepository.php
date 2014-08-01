@@ -64,7 +64,6 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 				)
 			);
 		}
-	
 
 		return $result['list']['top'];
 	}
@@ -179,7 +178,6 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		}
 	}
 	
-	
 	/**
 	 * Zeigt die Detailansicht
 	 * 
@@ -236,7 +234,6 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		
 		return $result['list'];
 	}
-	
 	
 	 /**
      * MiniFormular ausgeben

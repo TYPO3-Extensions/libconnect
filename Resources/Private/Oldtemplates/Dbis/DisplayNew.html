@@ -6,11 +6,11 @@
 <h3 class="libconnect-h3"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.new.legend.headline" /></h3>
 
 <div class="dbis-list-legend">
-<ul>
-	<f:for each="{list.access_infos}" as="info">
-		<li class="dbis-list-accessinfo-{info.id}"><f:escape value="{info.title}" type="raw" /> (<f:escape value="{info.description}" type="raw" />)</li>
-	</f:for>
-</ul>
+	<ul>
+		<f:for each="{list.access_infos}" as="info">
+			<li class="dbis-list-accessinfo-{info.id}"><f:escape value="{info.title}" type="raw" /> (<f:escape value="{info.description}" type="raw" />)</li>
+		</f:for>
+	</ul>
 </div>
 
 <br/><br/>
@@ -37,7 +37,6 @@
 </div>
 </f:if>
 <!-- EOF workaround for alphabetical listing -->
-
 
 <f:if condition="{list.error}">
 	<f:then>

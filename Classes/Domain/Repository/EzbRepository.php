@@ -102,7 +102,6 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		//Zugriffsinformationen holen
 		$journals['selected_colors'] = $this->getAccessInfos();
 		
-		
 		/**
 		 * Links bauen
 		 */
@@ -214,12 +213,10 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		}
 		unset($searchVars['sword']);//in weiterer Verarbeitung nicht sinnvoll
 		
-
 		$linkParams = array();
 		foreach ($searchVars as $key => $value) {
 			$linkParams["libconnect[search][$key]"] = $value;
 		}
-		
 		
 		$ezb = new EZB();
 		$journals = $ezb->search($term, $searchVars);

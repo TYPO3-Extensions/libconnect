@@ -1,14 +1,13 @@
 <div id="extSearchForm-wrapper" class="clearfix">
 
 <form name="extSearchForm" action="{listUrl}" method="get" class="e-search">
-  <input type="hidden" name="id" value="{listPid}" />
-  <fieldset id="extSearchForm-fieldset-1">
+	<input type="hidden" name="id" value="{listPid}" />
+	<fieldset id="extSearchForm-fieldset-1">
     <legend><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.form.extended_search" /></legend>
     <table>
 	    
 	<f:for each="{1:1, 2:2, 3:3, 4:4}" as="jq_type">
-
-	    <tr>
+		<tr>
 	        <td>
                 <label for="jq_type{jq_type}" class="hiddendebis"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.form.field" /></label>
                 <select name="libconnect[search][jq_type{jq_type}]" id="jq_type{jq_type}">
@@ -27,7 +26,7 @@
                     <f:for each="{form.jq_bool}" as="value" key="key">
                         <option value="{key}">{value}</option>
                     </f:for>
-                </select>    
+                </select>
 	        </td>
 	        <td>
                 <label for="jq_not{jq_type}" class="hiddendebis"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.form.negator" /></label> 
@@ -40,11 +39,11 @@
         </tr>
 	    
 	</f:for>
-	
+
 	</table>
   </fieldset>
-  
-  <fieldset id="extSearchForm-fieldset-2">
+
+	<fieldset id="extSearchForm-fieldset-2">
     <legend><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.form.limit_search" /></legend> 
 
 	<div id="dbis-extended-wrapper">
@@ -102,7 +101,7 @@
     </table>
     <input type="submit" class="button submit" value="Suchen"/>
     </div>
-  </fieldset>
+	</fieldset>
 
 </form>
 </div>

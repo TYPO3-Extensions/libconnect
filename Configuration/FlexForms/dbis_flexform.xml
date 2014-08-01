@@ -5,14 +5,12 @@
 	</meta>
 <sheets>  
   <sDEF>
-  
 		<ROOT>
 			<TCEforms>
 				<sheetTitle>LLL:EXT:lang/locallang_general.xml:LGL.startingpoint</sheetTitle>
 			</TCEforms>
 			<type>array</type>
 			<el>
-			
 				<switchableControllerActions>
 					<TCEforms>
 						<label>Ausgabe</label>
@@ -57,9 +55,9 @@
 							<type>select</type>
 							<foreign_table>tx_libconnect_domain_model_subject</foreign_table>
 							<foreign_table_where>AND tx_libconnect_domain_model_subject.deleted=0 AND tx_libconnect_domain_model_subject.hidden=0 ORDER BY tx_libconnect_domain_model_subject.title</foreign_table_where>
-							<size>1</size>							
-							<minitems>1</minitems>							
-							<maxitems>1</maxitems>							
+							<size>1</size>
+							<minitems>1</minitems>
+							<maxitems>1</maxitems>
 						</config>
 					</TCEforms>
 				</settings.flexform.subject>
@@ -79,7 +77,7 @@
 							<show_thumbs>1</show_thumbs>
 						</config>
 					</TCEforms>
-				</settings.flexform.detailPid>				
+				</settings.flexform.detailPid>
 
 				<settings.flexform.listPid>
 					<TCEforms>
@@ -96,7 +94,7 @@
 							<show_thumbs>1</show_thumbs>
 						</config>
 					</TCEforms>
-				</settings.flexform.listPid>				
+				</settings.flexform.listPid>
 
 				<settings.flexform.searchPid>
 					<TCEforms>
@@ -113,7 +111,7 @@
 							<show_thumbs>1</show_thumbs>
 						</config>
 					</TCEforms>
-				</settings.flexform.searchPid>				
+				</settings.flexform.searchPid>
 				
 				<settings.flexform.sortParameter>
 					<TCEforms>
@@ -134,7 +132,7 @@
 								<numIndex index="2" type="array">
 									<numIndex index="0">Zugangsart</numIndex>
 									<numIndex index="1">access</numIndex>
-								</numIndex>															
+								</numIndex>
 							</items>
 						</config>
 					</TCEforms>
@@ -169,8 +167,7 @@
 							<show_thumbs>1</show_thumbs>
 						</config>
 					</TCEforms>
-				</settings.flexform.newPid>				
-
+				</settings.flexform.newPid>
 			</el>
 		</ROOT>
     </sDEF>

@@ -11,7 +11,7 @@ plugin.tx_libconnect {
     //zdbsigel = SIGEL
     //zdbisil = ISIL
     //zdbbik = ISIL	
-	
+
 	view {
 		# cat=plugin.tx_libconnect/file; type=string; label=Path to template root (FE)
 		templateRootPath = EXT:libconnect/Resources/Private/Templates/
@@ -24,13 +24,13 @@ plugin.tx_libconnect {
 		# cat=plugin.tx_libconnect//a; type=int+; label=Default storage PID
 		storagePid = 
 	}
-	
+
     settings {
 		file.path {
 			dbisCSS = EXT:libconnect/Resources/Public/Styles/dbis.css
 			ezbCSS = EXT:libconnect/Resources/Public/Styles/ezb.css
 		}
-		
+
 		ezblongaccessinfos{
 			force = false
 			de{
@@ -40,7 +40,7 @@ plugin.tx_libconnect {
 				6 = Nur für einen Teil der erschienenen Jahrgänge zugänglich
 			}
 		}
-		
+
 		ezbshortaccessinfos.de{
 			1 = frei zugänglich 
 			2 = im Campus-Netz zugänglich

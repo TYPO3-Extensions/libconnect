@@ -1,5 +1,4 @@
 <?php
-
 /***************************************************************
 * Copyright notice
 *
@@ -185,7 +184,6 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		}elseif(!empty($this->settings['flexform']['newPid'])){
 			$this->view->assign('newUrl', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid'])) );
 		}
-		
     }
 	
 	/**

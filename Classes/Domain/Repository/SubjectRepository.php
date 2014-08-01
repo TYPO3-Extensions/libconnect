@@ -33,7 +33,6 @@
 
 Class Tx_Libconnect_Domain_Repository_SubjectRepository extends Tx_Extbase_Persistence_Repository {
 
-
 	/**
 	 * Fächer zufällig aus Datenbank laden
 	 * 

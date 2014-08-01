@@ -6,13 +6,13 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_libconnect_domain_model_dbis'] = array(
 	'ctrl' => $TCA['tx_libconnect_domain_model_dbis']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden'
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime')
 	),
 	'palettes' => array(
-		'1' => array('showitem' => ''),
+		'1' => array('showitem' => '')
 	),
 	'columns' => array(
 		'sys_language_uid' => array(
@@ -25,8 +25,8 @@ $TCA['tx_libconnect_domain_model_dbis'] = array(
 				'items' => array(
 					array('LLL:EXT:lang/locallang_general.xml:LGL.allLanguages', -1),
 					array('LLL:EXT:lang/locallang_general.xml:LGL.default_value', 0)
-				),
-			),
+				)
+			)
 		),
 		'l10n_parent' => array(
 			'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -44,7 +44,7 @@ $TCA['tx_libconnect_domain_model_dbis'] = array(
 		'l10n_diffsource' => array(
 			'config' => array(
 				'type' => 'passthrough',
-			),
+			)
 		),
 		't3ver_label' => array(
 			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.versionLabel',
@@ -59,7 +59,7 @@ $TCA['tx_libconnect_domain_model_dbis'] = array(
 			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
 			'config' => array(
 				'type' => 'check',
-			),
+			)
 		),
 		'starttime' => array(
 			'exclude' => 1,
@@ -74,8 +74,8 @@ $TCA['tx_libconnect_domain_model_dbis'] = array(
 				'default' => 0,
 				'range' => array(
 					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-				),
-			),
+				)
+			)
 		),
 		'endtime' => array(
 			'exclude' => 1,
@@ -90,9 +90,9 @@ $TCA['tx_libconnect_domain_model_dbis'] = array(
 				'default' => 0,
 				'range' => array(
 					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-				),
-			),
-		),
-	),
+				)
+			)
+		)
+	)
 );
 ?>

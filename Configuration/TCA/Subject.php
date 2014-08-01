@@ -15,7 +15,7 @@ $TCA['tx_libconnect_domain_model_subject'] = array(
 		'0' => array('showitem' => 'hidden;;1;;1-1-1, title, dbisid, ezbnotation')
 	),
 	'palettes' => array(
-		'1' => array('showitem' => ''),
+		'1' => array('showitem' => '')
 	),
 	'columns' => array(
 		/*'sys_language_uid' => array(
@@ -62,7 +62,7 @@ $TCA['tx_libconnect_domain_model_subject'] = array(
 			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
 			'config' => array(
 				'type' => 'check',
-			),
+			)
 		),
 		'title' => array(
 			'exclude' => 0,
@@ -71,7 +71,7 @@ $TCA['tx_libconnect_domain_model_subject'] = array(
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'trim,required'
-			),
+			)
 		),
 		'dbisid' => array(
 			'exclude' => 0,
@@ -80,7 +80,7 @@ $TCA['tx_libconnect_domain_model_subject'] = array(
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'trim'
-			),
+			)
 		),
 		'ezbnotation' => array(
 			'exclude' => 0,
@@ -89,8 +89,8 @@ $TCA['tx_libconnect_domain_model_subject'] = array(
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'trim'
-			),
-		),
-	),
+			)
+		)
+	)
 );
 ?>

@@ -9,7 +9,6 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 	'libconnect: dbis'
 );
 
-
 Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
 	'Ezb',
@@ -24,9 +23,7 @@ t3lib_extMgm::addPiFlexFormValue($_EXTKEY . '_dbis', 'FILE:EXT:'.$_EXTKEY.'/Conf
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY . '_ezb'] = 'pi_flexform';
 t3lib_extMgm::addPiFlexFormValue($_EXTKEY . '_ezb', 'FILE:EXT:'.$_EXTKEY.'/Configuration/FlexForms/ezb_flexform.xml');
 
-
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript/', 'libconnect');
-
 
 t3lib_extMgm::addLLrefForTCAdescr('tx_libconnect_domain_model_subject', 'EXT:libconnect/Resources/Private/Language/locallang_csh_tx_libconnect_domain_model_subject.xml');
 t3lib_extMgm::allowTableOnStandardPages('tx_libconnect_domain_model_subject');
@@ -53,7 +50,7 @@ $TCA['tx_libconnect_domain_model_subject'] = array(
 		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Subject.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_libconnect_domain_model_subject.gif'
-	),
+	)
 );
 /*
 t3lib_extMgm::addLLrefForTCAdescr('tx_libconnect_domain_model_dbis', 'EXT:libconnect/Resources/Private/Language/locallang_csh_tx_libconnect_domain_model_dbis.xml');
@@ -114,5 +111,4 @@ if (TYPO3_MODE == 'BE') {
     $TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_libconnect_dbis_wizicon'] = t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/Wizicon/class.tx_libconnect_dbis_wizicon.php';
     $TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_libconnect_ezb_wizicon'] = t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/Wizicon/class.tx_libconnect_ezb_wizicon.php';
 }
-
 ?>
