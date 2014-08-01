@@ -11,9 +11,9 @@
 		- UpperCaseConstantFound - entfernt (vorher 28) (TW)
 	- EZB: 
 		- Detailansicht: 
-			- URLs für die Homepage fehlerhaft (TW)
 			- die Texte der Links für die Homepage bisher auf 70 Zeichen begrenzt (TW)
 			- URLs bezüglich Lizenzen waren fehlerhaft (TW)
+			- falsche CSS-Klassenbezeichnung korrigiert (TW)
 3.5.0
 	- Kompatibilität zu TYPO3 6.2 (TW)
 3.4.0
