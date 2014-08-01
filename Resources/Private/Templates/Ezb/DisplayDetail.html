@@ -75,7 +75,7 @@
             </th>
 
 			<td>
-				<a class="dbis-research" href="{libconnect:urldecode(url: journal.fulltext_link)}" target="_blank">{libconnect:truncate(string: journal.fulltext, length: 70)}</a>
+				<a class="ezb-research" href="{libconnect:urldecode(url: journal.fulltext_link)}" target="_blank">{libconnect:truncate(string: journal.fulltext, length: 70)}</a>
 			</td>
 		</tr>
 		</f:if>
@@ -90,7 +90,7 @@
 				<ul>
 				<f:for each="{journal.homepages}" as="homepage">
 					<li>
-						<a class="dbis-research" href="http://ezb.uni-regensburg.de/warpto.phtml?bibid={bibid}&colors=7&lang=de&jour_id={journal.id}&url={homepage}" target="_blank">{homepage}</a>
+						<a class="ezb-research" href="http://ezb.uni-regensburg.de/warpto.phtml?bibid={bibid}&colors=7&lang=de&jour_id={journal.id}&url={homepage}" target="_blank">{homepage}</a>
 					</li>
 				</f:for>
 				</ul>
