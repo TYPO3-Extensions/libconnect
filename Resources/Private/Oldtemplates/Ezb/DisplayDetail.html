@@ -52,7 +52,7 @@
                             <f:else>
                                 <span class="ezb-list-accessinfo-access_{period.color_code}">&nbsp;</span></a>
                             </f:else>
-                        </f:if>							
+                        </f:if>
                     </td>
 				</f:then>
 				<f:else>
@@ -68,7 +68,6 @@
 			</f:for>
 		</f:if>
 
-		
 		<f:if condition="{libconnect:strlen(string: journal.fulltext)} > 0">
 		<tr>
 			<th>
@@ -238,7 +237,7 @@
 		</f:if>
 
 <!-- code for location data -->
-       <f:if condition="{settings.enableLocationData}">
+		<f:if condition="{settings.enableLocationData}">
         <f:if condition="<f:count subject='{journal.locationData}' /> > 0">
         <tr>
             <th>
@@ -306,7 +305,7 @@
             </td>
         </tr>
         </f:if>
-       </f:if>
+		</f:if>
 <!-- ende code for location data -->   
 		
 		<f:if condition="{libconnect:strlen(string: journal.participants)} > 0">
@@ -320,7 +319,7 @@
 			</td>
 		</tr>
 		</f:if>
-		
+
 		</tbody>
 		</table>
 	</f:else>
