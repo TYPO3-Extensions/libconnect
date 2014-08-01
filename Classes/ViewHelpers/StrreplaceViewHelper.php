@@ -22,6 +22,13 @@
 *
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
+/**
+ * This class is a view helper that replace a string.
+ *
+ * @package TYPO3
+ * @subpackage Fluid
+ * @version
+ */
 
 class Tx_Libconnect_ViewHelpers_StrreplaceViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
@@ -38,7 +45,5 @@ class Tx_Libconnect_ViewHelpers_StrreplaceViewHelper extends Tx_Fluid_Core_ViewH
 		return str_replace($search, $replace, $subject);
 
     }
-
 }
-
 ?>

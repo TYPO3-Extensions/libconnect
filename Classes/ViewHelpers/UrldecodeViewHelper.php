@@ -1,12 +1,12 @@
 <?php
-
 /**
- * This class is a demo view helper for the Fluid templating engine.
+ * This class is a view helper that returns a urldecoded string.
  *
  * @package TYPO3
  * @subpackage Fluid
  * @version
  */
+
 class Tx_Libconnect_ViewHelpers_UrldecodeViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
     /**
@@ -19,5 +19,4 @@ class Tx_Libconnect_ViewHelpers_UrldecodeViewHelper extends Tx_Fluid_Core_ViewHe
         return urldecode($url);
     }
 }
-
 ?>

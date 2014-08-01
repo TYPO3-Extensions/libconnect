@@ -1,5 +1,4 @@
 <?php
-
 /***************************************************************
  *  Copyright notice
  *
@@ -23,7 +22,14 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
- 
+/**
+ * This class is a view helper that finds whether a variable is an array.
+ *
+ * @package TYPO3
+ * @subpackage Fluid
+ * @version
+ */
+
 class Tx_Libconnect_ViewHelpers_IsArrayViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
     /**
@@ -36,5 +42,4 @@ class Tx_Libconnect_ViewHelpers_IsArrayViewHelper extends Tx_Fluid_Core_ViewHelp
         return is_array($value);
     }
 }
-
 ?>

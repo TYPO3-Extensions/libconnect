@@ -23,7 +23,14 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
- 
+/**
+ * This class is a view helper that returns the length of a string.
+ *
+ * @package TYPO3
+ * @subpackage Fluid
+ * @version
+ */
+
 class Tx_Libconnect_ViewHelpers_StrlenViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
     /**
@@ -36,5 +43,4 @@ class Tx_Libconnect_ViewHelpers_StrlenViewHelper extends Tx_Fluid_Core_ViewHelpe
         return strlen($string);
     }
 }
-
 ?>
