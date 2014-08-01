@@ -324,17 +324,24 @@ class EZB {
 			foreach ($xml_request->ezb_detail_about_journal->journal->periods->period as $period) {
 				$i = 1;
 				$warpto = '';
+				$domain = '';
+				
 				if (@$period->warpto_link->attributes()->url) {
 					$warpto = urlencode((string) $period->warpto_link->attributes()->url);
 				}
+				
+				if(!empty($period->readme_link->attributes()->url)){
+					if(!preg_match('/^http/', $period->readme_link->attributes()->url)){
+						$domain = 'http://rzblx1.uni-regensburg.de/ezeit/';
+					}
+				}
+				
 				$journal['periods'][] = array(
 					'label' => (string) $period->label,
 					'color' => (string) @$period->journal_color->attributes()->color,
 					'color_code' => $color_map[(string) @$period->journal_color->attributes()->color],
-					//'link' => (string) $period->warpto_link->attributes()->url //alt und fehlerhaft
-					'link' => 'http%3A%2F%2Frzblx1.uni-regensburg.de%2Fezeit%2Fwarpto.phtml?bibid=' . $this->bibID . '&colors=' . $this->colors . '&lang=' . $this->lang . '&jour_id=' . $journalId . '&url=' . $warpto,
-					//'link' => str_replace('http%3A%2F%2F', 'http%3A%2F%2Frzblx1.uni-regensburg.de%2Fezeit%2Fwarpto.phtml?bibid='.$bibid.'&colors='.$this->colors.'&lang='.$this->lang.'&jour_id='.$journalId.'&url=http%3A%2F%2F', $warpto, $i
-					'readme' => (string) @$period->readme_link->attributes()->url
+					'link' => 'http%3A%2F%2Frzblx1.uni-regensburg.de%2Fezeit%2Fwarpto.phtml?bibid=' . $this->bibID . '%26colors=' . $this->colors . '%26lang=' . $this->lang . '%26jour_id=' . $journalId . '%26url=' . $warpto,
+					'readme' => $domain. (string) @$period->readme_link->attributes()->url
 				);
 			}
 		}
