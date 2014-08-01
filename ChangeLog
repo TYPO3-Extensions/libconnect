@@ -9,9 +9,11 @@
 	- Codeverbesserungen:
 		- DoubleQuoteUsageNotRequired - verringert (vorher 36) (TW)
 		- UpperCaseConstantFound - entfernt (vorher 28) (TW)
-	- DBIS: 
-		- bei Detailansicht waren URLs für die Homepage fehlerhaft (TW)
-		- bei Detailansicht wurden die Texte der Links für die Homepage bisher auf 70 Zeichen begrenzt (TW)
+	- EZB: 
+		- Detailansicht: 
+			- URLs für die Homepage fehlerhaft (TW)
+			- die Texte der Links für die Homepage bisher auf 70 Zeichen begrenzt (TW)
+			- URLs bezüglich Lizenzen waren fehlerhaft (TW)
 3.5.0
 	- Kompatibilität zu TYPO3 6.2 (TW)
 3.4.0
