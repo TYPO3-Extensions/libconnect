@@ -5,6 +5,10 @@
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
 
+3.5.2
+	- DBIS: Anleitungen werden jetzt auch angezeigt.
+	- Codeverbesserungen
+	- mehr Kommentare
 3.5.1
 	- Codeverbesserungen:
 		- DoubleQuoteUsageNotRequired - verringert (vorher 36) (TW)
