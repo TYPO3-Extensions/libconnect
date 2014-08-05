@@ -1,0 +1,56 @@
+<h1 class="libconnect-h1"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.results" /></h1>
+
+<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.criterion" /><br/>
+<ul>
+	<f:for each="{list.searchDescription}" as="description">
+		<li><f:format.htmlentitiesDecode>{description}</f:format.htmlentitiesDecode></li>
+	</f:for>
+</ul>
+
+<br/><br/>
+
+<f:if condition="{list.error}">
+	<f:then>
+
+	</f:then>
+	<f:else>
+		<h3 class="libconnect-h3"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.licence" /></h3>
+
+		<div class="dbis-list-legend">
+		<ul>
+			<f:for each="{list.access_infos}" as="info">
+				<li class="dbis-list-accessinfo-{info.id}"><f:format.htmlentitiesDecode>{info.title}</f:format.htmlentitiesDecode> (<f:format.htmlentitiesDecode>{info.description}</f:format.htmlentitiesDecode>)</li>
+			</f:for>
+		</ul>
+		</div>
+
+		<f:if condition="<f:count subject='{list.top}' /> > 0">
+		<div class="top-database-wrapper">
+			<h2><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.top_databases" /></h2>
+			<ul class="dbis-top-list">
+			<f:for each="{list.top}" as="db">
+				<li><a href="{db.detail_link}"><f:format.htmlentitiesDecode>{db.title}</f:format.htmlentitiesDecode></a> (<f:format.htmlentitiesDecode>{db.access}</f:format.htmlentitiesDecode>)</li>
+			</f:for>
+			</ul>
+		</div>
+		</f:if>
+
+		<br/><br/>
+
+		<f:count subject='{list.values}' /> <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.hits" />
+
+		<div class="dbis-list">
+		<f:if condition="<f:count subject='{list.values}' /> > 0">
+			<div class="accordion-content clearfix">
+				<ul class="dbis-dblist">
+					<f:for each="{list.values}" as="db" key="titleid">
+							<li class="dbis-list-accessinfo-{db.access_ref}">
+								<a href="{db.detail_link}"><f:format.htmlentitiesDecode>{db.title}</f:format.htmlentitiesDecode></a>
+							</li>
+					</f:for>
+				</ul>
+			</div>
+		</f:if>
+		</div>
+</f:else>
+</f:if>
