@@ -44,10 +44,9 @@
  *      zdbbik = BIK
  *
  */
- 
+
 require_once(t3lib_extMgm::extPath('libconnect') . 'Resources/Private/Lib/class_XMLPageConnection.php'); 
- 
- 
+
 class ZDB {
 
    /**
@@ -88,7 +87,6 @@ class ZDB {
 
     // XML Data Object
     private $XMLPageConnection;    
-    
 
     /**
 	 * Class Constructor
@@ -112,7 +110,7 @@ class ZDB {
             if ($this->debug) {
                 t3lib_div::devLog('invalid SID given: ' . $this->sid, 'libconnect', 1);
             }
-            return false;
+            return FALSE;
         }
         
         //get the bibid
@@ -205,12 +203,11 @@ class ZDB {
 		    *     unknown     Unbekannter Fehler
 		    *
 		    */
-                if ($this->debug) {
-                    t3lib_div::devLog('Error-Code: ' . $xml_request->Full->Error->attributes()->code . ' - URL: ' . $url, 'libconnect', 1);
-                }
-                    return FALSE;
+			if ($this->debug) {
+				t3lib_div::devLog('Error-Code: ' . $xml_request->Full->Error->attributes()->code . ' - URL: ' . $url, 'libconnect', 1);
+			}
+			return FALSE;
 		}
-
 			
 		$locationDetail['library'] = (string) $xml_request->Full->PrintData->Library;
 		
@@ -249,7 +246,7 @@ class ZDB {
                              array(2,3)
                             );
         array_walk($validStatesArray, create_function('&$val', '$val = trim($val);')); //remove all whitespaces from states	        
-        $validStateFlag = false;
+        $validStateFlag = FALSE;
         if (count($tmpStates)) {
             foreach($tmpStates as $tmpState) {
                 if (in_array($tmpState->attributes()->state, $validStatesArray))
@@ -263,7 +260,6 @@ class ZDB {
             }
             return FALSE;
         }
-
 
        /**
         * Result
@@ -283,12 +279,12 @@ class ZDB {
             foreach($tmpResultList as $tmpResult) {
                 if(in_array($tmpResult->attributes()->state, $validStatesArray)) {
                     array_push($locationDetail['resultList'],
-                               array('state'     => (int) $tmpResult->attributes()->state,
-                                     'Title'     => (string) $tmpResult->Title,
-                                     'Location'  => (string) $tmpResult->Location,
-                                     'Signature' => (string) $tmpResult->Signature,
-                                     'Period'    => (string) $tmpResult->Period)
-                               );
+						array('state'     => (int) $tmpResult->attributes()->state,
+							 'Title'     => (string) $tmpResult->Title,
+							 'Location'  => (string) $tmpResult->Location,
+							 'Signature' => (string) $tmpResult->Signature,
+							 'Period'    => (string) $tmpResult->Period)
+						);
                 }
             }
         }
@@ -364,12 +360,11 @@ class ZDB {
 		$this->sid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbsid'];
 
 		if(is_null($this->sid) or !$this->sid or empty($this->sid)){	
-			return false;
+			return FALSE;
 		}
 		
 		return TRUE;
 	}
 	
 }
-
 ?>
