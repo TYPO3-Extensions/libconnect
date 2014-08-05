@@ -110,10 +110,16 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 		}
     }
 	
+	/**
+	 * erzeugt Instanz von DbisRepository
+	 */
 	public function injectDbisRepository(Tx_Libconnect_Domain_Repository_DbisRepository $dbisRepository){
 		$this->dbisRepository = $dbisRepository;
 	}
 	
+	/**
+	 * erzeugt Instanz von SubjectRepository
+	 */
 	public function injectSubjectRepository(Tx_Libconnect_Domain_Repository_SubjectRepository $subjectRepository){
 		$this->subjectRepository = $subjectRepository;
 	}

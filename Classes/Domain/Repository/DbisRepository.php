@@ -190,7 +190,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		$db = $dbis->getDbDetails($title_id);
 		
 		if (! $db ){
-			return false;
+			return FALSE;
 		}
 		
 		return $db;
@@ -223,6 +223,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 				)
 			);
 		}
+		
 		foreach(array_keys($result['list']['values']) as $value) {
 				$result['list']['values'][$value]['detail_link'] = $cObject->getTypolink_URL(
 					intval($config['detailPid']),
@@ -259,6 +260,9 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 		return $form;
 	}
 	
+	/**
+	 * erzeugt Instanz von SubjectRepository
+	 */
 	public function injectSubjectRepository(Tx_Libconnect_Domain_Repository_SubjectRepository $subjectRepository){
 		$this->subjectRepository = $subjectRepository;
 	}

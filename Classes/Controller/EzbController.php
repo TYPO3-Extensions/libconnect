@@ -92,11 +92,17 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 			$this->view->assign('list', $liste);
 		}
 	}
-	
+
+	/**
+	 * erzeugt Instanz von EzbRepository
+	 */
 	public function injectEzbRepository(Tx_Libconnect_Domain_Repository_EzbRepository $ezbRepository){
 		$this->ezbRepository = $ezbRepository;
 	}
 	
+	/**
+	 * erzeugt Instanz von SubjectRepository
+	 */
 	public function injectSubjectRepository(Tx_Libconnect_Domain_Repository_SubjectRepository $subjectRepository){
 		$this->subjectRepository = $subjectRepository;
 	}

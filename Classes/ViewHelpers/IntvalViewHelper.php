@@ -16,7 +16,9 @@ class Tx_Libconnect_ViewHelpers_IntvalViewHelper extends Tx_Fluid_Core_ViewHelpe
      * @return int
      */
     public function render($wert) {
-        return intval($wert);
+		$return = intval($wert);
+        
+		return $return;
     }
 }
 ?>

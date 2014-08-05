@@ -161,7 +161,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		$journal = $ezb->getJournalDetail($journal_id);
 
 		if (! $journal ){
-			return false;
+			return FALSE;
 		}
 		
 		/*BEGIN Zugriffsinformationen holen*/
@@ -170,7 +170,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		$LongAccessInfos = $ezb->getLongAccessInfos();
 		
 		$colortext = array();
-		if((!empty($LongAccessInfos['longAccessInfos'])) && ($LongAccessInfos['longAccessInfos']!= false)){
+		if((!empty($LongAccessInfos['longAccessInfos'])) && ($LongAccessInfos['longAccessInfos']!= FALSE)){
 			foreach($LongAccessInfos as $key =>$text){
 				 $colortext[$key] = $text;
 			}
@@ -222,7 +222,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		$journals = $ezb->search($term, $searchVars);
 		
 		if (! $journals){
-			return false;
+			return FALSE;
 		}
 		
 		$journals['searchDescription'] = $this->getSearchDescription($searchVars);
@@ -303,7 +303,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		$LongAccessInfos = $ezb->getLongAccessInfos();
 		
 		$colortext = array();
-		if((!empty($LongAccessInfos['longAccessInfos'])) && ($LongAccessInfos['longAccessInfos']!= false)){
+		if((!empty($LongAccessInfos['longAccessInfos'])) && ($LongAccessInfos['longAccessInfos']!= FALSE)){
 			foreach($LongAccessInfos as $key =>$text){
 				 $colortext[$key] = $text;
 			}
@@ -321,7 +321,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		
 		//falls eine k�rzere Form erw�nscht ist
 		$ShortAccessInfos = $ezb->getShortAccessInfos();
-		if((!empty($ShortAccessInfos)) && ($ShortAccessInfos!= false)){
+		if((!empty($ShortAccessInfos)) && ($ShortAccessInfos!= FALSE)){
 			foreach($ShortAccessInfos['shortAccessInfos'] as $key =>$text){
 				 $form['selected_colors'][$key] = $text;
 			}
@@ -361,7 +361,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		}
 
 		if (! $locationData ){
-			return false;
+			return FALSE;
 		}
 	
 		return $locationData; 
@@ -384,7 +384,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		$LongAccessInfos = $ezb->getLongAccessInfos();
 		
 		$colortext = array();
-		if((!empty($LongAccessInfos['longAccessInfos'])) && ($LongAccessInfos['longAccessInfos']!= false)){
+		if((!empty($LongAccessInfos['longAccessInfos'])) && ($LongAccessInfos['longAccessInfos']!= FALSE)){
 			foreach($LongAccessInfos as $key =>$text){
 				 $colortext[$key] = $text;
 			}
@@ -455,6 +455,8 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 	
 	/**
 	 * liefert EZB-Id von einem Fach
+	 *
+	 * @param integer Id des Faches
 	 */
 	public function getSubject($subject_id){
 		$this->loadSubjects();

@@ -81,7 +81,7 @@ class DBIS {
     /**
      * Set id Fachgebiet
      *
-     * @param int $fachgebiet
+     * @param integer $fachgebiet
      */
     public function setGebiet($fachgebiet) {
 		$this->fachgebiet = (int) $fachgebiet;
@@ -99,7 +99,7 @@ class DBIS {
     /**
      * Set the int value colors
      *
-     * @param int $colors
+     * @param integer $colors
      */
     public function setColors($colors) {
 		$this->colors = $colors;
@@ -108,7 +108,7 @@ class DBIS {
     /**
      * Set the int value ocolors
      *
-     * @param int $ocolors
+     * @param integer $ocolors
      */
     public function setOcolors($ocolors) {
 		$this->ocolors = $ocolors;
@@ -144,7 +144,8 @@ class DBIS {
     /**
      * Return the list Fachgebiet
      *
-     * @param $fachgebiet int
+     * @param integer $fachgebiet
+     * @param string $sort
      *
      * @return array
      */
@@ -324,7 +325,7 @@ class DBIS {
     /**
      * liefert Detailinformationen
      *
-     * @param db_id int
+     * @param integer Id der DB
      *
      * @return array
      */
@@ -336,7 +337,7 @@ class DBIS {
 
 		//@todo Fehlerbehandlung
 		if (!isset($xml_db_details->details)) {
-			return false;
+			return FALSE;
 		}
 
 		if (count($xml_db_details->details->children()) > 0){
@@ -429,7 +430,7 @@ class DBIS {
 		
 		//zu sperrende Zugaenge auslesen und aus Gesamtmenge entfernen
 		DBIS::setLicenceForbid();
-		if((!empty($this->licenceForbid)) && ($this->licenceForbid!= false)){
+		if((!empty($this->licenceForbid)) && ($this->licenceForbid!= FALSE)){
 			foreach($this->licenceForbid as $key =>$licence){
 				unset($form['zugaenge'][$key]);
 			}
@@ -457,8 +458,8 @@ class DBIS {
     /**
      * Suchurl erzeugen
      *
-     * @param searchVars array
-     * @param lett string
+     * @param array $searchVars
+     * @param string $lett
      *
      * @retun string
      */
@@ -489,13 +490,13 @@ class DBIS {
     /**
      * Suche durchführen
      *
-     * @param term string
-     * @param searchVars string
-     * @param lett string
+     * @param string $term
+     * @param mixed $searchVars
+     * @param string $lett
      *
      * @return array
      */
-    public function search($term, $searchVars = false, $lett = 'fs') {
+    public function search($term, $searchVars = FALSE, $lett = 'fs') {
 		//falls jemand kein utf-8 verwendet
 		if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == 'utf-8'){
 			$term = utf8_decode($term);
@@ -514,7 +515,7 @@ class DBIS {
 		$request = $this->XMLPageConnection->getDataFromXMLPage($searchUrl);
 		
 		if (!$request) {
-			return false;
+			return FALSE;
 		}
 		
 		$list = array(
@@ -599,7 +600,7 @@ class DBIS {
      *
      * helper function get fachliste
      *
-     * @param request string
+     * @param string $request
      * @return array
      */
     public function getRequestFachliste($request) {
@@ -611,7 +612,7 @@ class DBIS {
     /**
      * helper function get db liste
      *
-     * @param request string
+     * @param string $request
      *
      * @return array
      */

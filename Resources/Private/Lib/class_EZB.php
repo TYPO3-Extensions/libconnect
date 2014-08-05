@@ -65,7 +65,6 @@ class EZB {
     private $participants_xml_url = 'http://ezb.uni-regensburg.de/ezeit/where.phtml?&xmloutput=1&';
     //private $contact_url = 'http://rzblx1.uni-regensburg.de/ezeit/kontakt.phtml?&xmloutput=1&';
     private $search_zd_id = 'http://ezb.uni-regensburg.de/?';
-    
 
     private $lang = 'de';
     private $colors = 7;
@@ -425,7 +424,7 @@ class EZB {
     /**
      * Suche durchführen
      *
-     * @param string Such string
+     * @param string Suchstring
      *
      * @return array
      */
@@ -523,10 +522,18 @@ class EZB {
 		return $result;
     }
 	
+	/**
+	 * setzt kurze Zugriffsinformationen
+	 */
 	public function setShortAccessInfos() {
 		$this->shortAccessInfos = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['settings.']['ezbshortaccessinfos.'][$this->lang.'.'];
     }
 	
+	/**
+	 * liefert kurze Zugriffsinformationen
+	 * 
+	 * @return array $return
+	 */
 	public function getShortAccessInfos(){
 		$this->setShortAccessInfos();
 		
@@ -535,10 +542,18 @@ class EZB {
 		return $return;
 	}
 	
+	/**
+	 * setzt umfangreiche Zugriffsinformationen
+	 */
 	public function setLongAccessInfos() {
 		$this->longAccessInfos = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['settings.']['ezblongaccessinfos.'][$this->lang.'.'];
     }
 	
+	/**
+	 * liefert umfangreiche Zugriffsinformationen
+	 * 
+	 * @return array $return
+	 */
 	public function getLongAccessInfos(){
 		$this->setLongAccessInfos();
 		

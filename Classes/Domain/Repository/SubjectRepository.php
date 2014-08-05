@@ -41,6 +41,7 @@ Class Tx_Libconnect_Domain_Repository_SubjectRepository extends Tx_Extbase_Persi
 	public function findRandom() {
         $rows = $this->createQuery()->execute()->count();
         $row_number = mt_rand(0, max(0, ($rows - 1)));
+		
         return $this->createQuery()->setOffset($row_number)->setLimit(1)->execute();
     }
 	
