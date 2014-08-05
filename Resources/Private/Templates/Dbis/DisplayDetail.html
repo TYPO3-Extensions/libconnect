@@ -112,6 +112,18 @@
 		</tr>
 		</f:if>
 
+                <f:if condition="{db.instruction}">
+		<tr>
+			<th>
+				<strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.detail.instruction" /></strong>
+			</th>
+
+			<td>
+				<f:format.htmlentitiesDecode>{db.instruction}</f:format.htmlentitiesDecode>
+			</td>
+		</tr>
+		</f:if>
+                
 		<f:if condition="{db.subjects}">
 		<tr>
 			<th>
