@@ -389,24 +389,25 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 				 $colortext[$key] = $text;
 			}
 		}
-		
+
 		//Texte aus dem Web holen
 		$form = $ezb->detailSearchFormFields();
-		$journal['selected_colors'] = $form['selected_colors'];
+		$journals = array();
 
-		if((!isset($journal['selected_colors'])) or (empty($journal['selected_colors'])) or ($LongAccessInfos['force'] == 'true')){
-			$journals['selected_colors'] = $colortext['longAccessInfos'];
+		if((!isset($form['selected_colors'])) or (empty($form['selected_colors'])) or ($LongAccessInfos['force'] == 'true')){
+			$journals = $colortext['longAccessInfos'];
 		}else{
-			$journals['selected_colors'] = $journal['selected_colors'];
+			$journals = $form['selected_colors'];
 			//Falls Lizenzinformationen fehlen
-			foreach($colortext['longAccessInfos'] as $key =>$text){
-				 if(!isset($journals['selected_colors'][$key])){
-					$journals['selected_colors'][$key] = $text;
+			foreach($journals as $key => $text){
+			    	 if(empty($text)){
+					$journals[$key] = $colortext['longAccessInfos'][$key];
 				 }
-			} 
+			}
+	
 		}
 		
-		return $journals['selected_colors'];
+		return $journals;
 	}
 	
 	private function getSearchDescription($searchVars){
