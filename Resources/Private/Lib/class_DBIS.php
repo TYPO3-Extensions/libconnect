@@ -477,7 +477,7 @@ class DBIS {
 				if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == 'utf-8'){
 					$values = utf8_decode($values);
 				}
-				$searchUrl .= '&$var=' . urlencode($values);
+				$searchUrl .= '&'.$var.'=' . urlencode($values);
 			} else {
 				foreach ($values as $value) {
 					if((mb_strtolower($GLOBALS['TSFE']->metaCharset)) == 'utf-8'){
