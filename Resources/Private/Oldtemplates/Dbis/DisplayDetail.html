@@ -119,7 +119,7 @@
 			</th>
 
 			<td>
-				<f:format.htmlentitiesDecode>{db.instruction}</f:format.htmlentitiesDecode>
+				<f:escape value="{db.instruction}" type="raw" />
 			</td>
 		</tr>
 		</f:if>
