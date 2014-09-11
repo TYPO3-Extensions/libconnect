@@ -110,6 +110,7 @@ class ZDB {
             if ($this->debug) {
                 t3lib_div::devLog('invalid SID given: ' . $this->sid, 'libconnect', 1);
             }
+			
             return FALSE;
         }
         
@@ -169,6 +170,7 @@ class ZDB {
 	    *
 	    */
 	    if(empty($journalIdentifier) && empty($ZDBID)){
+		
 	        return FALSE;
 	    }else {
 	        if(!empty($ZDBID)) {
@@ -189,9 +191,10 @@ class ZDB {
 		// only Full-objects got all the info we want
 		if (! is_object($xml_request->Full)) {
 		    if ($this->debug) {
-                        t3lib_div::devLog('invalid XML-Object - URL: ' . $url, 'libconnect', 1);
-                    }
-                    return FALSE;
+				t3lib_div::devLog('invalid XML-Object - URL: ' . $url, 'libconnect', 1);
+			}
+			
+			return FALSE;
 		} elseif (property_exists($xml_request->Full, 'Error')) {
 		   /**
 		    * possible Error-Codes:
@@ -206,6 +209,7 @@ class ZDB {
 			if ($this->debug) {
 				t3lib_div::devLog('Error-Code: ' . $xml_request->Full->Error->attributes()->code . ' - URL: ' . $url, 'libconnect', 1);
 			}
+			
 			return FALSE;
 		}
 			
@@ -219,6 +223,7 @@ class ZDB {
             if ($this->debug) {
                 t3lib_div::devLog('invalid ResultList - URL: ' . $url, 'libconnect', 1);
             }
+			
             return FALSE;
         }
 	    
@@ -249,8 +254,9 @@ class ZDB {
         $validStateFlag = FALSE;
         if (count($tmpStates)) {
             foreach($tmpStates as $tmpState) {
-                if (in_array($tmpState->attributes()->state, $validStatesArray))
+                if (in_array($tmpState->attributes()->state, $validStatesArray)){
                     $validStateFlag = TRUE;
+				}
             }
         }
         //no valid state found -> exit
@@ -258,6 +264,7 @@ class ZDB {
             if ($this->debug) {
                 t3lib_div::devLog('non valid state - URL: ' . $url, 'libconnect', 0);
             }
+			
             return FALSE;
         }
 
@@ -288,8 +295,6 @@ class ZDB {
                 }
             }
         }
-
-		
 		
 	   /**
 		* Reference
@@ -303,9 +308,9 @@ class ZDB {
             if(count($tmpReferences)) {
                 foreach($tmpReferences as $tmpReference) {
                     array_push($locationDetail['references'],
-                               array('URL'   => (string) $tmpReference->URL,
-                                     'Label' => (string) $tmpReference->Label)
-                               );
+						array('URL'   => (string) $tmpReference->URL,
+							 'Label' => (string) $tmpReference->Label)
+						);
                 }
             }
         }		
@@ -323,9 +328,7 @@ class ZDB {
         }
 
         return $locationDetail;
-	    
     }
-    
 	
     /**
 	 * helper function build ICON-service request
@@ -338,7 +341,6 @@ class ZDB {
 		return "http://services.d-nb.de/fize-service/gvr/icon?sid='.{$this->sid}" . (!empty($this->pid) ? "&pid={$this->pid}" : '' ) . $journalIdentifier . "&genre={$genre}";
 	}
 	
-
     /**
 	 * helper function build ICON-info url
 	 * (http://www.zeitschriftendatenbank.de/fileadmin/user_upload/ZDB/pdf/services/JOP_Dokumentation_Icon-Dienst.pdf)
@@ -349,7 +351,6 @@ class ZDB {
 		
 		return "http://services.d-nb.de/fize-service/gvr/html-service.htm?sid={$this->sid}" . (!empty($this->pid) ? "&pid={$this->pid}" : '' ) . $journalIdentifier . "&genre={$genre}";
 	}
-	
 	
 	/**
 	 * helper function get SID
@@ -365,6 +366,5 @@ class ZDB {
 		
 		return TRUE;
 	}
-	
 }
 ?>
