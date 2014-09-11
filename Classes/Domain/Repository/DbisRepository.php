@@ -273,7 +273,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
 	public function getSubject($subject_id){
 		$this->loadSubjects();
 		
-		return $this->t3_to_dbis_subjects[$subject_id];
+		return $this->t3_to_dbis_subjects[$subject_id]['dbisid'];;
 	}
 }
 ?>
