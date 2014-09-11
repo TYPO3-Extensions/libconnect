@@ -577,7 +577,7 @@ class DBIS {
 					);
 
 					if ($db['top_db']) {
-					$list['top'][] = $db;
+						$list['top'][] = $db;
 					}
 					$list['values'][$db['title'] . '_' . $db['id']] = $db;
 					$sort[$db['title'] . '_' . $db['id']] = (string) $db['title'];
@@ -613,6 +613,7 @@ class DBIS {
     public function getRequestFachliste($request) {
 		$url = $this->fachliste_url . $this->bibID . '&' . $request;
 		$xml_request = $this->XMLPageConnection->getDataFromXMLPage($url);
+		
 		return $xml_request;
     }
 
@@ -626,6 +627,7 @@ class DBIS {
     public function getRequestDbliste($request) {
 		$url = $this->dbliste_url . $this->bibID . '&' . $request;
 		$xml_request = $this->XMLPageConnection->getDataFromXMLPage($url);
+		
 		return $xml_request;
     }
 }
