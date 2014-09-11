@@ -35,6 +35,7 @@
  */
 
 require_once(t3lib_extMgm::extPath('libconnect') . 'Classes/UserFunctions/IsfirstPlugInUserFunction.php'); 
+require_once(t3lib_extMgm::extPath('libconnect') . 'Classes/UserFunctions/RepairHTMLUserFunction.php'); 
 
 class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_ActionController {
 	
@@ -140,6 +141,9 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 			return;
 		}
 		$liste =  $this->dbisRepository->loadDetail($params['titleid']);
+		
+		//kaputtes HMTL reparieren
+		$liste = RepairHTMLUserFunction($liste);
 		
 		if(!$liste){
 			//Variable Template übergeben
