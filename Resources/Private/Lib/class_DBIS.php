@@ -332,7 +332,7 @@ class DBIS {
     public function getDbDetails($db_id) {
 
 		$details = array();
-		$url =  $this->db_detail_url. $this->bibID . '&colors=&ocolors=&' . "lett={$this->lett}&colors={$this->colors}&ocolors={$this->ocolors}&titel_id=" . $db_id;
+		$url =  $this->db_detail_url. $this->bibID . '&lett='. $this->lett .'&colors='. $this->colors .'&ocolors='. $this->ocolors .'&titel_id='. $db_id;
 		$xml_db_details = $this->XMLPageConnection->getDataFromXMLPage($url);
 
 		//@todo Fehlerbehandlung
