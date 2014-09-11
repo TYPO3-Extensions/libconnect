@@ -403,13 +403,16 @@ class DBIS {
 				    //warpto-Link ist relativ, daher muss er vervollstaendigt werden
 				    $hint = preg_replace('/warpto/', 'http://rzblx10.uni-regensburg.de/dbinfo/warpto',  (string) $value);
 				    $details['hints'] =  $hint;
+				} else if ($key == 'instruction') {
+					$details['instruction'] = (string) $value;
 				}
 				// copy all left values into array
 				else {
-					$details[$key] = (string) $value;
+					$details[(string)$key] = (string) $value;
 				}
 			}
 		}
+
 		return $details;
     }
 
