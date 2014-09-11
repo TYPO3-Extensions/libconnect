@@ -4,11 +4,23 @@
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
-
-3.5.2
-	- DBIS: Anleitungen werden jetzt auch angezeigt.
+3.5.3
+	- DBIS: 
+		- Detailansicht:
+			- URl zum Login für registrierte Benutzer war relativ und somit ungültig. (TW)		
+			- Darstellungsanweisung für "Anleitung" in alten Templates war falsch. (TW)
+			- Anleitungen wurden nicht immer angezeigt. (TW)
+			- automatische Korrektur des HTML
+		- Suche: Suchstringvariabe ging verloren -> ' und " -Problematik (TW)
+		- leere Paramter in URls entfernt (TW)
+	- EZB:
+		- In den ezbshortaccessinfos fehlte die nur zum Teil zugänglichen (TW)
 	- Codeverbesserungen
-	- mehr Kommentare
+		- DoubleQuoteUsageNotRequired - verringert (TW)
+3.5.2
+	- DBIS: Anleitungen werden jetzt auch angezeigt. (TW)
+	- Codeverbesserungen (TW)
+	- mehr Kommentare (TW)
 3.5.1
 	- Codeverbesserungen:
 		- DoubleQuoteUsageNotRequired - verringert (vorher 36) (TW)
