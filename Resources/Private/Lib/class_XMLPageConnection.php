@@ -14,7 +14,7 @@ class XMLPageConnection {
     * Enable debug for logging errors to devLog
     *
     */
-    private $debug = false;    
+    private $debug = FALSE;    
     
     private $extPiVars;
     private $proxy;
@@ -40,8 +40,12 @@ class XMLPageConnection {
      */
     private function setExtConfVars() {
 		$ext_conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['libconnect']);
-        if ($ext_conf['debug'] == true) $this->debug = true;
-        if ($ext_conf['debug'] == false) $this->debug = false;
+        if ($ext_conf['debug'] == TRUE){
+			$this->debug = TRUE;
+		}
+        if ($ext_conf['debug'] == FALSE){
+			$this->debug = FALSE;
+		}
     }
 
     /**
@@ -86,7 +90,7 @@ class XMLPageConnection {
 		    //simplexml_load_string will produce E_WARNING error messages for each error 
             //found in the XML data. Therefore suppress error messages in any mode and
             //handle errors for debug-mode differently.
-            libxml_use_internal_errors(true);
+            libxml_use_internal_errors(TRUE);
             
             //parse the XML data.
             $xmlObj = simplexml_load_string($result);
@@ -100,8 +104,7 @@ class XMLPageConnection {
             }
             
             //reset libxml error buffering and clear any existing libxml errors
-            libxml_use_internal_errors(false);
-            
+            libxml_use_internal_errors(FALSE);
 		}
 		
 		//Pruefung ob Abfrage fehlerfrei erfolgte
@@ -111,7 +114,9 @@ class XMLPageConnection {
 		if($http_code['http_code']!=200){
 			$xmlObj = FALSE;
 			
-			if ($this->debug) t3lib_div::devLog('Got HTTP Code ' . $http_code['http_code'] . ' for request: ' . $url, 'libconnect', 1);
+			if ($this->debug){
+				t3lib_div::devLog('Got HTTP Code ' . $http_code['http_code'] . ' for request: ' . $url, 'libconnect', 1);
+			}
 			
 			return $xmlObj;
 		}
