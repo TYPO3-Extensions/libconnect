@@ -226,7 +226,7 @@ class EZB {
     public function getJournalDetail($journalId) {
 	
 		$journal = array();
-		$url = "{$this->detailview_request_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}";
+		$url = $this->detailview_request_url .'bibid='. $this->bibID .'&colors='. $this->colors .'&lang='. $this->lang .'&jour_id='.$journalId;
 		$xml_request = $this->XMLPageConnection->getDataFromXMLPage($url);
 
 		if (!is_object($xml_request->ezb_detail_about_journal->journal)) {
@@ -561,6 +561,5 @@ class EZB {
 		
 		return $return;
 	}
-		
 }
 ?>
