@@ -1,0 +1,62 @@
+#
+# content here will be included after plugin activation automatically. No template inclusion necessary.
+#
+
+plugin.tx_libconnect {
+
+	ezbbibid = SUBHH
+	dbisbibid = sub_hh
+    zdbsid = vid:dbid
+    //zdbbibid = BIBID
+    //zdbsigel = SIGEL
+    //zdbisil = ISIL
+    //zdbbik = ISIL
+
+	#Proxy Einstellungen für CURL Verbindung
+    proxy = 
+    proxy_port = 
+
+	persistence {
+		storagePid = {$plugin.tx_libconnect.persistence.storagePid}
+	}
+
+	settings {
+	    allListingId = 44
+        enableLocationData = 0
+        useIconService = 1
+        validStatesList = 2,3
+
+		ezblongaccessinfos{
+			force = false
+			de{
+				1 = frei zugänglich 
+				2 = Im Campus-Netz sowie für Angehörige der Universität auch extern zugänglich
+				4 = Für Ihren Standort nicht freigeschaltet. Zum Teil bekommen Sie Zugriff auf Abstracts 
+				6 = Nur für einen Teil der erschienenen Jahrgänge zugänglich
+			}
+		}
+
+		ezbshortaccessinfos.de{
+			1 = frei zugänglich 
+			2 = im Campus-Netz zugänglich
+			4 = nicht frei zugänglich 
+			6 = nur ein Teil zugänglich
+		}
+	}
+}
+
+#[compatVersion = 4.5]
+#	plugin.tx_libconnect.view.templateRootPath = EXT:libconnect/Resources/Private/Oldtemplates/
+#[global]
+
+#[userFunc = user_libconnect_hasSelectedPluginForCSSInclude(dbis)]
+#page.includeCSS {
+#    DBIS = {$plugin.tx_libconnect.settings.file.path.dbisCSS}
+#}
+#[global]
+
+#[userFunc = user_libconnect_hasSelectedPluginForCSSInclude(ezb)]
+#page.includeCSS {
+#    EZB = {$plugin.tx_libconnect.settings.file.path.ezbCSS}
+#}
+#[global]
