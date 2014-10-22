@@ -84,6 +84,7 @@
 			<label index="tx_libconnect.ezb.detail.print.signature">Grundsignatur</label>
 			<label index="tx_libconnect.ezb.detail.print.location">Standort</label>
 			<label index="tx_libconnect.ezb.detail.print.info">Informationen zur Verfügbarkeit</label>
+            <label index="tx_libconnect.ezb.detail.print.titel">Titel</label>
 			<label index="tx_libconnect.ezb.detail.participants">Liste der teilnehmenden Institutionen, die Volltextzugriff bieten.</label>
 
 			<label index="tx_libconnect.ezb.new.headline.alphabetical">Neu in der EZB - Alphabetische Auflistung</label>

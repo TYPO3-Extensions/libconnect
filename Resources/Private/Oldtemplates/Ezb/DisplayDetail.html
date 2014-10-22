@@ -253,12 +253,12 @@
                             <td class="zdb-location-info-result">
                                 <table class="zdb-location-detail">
                                     <tbody>
-                                        <!--<f:if condition="{libconnect:strlen(string: result.Title)} > 0">
+                                        <f:if condition="{libconnect:strlen(string: result.Title)} > 0">
                                         <tr>
-                                            <th>Titel:</th>
+                                            <th><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.print.titel" />:</th>
                                             <td><f:escape value="{result.Title}" type="raw" /></td>
                                         </tr>
-                                        </f:if>-->
+                                        </f:if>
                                         <f:if condition="{libconnect:strlen(string: result.Period)} > 0">
                                         <tr>
                                             <th><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.print.period" />:</th>
