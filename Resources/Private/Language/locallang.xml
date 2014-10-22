@@ -119,7 +119,7 @@
 			<label index="tx_libconnect.dbis.detail.update">Erscheinungsweise:</label>
 			<label index="tx_libconnect.dbis.detail.license">Lizenz:</label>
 			<label index="tx_libconnect.dbis.detail.remarks">Weitere Bemerkungen:</label>
-                        <label index="tx_libconnect.dbis.detail.instruction">Anleitung:</label>
+            <label index="tx_libconnect.dbis.detail.instruction">Anleitung:</label>
 			
 			<label index="tx_libconnect.dbis.miniform.link.sort">Sortierung</label>
 			<label index="tx_libconnect.dbis.miniform.listing_alph">alphabetisch</label>
