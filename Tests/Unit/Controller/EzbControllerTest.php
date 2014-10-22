@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2012 Torsten Witt <witt@sub.uni-hamburg.de>, Stabi Hamburg
- *  			
+ *  
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -37,25 +37,25 @@
  * @author Torsten Witt <witt@sub.uni-hamburg.de>
  */
 class Tx_Libconnect_Controller_EzbControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
-	/**
-	 * @var Tx_Libconnect_Domain_Model_Ezb
-	 */
-	protected $fixture;
+    /**
+     * @var Tx_Libconnect_Domain_Model_Ezb
+     */
+    protected $fixture;
 
-	public function setUp() {
-		$this->fixture = new Tx_Libconnect_Domain_Model_Ezb();
-	}
+    public function setUp() {
+        $this->fixture = new Tx_Libconnect_Domain_Model_Ezb();
+    }
 
-	public function tearDown() {
-		unset($this->fixture);
-	}
+    public function tearDown() {
+        unset($this->fixture);
+    }
 
-	/**
-	 * @test
-	 */
-	public function dummyMethod() {
-		$this->markTestIncomplete();
-	}
+    /**
+     * @test
+     */
+    public function dummyMethod() {
+        $this->markTestIncomplete();
+    }
 
 }
 ?>
