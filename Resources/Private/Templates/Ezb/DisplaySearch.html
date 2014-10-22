@@ -75,9 +75,9 @@
 		<h2><f:format.htmlentitiesDecode>{journals.alphabetical_order.current_title}</f:format.htmlentitiesDecode>...</h2>
 		</f:if>
 
-		<ul class="ezb-list" {if ! ($journals.alphabetical_order.current_title)}style="padding-left: 0px !important;"{/if}>
+		<ul class="ezb-list">
 		<f:for each="{journals.alphabetical_order.journals}" as="journal">
-			<li class="ezb-list-accessinfo-access_{journal.color_code}"><a href="{db.detail_link}"><a href="{journal.detail_link}"><f:format.htmlentitiesDecode>{journal.title}</f:format.htmlentitiesDecode></a></li>
+			<li class="ezb-list-accessinfo-access_{journal.color_code}"><a href="{journal.detail_link}"><f:format.htmlentitiesDecode>{journal.title}</f:format.htmlentitiesDecode></a></li>
 		</f:for>
 		</ul>
 
