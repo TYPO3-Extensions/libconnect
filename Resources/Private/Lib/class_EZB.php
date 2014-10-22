@@ -298,7 +298,11 @@ class EZB {
 		$journal['moving_wall'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->moving_wall;
 		$journal['appearence'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->appearence;
 		$journal['costs'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->costs;
-		$journal['remarks'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->remarks;
+        $journal['remarks'] = trim((string) $xml_request->ezb_detail_about_journal->journal->detail->remarks);
+
+        if(empty($journal['remarks'])){
+            unset($journal['remarks']);
+        }
 
 		// generate link to institutions having access to this journal
 		$participants_xml_request = $this->XMLPageConnection->getDataFromXMLPage("{$this->participants_xml_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}");
