@@ -22,7 +22,7 @@ function IsfirstPlugInUserFunction($type, $uid) {
 
     $select = 'uid, pid, list_type, sorting';
     $from = 'tt_content';
-    $where = 'pid = "'.$pid.'" AND list_type = "'.$list_type.'" AND deleted = "0"';
+    $where = 'pid = "'.$pid.'" AND list_type = "'.$GLOBALS['TYPO3_DB']->quoteStr($list_type, 'tt_content').'" AND deleted = "0"';
     $groupBy = '';
     $orderBy = 'sorting asc';
     $limit = '0,1';
