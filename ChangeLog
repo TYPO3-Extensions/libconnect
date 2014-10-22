@@ -4,6 +4,16 @@
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
+    
+3.5.4
+    - EZB:
+        - Detailansicht: mögliche Fehlermeldung bezüglich ReadMe-Link unterbunden (TW)
+        - Suchergebnisseite: HTML korrigiert (TW)
+        - Detailansicht:
+            - Bemerkung wurde angezeigt, obwohl es keine gab
+            - Die Beschriftung: "P-ISSN(s)" fehlte
+            - ZDB: Beschriftung "Grundsignatur" war doppelt vergeben
+    - UserFunctions Escaping in eine SQL-Query eingefügt
 3.5.3
 	- DBIS: 
 		- Detailansicht:
