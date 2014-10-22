@@ -328,9 +328,11 @@ class EZB {
 				if (@$period->warpto_link->attributes()->url) {
 					$warpto = urlencode((string) $period->warpto_link->attributes()->url);
 				}
-				
-				if(!empty($period->readme_link->attributes()->url)){
-					if(!preg_match('/^http/', $period->readme_link->attributes()->url)){
+
+				$test = (string) @$period->readme_link->attributes()->url;
+
+				if(!empty($test)){
+					if(!preg_match('/^http/', $test)){
 						$domain = 'http://rzblx1.uni-regensburg.de/ezeit/';
 					}
 				}
