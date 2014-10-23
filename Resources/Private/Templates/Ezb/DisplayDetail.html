@@ -253,12 +253,12 @@
                             <td class="zdb-location-info-result">
                                 <table class="zdb-location-detail">
                                     <tbody>
-                                        <!--<f:if condition="{libconnect:strlen(string: result.Title)} > 0">
+                                        <f:if condition="{libconnect:strlen(string: result.Title)} > 0">
                                         <tr>
-                                            <th>Titel:</th>
+                                            <th><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.print.titel" />:</th>
                                             <td><f:format.htmlentitiesDecode>{result.Title}</f:format.htmlentitiesDecode></td>
                                         </tr>
-                                        </f:if>-->
+                                        </f:if>
                                         <f:if condition="{libconnect:strlen(string: result.Period)} > 0">
                                         <tr>
                                             <th><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.print.period" />:</th>
@@ -267,7 +267,7 @@
                                         </f:if>
                                         <f:if condition="{libconnect:strlen(string: result.Signature)} > 0">
                                         <tr>
-                                            <th><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.print.signature" /><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.print.signature" />:</th>
+                                            <th><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.print.signature" />:</th>
                                             <td><f:format.htmlentitiesDecode>{result.Signature}</f:format.htmlentitiesDecode></td>
                                         </tr>
                                         </f:if>
