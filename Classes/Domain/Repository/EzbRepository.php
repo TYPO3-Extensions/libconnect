@@ -101,7 +101,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		
 		//Zugriffsinformationen holen
 		$journals['selected_colors'] = $this->getAccessInfos();
-		
+
 		/**
 		 * Links bauen
 		 */
@@ -379,32 +379,33 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 	
 	public function getAccessInfos(){
 		$ezb = new EZB();
-		
+
 		//Standardtexte holen
 		$LongAccessInfos = $ezb->getLongAccessInfos();
-		
+
 		$colortext = array();
 		if((!empty($LongAccessInfos['longAccessInfos'])) && ($LongAccessInfos['longAccessInfos']!= FALSE)){
 			foreach($LongAccessInfos as $key =>$text){
 				 $colortext[$key] = $text;
 			}
 		}
-
+        
 		//Texte aus dem Web holen
 		$form = $ezb->detailSearchFormFields();
 		$journals = array();
 
+        //eigene Texte oder aus dem Web
 		if((!isset($form['selected_colors'])) or (empty($form['selected_colors'])) or ($LongAccessInfos['force'] == 'true')){
 			$journals = $colortext['longAccessInfos'];
 		}else{
 			$journals = $form['selected_colors'];
+
 			//Falls Lizenzinformationen fehlen
-			foreach($journals as $key => $text){
-			    	 if(empty($text)){
+            foreach($colortext['longAccessInfos'] as $key => $text){
+                if(empty($journals[$key])){
 					$journals[$key] = $colortext['longAccessInfos'][$key];
-				 }
+                }
 			}
-	
 		}
 		
 		return $journals;
