@@ -281,8 +281,6 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		//Zugriffsinformationen holen
 		$journals['selected_colors'] = $this->getAccessInfos();
 		
-		
-		
 		return $journals;
 	}
 
