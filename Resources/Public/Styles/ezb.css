@@ -165,7 +165,6 @@ ul.ezb-list li a {
  * end - extended search styles
  */
 
- 
 /**
  * begin - miniform search styles
  */  
@@ -196,13 +195,10 @@ ul.ezb-list li a {
  * end - miniform search styles
  */
 
-
 /**
  * begin - ZDB styles
  */
 
-.zdb-location-info {
-}
 .zdb-location-info th {
     width: 100px !important;
 }
@@ -214,8 +210,6 @@ ul.ezb-list li a {
     width: 50px !important;
 }
 
-.zdb-location-detail th {
-}
 .zdb-location-detail td {
     width: 100%;
 }
@@ -232,6 +226,19 @@ ul.ezb-list li a {
     width: 60px;
     border: 0px;
     height: 14px;
+}
+
+#ezb-result-details .zdb-location-detail th,
+#ezb-result-details .zdb-location-detail td{
+    border-top: none;
+}
+
+#ezb-result-details .zdb-location-detail tr {
+    border-top: none;
+}
+
+#ezb-result-details .zdb-location-detail tr:last-child{
+   border-bottom: none;
 }
 
 /**
