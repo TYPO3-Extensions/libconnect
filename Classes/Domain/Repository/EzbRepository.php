@@ -315,7 +315,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 
 		if((!isset($journal['selected_colors'])) or (empty($journal['selected_colors'])) or ($LongAccessInfos['force'] == 'true')){
 			$form['selected_colors'] = $colortext['longAccessInfos'];
-		}else{
+		} else {
 			$form['selected_colors'] = $journal['selected_colors'];
 		}
 		
@@ -350,14 +350,14 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		$cObject = t3lib_div::makeInstance('tslib_cObj');
 		$zdb = new ZDB();
 
-		if(!empty($journal['ZDB_number']))
+		if(!empty($journal['ZDB_number'])){
 		    $locationData = $zdb->getJournalLocationDetails( NULL, $journal['ZDB_number']);
-		else {
-		    if(count($journal['pissns']))
+        } else {
+		    if(count($journal['pissns'])){
 		        $locationData = $zdb->getJournalLocationDetails( "issn=" . reset($journal['pissns']), NULL );
-		    
-		    elseif(count($journal['eissns']))
+            } elseif(count($journal['eissns'])){
 		        $locationData = $zdb->getJournalLocationDetails( "eissn=" . reset($journal['eissns']), NULL );
+            }
 		}
 
 		if (! $locationData ){
@@ -445,6 +445,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 	    //Lizenzen
 	    if(!empty($searchVars['selected_colors'])){
 		    $accessInfos = $this-> getAccessInfos();
+            
 			foreach($searchVars['selected_colors'] as $key=>$color){
 				if($accessInfos[$color]){
 					$list[]=$accessInfos[$color];
