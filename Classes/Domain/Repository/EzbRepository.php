@@ -291,43 +291,18 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		
 		return $form;
 	}
-
+    
+    /**
+     * Erzeugt das Suchformular
+     * @return array
+     */
 	public function loadForm() {
 		$ezb = new EZB();
-		
-		/*BEGIN Zugriffsinformationen holen*/
-		
-		//Standardtexte holen
-		$LongAccessInfos = $ezb->getLongAccessInfos();
-		
-		$colortext = array();
-		if((!empty($LongAccessInfos['longAccessInfos'])) && ($LongAccessInfos['longAccessInfos']!= FALSE)){
-			foreach($LongAccessInfos as $key =>$text){
-				 $colortext[$key] = $text;
-			}
-		}
-		
-		//Texte aus dem Web holen
 		$form = $ezb->detailSearchFormFields();
-		$journal['selected_colors'] = $form['selected_colors'];
 
-		if((!isset($journal['selected_colors'])) or (empty($journal['selected_colors'])) or ($LongAccessInfos['force'] == 'true')){
-			$form['selected_colors'] = $colortext['longAccessInfos'];
-		} else {
-			$form['selected_colors'] = $journal['selected_colors'];
-		}
-		
-		//falls eine k�rzere Form erw�nscht ist
-		$ShortAccessInfos = $ezb->getShortAccessInfos();
-		if((!empty($ShortAccessInfos)) && ($ShortAccessInfos!= FALSE)){
-			foreach($ShortAccessInfos['shortAccessInfos'] as $key =>$text){
-				 $form['selected_colors'][$key] = $text;
-			}
-		}
-		
-		unset($form['selected_colors'][6]);
-		/*END Zugriffsinformationen holen*/
-	
+        //Zugriffsinformationen holen
+		$form['selected_colors'] = $this->getAccessInfos(true);
+
 		return $form;
 	}
 	
@@ -375,7 +350,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		return $this->longAccessInfos;
 	}
 	
-	public function getAccessInfos(){
+	public function getAccessInfos($short = false){
 		$ezb = new EZB();
 
 		//Standardtexte holen
@@ -398,14 +373,27 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 		}else{
 			$journals = $form['selected_colors'];
 
-			//Falls Lizenzinformationen fehlen
-            foreach($colortext['longAccessInfos'] as $key => $text){
-                if(empty($journals[$key])){
-					$journals[$key] = $colortext['longAccessInfos'][$key];
+            if($short){
+                //falls eine kuerzere Form erwuenscht ist
+                $ShortAccessInfos = $ezb->getShortAccessInfos();
+
+                if((!empty($ShortAccessInfos)) && ($ShortAccessInfos!= FALSE)){
+                    foreach($ShortAccessInfos['shortAccessInfos'] as $key => $text){
+                        if(empty($journals[$key])){
+                            $journals[$key] = $ShortAccessInfos['shortAccessInfos'][$key];
+                        }
+                    }
                 }
-			}
+            }else{
+                //Falls Lizenzinformationen fehlen
+                foreach($colortext['longAccessInfos'] as $key => $text){
+                    if(empty($journals[$key])){
+                        $journals[$key] = $colortext['longAccessInfos'][$key];
+                    }
+                }
+            }
 		}
-		
+        
 		return $journals;
 	}
 	
