@@ -5,16 +5,22 @@
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
 
-3.5.4
+3.5.5
     - EZB:
-        - Detailansicht: mögliche Fehlermeldung bezüglich ReadMe-Link unterbunden (TW)
         - Suchergebnisseite: HTML korrigiert (TW)
+        - Listenansicht:
+            - Es fehlte immer eine Ampel (TW)
         - Detailansicht:
-            - Bemerkung wurde angezeigt, obwohl es keine gab
-            - Die Beschriftung: "P-ISSN(s)" fehlte
-            - ZDB: Beschriftung "Grundsignatur" war doppelt vergeben
-    - UserFunctions Escaping in eine SQL-Query eingefügt
-3.5.3
+            - mögliche Fehlermeldung bezüglich ReadMe-Link unterbunden (TW)
+            - "Bemerkung" wurde angezeigt, obwohl es keine gab (TW)
+            - Die Beschriftung: "P-ISSN(s)" fehlte (TW)
+            - ZDB: Beschriftung "Grundsignatur" war doppelt vergeben (TW)
+        - Suche:
+            - Suche mit allen Lizenzen einschränkbar (TW)
+    - UserFunctions Escaping in eine SQL-Query eingefügt (TW)
+    - ZDB:
+        - kleine Korrekturen bei der Darstellung der vorhandenen Drucke (TW)
+3.5.4
     - DBIS: 
         - Detailansicht:
             - URl zum Login für registrierte Benutzer war relativ und somit ungültig. (TW)        
@@ -27,6 +33,8 @@
         - In den ezbshortaccessinfos fehlte die nur zum Teil zugänglichen (TW)
     - Codeverbesserungen
         - DoubleQuoteUsageNotRequired - verringert (TW)
+3.5.3
+    - DBIS: Bei Detailansicht gab es ein Problem mit der URl zum Login für registrierte Benutzer. Die URL war relativ und somit ungültig.
 3.5.2
     - DBIS: Anleitungen werden jetzt auch angezeigt. (TW)
     - Codeverbesserungen (TW)
