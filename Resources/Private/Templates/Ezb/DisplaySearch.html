@@ -1,118 +1,118 @@
 {namespace libconnect=Tx_Libconnect_ViewHelpers}
 <h1 class="ezb">
-	<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.headline" />
+    <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.headline" />
 </h1>
 
 <p id="ezb-conditions"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.criterion" /></p>
 <ul>
-	<f:for each="{journals.searchDescription}" as="description">
-		<li><f:format.htmlentitiesDecode>{description}</f:format.htmlentitiesDecode></li>
-	</f:for>
+    <f:for each="{journals.searchDescription}" as="description">
+        <li><f:format.htmlentitiesDecode>{description}</f:format.htmlentitiesDecode></li>
+    </f:for>
 </ul>
 
 <f:if condition="{journals.page_vars.search_count} != -1">
-	<f:then>
-		<div class="ezb-list-legend">
-			<ul>
-				<f:for each="{journals.selected_colors}" as="section" key="key">
-					<f:if condition="{key} == 1">
-						<li class="ezb-list-legend-one">
-							<f:format.htmlentitiesDecode>{section}</f:format.htmlentitiesDecode>
-						</li>
-					</f:if>
-					<f:if condition="{key} == 2">
-						<li class="ezb-list-legend-two">
-							<f:format.htmlentitiesDecode>{section}</f:format.htmlentitiesDecode>
-						</li>
-					</f:if>
-					<f:if condition="{key} == 6">
-						<li class="ezb-list-legend-six">
-							<f:format.htmlentitiesDecode>{section}</f:format.htmlentitiesDecode>
-						</li>
-					</f:if>
-					<f:if condition="{key} == 4">
-						<li class="ezb-list-legend-four">
-							<f:format.htmlentitiesDecode>{section}</f:format.htmlentitiesDecode>
-						</li>
-					</f:if>
-				</f:for>
+    <f:then>
+        <div class="ezb-list-legend">
+            <ul>
+                <f:for each="{journals.selected_colors}" as="section" key="key">
+                    <f:if condition="{key} == 1">
+                        <li class="ezb-list-legend-one">
+                            <f:format.htmlentitiesDecode>{section}</f:format.htmlentitiesDecode>
+                        </li>
+                    </f:if>
+                    <f:if condition="{key} == 2">
+                        <li class="ezb-list-legend-two">
+                            <f:format.htmlentitiesDecode>{section}</f:format.htmlentitiesDecode>
+                        </li>
+                    </f:if>
+                    <f:if condition="{key} == 6">
+                        <li class="ezb-list-legend-six">
+                            <f:format.htmlentitiesDecode>{section}</f:format.htmlentitiesDecode>
+                        </li>
+                    </f:if>
+                    <f:if condition="{key} == 4">
+                        <li class="ezb-list-legend-four">
+                            <f:format.htmlentitiesDecode>{section}</f:format.htmlentitiesDecode>
+                        </li>
+                    </f:if>
+                </f:for>
 			</ul>
-		</div>
+        </div>
 
-		<br/><br/>
+        <br/><br/>
 		
-		<p id="ezb-hits">
-			<libconnect:strreplace search="%s" replace=" {journals.page_vars.search_count} ">
-				<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.text.hits" />
-			</libconnect:strreplace>
-		</p>
+        <p id="ezb-hits">
+            <libconnect:strreplace search="%s" replace=" {journals.page_vars.search_count} ">
+                <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.text.hits" />
+            </libconnect:strreplace>
+        </p>
 
-		<br/><br/>
+        <br/><br/>
 
-		<f:if condition="{libconnect:IsArray(value: journals.navlist.pages)}">
-			<div class="ezb-navigation">
-			<f:for each="{journals.navlist.pages}" as="item">
-				<f:if condition="{libconnect:IsArray(value: item)}">
-				<f:then>
-					<a href="{item.link}">{item.title}</a>
-				</f:then>
-				<f:else>
-					<em>{item}</em>
-				</f:else>
-				</f:if>
-			</f:for>
-			</div>
+        <f:if condition="{libconnect:IsArray(value: journals.navlist.pages)}">
+            <div class="ezb-navigation">
+                <f:for each="{journals.navlist.pages}" as="item">
+                    <f:if condition="{libconnect:IsArray(value: item)}">
+                        <f:then>
+                            <a href="{item.link}">{item.title}</a>
+                        </f:then>
+                        <f:else>
+                            <em>{item}</em>
+                        </f:else>
+                    </f:if>
+                </f:for>
+            </div>
 
-			<br/><br/>
-		</f:if>
+            <br/><br/>
+        </f:if>
 
-		<div class="ezb-list-output">
-		<f:for each="{journals.alphabetical_order.first_fifty}" as="section">
-			<h3><a href="{section.link}"><f:format.htmlentitiesDecode>{section.first_fifty_titles}</f:format.htmlentitiesDecode>...</a></h3>
-		</f:for>
+        <div class="ezb-list-output">
+            <f:for each="{journals.alphabetical_order.first_fifty}" as="section">
+                <h3><a href="{section.link}"><f:format.htmlentitiesDecode>{section.first_fifty_titles}</f:format.htmlentitiesDecode>...</a></h3>
+            </f:for>
 
-		<f:if condition="{journals.alphabetical_order.current_title}">
-		<h2><f:format.htmlentitiesDecode>{journals.alphabetical_order.current_title}</f:format.htmlentitiesDecode>...</h2>
-		</f:if>
+            <f:if condition="{journals.alphabetical_order.current_title}">
+                <h2><f:format.htmlentitiesDecode>{journals.alphabetical_order.current_title}</f:format.htmlentitiesDecode>...</h2>
+            </f:if>
 
-		<ul class="ezb-list">
-		<f:for each="{journals.alphabetical_order.journals}" as="journal">
-			<li class="ezb-list-accessinfo-access_{journal.color_code}"><a href="{journal.detail_link}"><f:format.htmlentitiesDecode>{journal.title}</f:format.htmlentitiesDecode></a></li>
-		</f:for>
-		</ul>
+            <ul class="ezb-list">
+                <f:for each="{journals.alphabetical_order.journals}" as="journal">
+                    <li class="ezb-list-accessinfo-access_{journal.color_code}"><a href="{journal.detail_link}"><f:format.htmlentitiesDecode>{journal.title}</f:format.htmlentitiesDecode></a></li>
+                </f:for>
+            </ul>
 
-		<f:for each="{journals.alphabetical_order.next_fifty}" as="section">
-			<h3><a href="{section.link}">{section.next_fifty_titles}...</a></h3>
-		</f:for>
-		</div>
+            <f:for each="{journals.alphabetical_order.next_fifty}" as="section">
+                <h3><a href="{section.link}">{section.next_fifty_titles}...</a></h3>
+            </f:for>
+        </div>
 
-		<f:if condition="{libconnect:IsArray(value: journals.navlist.pages)}">
-			<f:then>
-				<br/><br/>
+        <f:if condition="{libconnect:IsArray(value: journals.navlist.pages)}">
+            <f:then>
+                    <br/><br/>
 
-				<div class="ezb-navigation">
-				<f:for each="{journals.navlist.pages}" as="item">
-					<f:if condition="{libconnect:IsArray(value: item)}">
-					<f:then>
-						<a href="{item.link}">{item.title}</a>
-					</f:then>
-					<f:else>
-						<em>{item}</em>
-					</f:else>
-					</f:if>
-				</f:for>
-				</div>
-			</f:then>
-		</f:if>
-	</f:then>
-	<f:else>
-		<p>
-			<strong>
-				<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.error.headline" />
-			</strong>
-		</p>
-		<p>
-			<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.error.text" />
-		</p>
-	</f:else>
+                    <div class="ezb-navigation">
+                    <f:for each="{journals.navlist.pages}" as="item">
+                        <f:if condition="{libconnect:IsArray(value: item)}">
+                            <f:then>
+                                <a href="{item.link}">{item.title}</a>
+                            </f:then>
+                            <f:else>
+                                <em>{item}</em>
+                            </f:else>
+                        </f:if>
+                    </f:for>
+                    </div>
+            </f:then>
+        </f:if>
+    </f:then>
+    <f:else>
+        <p>
+            <strong>
+                <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.error.headline" />
+            </strong>
+        </p>
+        <p>
+            <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.error.text" />
+        </p>
+    </f:else>
 </f:if>
