@@ -40,7 +40,7 @@
         </div>
 
         <br/><br/>
-		
+        		
         <p id="ezb-hits">
             <libconnect:strreplace search="%s" replace="{journals.page_vars.search_count}">
                 <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.text.hits" />
@@ -48,8 +48,20 @@
         </p>
 
         <br/><br/>
+        
+        <f:if condition="{libconnect:IsArray(value: journals.precise_hits)}">
+            <h2><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.proper.hits" /></h2>
+           <ul class="ezb-list">
+                <f:for each="{journals.precise_hits}" as="journal">
+                    <li class="ezb-list-accessinfo-access_{journal.color_code}">
+                        <a href="{journal.detail_link}"><f:format.htmlentitiesDecode>{journal.title}</f:format.htmlentitiesDecode></a>
+                    </li>
+                </f:for>
+            </ul>
+        </f:if>
 
         <f:if condition="{libconnect:IsArray(value: journals.navlist.pages)}">
+            <h2><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.all.hits" /></h2>
             <div class="ezb-navigation">
                 <f:for each="{journals.navlist.pages}" as="item">
                     <f:if condition="{libconnect:IsArray(value: item)}">
@@ -65,7 +77,7 @@
 
             <br/><br/>
         </f:if>
-
+        
         <div class="ezb-list-output">
             <f:for each="{journals.alphabetical_order.first_fifty}" as="section">
                 <h3><a href="{section.link}"><f:format.htmlentitiesDecode>{section.first_fifty_titles}</f:format.htmlentitiesDecode>...</a></h3>
@@ -88,20 +100,20 @@
 
         <f:if condition="{libconnect:IsArray(value: journals.navlist.pages)}">
             <f:then>
-                    <br/><br/>
+                <br/><br/>
 
-                    <div class="ezb-navigation">
-                    <f:for each="{journals.navlist.pages}" as="item">
-                        <f:if condition="{libconnect:IsArray(value: item)}">
-                            <f:then>
-                                <a href="{item.link}">{item.title}</a>
-                            </f:then>
-                            <f:else>
-                                <em>{item}</em>
-                            </f:else>
-                        </f:if>
-                    </f:for>
-                    </div>
+                <div class="ezb-navigation">
+                <f:for each="{journals.navlist.pages}" as="item">
+                    <f:if condition="{libconnect:IsArray(value: item)}">
+                        <f:then>
+                            <a href="{item.link}">{item.title}</a>
+                        </f:then>
+                        <f:else>
+                            <em>{item}</em>
+                        </f:else>
+                    </f:if>
+                </f:for>
+                </div>
             </f:then>
         </f:if>
     </f:then>

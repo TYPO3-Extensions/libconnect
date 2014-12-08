@@ -391,7 +391,8 @@ class EZB {
 
 			return $searchUrl;
 		}else{
-			$searchUrl = $this->search_result_page . 'bibid=' . $this->bibID . '&colors=' . $this->colors . '&lang=' . $this->lang;
+			$searchUrl = $this->search_result_page . 'bibid=' . $this->bibID . '&colors=' . $this->colors . '&lang=' . $this->lang . 
+                            '&xmlv=3';
 		}		
 		
 		//falls jemand kein utf-8 verwendet, sollte das nicht gemacht werden
@@ -473,7 +474,19 @@ class EZB {
 			return $result;
 		}
 		
-		//Anzahl Suchergebnisse
+        //precise hits
+        if (isset($xml_request->ezb_alphabetical_list_searchresult->precise_hits->journals->journal)) {
+			foreach ($xml_request->ezb_alphabetical_list_searchresult->precise_hits->journals->journal AS $key => $precise_hit) {
+                $result['precise_hits'][] = array(
+                    'jourid' => (string) $precise_hit->attributes()->jourid,
+                    'title' => (string) $precise_hit->title,
+                    'color_code' => (int) $precise_hit->journal_color->attributes()->color_code,
+                    'color' => (int) $precise_hit->journal_color->attributes()->color
+                );
+			}
+		}
+        
+		//Count Hits
 		$result['page_vars']['search_count'] = (int) $xml_request->ezb_alphabetical_list_searchresult->search_count;
 
 		if (isset($xml_request->ezb_alphabetical_list_searchresult->navlist->other_pages)) {

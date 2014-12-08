@@ -242,6 +242,21 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 				}
 			}
 		}
+        
+        //precise hits
+		if (is_array($journals['precise_hits'])) {
+            
+			foreach(array_keys($journals['precise_hits']) as $precise_hit) {
+				if (is_array($journals['precise_hits'][$precise_hit])) {
+					$journals['precise_hits'][$precise_hit]['detail_link'] = $cObject->getTypolink_URL(
+                        intval($config['detailPid']),
+						array(
+							'libconnect[jourid]' => $journals['precise_hits'][$precise_hit]['jourid'],
+						)
+                    );
+				}
+			}
+		}
 		
 		//Ergenisse
 		if (is_array($journals['alphabetical_order']['first_fifty'])) {
@@ -259,10 +274,10 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 
 			foreach(array_keys($journals['alphabetical_order']['journals']) as $journal) {
 				$journals['alphabetical_order']['journals'][$journal]['detail_link'] = $cObject->getTypolink_URL(
-						intval($config['detailPid']),
-						array(
-							'libconnect[jourid]' => $journals['alphabetical_order']['journals'][$journal]['jourid'],
-						)
+                    intval($config['detailPid']),
+                    array(
+                        'libconnect[jourid]' => $journals['alphabetical_order']['journals'][$journal]['jourid'],
+                    )
 				);
 			}
 		}

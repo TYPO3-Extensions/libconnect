@@ -42,6 +42,8 @@
             <label index="tx_libconnect.ezb.search.error.headline">Bei der Suche ist ein Fehler aufgetreten:</label>
             <label index="tx_libconnect.ezb.search.error.text">Sie haben keine Suchbegriffe eingegeben und kein Fachgebiet ausgewählt.</label>
             <label index="tx_libconnect.ezb.search.criterion">Sie suchten nach folgenden Kriterien:</label>
+            <label index="tx_libconnect.ezb.search.proper.hits">Exakte Treffer:</label>
+            <label index="tx_libconnect.ezb.search.all.hits">Alle Treffer:</label>
 
             <label index="tx_libconnect.ezb.form.label.extsearchform">Erweiterte Suche nach Zeitschriften</label>
             <label index="tx_libconnect.ezb.form.label.searchterm">Suchbegriff</label>
