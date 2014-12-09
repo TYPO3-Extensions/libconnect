@@ -2,17 +2,17 @@
 /**
  * Class 'user_libconnect_hasSelectedPluginForCSSInclude' for the 'libconnect' extension.
  *
- * @author	Björn Heinermann <hein@zhaw.ch>
- * @package	TYPO3
- * @subpackage	tx_libconnect
+ * @author      Björn Heinermann <hein@zhaw.ch>
+ * @package     TYPO3
+ * @subpackage  tx_libconnect
  */
 
 /**
  * Prüft welches PlugIn installiert wurde
  * 
- * @param string	$type: Name des gewählten PlugIns
+ * @param string    $type: Name des gewählten PlugIns
  * 
- * @return boolean		
+ * @return boolean
  */
 function user_libconnect_hasSelectedPluginForCSSInclude($type) {
 

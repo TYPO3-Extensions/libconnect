@@ -2,18 +2,18 @@
 /**
  * Class 'IsfirstPlugInUserFunction' for the 'libconnect' extension.
  *
- * @author	Torsten Witt
- * @package	TYPO3
- * @subpackage	tx_libconnect
+ * @author      Torsten Witt
+ * @package     TYPO3
+ * @subpackage  tx_libconnect
  */
 
 /**
  * Prüft ob das aufrufende PlugIn das erste auf der Seite ist
  * 
- * @param string	$type: Name des gewählten PlugIns
- * @param integer	$uid: Uid des PlugIns aus Tabelle tt_content
+ * @param string    $type: Name des gewählten PlugIns
+ * @param integer    $uid: Uid des PlugIns aus Tabelle tt_content
  * 
- * @return boolean		
+ * @return boolean        
  */
 function IsfirstPlugInUserFunction($type, $uid) {
     $pid = $GLOBALS['TSFE']->id;
@@ -28,12 +28,12 @@ function IsfirstPlugInUserFunction($type, $uid) {
     $limit = '0,1';
     $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
 
-	//Wenn die aktuelle UID nicht ganz oben auf de Seite ist, soll diese kein CSS einbinden
-	while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)){
-		if($row['uid'] != $uid){
-			return FALSE;
-		}
-	}
+    //Wenn die aktuelle UID nicht ganz oben auf de Seite ist, soll diese kein CSS einbinden
+    while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)){
+        if($row['uid'] != $uid){
+            return FALSE;
+        }
+    }
     
     return TRUE;
 }

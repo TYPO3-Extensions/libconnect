@@ -33,99 +33,99 @@
 
 class Tx_Libconnect_Domain_Model_Subject extends Tx_Extbase_DomainObject_AbstractValueObject {
 
-	/**
-	 * Name des Fachgebiets
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $title;
+    /**
+     * Name des Fachgebiets
+     *
+     * @var string
+     * @validate NotEmpty
+     */
+    protected $title;
 
-	/**
-	 * Notation im DBIS-System
-	 *
-	 * @var string
-	 */
-	protected $dbisid;
+    /**
+     * Notation im DBIS-System
+     *
+     * @var string
+     */
+    protected $dbisid;
 
-	/**
-	 * Notation im EZB-System
-	 *
-	 * @var string
-	 */
-	protected $ezbnotation;
-	
-	/**
-	 * uid
-	 *
-	 * @var string
-	 */
-	protected $uid;
+    /**
+     * Notation im EZB-System
+     *
+     * @var string
+     */
+    protected $ezbnotation;
+    
+    /**
+     * uid
+     *
+     * @var string
+     */
+    protected $uid;
 
-	/**
-	 * __construct
-	 *
-	 * @return void
-	 */
-	public function __construct() {
+    /**
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct() {
 
-	}
+    }
 
-	/**
-	 * Returns the title
-	 *
-	 * @return string $title
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
+    /**
+     * Returns the title
+     *
+     * @return string $title
+     */
+    public function getTitle() {
+        return $this->title;
+    }
 
-	/**
-	 * Sets the title
-	 *
-	 * @param string $title
-	 * @return void
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-	}
+    /**
+     * Sets the title
+     *
+     * @param string $title
+     * @return void
+     */
+    public function setTitle($title) {
+        $this->title = $title;
+    }
 
-	/**
-	 * Returns the dbisid
-	 *
-	 * @return string $dbisid
-	 */
-	public function getDbisid() {
-		return $this->dbisid;
-	}
+    /**
+     * Returns the dbisid
+     *
+     * @return string $dbisid
+     */
+    public function getDbisid() {
+        return $this->dbisid;
+    }
 
-	/**
-	 * Sets the dbisid
-	 *
-	 * @param string $dbisid
-	 * @return void
-	 */
-	public function setDbisId($dbisid) {
-		$this->dbisId = $dbisid;
-	}
+    /**
+     * Sets the dbisid
+     *
+     * @param string $dbisid
+     * @return void
+     */
+    public function setDbisId($dbisid) {
+        $this->dbisId = $dbisid;
+    }
 
-	/**
-	 * Returns the ezbnotation
-	 *
-	 * @return string $ezbnotation
-	 */
-	public function getEzbnotation() {
-		return $this->ezbnotation;
-	}
+    /**
+     * Returns the ezbnotation
+     *
+     * @return string $ezbnotation
+     */
+    public function getEzbnotation() {
+        return $this->ezbnotation;
+    }
 
-	/**
-	 * Sets the ezbnotation
-	 *
-	 * @param string $ezbnotation
-	 * @return void
-	 */
-	public function setEzbnotation($ezbnotation) {
-		$this->ezbnotation = $ezbnotation;
-	}
+    /**
+     * Sets the ezbnotation
+     *
+     * @param string $ezbnotation
+     * @return void
+     */
+    public function setEzbnotation($ezbnotation) {
+        $this->ezbnotation = $ezbnotation;
+    }
 }
 ?>
