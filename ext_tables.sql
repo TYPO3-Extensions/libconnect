@@ -9,7 +9,7 @@ CREATE TABLE tx_libconnect_domain_model_subject (
     title tinytext NOT NULL,
     dbisid tinytext NOT NULL,
     ezbnotation tinytext NOT NULL,
-    
+
     PRIMARY KEY (uid),
     KEY parent (pid)
 );

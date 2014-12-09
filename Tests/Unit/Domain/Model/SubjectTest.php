@@ -50,7 +50,6 @@ class Tx_Libconnect_Domain_Model_SubjectTest extends Tx_Extbase_Tests_Unit_BaseT
         unset($this->fixture);
     }
     
-    
     /**
      * @test
      */
@@ -101,6 +100,6 @@ class Tx_Libconnect_Domain_Model_SubjectTest extends Tx_Extbase_Tests_Unit_BaseT
             $this->fixture->getezbnotation()
         );
     }
-    
+
 }
 ?>
