@@ -5,6 +5,11 @@
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
 
+3.6.0
+    - EZB:
+        - Suche: jetzt werden exakte Treffer angezeigt (TW)
+        - Detailansicht: Funktionalität "Liste der teilnehmenden Institutionen, die Volltextzugriff bieten" eingebaut (TW)
+        - Ansprechpartner können über PlugIn "Kontakt" angezeigt werden (TW)
 3.5.5
     - EZB:
         - Suchergebnisseite: HTML korrigiert (TW)
