@@ -42,6 +42,10 @@
                                         <numIndex index="0">Auswahl Teilnehmer</numIndex>
                                         <numIndex index="1">Ezb->displayParticipantsForm</numIndex>
                                     </numIndex>
+                                    <numIndex index="7" type="array">
+                                        <numIndex index="0">Kontakt</numIndex>
+                                        <numIndex index="1">Ezb->displayContact</numIndex>
+                                    </numIndex>
                                 </items>
                             </config>
                         </TCEforms>
@@ -51,7 +55,7 @@
                         <TCEforms>
                             <exclude>1</exclude>
                             <label>Detailseite</label>
-                            <displayCond><![CDATA[FIELD:switchableControllerActions:!IN:Ezb->displayDetail,Ezb->displayMiniForm,Ezb->displayForm,Ezb->displayParticipantsForm]]></displayCond>
+                            <displayCond><![CDATA[FIELD:switchableControllerActions:!IN:Ezb->displayDetail,Ezb->displayMiniForm,Ezb->displayForm,Ezb->displayParticipantsForm,Ezb->displayContact]]></displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>

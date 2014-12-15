@@ -267,6 +267,14 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
         $this->view->assign('jourid', $params['jourid']);
         $this->view->assign('titel', $titel);
     }
+    
+    /**
+     * get contact information
+     */
+    public function displayContactAction() {
+        $contact =  $this->ezbRepository->getContact();
+        $this->view->assign('contact', $contact);
+    }
 
     /**
      * prüft ob eine CSS-Datei eingebunden werden muss und macht es dann

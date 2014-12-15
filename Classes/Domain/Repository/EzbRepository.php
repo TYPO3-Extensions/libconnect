@@ -492,5 +492,15 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 
         return $list;
     }
+    
+    /**
+     * @return array contact information: person, email
+     */
+    public function getContact(){
+        $ezb = new EZB();
+        $contact = $ezb->getContact();
+        
+        return $contact;
+    }
 }
 ?>

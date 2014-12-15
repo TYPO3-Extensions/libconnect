@@ -63,7 +63,7 @@ class EZB {
     //private $search_result_page = 'http://ezb.uni-regensburg.de/searchres.phtml?xmloutput=1&bibid=SUBHH&colors=7&lang=de';
     private $participants_url = 'http://ezb.uni-regensburg.de/ezeit/where.phtml?';
     private $participants_xml_url = 'http://ezb.uni-regensburg.de/ezeit/where.phtml?&xmloutput=1&';
-    //private $contact_url = 'http://rzblx1.uni-regensburg.de/ezeit/kontakt.phtml?&xmloutput=1&';
+    private $contact_url = 'http://ezb.uni-regensburg.de/ezeit/kontakt.phtml?';
     private $search_zd_id = 'http://ezb.uni-regensburg.de/?';
 
     private $lang = 'de';
@@ -648,6 +648,24 @@ class EZB {
         $url = $this->detailview_request_url . $this->colors .'&lang='. $this->lang;
 
         return $url;
+    }
+    
+    public function getContact(){
+        $contact = FALSE;
+        
+        $contact_xml_request = $this->XMLPageConnection->getDataFromXMLPage("{$this->contact_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&xmloutput=1");
+
+        if ($contact_xml_request->library ){
+            $contact['library']['library'] = (string)$contact_xml_request->library;
+            $contact['library']['www'] = (string)$contact_xml_request->library ->attributes()->href;
+        }
+        
+        if ($contact_xml_request->ezb_contact){
+            $contact['email'] = (string)$contact_xml_request->ezb_contact->attributes()->href;
+            $contact['person'] = (string)$contact_xml_request->ezb_contact;
+        }
+        
+        return $contact;
     }
 }
 ?>

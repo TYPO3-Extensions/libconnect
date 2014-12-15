@@ -283,3 +283,16 @@ ul.ezb-list li a {
 /**
  * end - ParticipantsForm
  */
+
+/**
+ * begin - Contact
+ */
+#ezb-contact-bibid,
+#ezb-contact-www,
+#ezb-contact-email{
+    margin-bottom: 1em;
+}
+
+/**
+ * end - Contact
+ */

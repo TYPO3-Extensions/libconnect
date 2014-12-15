@@ -1,0 +1,21 @@
+<div id="ezb-contact">
+    <f:if condition="{contact.library.library}">
+        <div id="ezb-contact-bibid">
+            <f:escape value="{contact.library.library}" type="raw" />
+       </div>
+    </f:if>
+    
+    <f:if condition="{contact.library.www}">
+        <div id="ezb-contact-www">
+            <a href="<f:escape value="{contact.library.www}" type="raw" />" target="_blank">{contact.library.www}</a>
+        </div>
+    </f:if>
+    
+    <f:if condition="{contact.email}">
+        <div id="ezb-contact-email">
+            <a href="<f:escape value="{contact.email}" type="raw" />">
+                 <f:escape value="{contact.person}" type="raw" />
+            </a>
+        </div>
+    </f:if>
+</div>
