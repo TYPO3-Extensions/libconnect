@@ -51,7 +51,7 @@
                         <TCEforms>
                             <exclude>1</exclude>
                             <label>Detailseite</label>
-                            <displayCond><![CDATA[FIELD:switchableControllerActions:!IN:Ezb->displayDetail,Ezb->displayMiniForm,Ezb->displayForm,Ezb->displayJournalPartner]]></displayCond>
+                            <displayCond><![CDATA[FIELD:switchableControllerActions:!IN:Ezb->displayDetail,Ezb->displayMiniForm,Ezb->displayForm,Ezb->displayParticipantsForm]]></displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
