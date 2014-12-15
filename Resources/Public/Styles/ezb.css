@@ -255,3 +255,31 @@ ul.ezb-list li a {
 /**
  * end - New in EZB
  */
+
+/**
+ * begin - ParticipantsForm
+ */
+#participants-form-wrapper div{
+    margin-bottom: 1em;
+}
+
+#participants{
+    width: 500px;
+    margin-top: 1em;
+}
+
+#participants-form label.filter{
+    float: left;
+    width: 100px;
+}
+
+#participants-form select.filter{
+    margin-left: 100px;
+}
+
+.hide{
+    display: none;
+}
+/**
+ * end - ParticipantsForm
+ */

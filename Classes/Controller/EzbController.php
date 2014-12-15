@@ -112,6 +112,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
      */
     public function displayDetailAction() {
         $params = t3lib_div::_GET('libconnect');
+        $config['partnerPid'] = $this->settings['flexform']['partnerPid'];
         
         //CSS includieren
         $this->decideIncludeCSS();
@@ -125,7 +126,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
         
         //$this->ezbRepository->setLongAccessInfos($this->ezblongaccessinfos->de);
 
-        $journal =  $this->ezbRepository->loadDetail($params['jourid']);
+        $journal =  $this->ezbRepository->loadDetail($params['jourid'], $config);
         
     //BOF ZDB LocationData
         //check if locationData is enabled
@@ -244,6 +245,27 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
         $this->view->assign('journals', $journals);
         $this->view->assign('new_date', date("d.m.Y",$today-($numDays * $oneDay)));
         $this->view->assign('subject', $subject['title']);
+    }
+    
+        
+    public function displayParticipantsFormAction() {
+        $params = t3lib_div::_GET('libconnect');
+        //include css
+        $this->decideIncludeCSS();
+        //include js
+        $this->response->addAdditionalHeaderData('<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Js/ezb.js" ></script>');    
+        
+        $ParticipantsList =  $this->ezbRepository->getParticipantsList($params['jourid']);
+
+        $config['partnerPid'] = 0;
+        $journal =  $this->ezbRepository->loadDetail($params['jourid'], $config);
+        $titel = $journal['title'];
+        unset($journal);
+        
+        //variables for template
+        $this->view->assign('ParticipantsList', $ParticipantsList);
+        $this->view->assign('jourid', $params['jourid']);
+        $this->view->assign('titel', $titel);
     }
 
     /**

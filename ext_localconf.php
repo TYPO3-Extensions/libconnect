@@ -19,11 +19,11 @@ Tx_Extbase_Utility_Extension::configurePlugin(
     $_EXTKEY,
     'Ezb',
     array(
-        'Ezb' => 'displayDetail, displayList, displayMiniForm, displayForm, displayNew'
+        'Ezb' => 'displayDetail, displayList, displayMiniForm, displayForm, displayNew, displayParticipantsForm'
     ),
     // non-cacheable actions
     array(
-        'Ezb' => 'displayDetail, displayList, displayMiniForm, displayForm, displayNew'
+        'Ezb' => 'displayDetail, displayList, displayMiniForm, displayForm, displayNew, displayParticipantsForm'
     )
 );
 ?>

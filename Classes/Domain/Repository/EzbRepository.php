@@ -155,7 +155,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         return $journals;
     }
 
-    public function loadDetail($journal_id) {
+    public function loadDetail($journal_id, $config) {
         $cObject = t3lib_div::makeInstance('tslib_cObj');
         $ezb = new EZB();
         $journal = $ezb->getJournalDetail($journal_id);
@@ -191,8 +191,20 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         }
         $journal['color_code']['color'] = $color;
         /*END Zugriffsinformationen holen*/
-        
-        return $journal; 
+
+        //generate link to institutions having access to this journal
+        if($journal['participants'] == TRUE){
+            if($config['partnerPid'] and $config['partnerPid'] != 0){
+                $journal['participants'] = $cObject->getTypolink_URL(
+                    intval($config['partnerPid']),
+                    array(
+                        'libconnect[jourid]' => $journal_id
+                    )
+                );
+            }
+        }
+
+        return $journal;
     }
     
     /**
@@ -466,6 +478,19 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         $this->loadSubjects();
         
         return $this->t3_to_ezb_subjects[$subject_id];
+    }
+    
+    public function getParticipantsList($journal_id) {
+        $cObject = t3lib_div::makeInstance('tslib_cObj');
+        $ezb = new EZB();
+        $list = $ezb->getParticipantsList($journal_id);
+
+        $bibID = $ezb->getBibID();
+        $list['BibID'] = $bibID;
+
+        $list['detailURL'] = $ezb->getDetailviewRequestUrl() . '&jour_id=' . $journal_id;
+
+        return $list;
     }
 }
 ?>

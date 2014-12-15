@@ -94,6 +94,12 @@
             <label index="tx_libconnect.ezb.new.since">Es gibt seit dem </label>
             <label index="tx_libconnect.ezb.new.hits"> %s neue Einträge:</label>
 
+            <label index="tx_libconnect.ezb.articipants.infotext">Folgende an der Elektronischen Zeitschriftenbibliothek beteiligten Einrichtungen bieten ihren Benutzern Zugriff auf die Volltexte der Zeitschrift.</label>
+            <label index="tx_libconnect.ezb.articipants.countries">1. Länder:</label>
+            <label index="tx_libconnect.ezb.articipants.categories">2. Kategorien:</label>
+            <label index="tx_libconnect.ezb.articipants.participants">3. Wählen Sie die Einrichtung aus:</label>
+            <label index="tx_libconnect.ezb.articipants.submit">Zur gewählten Einrichtung wechseln</label>
+
             <label index="tx_libconnect.dbis.overview.headline">Datenbank-Infosystem</label>
 
             <label index="tx_libconnect.dbis.list.headline.dbis">DBIS</label>

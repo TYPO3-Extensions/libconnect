@@ -55,7 +55,7 @@ class EZB {
     
     // general config
     private $overview_requst_url = 'http://ezb.uni-regensburg.de/ezeit/fl.phtml?xmloutput=1&';
-    private $detailview_request_url = 'http://ezb.uni-regensburg.de/ezeit/detail.phtml?xmloutput=1&';
+    private $detailview_request_url = 'http://ezb.uni-regensburg.de/ezeit/detail.phtml?';
     private $search_url = 'http://ezb.uni-regensburg.de/ezeit/search.phtml?xmloutput=1&';
     //private $journal_link_url = 'http://rzblx1.uni-regensburg.de/ezeit/warpto.phtml?bibid=SUBHH&colors=7&lang=de&jour_id=';
     private $search_result_page = 'http://ezb.uni-regensburg.de/ezeit/searchres.phtml?&xmloutput=1&';
@@ -111,6 +111,15 @@ class EZB {
      */
     private function setBibID() {
 		$this->bibID = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid'];
+    }
+    
+    /**
+     * returns the bibID
+     * 
+     * @return string
+     */
+    public function getBibID() {
+		return $this->bibID;
     }
     
     /**
@@ -225,7 +234,7 @@ class EZB {
     public function getJournalDetail($journalId) {
 
         $journal = array();
-        $url = $this->detailview_request_url .'bibid='. $this->bibID .'&colors='. $this->colors .'&lang='. $this->lang .'&jour_id='.$journalId;
+        $url = $this->getDetailviewRequestUrl() . '&xmloutput=1&colors=' . '&jour_id=' . $journalId . '&bibid='. $this->bibID;
         $xml_request = $this->XMLPageConnection->getDataFromXMLPage($url);
 
         if (!is_object($xml_request->ezb_detail_about_journal->journal)) {
@@ -303,15 +312,8 @@ class EZB {
             unset($journal['remarks']);
         }
 
-        // generate link to institutions having access to this journal
-        $participants_xml_request = $this->XMLPageConnection->getDataFromXMLPage("{$this->participants_xml_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}");
-        //if ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution->count() > 0) {
-        if ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution){
-            foreach ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution->children() as $childs)  {
-                $journal['participants'] = "{$this->participants_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$journalId}";
-                break;
-            }
-        }
+        //check institutions having access to this journal
+        $journal['participants'] = $this->getParticipants($journalId);
 
         // periods
 
@@ -578,6 +580,74 @@ class EZB {
         $return = array('longAccessInfos' => $this->longAccessInfos, 'force' => $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['settings.']['ezblongaccessinfos.']['force']);
 
         return $return;
+    }
+    
+    /**
+     * returns List where Journal at Partners available
+     * 
+     * @param type $jour_id
+     * @return array full list of Partner with Journal
+     */
+    public function getParticipantsList($jour_id){
+        $participants_xml_request = $this->XMLPageConnection->getDataFromXMLPage($this->participants_xml_url.'&bibid=' . $this->bibID.'&jour_id='.$jour_id);
+        
+        $participantsList = array();
+        
+        if (!$participants_xml_request) {
+            return FALSE;
+        }
+        
+        if ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->countries->country){
+            foreach ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->countries->country as $country){   
+                $participantsList['countries'][(string) $country->attributes()->ID] = (string) $country[0];
+            }
+            
+            foreach ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->categories->category as $category){   
+                $participantsList['categories'][(string) $category->attributes()->ID]['countryrefs'] = (string)$category->attributes()->countryrefs;
+                $participantsList['categories'][(string) $category->attributes()->ID]['category_name'] = (string)$category->category_name;
+            }
+            
+            foreach ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution  as $institution ){   
+                $participantsList['institutions'][(string) $institution->attributes()->ID]['catrefs'] = (string)$institution->attributes()->catrefs;
+                $participantsList['institutions'][(string) $institution->attributes()->ID]['countryref'] = (string)$institution->attributes()->countryref;
+                $participantsList['institutions'][(string) $institution->attributes()->ID]['name'] = (string) $institution->name;
+                $participantsList['institutions'][(string) $institution->attributes()->ID]['city'] = (string) $institution->city;
+            }
+        }
+
+        return $participantsList; 
+    }
+
+    /**
+     * check institutions having access to this journal
+     * 
+     * @param type $jour_id
+     * @return boolean
+     */
+    public function getParticipants($jour_id){
+        $participants = FALSE;
+        
+        $participants_xml_request = $this->XMLPageConnection->getDataFromXMLPage("{$this->participants_xml_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$jour_id}");
+
+        if ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution){
+            foreach ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution->children() as $childs)  {
+                $participants = "{$this->participants_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$jour_id}";
+                break;
+            }
+        }
+
+        return $participants;
+    }
+
+    /**
+     * returns detailview_request_url
+     * 
+     * @return string
+     */
+    public function getDetailviewRequestUrl(){
+        $url = $this->detailview_request_url . $this->colors .'&lang='. $this->lang;
+
+        return $url;
     }
 }
 ?>
