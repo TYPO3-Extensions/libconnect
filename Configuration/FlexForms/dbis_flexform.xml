@@ -67,7 +67,7 @@
                         <TCEforms>
                             <exclude>1</exclude>
                             <label>Detailseite</label>
-                            <displayCond><![CDATA[FIELD:switchableControllerActions:IN:Dbis->displayList,Dbis->displayTop]]></displayCond>
+                            <displayCond><![CDATA[FIELD:switchableControllerActions:IN:Dbis->displayList,Dbis->displayTop,Dbis->displayNew]]></displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
