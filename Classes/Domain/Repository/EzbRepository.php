@@ -194,9 +194,9 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 
         //generate link to institutions having access to this journal
         if($journal['participants'] == TRUE){
-            if($config['partnerPid'] and $config['partnerPid'] != 0){
+            if($config['participantsPid'] and $config['participantsPid'] != 0){
                 $journal['participants'] = $cObject->getTypolink_URL(
-                    intval($config['partnerPid']),
+                    intval($config['participantsPid']),
                     array(
                         'libconnect[jourid]' => $journal_id
                     )

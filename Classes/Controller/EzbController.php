@@ -112,8 +112,8 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
      */
     public function displayDetailAction() {
         $params = t3lib_div::_GET('libconnect');
-        $config['partnerPid'] = $this->settings['flexform']['partnerPid'];
-        
+        $config['participantsPid'] = $this->settings['flexform']['participantsPid'];
+
         //CSS includieren
         $this->decideIncludeCSS();
 
