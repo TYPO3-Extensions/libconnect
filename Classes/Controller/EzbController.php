@@ -287,8 +287,6 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
             return;
         }
 
-        $params = t3lib_div::_GET('libconnect');
-
         //get UID of PlugIn
         $this->contentObj = $this->configurationManager->getContentObject();
         $uid = $this->contentObj->data['uid'];
