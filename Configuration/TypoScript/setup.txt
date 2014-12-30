@@ -42,6 +42,9 @@ plugin.tx_libconnect {
             4 = nicht frei zugänglich 
             6 = nur ein Teil zugänglich
         }
+
+        ezbNoCSS = 0
+        dbisNoCSS = 0
     }
 }
 

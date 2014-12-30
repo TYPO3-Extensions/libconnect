@@ -34,19 +34,22 @@ plugin.tx_libconnect {
         ezblongaccessinfos{
             force = false
             de{
-                1 = frei zug‰nglich 
-                2 = Im Campus-Netz sowie f¸r Angehˆrige der Universit‰t auch extern zug‰nglich
-                4 = F¸r Ihren Standort nicht freigeschaltet. Zum Teil bekommen Sie Zugriff auf Abstracts
-                6 = Nur f¸r einen Teil der erschienenen Jahrg‰nge zug‰nglich
+                1 = frei zug√§nglich 
+                2 = Im Campus-Netz sowie f√ºr Angeh√∂rige der Universit√§t auch extern zug√§nglich
+                4 = F√ºr Ihren Standort nicht freigeschaltet. Zum Teil bekommen Sie Zugriff auf Abstracts
+                6 = Nur f√ºr einen Teil der erschienenen Jahrg√§nge zug√§nglich
             }
         }
 
         ezbshortaccessinfos.de{
-            1 = frei zug‰nglich 
-            2 = im Campus-Netz zug‰nglich
-            4 = nicht frei zug‰nglich
-            6 = nur ein Teil zug‰nglich
+            1 = frei zug√§nglich 
+            2 = im Campus-Netz zug√§nglich
+            4 = nicht frei zug√§nglich
+            6 = nur ein Teil zug√§nglich
         }
+
+        ezbNoCSS = 0
+        dbisNoCSS = 0
     }
 }
 

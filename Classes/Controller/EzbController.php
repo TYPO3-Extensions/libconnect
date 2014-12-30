@@ -277,16 +277,24 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
     }
 
     /**
-     * prüft ob eine CSS-Datei eingebunden werden muss und macht es dann
+     * check if css file is need and includes it
      */
     private function decideIncludeCSS(){
+        //if user don´t want to use our css
+        $noCSS = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['settings.']['ezbNoCSS'];
+
+        if($noCSS == 1){
+            return;
+        }
+
         $params = t3lib_div::_GET('libconnect');
-        //UID des PlugIns ermitteln
+
+        //get UID of PlugIn
         $this->contentObj = $this->configurationManager->getContentObject();
         $uid = $this->contentObj->data['uid'];
         unset($this->contentObj);
-        
-        //Nur das erste PlugIn auf der Seite soll die CSS-Datei einbinden
+
+        //only the first PlugIn needs to include the css
         if(IsfirstPlugInUserFunction('ezb', $uid)){
             $this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/ezb.css" />');    
         }
