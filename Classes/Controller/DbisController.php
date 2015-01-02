@@ -76,7 +76,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
             
             //Sortierung der Liste durch User
             if(isset($params['sort']) && !empty($params['sort'])) {
-                $config['sort'] =     $params['sort'];
+                $config['sort'] = $params['sort'];
             }
             
             $liste =  $this->dbisRepository->loadList($params['subject'], $config);
