@@ -82,7 +82,8 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
             $liste =  $this->dbisRepository->loadList($params['subject'], $config);
             
             //Variablen Template übergeben
-            $this->view->assign('subject', $liste['subject']);
+            $this->view->assign('listhead', $liste['subject']);
+            $this->view->assign('subject', $params['subject']);
             $this->view->assign('list', $liste['list']);
 
         } else if (!empty($params['search'])) {//Suchergebnisse
@@ -181,7 +182,9 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
         
         //Möglichkeit zur Sortierung der Einträge des Fachgebietes erst nach Wahl des Fachgebietes
         if (!empty($params['subject'])) {
-            $this->view->assign('listingsWrapper', true);
+            if($params['subject'] != 'all'){
+                $this->view->assign('listingsWrapper', true);
+            }
             
             //Wenn New aktiviert soll hier auch das Neu im Fach aktiviert werden
             if(!empty($this->settings['flexform']['newPid'])){

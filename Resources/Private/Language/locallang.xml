@@ -132,7 +132,8 @@
 	
             <label index="tx_libconnect.dbis.miniform.link.sort">Sortierung</label>
             <label index="tx_libconnect.dbis.miniform.listing_alph">alphabetisch</label>
-            <label index="tx_libconnect.dbis.miniform.listing_subject">nach Datenbanktyp</label>
+            <label index="tx_libconnect.dbis.miniform.listing_type">nach Datenbanktyp</label>
+            <label index="tx_libconnect.dbis.miniform.listing_subject">Fachübersicht</label>
             <label index="tx_libconnect.dbis.miniform.search_header">Suche nach Datenbanken</label>
             <label index="tx_libconnect.dbis.miniform.search_term">Suchbegriff</label>
             <label index="tx_libconnect.dbis.miniform.search_link">Erweiterte Suche</label>
