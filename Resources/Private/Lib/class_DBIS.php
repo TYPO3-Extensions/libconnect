@@ -176,8 +176,7 @@ class DBIS {
                 $url .= 'lett=c&collid=' . $fachgebiet;
             }
         }
-        //EOF workaround for alphabetical listing	
-
+        //EOF workaround for alphabetical listing
         $xml_fachgebiet_db = $this->XMLPageConnection->getDataFromXMLPage($url);
 
         $list = array(
