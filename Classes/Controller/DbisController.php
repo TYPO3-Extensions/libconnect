@@ -40,10 +40,10 @@ require_once(t3lib_extMgm::extPath('libconnect') . 'Classes/UserFunctions/Repair
 class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_ActionController {
     
     /**
-     * zeigt die Top-Datenbanken an
+     * shows top databases
      */
     public function displayTopAction() {
-        //CSS includieren
+        //include CSS
         $this->decideIncludeCSS();
         
         $config['subject'] = $this->settings['flexform']['subject'];
@@ -51,55 +51,55 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 
         $top =  $this->dbisRepository->loadTop($config);
         
-        //Variable Template übergeben
+        //variables for template
         $this->view->assign('top', $top);
     }
     
     /**
-     * Zeigt eine Liste von Datenbanken (für allgemein, Suche und das gewählte Fach)
+     * shows a list of databases (for general, search, choosed subject)
      */
     public function displayListAction() {
         $params = t3lib_div::_GET('libconnect');
         
-        //Test wegen Kompatibilität
+        //test for compatibility
         /*$version = t3lib_div::int_from_ver(TYPO3_version);
-        if($version < 40060000){//Älter als Version 4.6?
+        if($version < 40060000){//older version as 4.6?
             $this->view->setTemplateRootPath(t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Private/Oldtemplates/');    
         }*/
         
-        //CSS includieren
+        //include CSS
         $this->decideIncludeCSS();
         
-        if (!empty($params['subject'])) {//Gewaehltes Fach nach Einstiegspunkt
+        if (!empty($params['subject'])) {//choosed subject after start point
             $config['sort'] = $this->settings['flexform']['sortParameter'];
             $config['detailPid'] = $this->settings['flexform']['detailPid'];
             
-            //Sortierung der Liste durch User
+            //user sorted list
             if(isset($params['sort']) && !empty($params['sort'])) {
                 $config['sort'] = $params['sort'];
             }
             
             $liste =  $this->dbisRepository->loadList($params['subject'], $config);
             
-            //Variablen Template übergeben
+            //variables for template
             $this->view->assign('listhead', $liste['subject']);
             $this->view->assign('subject', $params['subject']);
             $this->view->assign('list', $liste['list']);
 
-        } else if (!empty($params['search'])) {//Suchergebnisse
+        } else if (!empty($params['search'])) {//search results
             $config['detailPid'] = $this->settings['flexform']['detailPid'];
             
             $liste =  $this->dbisRepository->loadSearch($params['search'], $config);
             
-            //andere View verwenden
+            //change view
             $controllerContext = $this->buildControllerContext();
             $controllerContext->getRequest()->setControllerActionName('displaySearch');
             $this->view->setControllerContext($controllerContext);
             
-            //Variable Template übergeben
+            //variables for template
             $this->view->assign('list', $liste);
 
-        } else {//Einstiegspunkt
+        } else {//start point
             $liste =  $this->dbisRepository->loadOverview();
             
             //andere View verwenden
@@ -107,32 +107,32 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
             $controllerContext->getRequest()->setControllerActionName('displayOverview');
             $this->view->setControllerContext($controllerContext);
             
-            //Variable Template übergeben
+            //variables for template
             $this->view->assign('list', $liste);
         }
     }
     
     /**
-     * erzeugt Instanz von DbisRepository
+     * creates instance of DbisRepository
      */
     public function injectDbisRepository(Tx_Libconnect_Domain_Repository_DbisRepository $dbisRepository){
         $this->dbisRepository = $dbisRepository;
     }
     
     /**
-     * erzeugt Instanz von SubjectRepository
+     * creates instance of SubjectRepository
      */
     public function injectSubjectRepository(Tx_Libconnect_Domain_Repository_SubjectRepository $subjectRepository){
         $this->subjectRepository = $subjectRepository;
     }
     
     /**
-     * Zeigt die Detailansicht
+     * shows deatail view
      */
     public function displayDetailAction() {
         $params = t3lib_div::_GET('libconnect');
         
-        //CSS includieren
+        //include CSS
         $this->decideIncludeCSS();
         
         if (!($params['titleid'])){
@@ -143,11 +143,11 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
         }
         $liste =  $this->dbisRepository->loadDetail($params['titleid']);
         
-        //kaputtes HMTL reparieren
+        //repair broken HMTL
         $liste = RepairHTMLUserFunction($liste);
         
         if(!$liste){
-            //Variable Template übergeben
+            //variables for template
             $this->view->assign('error', 'Error');
             
         }else{
@@ -155,24 +155,24 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
             if($liste['access_id']!='access_4'){
                 $liste['access_workaround']=$liste['access_id'];
             }
-            //Variable Template übergeben
+            //variables for template
             $this->view->assign('db', $liste);
         }        
     }
     
     /**
-     * zeigt die Sidebar
+     * shows sidebar
      */
     public function displayMiniFormAction() {
         $params = t3lib_div::_GET('libconnect');
         
-        //CSS includieren
+        //include CSS
         $this->decideIncludeCSS();
         
         $cObject = t3lib_div::makeInstance('tslib_cObj');
         $form = $this->dbisRepository->loadMiniForm();
         
-        //Variablen Template übergeben
+        //variables for template
         $this->view->assign('vars', $params['search']);
         $this->view->assign('form', $form);
         $this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
@@ -180,13 +180,13 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
         $this->view->assign('listUrl', $cObject->getTypolink_URL($this->settings['flexform']['listPid']));//Link zur Suchseite
         $this->view->assign('listPid', $this->settings['flexform']['listPid']);//ID der Listendarstellung
         
-        //Möglichkeit zur Sortierung der Einträge des Fachgebietes erst nach Wahl des Fachgebietes
-        if (!empty($params['subject'])) {
+        //possibility for sorting the entries of the subject for the choosed subject
+        if(!empty($params['subject'])) {
             if($params['subject'] != 'all'){
                 $this->view->assign('listingsWrapper', true);
             }
-            
-            //Wenn New aktiviert soll hier auch das Neu im Fach aktiviert werden
+
+            //if new activated should here the new for subject be active
             if(!empty($this->settings['flexform']['newPid'])){
                 $cObject = t3lib_div::makeInstance('tslib_cObj');
                 
@@ -200,19 +200,19 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
     }
     
     /**
-     * zeigt die Suche
+     * shows the search
      */
     public function displayFormAction() {
         $params = t3lib_div::_GET('libconnect');
         
-        //CSS includieren
+        //include CSS
         $this->decideIncludeCSS();
                 
         $cObject = t3lib_div::makeInstance('tslib_cObj');
     
         $form = $this->dbisRepository->loadForm($params['search']);
         
-        //Variablen Template übergeben
+        //variables for template
         $this->view->assign('vars', $params['search']);
         $this->view->assign('form', $form);
         $this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
@@ -221,7 +221,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
     }
 
     /**
-     * zeigt die neuesten Einträge
+     * shows the new entries
      */
     public function displayNewAction() {
         $params = t3lib_div::_GET('libconnect');
@@ -234,29 +234,29 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
         unset($params['subject']);
         unset($params['search']);
         
-        //CSS einbinden
+        //include CSS
         $this->decideIncludeCSS();
         
-        date_default_timezone_set('GMT+1');//@todo aus dem System auslesen
+        date_default_timezone_set('GMT+1');//@todo get the information from system
         
-        $oneDay = 86400;//Sekunden
-        $numDays = 7; //Standard sind 7 Tage
+        $oneDay = 86400;//seconds
+        $numDays = 7; //default are 7 days
         $today = strtotime('now');
   
         if(!empty($this->settings['flexform']['countDays'])){
             $numDays = $this->settings['flexform']['countDays'];
         }
         
-        //Datum berechnen
+        //calcaulate date
         $date = date("d.m.Y",$today-($numDays * $oneDay));
-        $params['jq_term1'] = $date;//Datum bis wann Eintrag neu
+        $params['jq_term1'] = $date;//date how long entry is new
         
         $config['detailPid'] = $this->settings['flexform']['detailPid'];
         
-        //Liste abfragen
+        //request
         $liste =  $this->dbisRepository->loadSearch($params, $config);
 
-        //Variable Template übergeben
+        //variables for template
         $this->view->assign('list', $liste);
         $this->view->assign('new_date', date("d.m.Y",$today-($numDays * $oneDay)));
         $this->view->assign('subject', $subject['title']);

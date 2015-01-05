@@ -34,7 +34,7 @@
 class Tx_Libconnect_Domain_Model_Subject extends Tx_Extbase_DomainObject_AbstractValueObject {
 
     /**
-     * Name des Fachgebiets
+     * name of subject
      *
      * @var string
      * @validate NotEmpty
@@ -42,14 +42,14 @@ class Tx_Libconnect_Domain_Model_Subject extends Tx_Extbase_DomainObject_Abstrac
     protected $title;
 
     /**
-     * Notation im DBIS-System
+     * notation in DBIS system
      *
      * @var string
      */
     protected $dbisid;
 
     /**
-     * Notation im EZB-System
+     * notation in EZB system
      *
      * @var string
      */

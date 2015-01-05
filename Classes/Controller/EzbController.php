@@ -39,15 +39,15 @@ require_once(t3lib_extMgm::extPath('libconnect') . 'Classes/UserFunctions/Isfirs
 class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_ActionController {
 
      /**
-     * Zeigt eine Liste von Datenbanken (für allgemein, Suche und das gewählte Fach)
+     * shows a list of journals (for general, search, choosed subject)
      */
     public function displayListAction() {
         $params = t3lib_div::_GET('libconnect');
         
-        //CSS includieren
+        //include CSS
         $this->decideIncludeCSS();
         
-        if ((!empty($params['subject'])) || (!empty($params['notation']))) {//Gewaehltes Fach nach Einstiegspunkt
+        if ((!empty($params['subject'])) || (!empty($params['notation']))) {//choosed subject after start point
             $config['detailPid'] = $this->settings['flexform']['detailPid'];
             
             $options['index'] = $params['index'];
@@ -55,7 +55,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
             $options['lc'] = $params['lc'];
             $options['notation'] = $params['notation'];
             
-            //damit nicht NULL in der Abfrage steht oder sonst es zu Problemen kommt
+            //it´s for there is not NULL in the request or there will be a problem
             if(!isset($params['subject'])){
                 $params['subject'] = "";
             }
@@ -65,56 +65,56 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
                 $config
             );
 
-            //Variable Template übergeben
+            //variables for template
             $this->view->assign('journals', $liste);
                 
-        } else if (!empty($params['search'])) {//Suchergebnisse
+        } else if (!empty($params['search'])) {//search results
             $config['detailPid'] = $this->settings['flexform']['detailPid'];
             
             $journals =  $this->ezbRepository->loadSearch($params['search'], $config);
             
-            //andere View verwenden
+            //change view
             $controllerContext = $this->buildControllerContext();
             $controllerContext->getRequest()->setControllerActionName('displaySearch');
             $this->view->setControllerContext($controllerContext);
             
-            //Variable Template übergeben
+            //variables for template
             $this->view->assign('journals', $journals);
-        } else {//Einstiegspunkt
+        } else {//start point
             $liste =  $this->ezbRepository->loadOverview();
             
-            //andere View verwenden
+            //change view
             $controllerContext = $this->buildControllerContext();
             $controllerContext->getRequest()->setControllerActionName('displayOverview');
             $this->view->setControllerContext($controllerContext);
             
-            //Variable Template übergeben
+            //variables for template
             $this->view->assign('list', $liste);
         }
     }
 
     /**
-     * erzeugt Instanz von EzbRepository
+     * creates instance of EzbRepository
      */
     public function injectEzbRepository(Tx_Libconnect_Domain_Repository_EzbRepository $ezbRepository){
         $this->ezbRepository = $ezbRepository;
     }
     
     /**
-     * erzeugt Instanz von SubjectRepository
+     * creates instance of SubjectRepository
      */
     public function injectSubjectRepository(Tx_Libconnect_Domain_Repository_SubjectRepository $subjectRepository){
         $this->subjectRepository = $subjectRepository;
     }
     
     /**
-     * Zeigt die Detailansicht
+     * shows details
      */
     public function displayDetailAction() {
         $params = t3lib_div::_GET('libconnect');
         $config['participantsPid'] = $this->settings['flexform']['participantsPid'];
 
-        //CSS includieren
+        //include CSS
         $this->decideIncludeCSS();
 
         //$this->set('bibid', $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid']);
@@ -140,7 +140,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
         }
     //EOF ZDB LocationData
         
-        //Variablen Template übergeben
+        //variables for template
         $this->view->assign('journal', $journal);
         $this->view->assign('bibid', $this->ezbRepository->getBibid());
     }
@@ -151,32 +151,32 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
     public function displayMiniFormAction() {
         $params = t3lib_div::_GET('libconnect');
         
-        //CSS includieren
+        //include CSS
         $this->decideIncludeCSS();
         
         $cObject = t3lib_div::makeInstance('tslib_cObj');
         $form = $this->ezbRepository->loadMiniForm();
         
-        //Variablen Template übergeben    
+        //variables for template
         $this->view->assign('vars', $params['search']);
         $this->view->assign('form', $form);
-        $this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
-        $this->view->assign('searchUrl', $cObject->getTypolink_URL($this->settings['flexform']['searchPid']));//Link zur Suchseite
-        $this->view->assign('listUrl', $cObject->getTypolink_URL($this->settings['flexform']['listPid']));//Link zur Suchseite
-        $this->view->assign('listPid', $this->settings['flexform']['listPid']);//ID der Listendarstellung
+        $this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//current URL
+        $this->view->assign('searchUrl', $cObject->getTypolink_URL($this->settings['flexform']['searchPid']));//link to search
+        $this->view->assign('listUrl', $cObject->getTypolink_URL($this->settings['flexform']['listPid']));//link to search results
+        $this->view->assign('listPid', $this->settings['flexform']['listPid']);//ID of list
         
-        //Wenn Fach gewählt, soll Link zur Fachübersicht dargestellt werden
+        //if subject is choosed link  to subject list is displayed
         if ((!empty($params['subject'])) || (!empty($params['notation']))) {
             $this->view->assign('showSubjectLink', true);
             
-            //Wenn New aktiviert soll hier auch das Neu im Fach aktiviert werden
+            //if new activated should here the new for subject be active
             if(!empty($this->settings['flexform']['newPid'])){
                     
                 $cObject = t3lib_div::makeInstance('tslib_cObj');
                 
                 if(!empty($params['subject'])){
                     $this->view->assign('newUrlSub', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid']), 
-                        array('libconnect' => array('subject' => $params['subject'] )) ) );//URL der New-Darstellung
+                        array('libconnect' => array('subject' => $params['subject'] )) ) );//URL of new list
                 }
             }
                 
@@ -191,22 +191,22 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
     public function displayFormAction() {
         $params = t3lib_div::_GET('libconnect');
         
-        //CSS includieren
+        //include CSS
         $this->decideIncludeCSS();
         
         $cObject = t3lib_div::makeInstance('tslib_cObj');
         $form =  $this->ezbRepository->loadForm();
         
-        //Variablen Template übergeben
+        //variables for template
         $this->view->assign('vars', $params['search']);
         $this->view->assign('form', $form);
-        $this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//aktuelle URL
-        $this->view->assign('listUrl', $cObject->getTypolink_URL($this->settings['flexform']['listPid']));//Link zur Suchseite
-        $this->view->assign('listPid', $this->settings['flexform']['listPid']);//ID der Listendarstellung
+        $this->view->assign('siteUrl', $cObject->getTypolink_URL($GLOBALS['TSFE']->id));//current URL
+        $this->view->assign('listUrl', $cObject->getTypolink_URL($this->settings['flexform']['listPid']));//url to search
+        $this->view->assign('listPid', $this->settings['flexform']['listPid']);//ID of list view
     }
     
     /**
-     * zeigt die neuesten Einträge
+     * shows list of new entries
      */
     public function displayNewAction() {
         $params = t3lib_div::_GET('libconnect');
@@ -219,29 +219,29 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
         unset($params['subject']);
         unset($params['search']);
         
-        //CSS einbinden
+        //include CSS
         $this->decideIncludeCSS();
         
-        date_default_timezone_set('GMT+1');//@todo aus dem System auslesen
+        date_default_timezone_set('GMT+1');//@todo get the information from system
         
-        $oneDay = 86400;//Sekunden
-        $numDays = 7; //Standard sind 7 Tage
+        $oneDay = 86400;//seconds
+        $numDays = 7; //default are 7 days
         $today = strtotime('now');
   
         if(!empty($this->settings['flexform']['countDays'])){
             $numDays = $this->settings['flexform']['countDays'];
         }
         
-        //Datum berechnen
+        //calcaulate date
         $date = date("d-m-Y",$today-($numDays * $oneDay));
         $params['jq_term1'] = $date;//Datum bis wann Eintrag neu
         
         $config['detailPid'] = $this->settings['flexform']['detailPid'];
         
-        //Liste abfragen
+        //request
         $journals =  $this->ezbRepository->loadSearch($params, $config);
         
-        //Variable Template übergeben
+        //variables for template
         $this->view->assign('journals', $journals);
         $this->view->assign('new_date', date("d.m.Y",$today-($numDays * $oneDay)));
         $this->view->assign('subject', $subject['title']);
@@ -250,7 +250,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
         
     public function displayParticipantsFormAction() {
         $params = t3lib_div::_GET('libconnect');
-        //include css
+        //include CSS
         $this->decideIncludeCSS();
         //include js
         $this->response->addAdditionalHeaderData('<script type="text/javascript" src="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Js/ezb.js" ></script>');    
