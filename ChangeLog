@@ -4,14 +4,16 @@
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
-3.6.2
+3.7.0
     - DBIS:
-        - Eindbindung der dbis.css kann mittels TypoScript unterbunden werden.
+        - Eindbindung der dbis.css kann mittels TypoScript unterbunden werden. (TW)
+        - Sidebar: Link für alphabetische Sortierung eingefügt (TW)
+        - Sidebar: Link zur Fachübersicht eingefügt (TW)
     - EZB:
-        - Eindbindung der ezb.css kann mittels TypoScript unterbunden werden.
+        - Eindbindung der ezb.css kann mittels TypoScript unterbunden werden. (TW)
 3.6.1
-    - DBIS: Neu in DBIS - fehlende switchableControllerActions in Flexform eingetragen
-    - EZB: Auswahl Teilnehmer - fehlerhafte Angabe der switchableControllerAction aus Flexform korrigiert
+    - DBIS: Neu in DBIS - fehlende switchableControllerActions in Flexform eingetragen (TW)
+    - EZB: Auswahl Teilnehmer - fehlerhafte Angabe der switchableControllerAction aus Flexform korrigiert (TW)
 
 3.6.0
     - EZB:
