@@ -4,6 +4,8 @@
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
+3.7.1
+    - CSS-Pfade für Bilder sind nun relativ.
 3.7.0
     - DBIS:
         - Eindbindung der dbis.css kann mittels TypoScript unterbunden werden. (TW)
