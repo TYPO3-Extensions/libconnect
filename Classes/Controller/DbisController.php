@@ -61,12 +61,6 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
     public function displayListAction() {
         $params = t3lib_div::_GET('libconnect');
         
-        //test for compatibility
-        /*$version = t3lib_div::int_from_ver(TYPO3_version);
-        if($version < 40060000){//older version as 4.6?
-            $this->view->setTemplateRootPath(t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Private/Oldtemplates/');    
-        }*/
-        
         //include CSS
         $this->decideIncludeCSS();
         
