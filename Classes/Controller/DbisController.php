@@ -182,7 +182,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 
             //if new activated should here the new for subject be active
             if(!empty($this->settings['flexform']['newPid'])){
-                $cObject = t3lib_div::makeInstance('tslib_cObj');
+                $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
                 
                 $this->view->assign('newUrlSub', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid']), 
                     array('libconnect' => array('subject' => $params['subject'] )) ) );//URL der New-Darstellung

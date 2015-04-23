@@ -172,7 +172,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
             //if new activated should here the new for subject be active
             if(!empty($this->settings['flexform']['newPid'])){
                     
-                $cObject = t3lib_div::makeInstance('tslib_cObj');
+                $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
                 
                 if(!empty($params['subject'])){
                     $this->view->assign('newUrlSub', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid']), 
@@ -194,7 +194,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
         //include CSS
         $this->decideIncludeCSS();
         
-        $cObject = t3lib_div::makeInstance('tslib_cObj');
+        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
         $form =  $this->ezbRepository->loadForm();
         
         //variables for template
