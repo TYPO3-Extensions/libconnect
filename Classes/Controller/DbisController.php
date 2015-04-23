@@ -59,7 +59,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
      * shows a list of databases (for general, search, choosed subject)
      */
     public function displayListAction() {
-        $params = t3lib_div::_GET('libconnect');
+        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
         
         //include CSS
         $this->decideIncludeCSS();
@@ -124,7 +124,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
      * shows deatail view
      */
     public function displayDetailAction() {
-        $params = t3lib_div::_GET('libconnect');
+        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
         
         //include CSS
         $this->decideIncludeCSS();
@@ -158,12 +158,12 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
      * shows sidebar
      */
     public function displayMiniFormAction() {
-        $params = t3lib_div::_GET('libconnect');
+        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
         
         //include CSS
         $this->decideIncludeCSS();
         
-        $cObject = t3lib_div::makeInstance('tslib_cObj');
+        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
         $form = $this->dbisRepository->loadMiniForm();
         
         //variables for template
@@ -197,12 +197,12 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
      * shows the search
      */
     public function displayFormAction() {
-        $params = t3lib_div::_GET('libconnect');
+        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
         
         //include CSS
         $this->decideIncludeCSS();
                 
-        $cObject = t3lib_div::makeInstance('tslib_cObj');
+        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
     
         $form = $this->dbisRepository->loadForm($params['search']);
         
@@ -218,7 +218,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
      * shows the new entries
      */
     public function displayNewAction() {
-        $params = t3lib_div::_GET('libconnect');
+        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
         $params['jq_type1'] = 'LD';
         $params['sc'] = $params['search']['sc'];
         if(!empty($params['subject'])){

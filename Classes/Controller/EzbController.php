@@ -42,7 +42,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
      * shows a list of journals (for general, search, choosed subject)
      */
     public function displayListAction() {
-        $params = t3lib_div::_GET('libconnect');
+        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
         
         //include CSS
         $this->decideIncludeCSS();
@@ -111,7 +111,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
      * shows details
      */
     public function displayDetailAction() {
-        $params = t3lib_div::_GET('libconnect');
+        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
         $config['participantsPid'] = $this->settings['flexform']['participantsPid'];
 
         //include CSS
@@ -149,12 +149,12 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
      * zeigt die Sidebar
      */
     public function displayMiniFormAction() {
-        $params = t3lib_div::_GET('libconnect');
+        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
         
         //include CSS
         $this->decideIncludeCSS();
         
-        $cObject = t3lib_div::makeInstance('tslib_cObj');
+        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
         $form = $this->ezbRepository->loadMiniForm();
         
         //variables for template
@@ -189,7 +189,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
      * zeigt die Suche
      */
     public function displayFormAction() {
-        $params = t3lib_div::_GET('libconnect');
+        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
         
         //include CSS
         $this->decideIncludeCSS();
@@ -209,7 +209,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
      * shows list of new entries
      */
     public function displayNewAction() {
-        $params = t3lib_div::_GET('libconnect');
+        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
         $params['jq_type1'] = 'ID';
         $params['sc'] = $params['search']['sc'];
         if(!empty($params['subject'])){
@@ -249,7 +249,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
     
         
     public function displayParticipantsFormAction() {
-        $params = t3lib_div::_GET('libconnect');
+        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
         //include CSS
         $this->decideIncludeCSS();
         //include js

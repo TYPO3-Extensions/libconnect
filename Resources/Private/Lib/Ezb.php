@@ -39,9 +39,7 @@
  *
  */
 
-require_once(t3lib_extMgm::extPath('libconnect') . 'Resources/Private/Lib/class_XMLPageConnection.php');
-
-class EZB {
+class Tx_libconnect_Resources_Private_Lib_Ezb {
 
     // document search meta infos
     private $title;
@@ -101,8 +99,8 @@ class EZB {
      *
      */
     public function __construct() {
-        $this->XMLPageConnection = new XMLPageConnection();
-        EZB::setBibID();
+        $this->XMLPageConnection = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_xmlpageconnection');
+        $this->setBibID();
     }
     
     /**

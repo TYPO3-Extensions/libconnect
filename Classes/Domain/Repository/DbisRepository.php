@@ -33,8 +33,6 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  *
  */
- 
-require_once(t3lib_extMgm::extPath('libconnect') . 'Resources/Private/Lib/class_DBIS.php');
 
 Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persistence_Repository {
     private $dbis_to_t3_subjects = array();
@@ -47,13 +45,13 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
      * @return array
      */
     public function loadTop($config) {
-        $cObject = t3lib_div::makeInstance('tslib_cObj');
+        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
 
         $this->loadSubjects();
         $subject = $this->t3_to_dbis_subjects[$config['subject']];
         $dbis_id = $subject['dbisid'];
 
-        $dbis = new DBIS();
+        $dbis = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_dbis');
         $result = $dbis->getDbliste($dbis_id);
 
         foreach(array_keys($result['list']['top']) as $db) {
@@ -75,11 +73,11 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
      * @param array array('subject'=>array(), 'list'=>array())
      */
     public function loadList($subject_id, $config) {
-        $cObject = t3lib_div::makeInstance('tslib_cObj');
+        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
 
         $this->loadSubjects();
 
-        $dbis = new DBIS();
+        $dbis = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_dbis');
         
         if(is_numeric($subject_id)){
             $subject = $this->t3_to_dbis_subjects[$subject_id];
@@ -130,9 +128,9 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
      */
     public function loadOverview() {
         $this->loadSubjects();
-        $cObject = t3lib_div::makeInstance('tslib_cObj');
+        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
         
-        $dbis = new DBIS();
+        $dbis = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_dbis');
         
         $list = $dbis->getFachliste();
 
@@ -184,8 +182,8 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
      * @return array $db
      */
     public function loadDetail($title_id) {
-        $cObject = t3lib_div::makeInstance('tslib_cObj');
-        $dbis = new DBIS();
+        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
+        $dbis = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_dbis');
         $db = $dbis->getDbDetails($title_id);
         
         if (! $db ){
@@ -204,14 +202,14 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
      * @return array $result
      */
     public function loadSearch($searchVars, $config) {
-        $cObject = t3lib_div::makeInstance('tslib_cObj');
+        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
         $this->loadSubjects();
 
         $term = $searchVars['sword'];//wird bei MiniForm verwendet
         unset($searchVars['sword']);
 
         //Suche abschicken
-        $dbis = new DBIS();
+        $dbis = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_dbis');
         $result = $dbis->search($term, $searchVars);
         
         foreach(array_keys($result['list']['top']) as $db) {
@@ -241,7 +239,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
      * @return array
      */
     public function loadMiniForm() {
-        $dbis = new DBIS();
+        $dbis = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_dbis');
         $form = $dbis->detailSucheFormFelder();
 
         return $form;
@@ -253,7 +251,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
      * @return array
      */
     public function loadForm() {
-        $dbis = new DBIS();
+        $dbis = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_dbis');
         $form = $dbis->detailSucheFormFelder();
         
         return $form;

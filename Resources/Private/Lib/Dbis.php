@@ -37,9 +37,8 @@
  * @author Torsten Witt
  *
  */
-require_once(t3lib_extMgm::extPath('libconnect') . 'Resources/Private/Lib/class_XMLPageConnection.php');
 
-class DBIS {
+class Tx_Libconnect_Resources_Private_Lib_Dbis {
 
     //such meta
     private $search_term;
@@ -65,8 +64,8 @@ class DBIS {
      *
      */
     public function __construct() {
-        $this->XMLPageConnection = new XMLPageConnection();
-        DBIS::setBibID();
+        $this->XMLPageConnection = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_xmlpageconnection');
+        $this->setBibID();
     }
 
     /**
@@ -433,7 +432,7 @@ class DBIS {
         }
 
         //zu sperrende Zugaenge auslesen und aus Gesamtmenge entfernen
-        DBIS::setLicenceForbid();
+        $this->setLicenceForbid();
         if((!empty($this->licenceForbid)) && ($this->licenceForbid!= FALSE)){
             foreach($this->licenceForbid as $key =>$licence){
                 unset($form['zugaenge'][$key]);

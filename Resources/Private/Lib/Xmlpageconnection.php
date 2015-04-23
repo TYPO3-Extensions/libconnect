@@ -8,7 +8,7 @@
  * @subpackage	tx_libconnect
  */
 
-class XMLPageConnection {
+class Tx_Libconnect_Resources_Private_Lib_Xmlpageconnection {
     
    /**
     * Enable debug for logging errors to devLog

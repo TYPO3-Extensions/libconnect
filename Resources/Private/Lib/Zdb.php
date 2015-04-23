@@ -45,9 +45,7 @@
  *
  */
 
-require_once(t3lib_extMgm::extPath('libconnect') . 'Resources/Private/Lib/class_XMLPageConnection.php'); 
-
-class ZDB {
+class Tx_libconnect_Resources_Private_Lib_Zdb {
 
    /**
     * Enable debug for logging errors to devLog
@@ -102,9 +100,9 @@ class ZDB {
             $this->debug = FALSE;
         }
 
-        $this->XMLPageConnection = new XMLPageConnection();
+        $this->XMLPageConnection = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_xmlpageconnection');
 
-        if(!ZDB::getSid()) {
+        if(!$this->getSid()) {
             //todo: Fehlermeldung ausgeben
             //error_log('typo3 extension libconnect - missing ZDB source-identifier: refer to documentation - chapter configuration.');
             if ($this->debug) {

@@ -33,9 +33,6 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  *
  */
- 
-require_once(t3lib_extMgm::extPath('libconnect') . 'Resources/Private/Lib/class_EZB.php');
-require_once(t3lib_extMgm::extPath('libconnect') . 'Resources/Private/Lib/class_ZDB.php');
 
 Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persistence_Repository {
     private $ezb_to_t3_subjects = array();
@@ -49,10 +46,9 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
     
     public function loadOverview() {
         $this->loadSubjects();
-        $cObject = t3lib_div::makeInstance('tslib_cObj');
+        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
         
-
-        $ezb = new EZB();
+        $ezb =  \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_ezb');
         $fb = $ezb->getFachbereiche();
 
         foreach($fb as $el) {
@@ -86,13 +82,13 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         $lc = $options['lc'];
         //$index=0, $sc='A', $lc =''
         
-        $cObject = t3lib_div::makeInstance('tslib_cObj');
+        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
         $this->loadSubjects();
 
         //Notation für Fach holen
         $subject = $this->t3_to_ezb_subjects[$subject_id];
 
-        $ezb = new EZB();
+        $ezb = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_ezb');
         if($options['notation'] == 'All'){
             $subject['ezbnotation'] = 'All';
         }
@@ -156,8 +152,8 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
     }
 
     public function loadDetail($journal_id, $config) {
-        $cObject = t3lib_div::makeInstance('tslib_cObj');
-        $ezb = new EZB();
+        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
+        $ezb = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_ezb');
         $journal = $ezb->getJournalDetail($journal_id);
 
         if (! $journal ){
@@ -215,7 +211,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
      * @return array $journals
      */
     public function loadSearch($searchVars, $config) {
-        $cObject = t3lib_div::makeInstance('tslib_cObj');
+        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
         $this->loadSubjects();
 
         //Suche von Sidebar
@@ -230,7 +226,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
             $linkParams["libconnect[search][$key]"] = $value;
         }
         
-        $ezb = new EZB();
+        $ezb = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_ezb');
         $journals = $ezb->search($term, $searchVars);
         
         if (! $journals){
@@ -312,8 +308,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
     }
 
     public function loadMiniForm() {
-
-        $ezb = new EZB();
+        $ezb = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_ezb');
         $form = $ezb->detailSearchFormFields();
         
         return $form;
@@ -324,7 +319,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
      * @return array
      */
     public function loadForm() {
-        $ezb = new EZB();
+        $ezb = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_ezb');
         $form = $ezb->detailSearchFormFields();
 
         //Zugriffsinformationen holen
@@ -347,8 +342,8 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
      * Standortinformationen für Druckausgaben von Zeitschriften
      */
     public function loadLocationData($journal) {
-        $cObject = t3lib_div::makeInstance('tslib_cObj');
-        $zdb = new ZDB();
+        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
+        $zdb = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_zdb');
 
         if(!empty($journal['ZDB_number'])){
             $locationData = $zdb->getJournalLocationDetails( NULL, $journal['ZDB_number']);
@@ -378,7 +373,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
     }
     
     public function getAccessInfos($short = false){
-        $ezb = new EZB();
+        $ezb = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_ezb');
 
         //Standardtexte holen
         $LongAccessInfos = $ezb->getLongAccessInfos();
@@ -426,7 +421,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
     
     private function getSearchDescription($searchVars){
         $list = array();
-        $ezb = new EZB();
+        $ezb = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_ezb');
         
         //Sucbbegriffe und deren Kategorien
         $jq = "";
@@ -481,8 +476,8 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
     }
     
     public function getParticipantsList($journal_id) {
-        $cObject = t3lib_div::makeInstance('tslib_cObj');
-        $ezb = new EZB();
+        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
+        $ezb = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_ezb');
         $list = $ezb->getParticipantsList($journal_id);
 
         $bibID = $ezb->getBibID();
@@ -497,7 +492,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
      * @return array contact information: person, email
      */
     public function getContact(){
-        $ezb = new EZB();
+        $ezb = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_ezb');
         $contact = $ezb->getContact();
         
         return $contact;
