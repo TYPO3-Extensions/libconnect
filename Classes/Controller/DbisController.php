@@ -178,6 +178,10 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
         if(!empty($params['subject'])) {
             if($params['subject'] != 'all'){
                 $this->view->assign('listingsWrapper', true);
+            
+            //new in DBIS in alphabetical list
+            }  else {
+                $this->view->assign('newUrl', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid'])) );
             }
 
             //if new activated should here the new for subject be active
@@ -187,7 +191,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
                 $this->view->assign('newUrlSub', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid']), 
                     array('libconnect' => array('subject' => $params['subject'] )) ) );//URL der New-Darstellung
             }
-
+        //new in all subjects
         }elseif(!empty($this->settings['flexform']['newPid'])){
             $this->view->assign('newUrl', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid'])) );
         }
