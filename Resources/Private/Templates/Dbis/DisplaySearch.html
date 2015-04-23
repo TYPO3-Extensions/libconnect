@@ -1,16 +1,21 @@
+{namespace libconnect=Tx_Libconnect_ViewHelpers}
 <h1 class="libconnect-h1"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.results" /></h1>
 
-<f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.criterion" /><br/>
+<p><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.criterion" /></p>
 <ul>
     <f:for each="{list.searchDescription}" as="description">
         <li><f:format.htmlentitiesDecode>{description}</f:format.htmlentitiesDecode></li>
     </f:for>
 </ul>
 
-<br/><br/>
-
 <f:if condition="{list.error}">
-    <f:then></f:then>
+    <f:then>
+        <p class="hitcount">        
+            <libconnect:strreplace search="%s" replace="{list.values -> f:count()}">
+                <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.hits" />
+            </libconnect:strreplace>
+        </p>
+    </f:then>
     <f:else>
         <h3 class="libconnect-h3"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.licence" /></h3>
 
@@ -33,9 +38,11 @@
             </div>
         </f:if>
 
-        <br/><br/>
-
-        <f:count subject='{list.values}' /> <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.hits" />
+        <p class="hitcount">
+            <libconnect:strreplace search="%s" replace="{list.values -> f:count()}">
+                <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.search.hits" />
+            </libconnect:strreplace>
+        </p>
 
         <div class="dbis-list">
             <f:if condition="<f:count subject='{list.values}' /> > 0">

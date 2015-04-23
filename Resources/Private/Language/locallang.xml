@@ -158,7 +158,7 @@
             <label index="tx_libconnect.dbis.search.criterion">Sie suchten nach folgenden Kriterien:</label>
             <label index="tx_libconnect.dbis.search.licence">Zugriffe:</label>
             <label index="tx_libconnect.dbis.search.top_databases">Top Datenbanken</label>
-            <label index="tx_libconnect.dbis.search.hits"> Treffer:</label>
+            <label index="tx_libconnect.dbis.search.hits">Die Suche ergab %s Treffer:</label>
 
             <label index="tx_libconnect.dbis.new.headline.alphabetical">Neu in der DBIS - Alphabetische Auflistung</label>
             <label index="tx_libconnect.dbis.new.headline.subject">Neu in der DBIS - Auflistung nach Datenbanktyp</label>
