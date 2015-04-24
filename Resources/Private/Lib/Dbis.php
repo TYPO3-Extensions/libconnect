@@ -132,7 +132,11 @@ class Tx_Libconnect_Resources_Private_Lib_Dbis {
 
         if (isset($xml_categories->list_subjects_collections->list_subjects_collections_item)) {
             foreach ($xml_categories->list_subjects_collections->list_subjects_collections_item AS $key => $value) {
-                $categories[(string) $value['notation']] = array('title' => (string) $value, 'id' => (string) $value['notation'], 'count' => (int) (string) $value['number'], 'lett' => (string) $value['lett']);
+                $categories[(string) $value['notation']] = array(
+                    'title' => (string) $value, 
+                    'id' => (string) $value['notation'], 
+                    'count' => (int) (string) $value['number'], 
+                    'lett' => (string) $value['lett']);
             }
         }
 
@@ -526,7 +530,8 @@ class Tx_Libconnect_Resources_Private_Lib_Dbis {
             //'groups' => array(),
             //'access_infos' => array(),
             'page_vars' => array(),
-            'values' => array()
+            'values' => array(),
+            'db_count' => 0
         );
         $dbsid = array();
 
@@ -559,6 +564,9 @@ class Tx_Libconnect_Resources_Private_Lib_Dbis {
         if (isset($request->list_dbs->dbs)) {
 
             foreach ($request->list_dbs->dbs as $dbs) {
+                if(isset($dbs->attributes()->db_count)){
+                    $list['db_count'] = (int) $dbs->attributes()->db_count;
+                }
 
                 foreach ($dbs->db as $value) {
 

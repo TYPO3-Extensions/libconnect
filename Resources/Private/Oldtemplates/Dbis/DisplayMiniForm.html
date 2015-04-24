@@ -61,13 +61,6 @@
                 </f:link.page>
             </p>
 
-            <f:if condition="{newUrlSub}">
-                <p id="dbis-newminiSub">
-                    <a href="{newUrlSub}">
-                        <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.new.subject" />
-                    </a>
-                </p>
-            </f:if>
         </f:then>
         <f:else>
             <p>
@@ -85,13 +78,26 @@
  
     </f:if>
 </div>
-        
+
 <f:if condition="{newUrl}">
-    <div class="dbis-new">
-        <p id="dbis-newmini">
-            <a href="{newUrl}">
-                <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.new.all" />
-            </a>
-        </p>
+    <div class="dbis-listings-wrapper">
+            <div class="dbis-new">
+                <p id="dbis-newmini">
+                    <a href="{newUrl}">
+                        <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.new.all" />
+                    </a>
+                </p>
+            </div>
+    </div>
+</f:if>
+<f:if condition="{newUrlSub}">
+    <div class="dbis-listings-wrapper">
+            <div class="dbis-new">
+                <p id="dbis-newmini">
+                    <a href="{newUrlSub}">
+                        <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.miniform.new.subject" /> ({newInSubjectCount})
+                    </a>
+                </p>
+            </div>
     </div>
 </f:if>

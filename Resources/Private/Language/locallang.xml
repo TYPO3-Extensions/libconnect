@@ -160,8 +160,8 @@
             <label index="tx_libconnect.dbis.search.top_databases">Top Datenbanken</label>
             <label index="tx_libconnect.dbis.search.hits">Die Suche ergab %s Treffer:</label>
 
-            <label index="tx_libconnect.dbis.new.headline.alphabetical">Neu in der DBIS - Alphabetische Auflistung</label>
-            <label index="tx_libconnect.dbis.new.headline.subject">Neu in der DBIS - Auflistung nach Datenbanktyp</label>
+            <label index="tx_libconnect.dbis.new.headline">Neu in DBIS</label>
+            <label index="tx_libconnect.dbis.new.headline.subject">Fachgebiet</label>
             <label index="tx_libconnect.dbis.new.since">Es gibt seit dem </label>
             <label index="tx_libconnect.dbis.new.hits">neue Einträge:</label>
         </languageKey>

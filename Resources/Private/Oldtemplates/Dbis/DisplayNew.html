@@ -1,9 +1,13 @@
 {namespace libconnect=Tx_Libconnect_ViewHelpers}
-<h1 class="libconnect-h1"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.new.headline.dbis" /> <f:if condition="{list.alphNavList}"><f:else><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.list.headline.subject" /></f:else></f:if></h1>
+<h1 class="libconnect-h1"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.new.headline" /> </h1>
 
-<h2 class="libconnect-h2">{subject}</h2>
+<f:if condition="{subject}">
+    <h2 class="libconnect-h2">
+        <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.list.headline.subject" /> {subject}
+    </h2>
+</f:if>
 
-<h3 class="libconnect-h3"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.new.legend.headline" /></h3>
+<h3 class="libconnect-h3"><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.dbis.list.legend.headline" /></h3>
 
 <div class="dbis-list-legend">
     <ul>

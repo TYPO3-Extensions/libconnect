@@ -60,7 +60,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
      */
     public function displayListAction() {
         $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
-        
+
         //include CSS
         $this->decideIncludeCSS();
         
@@ -95,7 +95,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 
         } else {//start point
             $liste =  $this->dbisRepository->loadOverview();
-            
+
             //andere View verwenden
             $controllerContext = $this->buildControllerContext();
             $controllerContext->getRequest()->setControllerActionName('displayOverview');
@@ -159,7 +159,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
      */
     public function displayMiniFormAction() {
         $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
-        
+
         //include CSS
         $this->decideIncludeCSS();
         
@@ -185,12 +185,17 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
             }
 
             //if new activated should here the new for subject be active
-            if(!empty($this->settings['flexform']['newPid'])){
-                $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
-                
-                $this->view->assign('newUrlSub', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid']), 
-                    array('libconnect' => array('subject' => $params['subject'] )) ) );//URL der New-Darstellung
-            }
+           // if(!empty($this->settings['flexform']['newPid'])){
+                $subject = $this->dbisRepository->getSubject($params['subject']);
+                $count = (int) $this->getNewCount($subject['dbisid']);
+
+                if($count >0){
+                    $this->view->assign('newUrlSub', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid']), 
+                        array('libconnect' => array('subject' => $params['subject'] )) ) );//URL der New-Darstellung
+                    
+                    $this->view->assign('newInSubjectCount',  $count);
+                }
+            //}
         //new in all subjects
         }elseif(!empty($this->settings['flexform']['newPid'])){
             $this->view->assign('newUrl', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid'])) );
@@ -225,9 +230,10 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
         $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
         $params['jq_type1'] = 'LD';
         $params['sc'] = $params['search']['sc'];
+
         if(!empty($params['subject'])){
             $subject = $this->dbisRepository->getSubject($params['subject']);
-            $params['gebiete']=array($subject['dbisid']);
+            $params['gebiete'][]=$subject['dbisid'];
         }
         unset($params['subject']);
         unset($params['search']);
@@ -258,6 +264,39 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
         $this->view->assign('list', $liste);
         $this->view->assign('new_date', date("d.m.Y",$today-($numDays * $oneDay)));
         $this->view->assign('subject', $subject['title']);
+    }
+    
+    /**
+     * count the new entries
+     */
+    private function getNewCount($subjectId) {
+        $params['jq_type1'] = 'LD';
+        $params['sc'] = $params['search']['sc'];
+        $params['gebiete'][]=$subjectId;
+
+        unset($params['subject']);
+        unset($params['search']);
+
+        date_default_timezone_set('GMT+1');//@todo get the information from system
+        
+        $oneDay = 86400;//seconds
+        $numDays = 70; //default are 7 days
+        $today = strtotime('now');
+  
+        if(!empty($this->settings['flexform']['countDays'])){
+            $numDays = $this->settings['flexform']['countDays'];
+        }
+        
+        //calcaulate date
+        $date = date("d.m.Y",$today-($numDays * $oneDay));
+        $params['jq_term1'] = $date;//date how long entry is new
+        
+        $config['detailPid'] = $this->settings['flexform']['detailPid'];
+        
+        //request
+        $list = $this->dbisRepository->loadSearch($params, $config);
+
+        return $list['db_count'];
     }
 
     /**

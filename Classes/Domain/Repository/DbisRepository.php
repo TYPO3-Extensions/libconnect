@@ -129,9 +129,9 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
     public function loadOverview() {
         $this->loadSubjects();
         $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
-        
+
         $dbis = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_dbis');
-        
+
         $list = $dbis->getFachliste();
 
         foreach($list as $el) {
@@ -267,10 +267,10 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
     /**
      * liefert DBIS-Id von einem Fach
      */
-    public function getSubject($subject_id){
+    public function getSubject($subjectId){
         $this->loadSubjects();
         
-        return $this->t3_to_dbis_subjects[$subject_id]['dbisid'];;
+        return $this->t3_to_dbis_subjects[$subjectId];
     }
 }
 ?>
