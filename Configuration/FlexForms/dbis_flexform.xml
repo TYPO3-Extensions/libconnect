@@ -118,7 +118,7 @@
                         <TCEforms>
                             <exclude>1</exclude>
                             <label>Sortierung</label>
-                            <displayCond><![CDATA[FIELD:switchableControllerActions:=:Dbis->displayList, Dbis->displayNew]]></displayCond>
+                            <displayCond><![CDATA[FIELD:switchableControllerActions:=:Dbis->displayList,Dbis->displayNew]]></displayCond>
                             <config>
                                 <type>select</type>
                                 <items type="array">
@@ -143,7 +143,7 @@
                         <TCEforms>
                             <exclude>1</exclude>
                             <label>Wieviel Tage gelten Einträge als neu? (Standard: 7)</label>
-                            <displayCond><![CDATA[FIELD:switchableControllerActions:=:Dbis->displayNew]]></displayCond>
+                            <displayCond><![CDATA[FIELD:switchableControllerActions:=:Dbis->displayNew,Dbis->displayMiniForm]]></displayCond>
                             <config>
                                 <type>input</type>
                                 <size>30</size>

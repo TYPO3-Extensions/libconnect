@@ -59,7 +59,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
      * shows a list of databases (for general, search, choosed subject)
      */
     public function displayListAction() {
-        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
+        $params = t3lib_div::_GET('libconnect');
 
         //include CSS
         $this->decideIncludeCSS();
@@ -124,7 +124,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
      * shows deatail view
      */
     public function displayDetailAction() {
-        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
+        $params = t3lib_div::_GET('libconnect');
         
         //include CSS
         $this->decideIncludeCSS();
@@ -158,12 +158,12 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
      * shows sidebar
      */
     public function displayMiniFormAction() {
-        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
+        $params = t3lib_div::_GET('libconnect');
 
         //include CSS
         $this->decideIncludeCSS();
         
-        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
+        $cObject = t3lib_div::makeInstance('tslib_cObj');
         $form = $this->dbisRepository->loadMiniForm();
         
         //variables for template
@@ -185,7 +185,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
             }
 
             //if new activated should here the new for subject be active
-           // if(!empty($this->settings['flexform']['newPid'])){
+            if(!empty($this->settings['flexform']['newPid'])){
                 $subject = $this->dbisRepository->getSubject($params['subject']);
                 $count = (int) $this->getNewCount($subject['dbisid']);
 
@@ -195,10 +195,15 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
                     
                     $this->view->assign('newInSubjectCount',  $count);
                 }
-            //}
+            }
         //new in all subjects
         }elseif(!empty($this->settings['flexform']['newPid'])){
-            $this->view->assign('newUrl', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid'])) );
+            $count = (int) $this->getNewCount(FALSE);
+            
+            if($count >0){
+                $this->view->assign('newUrl', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid'])) );
+                $this->view->assign('newInSubjectCount',  $count);
+            }
         }
     }
     
@@ -206,12 +211,12 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
      * shows the search
      */
     public function displayFormAction() {
-        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
+        $params = t3lib_div::_GET('libconnect');
         
         //include CSS
         $this->decideIncludeCSS();
                 
-        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
+        $cObject = t3lib_div::makeInstance('tslib_cObj');
     
         $form = $this->dbisRepository->loadForm($params['search']);
         
@@ -227,7 +232,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
      * shows the new entries
      */
     public function displayNewAction() {
-        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
+        $params = t3lib_div::_GET('libconnect');
         $params['jq_type1'] = 'LD';
         $params['sc'] = $params['search']['sc'];
 
@@ -269,10 +274,13 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
     /**
      * count the new entries
      */
-    private function getNewCount($subjectId) {
+    private function getNewCount($subjectId = FALSE) {
         $params['jq_type1'] = 'LD';
         $params['sc'] = $params['search']['sc'];
-        $params['gebiete'][]=$subjectId;
+        
+        if($subjectId != FALSE){
+            $params['gebiete'][]=$subjectId;
+        }
 
         unset($params['subject']);
         unset($params['search']);
@@ -280,7 +288,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
         date_default_timezone_set('GMT+1');//@todo get the information from system
         
         $oneDay = 86400;//seconds
-        $numDays = 70; //default are 7 days
+        $numDays = 7; //default are 7 days
         $today = strtotime('now');
   
         if(!empty($this->settings['flexform']['countDays'])){
