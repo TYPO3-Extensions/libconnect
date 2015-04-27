@@ -99,7 +99,7 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
      *
      */
     public function __construct() {
-        $this->XMLPageConnection = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_xmlpageconnection');
+        $this->XMLPageConnection = t3lib_div::makeInstance('tx_libconnect_resources_private_lib_xmlpageconnection');
         $this->setBibID();
     }
     

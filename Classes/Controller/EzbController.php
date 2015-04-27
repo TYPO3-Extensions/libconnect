@@ -42,7 +42,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
      * shows a list of journals (for general, search, choosed subject)
      */
     public function displayListAction() {
-        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
+        $params = t3lib_div::_GET('libconnect');
         
         //include CSS
         $this->decideIncludeCSS();
@@ -111,7 +111,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
      * shows details
      */
     public function displayDetailAction() {
-        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
+        $params = t3lib_div::_GET('libconnect');
         $config['participantsPid'] = $this->settings['flexform']['participantsPid'];
 
         //include CSS
@@ -149,12 +149,13 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
      * zeigt die Sidebar
      */
     public function displayMiniFormAction() {
-        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
+        $params = t3lib_div::_GET('libconnect');
         
         //include CSS
         $this->decideIncludeCSS();
         
-        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
+        $cObject = t3lib_div::makeInstance('tslib_cObj');
+        
         $form = $this->ezbRepository->loadMiniForm();
         
         //variables for template
@@ -172,7 +173,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
             //if new activated should here the new for subject be active
             if(!empty($this->settings['flexform']['newPid'])){
                     
-                $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
+                $cObject = t3lib_div::makeInstance('tslib_cObj');
                 
                 if(!empty($params['subject'])){
                     $this->view->assign('newUrlSub', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid']), 
@@ -189,12 +190,12 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
      * zeigt die Suche
      */
     public function displayFormAction() {
-        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
+        $params = t3lib_div::_GET('libconnect');
         
         //include CSS
         $this->decideIncludeCSS();
         
-        $cObject = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tslib_cObj');
+        $cObject = t3lib_div::makeInstance('tslib_cObj');
         $form =  $this->ezbRepository->loadForm();
         
         //variables for template
@@ -209,7 +210,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
      * shows list of new entries
      */
     public function displayNewAction() {
-        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
+        $params = t3lib_div::_GET('libconnect');
         $params['jq_type1'] = 'ID';
         $params['sc'] = $params['search']['sc'];
         if(!empty($params['subject'])){
@@ -249,7 +250,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
     
         
     public function displayParticipantsFormAction() {
-        $params = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('libconnect');
+        $params = t3lib_div::_GET('libconnect');
         //include CSS
         $this->decideIncludeCSS();
         //include js

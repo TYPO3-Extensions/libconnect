@@ -64,7 +64,7 @@ class Tx_Libconnect_Resources_Private_Lib_Dbis {
      *
      */
     public function __construct() {
-        $this->XMLPageConnection = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_libconnect_resources_private_lib_xmlpageconnection');
+        $this->XMLPageConnection = t3lib_div::makeInstance('tx_libconnect_resources_private_lib_xmlpageconnection');
         $this->setBibID();
     }
 
