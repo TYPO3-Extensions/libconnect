@@ -89,7 +89,7 @@
                         <TCEforms>
                             <exclude>1</exclude>
                             <label>Seite mit Detailsuche</label>
-                            <displayCond><![CDATA[FIELD:switchableControllerActions:=:Ezb->displayMiniForm, Ezb->displayNew]]></displayCond>
+                            <displayCond><![CDATA[FIELD:switchableControllerActions:=:Ezb->displayMiniForm]]></displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
