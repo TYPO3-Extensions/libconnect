@@ -45,21 +45,21 @@
         <f:then>
             <p id="ezb-newminiSub">
                 <a href="{newUrlSub}">
-                    <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.miniform.new.subject" />
+                    <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.miniform.new.subject" /><span class="newcount"> ({newInSubjectCount})</span>
                 </a>
             </p>
         </f:then>
         <f:else></f:else>
     </f:if>
 
-    <f:if condition="{newUrl}">
-        <f:then>
-            <p id="ezb-newmini">
-                <a href="{newUrl}">
-                    <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.miniform.new.all" />
-                </a>
-            </p>
-        </f:then>
-        <f:else></f:else>
-    </f:if>
 </div>
+
+<f:if condition="{newUrl}">    
+    <div class="ezb-listings-wrapper">
+        <p id="ezb-newmini">
+            <a href="{newUrl}">
+                <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.miniform.new.all" /><span class="newcount"> ({newInSubjectCount})</span>
+            </a>
+        </p>
+    </div>
+</f:if>

@@ -176,13 +176,25 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
                 $cObject = t3lib_div::makeInstance('tslib_cObj');
                 
                 if(!empty($params['subject'])){
-                    $this->view->assign('newUrlSub', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid']), 
-                        array('libconnect' => array('subject' => $params['subject'] )) ) );//URL of new list
+                    $count = (int) $this->getNewCount($params['subject']);
+                    
+                    if($count >0){
+                        $this->view->assign('newInSubjectCount',  $count);
+
+                        $this->view->assign('newUrlSub', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid']), 
+                            array('libconnect' => array('subject' => $params['subject'] )) ) );//URL of new list
+                    }
                 }
             }
-                
+
         }elseif(!empty($this->settings['flexform']['newPid'])){
-            $this->view->assign('newUrl', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid'])) );
+            $count = (int) $this->getNewCount(FALSE);
+            
+            //show "new in EZB" only if there is something new
+            if($count >0){
+                $this->view->assign('newUrl', $cObject->getTypolink_URL( intval($this->settings['flexform']['newPid'])) );
+                $this->view->assign('newInSubjectCount',  $count);
+            }
         }
     }
     
@@ -248,6 +260,42 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
         $this->view->assign('subject', $subject['title']);
     }
     
+    /**
+     * count the new entries
+     */
+    public function getNewCount($subjectId = FALSE) {
+        $params = t3lib_div::_GET('libconnect');
+        $params['jq_type1'] = 'ID';
+        $params['sc'] = $params['search']['sc'];
+        
+        if($subjectId != FALSE){
+            $subject = $this->ezbRepository->getSubject($subjectId);
+            $params['Notations']=array($subject['ezbnotation']);
+        }
+        unset($params['subject']);
+        unset($params['search']);
+        
+        date_default_timezone_set('GMT+1');//@todo get the information from system
+        
+        $oneDay = 86400;//seconds
+        $numDays = 7; //default are 7 days
+        $today = strtotime('now');
+  
+        if(!empty($this->settings['flexform']['countDays'])){
+            $numDays = $this->settings['flexform']['countDays'];
+        }
+        
+        //calcaulate date
+        $date = date("d-m-Y",$today-($numDays * $oneDay));
+        $params['jq_term1'] = $date;//Datum bis wann Eintrag neu
+        
+        $config['detailPid'] = $this->settings['flexform']['detailPid'];
+        
+        //request
+        $journals =  $this->ezbRepository->loadSearch($params, $config);
+
+        return $journals['page_vars']['search_count'];
+    }
         
     public function displayParticipantsFormAction() {
         $params = t3lib_div::_GET('libconnect');
