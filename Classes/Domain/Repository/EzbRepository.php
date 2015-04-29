@@ -384,16 +384,16 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
                  $colortext[$key] = $text;
             }
         }
-        
+
         //Texte aus dem Web holen
         $form = $ezb->detailSearchFormFields();
-        $journals = array();
+        $AccessInfos = array();
 
         //eigene Texte oder aus dem Web
         if((!isset($form['selected_colors'])) or (empty($form['selected_colors'])) or ($LongAccessInfos['force'] == 'true')){
-            $journals = $colortext['longAccessInfos'];
+            $AccessInfos = $colortext['longAccessInfos'];
         }else{
-            $journals = $form['selected_colors'];
+            $AccessInfos = $form['selected_colors'];
 
             if($short){
                 //falls eine kuerzere Form erwuenscht ist
@@ -401,22 +401,37 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 
                 if((!empty($ShortAccessInfos)) && ($ShortAccessInfos!= FALSE)){
                     foreach($ShortAccessInfos['shortAccessInfos'] as $key => $text){
-                        if(empty($journals[$key])){
-                            $journals[$key] = $ShortAccessInfos['shortAccessInfos'][$key];
+                        if(empty($AccessInfos[$key])){
+                            $AccessInfos[$key] = $ShortAccessInfos['shortAccessInfos'][$key];
                         }
                     }
                 }
             }else{
                 //Falls Lizenzinformationen fehlen
                 foreach($colortext['longAccessInfos'] as $key => $text){
-                    if(empty($journals[$key])){
-                        $journals[$key] = $colortext['longAccessInfos'][$key];
+                    if(empty($AccessInfos[$key])){
+                        $AccessInfos[$key] = $colortext['longAccessInfos'][$key];
                     }
                 }
             }
         }
         
-        return $journals;
+        //reorginize array
+        foreach($AccessInfos as $colorkey => $value){
+            if ( $colorkey != 6 ){
+                $key = $colorkey;
+            } else {
+                $key = 3;
+            }
+            $return[$key] = array(
+                            'colorkey' => $colorkey,
+                            'value' => $value
+                        );
+        }
+        
+        ksort($return);
+
+        return $return;
     }
     
     private function getSearchDescription($searchVars){
