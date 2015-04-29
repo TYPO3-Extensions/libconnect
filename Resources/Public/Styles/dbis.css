@@ -132,6 +132,15 @@
     float:right;
 }
 
+#dbis-detail p{
+    text-align: center;
+}
+
+a.dbis-research{
+    text-decoration: underline;
+    font-weight: bold;
+}
+
 /**
  * begin - extended search styles 
  */
