@@ -471,7 +471,12 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
             
             foreach($searchVars['selected_colors'] as $key=>$color){
                 if($accessInfos[$color]){
-                    $list[]=$accessInfos[$color];
+                    $list[]=$accessInfos[$color]['value'];
+                    
+                    //if color is 2, 6 must be displayed too
+                    if($color == 2){
+                        $list[]=$accessInfos[3]['value'];
+                    }
                 }
             }
         }

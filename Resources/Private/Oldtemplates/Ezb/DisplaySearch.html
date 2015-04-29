@@ -15,24 +15,24 @@
         <div class="ezb-list-legend">
             <ul>
                 <f:for each="{journals.selected_colors}" as="section" key="key">
-                    <f:if condition="{key} == 1">
+                    <f:if condition="{section.colorkey} == 1">
                         <li class="ezb-list-legend-one">
-                            <f:escape value="{section}" type="raw" />
+                            <f:escape value="{section.value}" type="raw" />
                         </li>
                     </f:if>
-                    <f:if condition="{key} == 2">
+                    <f:if condition="{section.colorkey} == 2">
                         <li class="ezb-list-legend-two">
-                            <f:escape value="{section}" type="raw" />
+                            <f:escape value="{section.value}" type="raw" />
                         </li>
                     </f:if>
-                    <f:if condition="{key} == 6">
+                    <f:if condition="{section.colorkey} == 6">
                         <li class="ezb-list-legend-six">
-                            <f:escape value="{section}" type="raw" />
+                            <f:escape value="{section.value}" type="raw" />
                         </li>
                     </f:if>
-                    <f:if condition="{key} == 4">
+                    <f:if condition="{section.colorkey} == 4">
                         <li class="ezb-list-legend-four">
-                            <f:escape value="{section}" type="raw" />
+                            <f:escape value="{section.value}" type="raw" />
                         </li>
                     </f:if>
                 </f:for>
