@@ -44,6 +44,11 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         $this->subjectRepository = $subjectRepository;
     }
     
+    /**
+     * get list for start page
+     * 
+     * @return array
+     */
     public function loadOverview() {
         $this->loadSubjects();
         $cObject = t3lib_div::makeInstance('tslib_cObj');
@@ -62,6 +67,9 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         return $list;
     }
 
+    /**
+     * fill variable $ezb_to_t3_subjects with list of subjects
+     */
     private function loadSubjects() {
         $res = $this->subjectRepository->findAll();
 
@@ -76,7 +84,15 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         }
     }
     
-    public function loadList($subject_id, $options =array('index' =>0, 'sc' => 'A', 'lc' => ''), $config) {
+    /**
+     * get list of a subject or letter
+     * 
+     * @param int $subject_id
+     * @param array $options
+     * @param array $config
+     * @return array
+     */
+    public function loadList($subject_id, $options = array('index' =>0, 'sc' => 'A', 'lc' => ''), $config) {
         $index = $options['index'];
         $sc = $options['sc'];
         $lc = $options['lc'];
@@ -85,7 +101,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         $cObject = t3lib_div::makeInstance('tslib_cObj');
         $this->loadSubjects();
 
-        //Notation für Fach holen
+        //get notation for subject
         $subject = $this->t3_to_ezb_subjects[$subject_id];
 
         $ezb = t3lib_div::makeInstance('tx_libconnect_resources_private_lib_ezb');
@@ -95,13 +111,13 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         //$ezb->notation = $options['notation'];
         $journals = $ezb->getFachbereichJournals($subject['ezbnotation'], $index, $sc, $lc);
         
-        //Zugriffsinformationen holen
+        //get access information
         $journals['selected_colors'] = $this->getAccessInfos();
 
         /**
-         * Links bauen
+         * create links
          */
-        //Navigation
+        //navigation
         foreach(array_keys($journals['navlist']['pages']) as $page) {
             if (is_array($journals['navlist']['pages'][$page])) {
                 $journals['navlist']['pages'][$page]['link'] = $cObject->getTypolink_URL($GLOBALS['TSFE']->id, array(
@@ -114,7 +130,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
             }
         }
         
-        //Ergenisse
+        //results
         if(isset($journals['alphabetical_order']['first_fifty'])){
             foreach(array_keys($journals['alphabetical_order']['first_fifty']) as $section) {
                 $journals['alphabetical_order']['first_fifty'][$section]['link'] = $cObject->getTypolink_URL($GLOBALS['TSFE']->id, array(
@@ -151,10 +167,17 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         return $journals;
     }
 
-    public function loadDetail($journal_id, $config) {
+    /**
+     * get detail information of a journal
+     * 
+     * @param type $journalId
+     * @param type $config
+     * @return boolean
+     */
+    public function loadDetail($journalId, $config) {
         $cObject = t3lib_div::makeInstance('tslib_cObj');
         $ezb = t3lib_div::makeInstance('tx_libconnect_resources_private_lib_ezb');
-        $journal = $ezb->getJournalDetail($journal_id);
+        $journal = $ezb->getJournalDetail($journalId);
 
         if (! $journal ){
             return FALSE;
@@ -162,7 +185,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
 
         /*BEGIN Zugriffsinformationen holen*/
         
-        //Standardtexte holen
+        //get default texts
         $LongAccessInfos = $ezb->getLongAccessInfos();
         
         $colortext = array();
@@ -172,7 +195,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
             }
         }
         
-        //Texte aus dem Web holen
+        //get texts from the web
         $form = $ezb->detailSearchFormFields();
         $journal['selected_colors'] = $form['selected_colors'];
 
@@ -194,7 +217,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
                 $journal['participants'] = $cObject->getTypolink_URL(
                     intval($config['participantsPid']),
                     array(
-                        'libconnect[jourid]' => $journal_id
+                        'libconnect[jourid]' => $journalId
                     )
                 );
             }
@@ -204,7 +227,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
     }
     
     /**
-     * Suche vorbereiten
+     * search
      * 
      * @param array $searchVars
      * @param array $config
@@ -214,7 +237,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         $cObject = t3lib_div::makeInstance('tslib_cObj');
         $this->loadSubjects();
 
-        //Suche von Sidebar
+        //search of sidebar
         if (strlen($searchVars['sword'])) {
             $searchVars['jq_type1'] = 'KT';
             $searchVars['jq_term1'] = $searchVars['sword'];
@@ -236,7 +259,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         $journals['searchDescription'] = $this->getSearchDescription($searchVars);
         
         /**
-         * Links bauen
+         * create links
          */
         //Navigation
         if (is_array($journals['navlist']['pages'])) {
@@ -266,7 +289,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
             }
         }
         
-        //Ergenisse
+        //results
         if (is_array($journals['alphabetical_order']['first_fifty'])) {
 
             foreach(array_keys($journals['alphabetical_order']['first_fifty']) as $section) {
@@ -301,12 +324,17 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
             }
         }
         
-        //Zugriffsinformationen holen
+        //get access information
         $journals['selected_colors'] = $this->getAccessInfos();
         
         return $journals;
     }
 
+    /**
+     * return sidebar
+     * 
+     * @return array
+     */
     public function loadMiniForm() {
         $ezb = t3lib_div::makeInstance('tx_libconnect_resources_private_lib_ezb');
         $form = $ezb->detailSearchFormFields();
@@ -315,7 +343,8 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
     }
     
     /**
-     * Erzeugt das Suchformular
+     * create search form
+     * 
      * @return array
      */
     public function loadForm() {
@@ -329,7 +358,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
     }
     
     /**
-     * holt BibID
+     * get BibID
      * 
      * @return string
      */
@@ -339,7 +368,9 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
     
 //BOF ZDB LocationData
     /**
-     * Standortinformationen für Druckausgaben von Zeitschriften
+     * get information about the location for the print version
+     * 
+     * @param array $journal
      */
     public function loadLocationData($journal) {
         $cObject = t3lib_div::makeInstance('tslib_cObj');
@@ -363,11 +394,20 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
     }
 //EOF ZDB LocationData
 
-
+    /**
+     * set detailed access informations
+     * 
+     * @param array $longAccessInfos
+     */
     public function setLongAccessInfos($longAccessInfos) {
         $this->longAccessInfos = $longAccessInfos;
     }
     
+    /**
+     * get detailed access informations
+     * 
+     * @return array
+     */
     public function getLongAccessInfos(){
         return $this->longAccessInfos;
     }
@@ -375,7 +415,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
     public function getAccessInfos($short = false){
         $ezb = t3lib_div::makeInstance('tx_libconnect_resources_private_lib_ezb');
 
-        //Standardtexte holen
+        //get default texts
         $LongAccessInfos = $ezb->getLongAccessInfos();
 
         $colortext = array();
@@ -385,18 +425,18 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
             }
         }
 
-        //Texte aus dem Web holen
+        //get text from web
         $form = $ezb->detailSearchFormFields();
         $AccessInfos = array();
 
-        //eigene Texte oder aus dem Web
+        //own texts or from web
         if((!isset($form['selected_colors'])) or (empty($form['selected_colors'])) or ($LongAccessInfos['force'] == 'true')){
             $AccessInfos = $colortext['longAccessInfos'];
         }else{
             $AccessInfos = $form['selected_colors'];
 
             if($short){
-                //falls eine kuerzere Form erwuenscht ist
+                //if shorter form is will
                 $ShortAccessInfos = $ezb->getShortAccessInfos();
 
                 if((!empty($ShortAccessInfos)) && ($ShortAccessInfos!= FALSE)){
@@ -434,11 +474,17 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         return $return;
     }
     
+    /**
+     * get data about the search
+     * 
+     * @param array $searchVars
+     * @return array
+     */
     private function getSearchDescription($searchVars){
         $list = array();
         $ezb = t3lib_div::makeInstance('tx_libconnect_resources_private_lib_ezb');
         
-        //Sucbbegriffe und deren Kategorien
+        //search terms and theire categories
         $jq = "";
         
         for($i=1;$i<=4;$i++){
@@ -455,7 +501,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
             $list = array(1 =>$jq);
         }
 
-        //Fächer
+        //subjects
         if(!empty($searchVars['Notations'])){
             foreach($searchVars['Notations'] as $notation){
                 if((!empty($this->ezb_to_t3_subjects[$notation])) && ($notation != '-')){
@@ -465,7 +511,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
             
         }
         
-        //Lizenzen
+        //licence
         if(!empty($searchVars['selected_colors'])){
             $accessInfos = $this-> getAccessInfos();
             
@@ -485,30 +531,38 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
     }
     
     /**
-     * liefert EZB-Id von einem Fach
+     * get subectID
      *
-     * @param integer Id des Faches
+     * @param int $subjectId
      */
-    public function getSubject($subject_id){
+    public function getSubject($subjectId){
         $this->loadSubjects();
         
-        return $this->t3_to_ezb_subjects[$subject_id];
+        return $this->t3_to_ezb_subjects[$subjectId];
     }
     
-    public function getParticipantsList($journal_id) {
+    /**
+     * get lit of participants
+     * 
+     * @param int $journalId
+     * @return array
+     */
+    public function getParticipantsList($journalId) {
         $cObject = t3lib_div::makeInstance('tslib_cObj');
         $ezb = t3lib_div::makeInstance('tx_libconnect_resources_private_lib_ezb');
-        $list = $ezb->getParticipantsList($journal_id);
+        $list = $ezb->getParticipantsList($journalId);
 
         $bibID = $ezb->getBibID();
         $list['BibID'] = $bibID;
 
-        $list['detailURL'] = $ezb->getDetailviewRequestUrl() . '&jour_id=' . $journal_id;
+        $list['detailURL'] = $ezb->getDetailviewRequestUrl() . '&jour_id=' . $journalId;
 
         return $list;
     }
     
     /**
+     * get contact information
+     * 
      * @return array contact information: person, email
      */
     public function getContact(){
