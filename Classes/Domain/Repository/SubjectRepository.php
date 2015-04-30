@@ -32,28 +32,16 @@
  */
 
 Class Tx_Libconnect_Domain_Repository_SubjectRepository extends Tx_Extbase_Persistence_Repository {
-
-    /**
-     * Fächer zufällig aus Datenbank laden
-     * 
-     * @return object
-     */
-    public function findRandom() {
-        $rows = $this->createQuery()->execute()->count();
-        $row_number = mt_rand(0, max(0, ($rows - 1)));
-        
-        return $this->createQuery()->setOffset($row_number)->setLimit(1)->execute();
-    }
     
     /**
-     * Fächer aus Datenbank laden
+     * get all subject from database
      * 
      * @return object
      */
     public function findAll() {
         //$pidList = implode(', ', t3lib_div::intExplode(',', $extbaseFrameworkConfiguration['persistence']['storagePid']));
         $query = $this->createQuery();
-        $query->statement('SELECT * from tx_libconnect_domain_model_subject');
+        $query->statement('SELECT * FROM tx_libconnect_domain_model_subject');
         
         return $query->execute();
      }
