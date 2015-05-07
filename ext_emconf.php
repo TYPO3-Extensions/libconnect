@@ -25,13 +25,13 @@ $EM_CONF[$_EXTKEY] = array (
   'modify_tables' => '',
   'clearCacheOnLoad' => 0,
   'lockType' => '',
-  'version' => '3.7.0',
+  'version' => '3.9.0',
   'dependencies' => 'cms,extbase,fluid',
   'constraints' => 
   array (
     'depends' => 
     array (
-      'typo3' => '4.5.0-6.2.99',
+      'typo3' => '4.6.0-6.2.99',
       'cms' => '',
       'extbase' => '',
       'fluid' => '',
@@ -48,7 +48,7 @@ $EM_CONF[$_EXTKEY] = array (
   array (
   ),
   'conflicts' => '',
-  'comment' => 'Eindbindung der dbis.css und ezb.css kann per TypoScript unterbunden werden. DBIS-Sidebar: Link zur alphabetischen Sortierung und Fachübersucht eingefügt.',
+  'comment' => 'Eindbindung der dbis.css und ezb.css kann per TypoScript unterbunden werden. DBIS-Sidebar: Link zur alphabetischen Sortierung und Fachï¿½bersucht eingefï¿½gt.',
   'user' => 'subunihhdevteam',
 );
 
