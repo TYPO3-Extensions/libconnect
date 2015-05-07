@@ -246,19 +246,8 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
         //include CSS
         $this->decideIncludeCSS();
         
-        date_default_timezone_set('GMT+1');//@todo get the information from system
-        
-        $oneDay = 86400;//seconds
-        $numDays = 7; //default are 7 days
-        $today = strtotime('now');
-  
-        if(!empty($this->settings['flexform']['countDays'])){
-            $numDays = $this->settings['flexform']['countDays'];
-        }
-        
-        //calcaulate date
-        $date = date("d.m.Y",$today-($numDays * $oneDay));
-        $params['jq_term1'] = $date;//date how long entry is new
+        //date how long entry is new
+        $params['jq_term1'] = $this->getCalculatedDate();
         
         $config['detailPid'] = $this->settings['flexform']['detailPid'];
         
@@ -267,7 +256,7 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
 
         //variables for template
         $this->view->assign('list', $liste);
-        $this->view->assign('new_date', date("d.m.Y",$today-($numDays * $oneDay)));
+        $this->view->assign('new_date', $params['jq_term1']);
         $this->view->assign('subject', $subject['title']);
     }
     
@@ -285,19 +274,8 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
         unset($params['subject']);
         unset($params['search']);
 
-        date_default_timezone_set('GMT+1');//@todo get the information from system
-        
-        $oneDay = 86400;//seconds
-        $numDays = 7; //default are 7 days
-        $today = strtotime('now');
-  
-        if(!empty($this->settings['flexform']['countDays'])){
-            $numDays = $this->settings['flexform']['countDays'];
-        }
-        
-        //calcaulate date
-        $date = date("d.m.Y",$today-($numDays * $oneDay));
-        $params['jq_term1'] = $date;//date how long entry is new
+        //date how long entry is new
+        $params['jq_term1'] = $this->getCalculatedDate();
         
         $config['detailPid'] = $this->settings['flexform']['detailPid'];
         
@@ -326,6 +304,28 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
         if(IsfirstPlugInUserFunction('dbis', $uid)){
             $this->response->addAdditionalHeaderData('<link rel="stylesheet" href="' . t3lib_extMgm::siteRelPath('libconnect') . 'Resources/Public/Styles/dbis.css" />');    
         }
+    }
+    
+    /**
+     * calculates the date for a search of new entries
+     * 
+     * @return string $date
+     */
+    private function getCalculatedDate(){
+        date_default_timezone_set('GMT+1');//@todo get the information from system
+        
+        $oneDay = 86400;//seconds
+        $numDays = 7; //default are 7 days
+        $today = strtotime('now');
+  
+        if(!empty($this->settings['flexform']['countDays'])){
+            $numDays = $this->settings['flexform']['countDays'];
+        }
+        
+        //calcaulate date
+        $date = date("d.m.Y",$today-($numDays * $oneDay));
+        
+        return $date;
     }
 }
 ?>
