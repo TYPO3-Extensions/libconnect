@@ -4,8 +4,36 @@
 * - AL: Andre Lahmann andre.lahmann@uni-leipzig.de (Leipzig University Library)
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
-3.7.1
-    - CSS-Pfade für Bilder sind nun relativ.
+
+4.0.0
+    - Kompatibilität zu TYPO3 6.2 erhöht (TW)
+    - CSS-Pfade für Bilder sind nun relativ (TW)
+    - Code lesbarer gestaltet (TW)
+    - DBIS:
+        - Suche: Es wird jetzt die gleiche Meldung für die Anzahl der Treffer ausgegeben wie bei EZB, inklusive 0 Treffer. (TW)
+        - "Neu in DBIS" wurde bisher nicht in der alphabetischen Liste angeboten (TW)
+        - Neu in DBIS bzw. Sidebar überarbeitet: 
+            - Darstellung korrigiert (TW)
+            - Facheinzeige neu, die nur sichtbar ist, wenn es Einträge gibt (TW)
+        - kleine Codeverbesserungen (TW)
+        - Anzahl der Einträge nun auch für "Neu in DBIS" eingebaut (TW)
+        - Detailanzeige:
+            - Button "Recherche starten" ist jetzt auffälliger gestaltet (TW)
+    - DBIS+EZB
+        - Sidebar:
+            - Der Link "neu in DBIS/EZB" enthält jetzt die Anzahl der neuen Einträge für Alle Fächer und das gewählte Fach. (TW)
+            - Der Link "neu in DBIS/EZB" wird jetzt nur noch angezeigt, wenn es Einträge gibt. (TW)
+    - EZB
+        - "Neu in EZB": br-Tags entfernt (TW)
+        - Sidebar: nutzlose then/else-Anweisungen entfernt (TW)
+        - Suche:
+            - Suche nach Einträgen mit "nur ein Teil zugänglich", führte dazu, dass Zugänge nicht gefiltert wurden. (TW)
+            - HTML korrigiert (TW)
+            - span- durch label-Tags ersetzt -> Barrierefreiheit erhöht (TW)
+        - Sortierung der Zugänge korrigiert (TW)
+        - Filter für Ampel in Listenansicht und Suchergebnissen eingebaut (TW)
+        - Detailansicht: In PlugIn-Konfiguration den Text verständlicher formuliert. (TW)
+
 3.7.0
     - DBIS:
         - Eindbindung der dbis.css kann mittels TypoScript unterbunden werden. (TW)
