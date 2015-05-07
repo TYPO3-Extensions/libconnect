@@ -13,30 +13,30 @@
 <f:if condition="{journals.page_vars.search_count} != -1">
     <f:then>
         <div class="ezb-list-legend">
-            <ul>
+            <form name="ezbaccessinfoform" id="ezb-accessinfo-form" action="{listUrl}" method="get" onchange="document.ezbaccessinfoform.submit();">
                 <f:for each="{journals.selected_colors}" as="section" key="key">
-                    <f:if condition="{section.colorkey} == 1">
-                        <li class="ezb-list-legend-one">
-                            <f:format.htmlentitiesDecode>{section.value}</f:format.htmlentitiesDecode>
-                        </li>
+                    <f:if condition="{section.colorkey} != 6">
+                        <input id="ezb-accessinfo-access_{section.colorkey}" type="checkbox" name="libconnect[colors][{section.colorkey}]" class="accessinfo-element" value="{section.colorkey}" <f:if condition="{libconnect:array(inputArray: journals.colors, key: section.colorkey)}">checked="checked"</f:if>/>
                     </f:if>
-                    <f:if condition="{section.colorkey} == 2">
-                        <li class="ezb-list-legend-two">
-                            <f:format.htmlentitiesDecode>{section.value}</f:format.htmlentitiesDecode>
-                        </li>
-                    </f:if>
-                    <f:if condition="{section.colorkey} == 6">
-                        <li class="ezb-list-legend-six">
-                            <f:format.htmlentitiesDecode>{section.value}</f:format.htmlentitiesDecode>
-                        </li>
-                    </f:if>
-                    <f:if condition="{section.colorkey} == 4">
-                        <li class="ezb-list-legend-four">
-                            <f:format.htmlentitiesDecode>{section.value}</f:format.htmlentitiesDecode>
-                        </li>
+                    <label class="ezb-accessinfo-access_{section.colorkey} accessinfo-element" for="ezb-accessinfo-access_{section.colorkey}">{section.value}</label>
+
+                </f:for>
+
+                <f:for each="{formParameter}" as="parameter" key="key">
+                    <f:if condition="{libconnect:IsArray(value: parameter)}">
+                        <f:then>
+                            <f:for each="{parameter}" as="array" key="arraykey">
+                                <input type="hidden" value="{array}" name="libconnect[search][{key}][{arraykey}]"/>
+                            </f:for>
+                        </f:then>
+                        <f:else>
+                            <input type="hidden" value="{parameter}" name="libconnect[search][{key}]"/>
+                        </f:else>
+                        
                     </f:if>
                 </f:for>
-            </ul>
+
+            </form>
         </div>
 
         <br/><br/>

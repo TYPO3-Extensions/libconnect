@@ -615,7 +615,16 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
 
         return $participantsList; 
     }
-
+    
+    /**
+     * set colors
+     * 
+     * @param int $colors sum of colors
+     */
+    public function setColors($colors){
+        $this->colors = $colors;
+    }
+    
     /**
      * check institutions having access to this journal
      * 

@@ -43,10 +43,14 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
      */
     public function displayListAction() {
         $params = t3lib_div::_GET('libconnect');
-        
+        $cObject = t3lib_div::makeInstance('tslib_cObj');
+
+        //get PageID
+        $Pid = intval($GLOBALS['TSFE']->id);
+
         //include CSS
         $this->decideIncludeCSS();
-        
+
         if ((!empty($params['subject'])) || (!empty($params['notation']))) {//choosed subject after start point
             $config['detailPid'] = $this->settings['flexform']['detailPid'];
             
@@ -54,6 +58,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
             $options['sc'] = $params['sc'];
             $options['lc'] = $params['lc'];
             $options['notation'] = $params['notation'];
+            $options['colors'] = $params['colors'];
             
             //it´s for there is not NULL in the request or there will be a problem
             if(!isset($params['subject'])){
@@ -65,21 +70,65 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
                 $config
             );
 
+            $listURL = $cObject->getTypolink_URL( $Pid );
+            
+            $formParameter = array(
+                'libconnect[subject]' => $params['subject'],
+                'libconnect[index]' => $params['index'],
+                'libconnect[sc]' => $params['sc'],
+                'libconnect[lc]' => $params['lc'],
+                'libconnect[notation]' => $params['notation']
+            );
+            
             //variables for template
             $this->view->assign('journals', $liste);
-                
+            $this->view->assign('listUrl', $listURL);
+            $this->view->assign('colors', $params['colors']);
+            $this->view->assign('formParameter', $formParameter);
+
         } else if (!empty($params['search'])) {//search results
             $config['detailPid'] = $this->settings['flexform']['detailPid'];
             
-            $journals =  $this->ezbRepository->loadSearch($params['search'], $config);
+            $journals = array();
+            
+            if(!empty($params['colors'])){
+                unset($params['search']['selected_colors']);
+                foreach($params['colors'] as  $color){
+                    $params['search']['selected_colors'][] = $color;
+                }
+                $journals['colors'] = $params['colors'];
+            } else {
+                $journals['colors'] = array(
+                    1 => 1,
+                    2 => 2,
+                    4 => 4,
+                    6 => 6
+                );
+            }
+            
+            $journals =  $this->ezbRepository->loadSearch($params['search'], $journals['colors'], $config);
+            
+            if(!empty($params['colors'])){
+                $journals['colors'] = $params['colors'];
+            } else {
+                $journals['colors'] = array(
+                    1 => 1,
+                    2 => 2,
+                    4 => 4,
+                    6 => 6
+                );
+            }
             
             //change view
             $controllerContext = $this->buildControllerContext();
             $controllerContext->getRequest()->setControllerActionName('displaySearch');
             $this->view->setControllerContext($controllerContext);
-            
+
             //variables for template
             $this->view->assign('journals', $journals);
+            $this->view->assign('listUrl', $listURL);
+            $this->view->assign('colors', $params['colors']);
+            $this->view->assign('formParameter', $params['search']);
         } else {//start point
             $liste =  $this->ezbRepository->loadOverview();
             
@@ -252,7 +301,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
         $config['detailPid'] = $this->settings['flexform']['detailPid'];
         
         //request
-        $journals =  $this->ezbRepository->loadSearch($params, $config);
+        $journals =  $this->ezbRepository->loadSearch($params, false, $config);
         
         //variables for template
         $this->view->assign('journals', $journals);
@@ -292,7 +341,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
         $config['detailPid'] = $this->settings['flexform']['detailPid'];
         
         //request
-        $journals =  $this->ezbRepository->loadSearch($params, $config);
+        $journals =  $this->ezbRepository->loadSearch($params, false, $config);
 
         return $journals['page_vars']['search_count'];
     }

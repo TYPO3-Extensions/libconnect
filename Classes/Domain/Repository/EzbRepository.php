@@ -97,7 +97,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         $sc = $options['sc'];
         $lc = $options['lc'];
         //$index=0, $sc='A', $lc =''
-        
+
         $cObject = t3lib_div::makeInstance('tslib_cObj');
         $this->loadSubjects();
 
@@ -108,16 +108,32 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         if($options['notation'] == 'All'){
             $subject['ezbnotation'] = 'All';
         }
-        //$ezb->notation = $options['notation'];
+        
+        //filter list by access list
+        if(!empty($options['colors'])){
+            $colors = $this->getColors($options['colors']);
+            $ezb->setColors($colors);
+            
+            $colorList = $options['colors'];
+        }else{
+            $colorList = array(
+                1 => 1,
+                2 => 2,
+                4 => 4,
+                6 => 6
+            );
+        }
+
         $journals = $ezb->getFachbereichJournals($subject['ezbnotation'], $index, $sc, $lc);
         
         //get access information
         $journals['selected_colors'] = $this->getAccessInfos();
+        $journals['colors'] = $colorList;
 
         /**
          * create links
          */
-        //navigation
+        //navigation - letters
         foreach(array_keys($journals['navlist']['pages']) as $page) {
             if (is_array($journals['navlist']['pages'][$page])) {
                 $journals['navlist']['pages'][$page]['link'] = $cObject->getTypolink_URL($GLOBALS['TSFE']->id, array(
@@ -125,12 +141,13 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
                     'libconnect[index]' => 0,
                     'libconnect[sc]' => $journals['navlist']['pages'][$page]['sc']? $journals['navlist']['pages'][$page]['sc'] : 'A',
                     'libconnect[lc]' => $journals['navlist']['pages'][$page]['lc'],
-                    'libconnect[notation]' => $subject['ezbnotation']
+                    'libconnect[notation]' => $subject['ezbnotation'],
+                    'libconnect[colors]' => array_flip($journals['colors'])
                 ));
             }
         }
         
-        //results
+        //navigation - sections in letters
         if(isset($journals['alphabetical_order']['first_fifty'])){
             foreach(array_keys($journals['alphabetical_order']['first_fifty']) as $section) {
                 $journals['alphabetical_order']['first_fifty'][$section]['link'] = $cObject->getTypolink_URL($GLOBALS['TSFE']->id, array(
@@ -138,7 +155,8 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
                         'libconnect[index]' => $journals['alphabetical_order']['first_fifty'][$section]['sindex'],
                         'libconnect[sc]' => $journals['alphabetical_order']['first_fifty'][$section]['sc']? $journals['alphabetical_order']['first_fifty'][$section]['sc'] : 'A',
                         'libconnect[lc]' => $journals['alphabetical_order']['first_fifty'][$section]['lc'],
-                        'libconnect[notation]' => $subject['ezbnotation']
+                        'libconnect[notation]' => $subject['ezbnotation'],
+                        'libconnect[colors]' => array_flip($journals['colors'])
                 ));
             }
         }
@@ -152,6 +170,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
                 );
             }
         }
+        //navigation - sections in letters
         if(isset($journals['alphabetical_order']['next_fifty'])){
             foreach(array_keys($journals['alphabetical_order']['next_fifty']) as $section) {
                 $journals['alphabetical_order']['next_fifty'][$section]['link'] = $cObject->getTypolink_URL($GLOBALS['TSFE']->id, array(
@@ -159,7 +178,8 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
                         'libconnect[index]' => $journals['alphabetical_order']['next_fifty'][$section]['sindex'],
                         'libconnect[sc]' => $journals['alphabetical_order']['next_fifty'][$section]['sc']? $journals['alphabetical_order']['next_fifty'][$section]['sc'] : 'A',
                         'libconnect[lc]' => $journals['alphabetical_order']['next_fifty'][$section]['lc'],
-                        'libconnect[notation]' => $subject['ezbnotation']
+                        'libconnect[notation]' => $subject['ezbnotation'],
+                        'libconnect[colors]' => array_flip($journals['colors'])
                 ));
             }
         }
@@ -233,7 +253,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
      * @param array $config
      * @return array $journals
      */
-    public function loadSearch($searchVars, $config) {
+    public function loadSearch($searchVars, $options, $config) {
         $cObject = t3lib_div::makeInstance('tslib_cObj');
         $this->loadSubjects();
 
@@ -255,8 +275,24 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         if (! $journals){
             return FALSE;
         }
+
+        //filter list by access list
+        if($options){
+            $colors = $this->getColors($options);
+            $ezb->setColors($colors);
+            
+            $colorList = $options;
+        }else{
+            $colorList = array(
+                1 => 1,
+                2 => 2,
+                4 => 4,
+                6 => 6
+            );
+        }
         
         $journals['searchDescription'] = $this->getSearchDescription($searchVars);
+        $journals['colors'] = $colorList;
         
         /**
          * create links
@@ -268,7 +304,8 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
                 if (is_array($journals['navlist']['pages'][$page])) {
                     $journals['navlist']['pages'][$page]['link'] = $cObject->getTypolink_URL($GLOBALS['TSFE']->id,
                         array_merge($linkParams, array(
-                            'libconnect[search][sc]' => $journals['navlist']['pages'][$page]['id']
+                            'libconnect[search][sc]' => $journals['navlist']['pages'][$page]['id'],
+                            'libconnect[colors]' => array_flip($journals['colors'])
                         )));
                 }
             }
@@ -297,6 +334,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
                     array_merge($linkParams, array(
                         'libconnect[search][sindex]' => $journals['alphabetical_order']['first_fifty'][$section]['sindex'],
                         'libconnect[search][sc]' => $journals['alphabetical_order']['first_fifty'][$section]['sc'],
+                        'libconnect[colors]' => array_flip($journals['colors'])
                     )));
             }
         }
@@ -320,6 +358,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
                     array_merge($linkParams, array(
                         'libconnect[search][sindex]' => $journals['alphabetical_order']['next_fifty'][$section]['sindex'],
                         'libconnect[search][sc]' => $journals['alphabetical_order']['next_fifty'][$section]['sc'],
+                        'libconnect[colors]' => array_flip($journals['colors'])
                     )));
             }
         }
@@ -512,7 +551,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         }
         
         //licence
-        if(!empty($searchVars['selected_colors'])){
+        /*if(!empty($searchVars['selected_colors'])){
             $accessInfos = $this-> getAccessInfos();
             
             foreach($searchVars['selected_colors'] as $key=>$color){
@@ -525,7 +564,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
                     }
                 }
             }
-        }
+        }*/
         
         return $list;
     }
@@ -570,6 +609,26 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         $contact = $ezb->getContact();
         
         return $contact;
+    }
+    
+    /**
+     * returns a in value for parameter colors
+     * 
+     * @param array $colors
+     * @return array $sum
+     */
+    private function getColors($colors){
+        $sum = 0;
+        foreach($colors as $color){
+            $sum += (int) $color;
+        }
+        
+        //0 is equal to all
+        if($sum == 0){
+            $sum = 7;
+        }
+        
+        return $sum;
     }
 }
 ?>

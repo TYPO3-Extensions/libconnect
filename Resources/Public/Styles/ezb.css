@@ -1,20 +1,24 @@
 @charset "UTF-8";
 .ezb-list-legend ul li.ezb-list-legend-one,
-.ezb-list-accessinfo-access_1 {
+.ezb-list-accessinfo-access_1,
+.ezb-accessinfo-access_1{
     background-image: url("../Img/ezb-list_1.png");
 }
 .ezb-list-legend ul li.ezb-list-legend-two,
-.ezb-list-accessinfo-access_2 {
+.ezb-list-accessinfo-access_2,
+.ezb-accessinfo-access_2{
     background-image: url("../Img/ezb-list_2.png");
 }
 
 .ezb-list-legend ul li.ezb-list-legend-four,
-.ezb-list-accessinfo-access_4 {
+.ezb-list-accessinfo-access_4,
+.ezb-accessinfo-access_4{
     background-image: url("../Img/ezb-list_4.png");
 }
 
 .ezb-list-legend ul li.ezb-list-legend-six,
-.ezb-list-accessinfo-access_6{
+.ezb-list-accessinfo-access_6,
+.ezb-accessinfo-access_6{
     background-image: url("../Img/ezb-list_6.png");
 }
 
@@ -25,12 +29,27 @@
 .ezb-list-accessinfo-access_1,
 .ezb-list-accessinfo-access_2,
 .ezb-list-accessinfo-access_4,
-.ezb-list-accessinfo-access_6{
+.ezb-list-accessinfo-access_6,
+.ezb-accessinfo-access_1,
+.ezb-accessinfo-access_2,
+.ezb-accessinfo-access_4,
+.ezb-accessinfo-access_6{
     background-repeat: no-repeat;
     background-position: 0 5px;
     list-style-image: none !important;
     margin: 0 !important;
     padding: 0 0 0.2em 2.3em !important;
+}
+
+.ezb-list-legend label {
+    display: block;
+    float: none;
+    font-weight: normal;
+    margin-left: 2em !important;
+}
+
+.accessinfo-element {
+    float: left;
 }
 
 .ezb-readme {

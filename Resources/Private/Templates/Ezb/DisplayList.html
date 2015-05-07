@@ -15,33 +15,20 @@
 </f:if>
 
 <div class="ezb-list-legend">
-    <ul>
+    <form name="ezbaccessinfoform" id="ezb-accessinfo-form" action="{listUrl}" method="get" onchange="document.ezbaccessinfoform.submit();">
         <f:for each="{journals.selected_colors}" as="section" key="key">
-            <f:if condition="{section.colorkey} == 1">
-                <li class="ezb-list-legend-one">
-                    <f:format.htmlentitiesDecode>{section.value}</f:format.htmlentitiesDecode>
-                </li>
+            <f:if condition="{section.colorkey} != 6">
+                <input id="ezb-accessinfo-access_{section.colorkey}" type="checkbox" name="libconnect[colors][{section.colorkey}]" class="accessinfo-element" value="{section.colorkey}" <f:if condition="{libconnect:array(inputArray: journals.colors, key: section.colorkey)}">checked="checked"</f:if>/>
             </f:if>
+            <label class="ezb-accessinfo-access_{section.colorkey} accessinfo-element" for="ezb-accessinfo-access_{section.colorkey}">{section.value}</label>
 
-            <f:if condition="{section.colorkey} == 2">
-                <li class="ezb-list-legend-two">
-                    <f:format.htmlentitiesDecode>{section.value}</f:format.htmlentitiesDecode>
-                </li>
-            </f:if>
-
-            <f:if condition="{section.colorkey} == 6">
-                <li class="ezb-list-legend-six">
-                    <f:format.htmlentitiesDecode>{section.value}</f:format.htmlentitiesDecode>
-                </li>
-            </f:if>
-
-            <f:if condition="{section.colorkey} == 4">
-                <li class="ezb-list-legend-four">
-                    <f:format.htmlentitiesDecode>{section.value}</f:format.htmlentitiesDecode>
-                </li>
-            </f:if>
         </f:for>
-    </ul>
+        
+        <f:for each="{formParameter}" as="parameter" key="key">
+            <f:form.hidden name="{key}" value="{parameter}" />
+        </f:for>
+        
+    </form>
 </div>
 
 <br/><br/>
