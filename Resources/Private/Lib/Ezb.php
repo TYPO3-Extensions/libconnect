@@ -43,13 +43,6 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
 
     // document search meta infos
     private $title;
-    private $author_firstname;
-    private $author_lastname;
-    private $genre; // journal / article
-    private $isbn;
-    private $issn;
-    private $eissn;
-    private $date; // YYYY-MM-DD YYYY-MM YYYY
     
     // general config
     private $overview_requst_url = 'http://ezb.uni-regensburg.de/ezeit/fl.phtml?xmloutput=1&';
