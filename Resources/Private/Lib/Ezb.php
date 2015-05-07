@@ -43,7 +43,7 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
 
     // document search meta infos
     private $title;
-    
+
     // general config
     private $overview_requst_url = 'http://ezb.uni-regensburg.de/ezeit/fl.phtml?xmloutput=1&';
     private $detailview_request_url = 'http://ezb.uni-regensburg.de/ezeit/detail.phtml?';
@@ -59,16 +59,16 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
 
     private $lang = 'de';
     private $colors = 7;
-    
+
     // Fachbereich Journals
     public $notation;
     public $sc;
     public $lc;
     public $sindex;
-    
+
     // typoscript Konfigurationsvariablen
     private $bibID;
-    
+
     // XML Daten
     private $XMLPageConnection;
 
@@ -95,7 +95,7 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
         $this->XMLPageConnection = t3lib_div::makeInstance('tx_libconnect_resources_private_lib_xmlpageconnection');
         $this->setBibID();
     }
-    
+
     /**
      * Funktion setzt die EZB Bibliothek ID Klassenvariable
      *
@@ -103,7 +103,7 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
     private function setBibID() {
 		$this->bibID = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['ezbbibid'];
     }
-    
+
     /**
      * returns the bibID
      * 
@@ -112,7 +112,7 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
     public function getBibID() {
 		return $this->bibID;
     }
-    
+
     /**
      * Fachbereiche laden
      *
@@ -439,7 +439,6 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
         $result = array('page_vars');
         foreach ($xml_request->page_vars->children() AS $key => $value) {
             $result = array('page_vars' => array($key => (string) $value->attributes()->value));
-            //$result['page_vars'][$key] = (string) $value->attributes()->value;
         }
 
         foreach ($xml_request->page_vars->children() AS $key => $value) {
@@ -478,7 +477,7 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
             }
         }
 
-        //Count Hits
+        //count Hits
         $result['page_vars']['search_count'] = (int) $xml_request->ezb_alphabetical_list_searchresult->search_count;
 
         if (isset($xml_request->ezb_alphabetical_list_searchresult->navlist->other_pages)) {
@@ -572,7 +571,7 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
 
         return $return;
     }
-    
+
     /**
      * returns List where Journal at Partners available
      * 
@@ -581,23 +580,23 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
      */
     public function getParticipantsList($jour_id){
         $participants_xml_request = $this->XMLPageConnection->getDataFromXMLPage($this->participants_xml_url.'&bibid=' . $this->bibID.'&jour_id='.$jour_id);
-        
+
         $participantsList = array();
-        
+
         if (!$participants_xml_request) {
             return FALSE;
         }
-        
+
         if ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->countries->country){
             foreach ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->countries->country as $country){   
                 $participantsList['countries'][(string) $country->attributes()->ID] = (string) $country[0];
             }
-            
+
             foreach ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->categories->category as $category){   
                 $participantsList['categories'][(string) $category->attributes()->ID]['countryrefs'] = (string)$category->attributes()->countryrefs;
                 $participantsList['categories'][(string) $category->attributes()->ID]['category_name'] = (string)$category->category_name;
             }
-            
+
             foreach ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution  as $institution ){   
                 $participantsList['institutions'][(string) $institution->attributes()->ID]['catrefs'] = (string)$institution->attributes()->catrefs;
                 $participantsList['institutions'][(string) $institution->attributes()->ID]['countryref'] = (string)$institution->attributes()->countryref;
@@ -608,7 +607,7 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
 
         return $participantsList; 
     }
-    
+
     /**
      * set colors
      * 
@@ -617,7 +616,7 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
     public function setColors($colors){
         $this->colors = $colors;
     }
-    
+
     /**
      * check institutions having access to this journal
      * 
@@ -626,7 +625,7 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
      */
     public function getParticipants($jour_id){
         $participants = FALSE;
-        
+
         $participants_xml_request = $this->XMLPageConnection->getDataFromXMLPage("{$this->participants_xml_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&jour_id={$jour_id}");
 
         if ($participants_xml_request->ezb_where_journal_at_partners->partner_selection->institutions->institution){
@@ -649,22 +648,22 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
 
         return $url;
     }
-    
+
     public function getContact(){
         $contact = FALSE;
-        
+
         $contact_xml_request = $this->XMLPageConnection->getDataFromXMLPage("{$this->contact_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}&xmloutput=1");
 
         if ($contact_xml_request->library ){
             $contact['library']['library'] = (string)$contact_xml_request->library;
             $contact['library']['www'] = (string)$contact_xml_request->library ->attributes()->href;
         }
-        
+
         if ($contact_xml_request->ezb_contact){
             $contact['email'] = (string)$contact_xml_request->ezb_contact->attributes()->href;
             $contact['person'] = (string)$contact_xml_request->ezb_contact;
         }
-        
+
         return $contact;
     }
 }
