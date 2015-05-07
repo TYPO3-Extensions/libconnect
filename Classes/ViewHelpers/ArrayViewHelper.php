@@ -1,6 +1,6 @@
 <?php
 /**
- * This class is a view helper that compare variables.
+ * This class is a view helper that returns an value of an sub array
  *
  * @package TYPO3
  * @subpackage Fluid
