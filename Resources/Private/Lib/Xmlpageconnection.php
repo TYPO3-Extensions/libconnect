@@ -9,31 +9,31 @@
  */
 
 class Tx_Libconnect_Resources_Private_Lib_Xmlpageconnection {
-    
+
    /**
     * Enable debug for logging errors to devLog
     *
     */
     private $debug = FALSE;    
-    
+
     private $extPiVars;
     private $proxy;
     private $proxyPort;
-    
+
     public function __construct() {
         $this->setExtPiVars();
         $this->setExtConfVars();
         $this->setProxy();
         $this->setProxyPort();
     }
-    
+
     /**
      * Läd die im typoscript gesetzten Variablen.
      */
     private function setExtPiVars() {
         $this->extPiVars = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.'];
     }
-    
+
     /**
      * Lädt die in der Extension Konfiguration gesetzten Variablen.
      */
@@ -53,14 +53,14 @@ class Tx_Libconnect_Resources_Private_Lib_Xmlpageconnection {
     private function setProxy() {
         $this->proxy = $this->extPiVars['proxy'];
     }
-    
+
     /**
      * Setzt den Proxy Port 
      */
     private function setProxyPort() {
         $this->proxyPort = $this->extPiVars['proxy_port'];
     }
-    
+
     /**
      * Holt XML Daten von einer Internetseite und gibt diese als array zurück
      *
@@ -85,7 +85,7 @@ class Tx_Libconnect_Resources_Private_Lib_Xmlpageconnection {
         //curl_exec with CURLOPT_RETURNTRANSFER set 1 returns FALSE on error or
         //the result on success, so check for result.
         if ($result) {
-    
+
             //simplexml_load_string will produce E_WARNING error messages for each error 
             //found in the XML data. Therefore suppress error messages in any mode and
             //handle errors for debug-mode differently.
@@ -101,7 +101,7 @@ class Tx_Libconnect_Resources_Private_Lib_Xmlpageconnection {
                     t3lib_div::devLog('XML data contained errors: '.$url, 'libconnect', 1);
                 }
             }
-            
+
             //reset libxml error buffering and clear any existing libxml errors
             libxml_use_internal_errors(FALSE);
         }

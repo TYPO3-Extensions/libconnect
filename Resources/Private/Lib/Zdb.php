@@ -59,7 +59,7 @@ class Tx_libconnect_Resources_Private_Lib_Zdb {
     *
     */
     private $sid = NULL;
-    
+
    /**
     * library authentication parameters to display correct availability
     *
@@ -68,14 +68,14 @@ class Tx_libconnect_Resources_Private_Lib_Zdb {
     private $sigel = NULL;
     private $isil = NULL;
     private $bik = NULL;
-    
+
    /**
     * non-open-url conform pid arguments-string
     *
     */ 
     private $pid = '';
     private $onlyPrintFlag = true;    
-    
+
    /**
     * request URLs
     *
@@ -91,7 +91,7 @@ class Tx_libconnect_Resources_Private_Lib_Zdb {
     *
     */    
     function __construct() {
-        
+
         $ext_conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['libconnect']);
         if ($ext_conf['debug'] == TRUE) {
             $this->debug = TRUE;
@@ -111,7 +111,7 @@ class Tx_libconnect_Resources_Private_Lib_Zdb {
 
             return FALSE;
         }
-        
+
         //get the bibid
         if (isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbbibid'])) {
             $this->bibid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbbibid'];
@@ -138,7 +138,7 @@ class Tx_libconnect_Resources_Private_Lib_Zdb {
                                (!empty($this->sigel) ? 'sigel=' . $this->sigel .'&' : '') .
                                (!empty($this->isil) ? 'isil=' . $this->isil .'&' : '') .
                                (!empty($this->bik) ? 'bik=' . $this->bik : ''));
-                     
+
         //remove last &(urlencode: %26) if existant (only if bik is empty but any other info above is given)
         if (strlen($this->pid) - 3 == strrpos($this->pid, '%26')) {
             $this->pid = substr($this->pid, 0, strlen($this->pid) - 3);
@@ -149,7 +149,7 @@ class Tx_libconnect_Resources_Private_Lib_Zdb {
             $this->pid .= (strlen($this->pid) > 0 ? urlencode('&print=1') : urlencode('print=1'));
         }
     }
-    
+
     /**
     * Standortdetails zu einem Journal laden
     *
@@ -359,7 +359,7 @@ class Tx_libconnect_Resources_Private_Lib_Zdb {
         $this->sid = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_libconnect.']['zdbsid'];
 
         if(is_null($this->sid) or !$this->sid or empty($this->sid)){	
-            
+
             return FALSE;
         }
 
