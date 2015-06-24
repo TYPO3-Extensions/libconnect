@@ -570,9 +570,9 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
     }
     
     /**
-     * get subectID
-     *
-     * @param int $subjectId
+     * liefert ein Fach
+     * 
+     * @param integer $subjectId Id des Faches
      */
     public function getSubject($subjectId){
         $this->loadSubjects();

@@ -265,7 +265,9 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
     }
     
     /**
-     * liefert DBIS-Id von einem Fach
+     * liefert ein Fach
+     * 
+     * @param integer $subjectId Id des Faches
      */
     public function getSubject($subjectId){
         $this->loadSubjects();
