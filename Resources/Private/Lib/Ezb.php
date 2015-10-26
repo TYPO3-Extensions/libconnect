@@ -294,7 +294,11 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
                 'date' => (int) $xml_request->ezb_detail_about_journal->journal->detail->last_fulltext_issue->last_date
             );
         }
-        $journal['moving_wall'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->moving_wall;
+        if(isset($xml_request->ezb_detail_about_journal->journal->detail->moving_wall)){
+            $journal['moving_wall'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->moving_wall;
+
+            $journal['moving_wall'] = trim(trim($journal['moving_wall'], "-"), "Y");
+        }
         $journal['appearence'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->appearence;
         $journal['costs'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->costs;
         $journal['remarks'] = trim((string) $xml_request->ezb_detail_about_journal->journal->detail->remarks);

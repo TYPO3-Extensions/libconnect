@@ -88,6 +88,9 @@
             <label index="tx_libconnect.ezb.detail.print.info">Informationen zur Verfügbarkeit</label>
             <label index="tx_libconnect.ezb.detail.print.titel">Titel</label>
             <label index="tx_libconnect.ezb.detail.participants">Liste der teilnehmenden Institutionen, die Volltextzugriff bieten.</label>
+            <label index="tx_libconnect.ezb.detail.movingwall">Moving Wall</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.begin">Nicht verfügbar die aktuellen</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.end">Jahrgänge</label>
 
             <label index="tx_libconnect.ezb.new.headline.alphabetical">Neu in der EZB - Alphabetische Auflistung</label>
             <label index="tx_libconnect.ezb.new.headline.subject">Neu in der EZB - Auflistung nach Fachgebieten</label>

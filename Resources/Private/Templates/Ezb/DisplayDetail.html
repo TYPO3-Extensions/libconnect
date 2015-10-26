@@ -119,7 +119,18 @@
                         </td>
                     </tr>
                 </f:if>
-
+                
+                <f:if condition="{journal.moving_wall}">
+                    <tr>
+                        <th>
+                            <strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall" />:</strong>
+                        </th>
+                        <td>
+                            <f:format.htmlentitiesDecode><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.begin" /> {journal.moving_wall} <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.end" /></f:format.htmlentitiesDecode>
+                        </td>
+                    </tr>
+                </f:if>
+            
                 <f:if condition="{journal.publisher}">
                     <tr>
                         <th>
