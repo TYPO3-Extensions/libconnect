@@ -59,9 +59,12 @@
                 </f:for>
             </ul>
         </f:if>
-        
-        <f:if condition="{libconnect:IsArray(value: journals.navlist.pages)}">
+
+        <f:if condition="{journals.page_vars.search_count} > 0">
             <h2><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.search.all.hits" /></h2>
+        </f:if>
+
+        <f:if condition="{libconnect:IsArray(value: journals.navlist.pages)}">
             <div class="ezb-navigation">
                 <f:for each="{journals.navlist.pages}" as="item">
                     <f:if condition="{libconnect:IsArray(value: item)}">
