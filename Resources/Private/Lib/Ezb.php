@@ -295,9 +295,8 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
             );
         }
         if(isset($xml_request->ezb_detail_about_journal->journal->detail->moving_wall)){
-            $journal['moving_wall'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->moving_wall;
-
-            $journal['moving_wall'] = trim(trim($journal['moving_wall'], "-"), "Y");
+            $temp = (string) $xml_request->ezb_detail_about_journal->journal->detail->moving_wall;
+            $journal['moving_wall'] = $this->getMovingwall($temp);
         }
         $journal['appearence'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->appearence;
         $journal['costs'] = (string) $xml_request->ezb_detail_about_journal->journal->detail->costs;
@@ -669,6 +668,34 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
         }
 
         return $contact;
+    }
+    
+    /**
+     * sets the movin wall
+     * 
+     * @param string $value
+     * @return array
+     */
+    private function getMovingwall($value){
+        $value = trim($value);
+
+        //prefix
+        $prefixTemp = rtrim(rtrim($value, "YMDIV"), "0123456789");
+        if($prefixTemp == "-"){
+            $prefix = "not";
+        }  else {
+            $prefix = "yes";
+        }
+
+        //number
+        $number = (int)rtrim(ltrim($value, "+-"), "YMDIV");
+
+        //duration
+        $duration = strtolower (ltrim(ltrim($value, "+-"), "0123456789"));
+
+        $moving_wall = array('prefix' => array($prefix => TRUE), 'number' => $number, 'duration' => array($duration => TRUE));
+
+        return $moving_wall;
     }
 }
 ?>

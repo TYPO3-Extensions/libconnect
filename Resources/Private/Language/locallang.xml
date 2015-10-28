@@ -89,8 +89,23 @@
             <label index="tx_libconnect.ezb.detail.print.titel">Titel</label>
             <label index="tx_libconnect.ezb.detail.participants">Liste der teilnehmenden Institutionen, die Volltextzugriff bieten.</label>
             <label index="tx_libconnect.ezb.detail.movingwall">Moving Wall</label>
-            <label index="tx_libconnect.ezb.detail.movingwall.begin">Nicht verfügbar die aktuellen</label>
-            <label index="tx_libconnect.ezb.detail.movingwall.end">Jahrgänge</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.not">Nicht</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.yes">Nur</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.begin">verfügbar für</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.middle.one">den aktuellen</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.middle.one.i">die aktuelle</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.middle.one.v">der aktuelle</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.middle.more">die aktuellen</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.end.y.more">Jahrgänge</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.end.m.more">Monate</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.end.d.more">Tage</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.end.i.more">Ausgaben</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.end.v.more">Bände</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.end.y.one">Jahrgang</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.end.m.one">Monat</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.end.d.one">Tag</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.end.i.one">Ausgabe</label>
+            <label index="tx_libconnect.ezb.detail.movingwall.end.v.one">Band</label>
 
             <label index="tx_libconnect.ezb.new.headline.alphabetical">Neu in der EZB - Alphabetische Auflistung</label>
             <label index="tx_libconnect.ezb.new.headline.subject">Neu in der EZB - Auflistung nach Fachgebieten</label>

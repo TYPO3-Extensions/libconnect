@@ -126,7 +126,68 @@
                             <strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall" />:</strong>
                         </th>
                         <td>
-                            <f:format.htmlentitiesDecode><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.begin" /> {journal.moving_wall} <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.end" /></f:format.htmlentitiesDecode>
+                            <f:if condition="{journal.moving_wall.prefix.not}">
+                                <f:then>
+                                    <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.not" /> 
+                                </f:then>
+                                <f:else>
+                                    <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.yes" /> 
+                                </f:else>
+                            </f:if>
+
+                            <f:if condition="{journal.moving_wall.number} > 1">
+                                <f:then>
+                                    <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.middle.more" /> {journal.moving_wall.number} 
+                                </f:then>
+                                <f:else>
+                                    <f:if condition="{journal.moving_wall.duration.i}">
+                                        <f:then>
+                                            <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.middle.one.i" /> 
+                                        </f:then>
+                                        <f:else>
+                                            <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.middle.one.v" /> 
+                                        </f:else>         
+                                    </f:if>
+                                </f:else>
+                            </f:if>
+
+                             <f:if condition="{journal.moving_wall.number} > 1">
+                                 <f:then>
+                                    <f:if condition="{journal.moving_wall.duration.y}">
+                                        <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.end.y.more" />
+                                    </f:if>
+                                    <f:if condition="{journal.moving_wall.duration.m}">
+                                        <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.end.m.more" />
+                                    </f:if>
+                                    <f:if condition="{journal.moving_wall.duration.d}">
+                                        <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.end.d.more" />
+                                    </f:if>
+                                    <f:if condition="{journal.moving_wall.duration.i}">
+                                        <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.end.i.more" />
+                                    </f:if>
+                                    <f:if condition="{journal.moving_wall.duration.v}">
+                                        <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.end.v.more" />
+                                    </f:if>
+                                 </f:then>
+                                 <f:else>
+                                    <f:if condition="{journal.moving_wall.duration.y}">
+                                        <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.end.y.one" />
+                                    </f:if>
+                                    <f:if condition="{journal.moving_wall.duration.m}">
+                                        <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.end.m.one" />
+                                    </f:if>
+                                    <f:if condition="{journal.moving_wall.duration.d}">
+                                        <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.end.d.one" />
+                                    </f:if>
+                                    <f:if condition="{journal.moving_wall.duration.i}">
+                                        <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.end.i.one" />
+                                    </f:if>
+                                    <f:if condition="{journal.moving_wall.duration.v}">
+                                        <f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.movingwall.end.v.one" />
+                                    </f:if>
+                                 </f:else>
+                             </f:if>
+
                         </td>
                     </tr>
                 </f:if>
