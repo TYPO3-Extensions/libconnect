@@ -227,7 +227,20 @@
                                 <strong><f:translate key="LLL:EXT:libconnect/Resources/Private/Language/locallang.xml:tx_libconnect.ezb.detail.subjects_join" />:</strong>
                             </th>
                             <td>
-                                <f:escape value="{journal.subjects_join}" type="raw" />
+                                <f:if condition="{journal.subjects_join_link}">
+                                    <f:then>
+                                        <ul>
+                                        <f:for each="{journal.subjects_join_link}" as="entry">
+                                            <li><a href="<f:format.htmlentitiesDecode>{entry.link}</f:format.htmlentitiesDecode>">
+                                                <f:escape value="{entry.title}" type="raw" />
+                                            </a></li>
+                                        </f:for>
+                                        </ul>
+                                    </f:then>
+                                    <f:else>
+                                        <f:escape value="{journal.subjects_join}" type="raw" />
+                                    </f:else>
+                                </f:if> 
                             </td>
                         </tr>
                     </f:if>

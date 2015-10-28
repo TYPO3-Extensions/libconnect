@@ -242,6 +242,24 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
                 );
             }
         }
+        
+        //setSubjectLinks but only it is configured
+        if(!empty($config['listPid'])){
+            $this->loadSubjects();
+            foreach($this->t3_to_ezb_subjects as $subject){
+                if($subject['title'] == $journal['subjects_join']){
+                    $journal['subjects_join_link'][] = array(
+                        'link' => $cObject->getTypolink_URL(
+                            intval($config['listPid']), 
+                            array(
+                                'libconnect[subject]' => $subject['uid']
+                            )
+                        ), 
+                        'title' => $subject['title']
+                    );
+                }
+            }
+        }
 
         return $journal;
     }
