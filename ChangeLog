@@ -9,7 +9,7 @@
     - EZB:
         - Detailanzeige:
             - Moving Wall wurde nicht angezeigt. (TW)
-            - Einträge in "Fachgruppe(n)" sind nun Links zu den Fächern, sofern PlugIn konfiguriert ist. (TW)
+            - In Einträge in "Fachgruppe(n)" sind nun Links zu den Fächern, sofern PlugIn konfiguriert ist. (TW)
         - Suche:
             - Bei Suchergebnissen mit Präzisen Treffern fehlte Überschrift über den "normalen" Treffern. (TW)
 
