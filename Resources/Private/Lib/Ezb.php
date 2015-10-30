@@ -93,7 +93,10 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
      */
     public function __construct() {
         $this->XMLPageConnection = t3lib_div::makeInstance('tx_libconnect_resources_private_lib_xmlpageconnection');
+        
+        //set configurations
         $this->setBibID();
+        $this->setLanguage();
     }
 
     /**
@@ -225,7 +228,7 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
     public function getJournalDetail($journalId) {
 
         $journal = array();
-        $url = $this->getDetailviewRequestUrl() . '&xmloutput=1&colors=' . '&jour_id=' . $journalId . '&bibid='. $this->bibID;
+        $url = $this->getDetailviewRequestUrl() . '&xmloutput=1&colors=' . '&jour_id=' . $journalId . '&bibid='. $this->bibID . '&lang=' . $this->lang;
         $xml_request = $this->XMLPageConnection->getDataFromXMLPage($url);
 
         if (!is_object($xml_request->ezb_detail_about_journal->journal)) {
@@ -355,8 +358,8 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
      * @return array
      */
     public function detailSearchFormFields() {
-
-        $xml_such_form = $this->XMLPageConnection->getDataFromXMLPage((string) $this->search_url);
+        $url = "{$this->search_url}bibid={$this->bibID}&colors={$this->colors}&lang={$this->lang}";
+        $xml_such_form = $this->XMLPageConnection->getDataFromXMLPage($url);
 
         foreach ($xml_such_form->ezb_search->option_list AS $key => $value) {
             foreach ($value->option AS $key2 => $value2) {
@@ -365,7 +368,7 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
         }
 
         // Schlagwort und issn tauschen...
-        $form['jq_type'] = $this->jq_type;
+        //$form['jq_type'] = $this->jq_type;
 
         return $form;
     }
@@ -382,7 +385,7 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
 
         //Falls Suchweiterleitung aus der ursprünglichen EZB-Ansicht
         if(isset($searchVars['jq_type1']) && $searchVars['jq_type1'] == 'ZD'){
-            $searchUrl = $this->search_zd_id . $searchVars['jq_term1']. '&bibid=' . $this->bibID .'&xmloutput=1';
+            $searchUrl = $this->search_zd_id . $searchVars['jq_term1']. '&bibid=' . $this->bibID . '&lang=' . $this->lang . '&xmloutput=1';
 
             return $searchUrl;
         }else{
@@ -696,6 +699,21 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
         $moving_wall = array('prefix' => array($prefix => TRUE), 'number' => $number, 'duration' => array($duration => TRUE));
 
         return $moving_wall;
+    }
+
+    /**
+     * set language
+     */
+    private function setLanguage(){
+        //get current language
+        $lang = $GLOBALS['TSFE']->config['config']['language'];
+        
+        //only de and en is allowed
+        if(($lang != 'de') && ($lang != 'en')){
+            $lang = 'de';
+        }
+        
+        $this->lang = $lang;
     }
 }
 ?>

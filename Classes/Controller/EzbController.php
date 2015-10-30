@@ -47,7 +47,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 
         //get PageID
         $Pid = intval($GLOBALS['TSFE']->id);
-
+        
         //include CSS
         $this->decideIncludeCSS();
 
