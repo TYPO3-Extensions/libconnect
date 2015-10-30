@@ -7,12 +7,16 @@
 
 4.1.0
     - EZB:
+        - EZB kann jetzt auch in Englisch aufgerufen werden. Dabei wird die TYPO3-Spracheinstellung beachtet. Falls eine andere Sprache angefragt wird,
+          wird Englisch angezeigt.
         - Detailanzeige:
             - Moving Wall wurde nicht angezeigt. (TW)
             - In Einträge in "Fachgruppe(n)" sind nun Links zu den Fächern, sofern PlugIn konfiguriert ist. (TW)
         - Suche:
             - Bei Suchergebnissen mit Präzisen Treffern fehlte Überschrift über den "normalen" Treffern. (TW)
-
+    - DBIS:
+        - DBIS kann jetzt auch teilweise in Englisch aufgerufen werden. Dabei wird die TYPO3-Spracheinstellung beachtet. Falls eine andere Sprache angefragt wird,
+          wird Englisch angezeigt.
 4.0.0
     - Kompatibilität zu TYPO3 6.2 erhöht (TW)
     - CSS-Pfade für Bilder sind nun relativ (TW)
