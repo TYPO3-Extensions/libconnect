@@ -320,3 +320,19 @@ ul.ezb-list li a {
 /**
  * end - Contact
  */
+
+/**
+* typo3-messages
+*/
+
+.typo3-messages {
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+.message-header {
+    color: #ff0000;
+    font-weight: bold;
+}
+/**
+* end - typo3-messages
+*/

@@ -263,3 +263,19 @@ a.dbis-research{
 /**
  * end - New in DBIS
  */
+
+/**
+* typo3-messages
+*/
+
+.typo3-messages {
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+.message-header {
+    color: #ff0000;
+    font-weight: bold;
+}
+/**
+* end - typo3-messages
+*/

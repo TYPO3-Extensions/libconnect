@@ -250,9 +250,18 @@ class Tx_Libconnect_Controller_DbisController extends Tx_Extbase_MVC_Controller_
         $params['jq_term1'] = $this->getCalculatedDate();
 
         $config['detailPid'] = $this->settings['flexform']['detailPid'];
-
-        //request
-        $liste =  $this->dbisRepository->loadSearch($params, $config);
+        if(empty($config['detailPid'])){
+            $this->addFlashMessage(
+                "Bitte konfigurieren Sie ein Ziel für die Detailseite.",
+                $messageTitle = 'Fehler',
+                $severity = \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+                $storeInSession = TRUE
+            );
+            $liste = FALSE;
+        }else{
+            //request
+            $liste =  $this->dbisRepository->loadSearch($params, $config);
+        }
 
         //variables for template
         $this->view->assign('list', $liste);

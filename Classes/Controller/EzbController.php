@@ -290,9 +290,19 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
 
         $config['detailPid'] = $this->settings['flexform']['detailPid'];
 
-        //request
-        $journals =  $this->ezbRepository->loadSearch($params, false, $config);
-
+        if(empty($config['detailPid'])){
+            $this->addFlashMessage(
+                "Bitte konfigurieren Sie ein Ziel für die Detailseite.",
+                $messageTitle = 'Fehler',
+                $severity = \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR,
+                $storeInSession = TRUE
+            );
+            $liste = FALSE;
+        }else{
+            //request
+            $journals =  $this->ezbRepository->loadSearch($params, false, $config);
+        }
+        
         //variables for template
         $this->view->assign('journals', $journals);
         $this->view->assign('new_date', $params['jq_term1']);
