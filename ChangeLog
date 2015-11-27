@@ -5,6 +5,16 @@
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
 
+4.1.1
+    - DBIS:
+        - Neu in DBIS: Falls dem PlugIn keine Detailseite zugeordnet wurde, wird eine entsprechende Fehlermeldung ausgegeben. (TW)
+        - Überall wird jetzt die Angabe der Detailseite zwingend vorausgesetzt. (TW)
+        - Korrektur des CSS auf Detailseite bezüglich "#dbis-detail p" (TW)
+        - linker Abstand für Suchbutton für MiniForm entfernt. Oft problematische Darstellung. (TW)
+    - EZB:
+        - Neu in EZB: Falls dem PlugIn keine Detailseite zugeordnet wurde, wird eine entsprechende Fehlermeldung ausgegeben. (TW)
+        - linker Abstand für Suchbutton für MiniForm entfernt. Oft problematische Darstellung. (TW)
+        - Beim Blättern durch Suchergebnisse sind Lizenzfilter verloren gegangen. (TW)
 4.1.0
     - EZB:
         - EZB kann jetzt auch in Englisch aufgerufen werden. Dabei wird die TYPO3-Spracheinstellung beachtet. Falls eine andere Sprache angefragt wird,
