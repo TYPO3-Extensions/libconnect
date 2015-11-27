@@ -18,7 +18,11 @@ class Tx_Libconnect_ViewHelpers_ArrayViewHelper extends Tx_Fluid_Core_ViewHelper
     */
     public function render($inputArray = array(), $key = '0') {
         if (is_array($inputArray)) {
-                return $inputArray[$key];
+            foreach ($inputArray as $value) {
+                if($value == $key){
+                    return $value;
+                }
+            }
         }
     }
 }

@@ -90,33 +90,21 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
             $config['detailPid'] = $this->settings['flexform']['detailPid'];
 
             $journals = array();
-
-            if(!empty($params['colors'])){
-                unset($params['search']['selected_colors']);
-                foreach($params['colors'] as  $color){
-                    $params['search']['selected_colors'][] = $color;
-                }
-                $journals['colors'] = $params['colors'];
-            } else {
-                $journals['colors'] = array(
+ 
+            if(empty($params['search']['selected_colors'])){
+                $params['search']['selected_colors'] = array(
                     1 => 1,
                     2 => 2,
                     4 => 4,
                     6 => 6
                 );
             }
+            
+            $journals =  $this->ezbRepository->loadSearch($params['search'], $journals['colors'], $config);           
 
-            $journals =  $this->ezbRepository->loadSearch($params['search'], $journals['colors'], $config);
-
-            if(!empty($params['colors'])){
-                $journals['colors'] = $params['colors'];
-            } else {
-                $journals['colors'] = array(
-                    1 => 1,
-                    2 => 2,
-                    4 => 4,
-                    6 => 6
-                );
+            if(!empty($params['search']['selected_colors'])){
+                //damit selected_colors nicht in verstekten Formularfeldern auftauchen
+                unset($params['search']['selected_colors']);
             }
 
             //change view

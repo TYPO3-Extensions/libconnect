@@ -281,37 +281,27 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
             $searchVars['jq_term1'] = $searchVars['sword'];
         }
         unset($searchVars['sword']);//in weiterer Verarbeitung nicht sinnvoll
-        
+
         $linkParams = array();
         foreach ($searchVars as $key => $value) {
             $linkParams["libconnect[search][$key]"] = $value;
         }
-        
+
         $ezb = t3lib_div::makeInstance('tx_libconnect_resources_private_lib_ezb');
+
+        //filter list by access list
+        $colors = $this->getColors($searchVars['selected_colors']);
+        $ezb->setColors($colors);
+
         $journals = $ezb->search($term, $searchVars);
-        
+
         if (! $journals){
             return FALSE;
         }
 
-        //filter list by access list
-        if($options){
-            $colors = $this->getColors($options);
-            $ezb->setColors($colors);
-            
-            $colorList = $options;
-        }else{
-            $colorList = array(
-                1 => 1,
-                2 => 2,
-                4 => 4,
-                6 => 6
-            );
-        }
-        
         $journals['searchDescription'] = $this->getSearchDescription($searchVars);
-        $journals['colors'] = $colorList;
-        
+        $journals['selected_colors'] = $searchVars['selected_colors'];
+    
         /**
          * create links
          */
@@ -323,7 +313,8 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
                     $journals['navlist']['pages'][$page]['link'] = $cObject->getTypolink_URL($GLOBALS['TSFE']->id,
                         array_merge($linkParams, array(
                             'libconnect[search][sc]' => $journals['navlist']['pages'][$page]['id'],
-                            'libconnect[colors]' => array_flip($journals['colors'])
+                            'libconnect[search][selected_colors]' => $journals['selected_colors'],
+                            'libconnect[search][colors]' => $colors
                         )));
                 }
             }
@@ -352,7 +343,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
                     array_merge($linkParams, array(
                         'libconnect[search][sindex]' => $journals['alphabetical_order']['first_fifty'][$section]['sindex'],
                         'libconnect[search][sc]' => $journals['alphabetical_order']['first_fifty'][$section]['sc'],
-                        'libconnect[colors]' => array_flip($journals['colors'])
+                        'libconnect[search][selected_colors]' => $journals['selected_colors']
                     )));
             }
         }
@@ -376,14 +367,15 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
                     array_merge($linkParams, array(
                         'libconnect[search][sindex]' => $journals['alphabetical_order']['next_fifty'][$section]['sindex'],
                         'libconnect[search][sc]' => $journals['alphabetical_order']['next_fifty'][$section]['sc'],
-                        'libconnect[colors]' => array_flip($journals['colors'])
+                        'libconnect[search][selected_colors]' => $journals['selected_colors'],
+                        'libconnect[search][colors]' => $colors
                     )));
             }
         }
         
         //get access information
-        $journals['selected_colors'] = $this->getAccessInfos();
-        
+        $journals['AccessInfos'] = $this->getAccessInfos();
+
         return $journals;
     }
 
@@ -630,17 +622,19 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
     }
     
     /**
-     * returns a in value for parameter colors
+     * returns a value for parameter colors. 
      * 
      * @param array $colors
      * @return array $sum
      */
     private function getColors($colors){
         $sum = 0;
-        foreach($colors as $color){
-            $sum += (int) $color;
-        }
         
+        if(!empty($colors)){
+            foreach($colors as $color){
+                $sum += (int) $color;
+            }
+        }
         //0 is equal to all
         if($sum == 0){
             $sum = 7;

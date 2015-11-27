@@ -434,7 +434,6 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
      * @return array
      */
     public function search($term, $searchVars = array()) {
-
         $searchUrl = str_replace(' ', '', $this->createSearchUrl($term, $searchVars));
         $xml_request = $this->XMLPageConnection->getDataFromXMLPage($searchUrl);
 
@@ -622,6 +621,15 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
     public function setColors($colors){
         $this->colors = $colors;
     }
+    
+    /**
+     * get colors
+     * 
+     * @param int $colors sum of colors
+     */
+    public function getColors(){
+        return $this->colors;
+    }
 
     /**
      * check institutions having access to this journal
@@ -707,12 +715,12 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
     private function setLanguage(){
         //get current language
         $lang = $GLOBALS['TSFE']->config['config']['language'];
-        
+
         //only de and en is allowed
         if(($lang != 'de') && ($lang != 'en')){
             $lang = 'de';
         }
-        
+
         $this->lang = $lang;
     }
 }
