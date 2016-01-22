@@ -42,8 +42,9 @@ class Tx_Libconnect_ViewHelpers_StrreplaceViewHelper extends Tx_Fluid_Core_ViewH
     public function render($search = '', $replace = '') {
 
         $subject = $this->renderChildren();
-        return str_replace($search, $replace, $subject);
+        $newString = str_replace($search, $replace, $subject);
 
+        return $newString;
     }
 }
 ?>
