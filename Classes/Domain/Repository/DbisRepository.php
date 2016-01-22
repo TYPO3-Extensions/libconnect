@@ -222,14 +222,14 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
         }
 
         foreach(array_keys($result['list']['values']) as $value) {
-                $result['list']['values'][$value]['detail_link'] = $cObject->getTypolink_URL(
-                    intval($config['detailPid']),
-                    array(
-                        'libconnect[titleid]' => $result['list']['values'][$value]['id'],
-                    )
-                );
+            $result['list']['values'][$value]['detail_link'] = $cObject->getTypolink_URL(
+                intval($config['detailPid']),
+                array(
+                    'libconnect[titleid]' => $result['list']['values'][$value]['id'],
+                )
+            );
         }
-        
+
         return $result['list'];
     }
     
