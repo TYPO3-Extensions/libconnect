@@ -27,8 +27,8 @@ function IsfirstPlugInUserFunction($type, $uid) {
     $orderBy = 'sorting asc';
     $limit = '0,1';
     $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
-
-    //Wenn die aktuelle UID nicht ganz oben auf de Seite ist, soll diese kein CSS einbinden
+    
+    //if current UID of the is not on top of the page, CSS shouldn´t loaded
     while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)){
         if($row['uid'] != $uid){
             return FALSE;
