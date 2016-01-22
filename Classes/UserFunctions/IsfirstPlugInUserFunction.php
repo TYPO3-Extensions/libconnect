@@ -8,7 +8,7 @@
  */
 
 /**
- * Prüft ob das aufrufende PlugIn das erste auf der Seite ist
+ * Checks if plugin is the first on the page
  * 
  * @param string    $type: Name des gewählten PlugIns
  * @param integer    $uid: Uid des PlugIns aus Tabelle tt_content

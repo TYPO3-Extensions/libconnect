@@ -33,7 +33,7 @@
 class Tx_Libconnect_ViewHelpers_StrreplaceViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
     /**
-     * Ersetzt alle Vorkommen des Suchstrings durch einen anderen String
+     * replace all matches of the search string with an other
      *
      * @param string $search
      * @param string $replace
