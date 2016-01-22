@@ -282,7 +282,9 @@ class Tx_libconnect_Resources_Private_Lib_Ezb {
         $journal['homepages'] = array();
         if (isset($xml_request->ezb_detail_about_journal->journal->detail->homepages->homepage)) {
             foreach ($xml_request->ezb_detail_about_journal->journal->detail->homepages->homepage as $homepage) {
-                $journal['homepages'][] = (string) $homepage;
+                $journal['homepages'][] = array(
+                        'linktext' => (string) $homepage,
+                        'url' => (string) $homepage->attributes()->url);
             }
         }
         $journal['first_fulltext'] = array(
