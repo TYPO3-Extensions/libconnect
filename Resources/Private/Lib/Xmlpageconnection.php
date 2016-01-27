@@ -41,8 +41,7 @@ class Tx_Libconnect_Resources_Private_Lib_Xmlpageconnection {
         $ext_conf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['libconnect']);
         if ($ext_conf['debug'] == TRUE){
             $this->debug = TRUE;
-        }
-        if ($ext_conf['debug'] == FALSE){
+        }elseif ($ext_conf['debug'] == FALSE){
             $this->debug = FALSE;
         }
     }
