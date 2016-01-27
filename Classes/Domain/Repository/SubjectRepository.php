@@ -44,6 +44,6 @@ Class Tx_Libconnect_Domain_Repository_SubjectRepository extends Tx_Extbase_Persi
         $query->statement('SELECT * FROM tx_libconnect_domain_model_subject');
         
         return $query->execute();
-     }
+    }
 }
 ?>
