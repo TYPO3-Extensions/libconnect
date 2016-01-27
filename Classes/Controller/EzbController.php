@@ -184,7 +184,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
     }
 
     /**
-     * zeigt die Sidebar
+     * shows sidebar
      */
     public function displayMiniFormAction() {
         $params = t3lib_div::_GET('libconnect');
@@ -237,7 +237,7 @@ class Tx_Libconnect_Controller_EzbController extends Tx_Extbase_MVC_Controller_A
     }
 
     /**
-     * zeigt die Suche
+     * show the seach form
      */
     public function displayFormAction() {
         $params = t3lib_div::_GET('libconnect');

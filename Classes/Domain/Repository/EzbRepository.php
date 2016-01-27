@@ -203,7 +203,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
             return FALSE;
         }
 
-        /*BEGIN Zugriffsinformationen holen*/
+        /*BEGIN get access information*/
         
         //get default texts
         $LongAccessInfos = $ezb->getLongAccessInfos();
@@ -229,7 +229,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
             $journal['color_code']['text'] = $journal['selected_colors'][$color];
         }
         $journal['color_code']['color'] = $color;
-        /*END Zugriffsinformationen holen*/
+        /*END get access information*/
 
         //generate link to institutions having access to this journal
         if($journal['participants'] == TRUE){
@@ -305,7 +305,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
         /**
          * create links
          */
-        //Navigation
+        //navigation
         if (is_array($journals['navlist']['pages'])) {
 
             foreach(array_keys($journals['navlist']['pages']) as $page) {
@@ -496,7 +496,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
                     }
                 }
             }else{
-                //Falls Lizenzinformationen fehlen
+                //if licence informations are missing
                 foreach($colortext['longAccessInfos'] as $key => $text){
                     if(empty($AccessInfos[$key])){
                         $AccessInfos[$key] = $colortext['longAccessInfos'][$key];
@@ -580,7 +580,7 @@ Class Tx_Libconnect_Domain_Repository_EzbRepository extends Tx_Extbase_Persisten
     }
     
     /**
-     * liefert ein Fach
+     * returns a subject
      * 
      * @param integer $subjectId Id des Faches
      */

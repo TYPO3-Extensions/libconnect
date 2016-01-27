@@ -39,7 +39,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
     private $t3_to_dbis_subjects = array();
     
     /**
-     * zeigt die Top-Datenbanken an
+     * shows top databases
      * 
      * @param array $config
      * @return array
@@ -67,7 +67,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
     }
     
     /**
-     * Zeigt eine Liste von Datenbanken (für allgemein, Suche und das gewählte Fach),
+     * shows a list of databases(for start, search and list of chose subject)
      * 
      * @param integer $subject_id
      * @param array array('subject'=>array(), 'list'=>array())
@@ -85,7 +85,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
             $dbis_id = $subject['dbisid'];
     
             $result = $dbis->getDbliste($dbis_id, $config['sort']);
-        }else{//für eigene Sammlung
+        }else{//for own collection
             $result = $dbis->getDbliste($subject_id, $config['sort']);
             
             $subject['title'] = $result['headline'];
@@ -122,7 +122,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
     }
     
     /**
-     * Zeigt Einstiegspunkt
+     * show start
      * 
      * @return array $list
      */
@@ -156,11 +156,10 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
     }
 
     /**
-     * Fächer aus Datenbank laden
+     * load subjects from datahase
      * 
      */
     private function loadSubjects() {
-        //Datenbankabruf -> hierfür dient subjectRepository
         $res = $this->subjectRepository->findAll();
         
         foreach($res as $row){        
@@ -176,9 +175,10 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
     }
     
     /**
-     * Zeigt die Detailansicht
+     * show details
      * 
      * @param integer $title_id
+     * 
      * @return array $db
      */
     public function loadDetail($title_id) {
@@ -194,7 +194,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
     }
     
     /**
-     * Suche durchführen
+     * execute search
      * 
      * @param array $searchVars
      * @param array $config
@@ -208,7 +208,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
         $term = $searchVars['sword'];//wird bei MiniForm verwendet
         unset($searchVars['sword']);
 
-        //Suche abschicken
+        //execute search
         $dbis = t3lib_div::makeInstance('tx_libconnect_resources_private_lib_dbis');
         $result = $dbis->search($term, $searchVars);
         
@@ -234,7 +234,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
     }
     
      /**
-     * MiniFormular ausgeben
+     * return miniform
      *
      * @return array
      */
@@ -246,7 +246,7 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
     }
 
     /**
-     * Detailsuche Formular ausgeben
+     * return form for detail search
      *
      * @return array
      */
@@ -258,16 +258,16 @@ Class Tx_Libconnect_Domain_Repository_DbisRepository extends Tx_Extbase_Persiste
     }
     
     /**
-     * erzeugt Instanz von SubjectRepository
+     * creates instance of SubjectRepository (for TYPO3 4.7)
      */
     public function injectSubjectRepository(Tx_Libconnect_Domain_Repository_SubjectRepository $subjectRepository){
         $this->subjectRepository = $subjectRepository;
     }
     
     /**
-     * liefert ein Fach
+     * returns a subject
      * 
-     * @param integer $subjectId Id des Faches
+     * @param integer $subjectId Id of subject
      */
     public function getSubject($subjectId){
         $this->loadSubjects();
