@@ -4,17 +4,17 @@
 
 plugin.tx_libconnect {
 
-    ezbbibid = SUBHH
-    dbisbibid = sub_hh
-    zdbsid = vid:dbid
+    ezbbibid = {$plugin.tx_libconnect.ezbbibid}
+    dbisbibid = {$plugin.tx_libconnect.dbisbibid}
+    zdbsid = {$plugin.tx_libconnect.zdbsid}
     //zdbbibid = BIBID
     //zdbsigel = SIGEL
     //zdbisil = ISIL
     //zdbbik = ISIL
 
-    #Proxy Einstellungen für CURL Verbindung
-    proxy = 
-    proxy_port = 
+    #proxy configuration for CURL
+    proxy = {$plugin.tx_libconnect.persistence.proxy}
+    proxy_port = {$plugin.tx_libconnect.persistence.proxy_port}
 
     persistence {
         storagePid = {$plugin.tx_libconnect.persistence.storagePid}

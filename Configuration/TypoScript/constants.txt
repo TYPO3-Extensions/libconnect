@@ -3,31 +3,43 @@
 #
 
 plugin.tx_libconnect {
+    # customsubcategory=settings=Settings
 
+    # cat=plugin.tx_libconnect/settings/0001; type=string; label=ezbbibid
     ezbbibid = SUBHH
+    # cat=plugin.tx_libconnect/settings/0002; type=string; label=dbisbibid
     dbisbibid = sub_hh
+    # cat=plugin.tx_libconnect/settings/0003; type=string; label=zdbsid
     zdbsid = vid:dbid
     //zdbbibid = BIBID
     //zdbsigel = SIGEL
     //zdbisil = ISIL
     //zdbbik = ISIL	
 
+    #proxy configuration for CURL
+    # cat=plugin.tx_libconnect/settings/0010; type=string; label=name or ip of proxy
+    proxy = 
+    # cat=plugin.tx_libconnect/settings/0011; type=string; label=port of proxy
+    proxy_port = 
+    
     view {
-        # cat=plugin.tx_libconnect/file; type=string; label=Path to template root (FE)
+        # cat=plugin.tx_libconnect/file/0003; type=string; label=Path to template root (FE)
         templateRootPath = EXT:libconnect/Resources/Private/Templates/
-        # cat=plugin.tx_libconnect/file; type=string; label=Path to template partials (FE)
+        # cat=plugin.tx_libconnect/file/0004; type=string; label=Path to template partials (FE)
         partialRootPath = EXT:libconnect/Resources/Private/Partials/
-        # cat=plugin.tx_libconnect/file; type=string; label=Path to template layouts (FE)
+        # cat=plugin.tx_libconnect/file/0005; type=string; label=Path to template layouts (FE)
         layoutRootPath = EXT:libconnect/Resources/Private/Layouts/
     }
     persistence {
-        # cat=plugin.tx_libconnect//a; type=int+; label=Default storage PID
+        # cat=plugin.tx_libconnect/settings/0020; type=int+; label=Default storage PID
         storagePid = 
     }
 
     settings {
         file.path {
+            # cat=plugin.tx_libconnect/file/0001; type=string; label=Path to CSS for DBIS (FE)
             dbisCSS = EXT:libconnect/Resources/Public/Styles/dbis.css
+            # cat=plugin.tx_libconnect/file/0002; type=string; label=Path to CSS for EZB (FE)
             ezbCSS = EXT:libconnect/Resources/Public/Styles/ezb.css
         }
 
