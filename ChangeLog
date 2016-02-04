@@ -5,6 +5,11 @@
 * - BH: Björn Heinermann hein@zhaw.ch (Zürcher Hochschule für Angewandte Wissenschaften)
 **/
 
+4.1.2
+    - EZB:
+        - Detailanzeige: Jetzt wird für die URL der Homepages die Eigenschaft "url" verwendet. Problem mit ungültigen URLs gelöst. (TW)
+    - weitere Kommentare übersetzt (TW)
+    - wesentliche Konfigurationen jetzt über Konstanten-Editor bearbeitbar (TW)
 4.1.1
     - DBIS:
         - Neu in DBIS: Falls dem PlugIn keine Detailseite zugeordnet wurde, wird eine entsprechende Fehlermeldung ausgegeben. (TW)
